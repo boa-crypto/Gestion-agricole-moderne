@@ -1,0 +1,799 @@
+# CMS² AgriPro — MODULE DE GESTION DES UTILISATEURS, RÔLES ET FONCTIONS
+
+Conçois un module complet, professionnel et évolutif de **gestion des utilisateurs, fonctions, rôles, responsabilités et permissions** pour une application de gestion d'exploitation agricole appelée **CMS² AgriPro**.
+
+Le système doit permettre de gérer les personnes qui travaillent dans l'exploitation, leurs fonctions, leurs responsabilités, leurs équipes, leurs zones d'intervention et leurs droits d'accès aux différents modules de l'application.
+
+L'objectif est de créer une gestion intelligente permettant de savoir :
+
+**QUI travaille dans l'exploitation ?**
+**QUELLE est sa fonction ?**
+**QUELLES sont ses responsabilités ?**
+**SUR QUELLES parcelles ou activités intervient-il ?**
+**QUELLES actions peut-il effectuer dans AgriPro ?**
+
+---
+
+# 1. STRUCTURE GÉNÉRALE
+
+Organiser le système autour de 5 niveaux :
+
+**Utilisateur**
+→ **Fonction**
+→ **Rôle**
+→ **Permissions**
+→ **Périmètre d'intervention**
+
+Exemple :
+
+> Mohamed Benali
+> Fonction : Chef d'exploitation
+> Rôle : Responsable exploitation
+> Permissions : gérer parcelles, interventions, stocks et équipes
+> Périmètre : Exploitation agricole A
+
+---
+
+# 2. GESTION DES UTILISATEURS
+
+Créer une page **Utilisateurs** permettant de gérer toutes les personnes travaillant dans l'exploitation.
+
+Informations :
+
+* Photo
+* Matricule
+* Nom
+* Prénom
+* Nom complet
+* Email
+* Téléphone
+* Adresse
+* Date d'embauche
+* Fonction
+* Rôle
+* Équipe
+* Responsable
+* Exploitation
+* Statut
+* Date de création
+* Dernière connexion
+* Notes
+
+Statuts :
+
+* Actif
+* Inactif
+* Suspendu
+* Archivé
+* En attente
+
+Permettre :
+
+* Ajouter
+* Modifier
+* Désactiver
+* Réactiver
+* Archiver
+* Supprimer
+* Rechercher
+* Filtrer
+* Exporter
+
+---
+
+# 3. FONCTIONS AGRICOLES
+
+Créer une bibliothèque de fonctions spécialement adaptée à l'agriculture.
+
+Exemples :
+
+### Direction / gestion
+
+* Propriétaire
+* Exploitant
+* Gérant
+* Directeur d'exploitation
+* Responsable administratif
+
+### Production
+
+* Chef d'exploitation
+* Responsable de production
+* Responsable de culture
+* Chef de culture
+* Agronome
+* Technicien agricole
+
+### Terrain
+
+* Chef d'équipe
+* Ouvrier agricole
+* Conducteur d'engins
+* Tractoriste
+* Agent d'irrigation
+* Agent phytosanitaire
+* Agent de maintenance
+
+### Logistique
+
+* Responsable stock
+* Magasinier
+* Responsable matériel
+* Chauffeur
+* Responsable récolte
+
+### Administration
+
+* Comptable
+* Responsable achats
+* Responsable ventes
+* Assistant administratif
+
+Chaque fonction doit posséder :
+
+* Code
+* Intitulé
+* Description
+* Missions
+* Responsabilités
+* Niveau hiérarchique
+* Responsable hiérarchique
+* Compétences requises
+* Modules accessibles par défaut
+* Statut
+
+---
+
+# 4. RÔLES AGRIPRO
+
+Créer des rôles prédéfinis mais entièrement personnalisables.
+
+### SUPER ADMINISTRATEUR
+
+Accès complet à AgriPro.
+
+### PROPRIÉTAIRE
+
+Accès global à l'exploitation :
+
+* Dashboard
+* Parcelles
+* Production
+* Irrigation
+* Stocks
+* Matériel
+* Maintenance
+* Achats
+* Ventes
+* Comptabilité
+* Rapports
+* Utilisateurs
+
+### GÉRANT D'EXPLOITATION
+
+Gestion opérationnelle globale.
+
+### RESPONSABLE DE PRODUCTION
+
+Accès à :
+
+* Cultures
+* Parcelles
+* Interventions
+* Semis
+* Fertilisation
+* Traitements
+* Récoltes
+* Rendements
+
+### RESPONSABLE IRRIGATION
+
+Accès à :
+
+* Parcelles
+* Réseaux d'irrigation
+* Programmes d'irrigation
+* Historique
+* Consommation d'eau
+
+### RESPONSABLE STOCK
+
+Accès à :
+
+* Produits
+* Intrants
+* Stocks
+* Entrées
+* Sorties
+* Inventaires
+* Alertes de stock
+
+### RESPONSABLE MATÉRIEL
+
+Accès à :
+
+* Tracteurs
+* Machines
+* Équipements
+* Maintenance
+* Carburant
+* Affectations
+
+### CHEF D'ÉQUIPE
+
+Accès aux :
+
+* Équipes
+* Travailleurs
+* Missions
+* Interventions
+* Parcelles affectées
+
+### OUVRIER AGRICOLE
+
+Accès limité :
+
+* Tâches personnelles
+* Interventions affectées
+* Parcelles affectées
+* Déclaration de travail
+* Historique personnel
+
+### COMPTABLE
+
+Accès :
+
+* Achats
+* Ventes
+* Dépenses
+* Recettes
+* Factures
+* Rapports financiers
+
+### CONSULTATION
+
+Lecture seule.
+
+---
+
+# 5. PERMISSIONS PAR MODULE
+
+Créer une matrice de permissions pour chaque module AgriPro.
+
+Modules :
+
+* Dashboard
+* Exploitations
+* Parcelles
+* Cultures
+* Semences
+* Interventions
+* Irrigation
+* Fertilisation
+* Traitements
+* Récoltes
+* Stocks
+* Intrants
+* Matériel
+* Maintenance
+* Carburant
+* Ressources humaines
+* Équipes
+* Achats
+* Ventes
+* Clients
+* Fournisseurs
+* Comptabilité
+* Documents
+* Rapports
+* Cartographie
+* Météo
+* Paramètres
+* Utilisateurs
+
+Actions :
+
+* Consulter
+* Créer
+* Modifier
+* Supprimer
+* Valider
+* Affecter
+* Planifier
+* Clôturer
+* Exporter
+* Imprimer
+
+---
+
+# 6. PÉRIMÈTRE AGRICOLE
+
+C'est un élément essentiel du système.
+
+Une permission doit pouvoir être limitée à :
+
+* Toute l'exploitation
+* Une exploitation
+* Un site
+* Un secteur
+* Une parcelle
+* Un groupe de parcelles
+* Une culture
+* Une équipe
+* Une activité
+* Une campagne agricole
+
+Exemple :
+
+> Ahmed
+> Rôle : Chef d'équipe
+> Parcelles autorisées : P01, P02, P05
+> Activités : irrigation + traitements
+> Actions : consulter + créer + modifier
+
+Ahmed ne doit pas pouvoir modifier les interventions des autres parcelles.
+
+---
+
+# 7. AFFECTATION DES UTILISATEURS
+
+Permettre d'affecter un utilisateur à :
+
+**Exploitation → Secteur → Parcelles → Culture → Équipe**
+
+Exemple :
+
+> Exploitation : Domaine El Bahia
+> Secteur : Secteur Nord
+> Parcelles : P01, P02, P03
+> Culture : Agrumes
+> Équipe : Équipe Irrigation
+> Responsable : Mohamed
+
+---
+
+# 8. GESTION DES ÉQUIPES
+
+Créer un module :
+
+**Équipes agricoles**
+
+Chaque équipe possède :
+
+* Nom
+* Code
+* Responsable
+* Membres
+* Fonction
+* Parcelles affectées
+* Activités
+* Horaires
+* Statut
+
+Exemples :
+
+* Équipe Irrigation
+* Équipe Récolte
+* Équipe Traitement
+* Équipe Maintenance
+* Équipe Plantation
+
+Afficher les équipes sous forme de cartes.
+
+---
+
+# 9. RESPONSABILITÉS
+
+Ne pas limiter le système aux permissions informatiques.
+
+Chaque utilisateur peut avoir des responsabilités agricoles.
+
+Exemples :
+
+**Responsable irrigation**
+
+Responsabilités :
+
+* Planification irrigation
+* Suivi des consommations
+* Contrôle des interventions
+* Validation des travaux
+
+**Chef d'équipe**
+
+Responsabilités :
+
+* Affectation des travailleurs
+* Répartition des tâches
+* Suivi du travail
+* Validation des interventions
+
+Créer une fiche :
+
+### Responsabilités
+
+* Responsabilité
+* Description
+* Niveau
+* Périmètre
+* Date de début
+* Date de fin
+* Responsable
+
+---
+
+# 10. AFFECTATION DES TÂCHES
+
+Permettre d'affecter une tâche directement à un utilisateur.
+
+Exemple :
+
+**Intervention : Traitement phytosanitaire**
+
+Parcelle : P12
+Culture : Olivier
+Date : 20/08/2026
+Responsable : Ahmed
+Équipe : Traitement
+Statut : Planifiée
+
+L'utilisateur reçoit la tâche dans son espace personnel.
+
+---
+
+# 11. ESPACE PERSONNEL
+
+Créer pour chaque utilisateur un tableau de bord personnalisé.
+
+Afficher :
+
+* Mes tâches
+* Mes interventions
+* Mes parcelles
+* Mon équipe
+* Mes responsabilités
+* Mes notifications
+* Mes validations
+* Mes activités récentes
+
+Un ouvrier ne doit pas voir le même dashboard qu'un propriétaire.
+
+---
+
+# 12. WORKFLOW DE VALIDATION
+
+Créer des workflows agricoles.
+
+Exemple :
+
+### Intervention
+
+Planifiée
+↓
+Affectée
+↓
+En cours
+↓
+Terminée
+↓
+À valider
+↓
+Validée
+
+Le responsable dispose d'un bouton :
+
+**VALIDER L'INTERVENTION**
+
+---
+
+# 13. PERMISSIONS TEMPORAIRES
+
+Permettre d'accorder temporairement une permission.
+
+Exemple :
+
+> Responsable irrigation absent.
+
+Attribuer temporairement son rôle à un autre utilisateur.
+
+Définir :
+
+* Date de début
+* Date de fin
+* Permissions
+* Motif
+* Responsable de l'autorisation
+
+À l'expiration, les droits sont automatiquement supprimés.
+
+---
+
+# 14. ORGANIGRAMME AGRICOLE
+
+Créer un organigramme visuel :
+
+**Propriétaire**
+
+↓
+
+**Gérant**
+
+↓
+
+**Chef d'exploitation**
+
+↓
+
+Responsable production | Responsable irrigation | Responsable matériel | Responsable stock
+
+↓
+
+Chefs d'équipe
+
+↓
+
+Ouvriers
+
+L'organigramme doit être interactif.
+
+Cliquer sur une personne ouvre sa fiche.
+
+---
+
+# 15. FICHE UTILISATEUR AGRIPRO
+
+Créer une fiche premium avec les onglets :
+
+### Profil
+
+Informations personnelles.
+
+### Fonction
+
+Poste et missions.
+
+### Organisation
+
+Exploitation, secteur, équipe et responsable.
+
+### Parcelles
+
+Parcelles affectées.
+
+### Activités
+
+Activités autorisées.
+
+### Rôles
+
+Rôles attribués.
+
+### Permissions
+
+Permissions effectives.
+
+### Tâches
+
+Tâches actuelles et historiques.
+
+### Performance
+
+Statistiques d'activité.
+
+### Historique
+
+Historique complet.
+
+---
+
+# 16. TABLEAU DE BORD ADMINISTRATION
+
+Créer des KPI :
+
+**Utilisateurs actifs**
+
+**Équipes**
+
+**Fonctions**
+
+**Rôles**
+
+**Parcelles affectées**
+
+**Tâches en cours**
+
+**Interventions aujourd'hui**
+
+**Validations en attente**
+
+Afficher également :
+
+* Activité récente
+* Nouveaux utilisateurs
+* Utilisateurs inactifs
+* Tâches non affectées
+* Permissions sensibles
+* Alertes
+
+---
+
+# 17. RECHERCHE INTELLIGENTE
+
+Créer une recherche globale.
+
+Exemples :
+
+> "Responsables irrigation"
+
+→ affiche tous les responsables irrigation.
+
+> "Équipe récolte"
+
+→ affiche tous les membres de l'équipe.
+
+> "Parcelle P12"
+
+→ affiche les utilisateurs affectés à P12.
+
+> "Ahmed"
+
+→ affiche son profil, ses rôles, ses tâches et ses parcelles.
+
+---
+
+# 18. JOURNAL D'ACTIVITÉ
+
+Enregistrer toutes les actions importantes :
+
+* Connexion
+* Création
+* Modification
+* Suppression
+* Affectation
+* Validation
+* Changement de rôle
+* Modification de permission
+* Modification d'une parcelle
+* Modification d'une intervention
+
+Afficher :
+
+**Utilisateur → Action → Objet → Date → Heure**
+
+---
+
+# 19. SÉCURITÉ
+
+Les permissions doivent être contrôlées côté serveur.
+
+Ne jamais considérer le frontend comme une protection.
+
+Implémenter :
+
+* RBAC
+* Permissions granulaires
+* Sessions sécurisées
+* MFA
+* Journal d'audit
+* Protection contre l'escalade de privilèges
+* Contrôle des accès par exploitation
+* Contrôle des accès par parcelle
+* Contrôle des accès par équipe
+
+---
+
+# 20. INTERFACE
+
+Créer une interface **AgriPro ultra moderne, professionnelle et agricole**, cohérente avec le reste de l'application.
+
+Utiliser :
+
+* Dashboard
+* Cards
+* Tableaux
+* Badges
+* Avatars
+* Icônes agricoles
+* Filtres
+* Recherche
+* Menus contextuels
+* Drawer
+* Modales
+* Graphiques
+
+Prévoir :
+
+**Mode clair + mode sombre**
+
+Interface responsive :
+
+**Desktop + tablette + mobile**
+
+---
+
+# 21. MENU ADMINISTRATION
+
+Créer :
+
+**Administration**
+
+→ Utilisateurs
+→ Fonctions
+→ Rôles
+→ Permissions
+→ Équipes
+→ Organisation
+→ Organigramme
+→ Affectations
+→ Délégations
+→ Journal d'activité
+→ Sécurité
+
+---
+
+# 22. PRINCIPE FONDAMENTAL AGRIPRO
+
+Ne jamais confondre :
+
+**FONCTION**
+= le métier ou poste réel de la personne.
+
+**RÔLE**
+= le niveau de responsabilité dans AgriPro.
+
+**PERMISSION**
+= l'action qu'elle peut effectuer.
+
+**PÉRIMÈTRE**
+= les données agricoles auxquelles elle peut accéder.
+
+**AFFECTATION**
+= les parcelles, équipes, cultures ou activités dont elle est responsable.
+
+Exemple complet :
+
+> **Utilisateur :** Ahmed Benali
+> **Fonction :** Chef d'équipe irrigation
+> **Rôle :** Responsable irrigation
+> **Exploitation :** Domaine El Bahia
+> **Secteur :** Nord
+> **Parcelles :** P01, P02, P05
+> **Équipe :** Irrigation
+> **Permissions :** consulter + créer + modifier + valider les interventions d'irrigation
+> **Périmètre :** P01, P02, P05
+
+---
+
+# 23. OBJECTIF FINAL
+
+Le module doit devenir le **centre de gestion des personnes et des responsabilités d'AgriPro**.
+
+Il doit être directement connecté aux autres modules :
+
+**Utilisateurs**
+↕
+**Équipes**
+↕
+**Parcelles**
+↕
+**Cultures**
+↕
+**Interventions**
+↕
+**Irrigation**
+↕
+**Stocks**
+↕
+**Matériel**
+↕
+**Maintenance**
+↕
+**Achats**
+↕
+**Ventes**
+↕
+**Comptabilité**
+
+L'architecture doit être conçue de manière modulaire afin de pouvoir ajouter ultérieurement de nouveaux métiers, rôles, modules, exploitations, parcelles et règles de permissions sans modifier profondément le système.
+
+Le résultat attendu est un **véritable système de gestion des ressources humaines opérationnelles et des autorisations agricoles**, parfaitement intégré à CMS² AgriPro.

@@ -1,0 +1,3 @@
+## Cartographie Parcellaire Plan
+- [x] Compléter la carte interactive AgriPro en conservant le design vert nuit/chlorophylle/ambre : outils de dessin/édition de contours de parcelles, sélection au clic et fiche parcellaire enrichie.
+- [x] Finaliser les contrôles cartographiques : sauvegarde GeoJSON, validation serveur, détails complets liés à la parcelle, historique et messages d’erreur/confirmation.

@@ -1,0 +1,1090 @@
+# PROMPT — INTÉGRATION DU SUIVI DES STADES CULTURAUX DANS AGRIPRO
+
+Tu travailles sur une plateforme agricole existante appelée AgriPro, développée en Python.
+
+Ta mission est d'intégrer un système professionnel de SUIVI DES CULTURES PAR STADES PHÉNOLOGIQUES.
+
+IMPORTANT :
+Ne crée pas une fonctionnalité isolée.
+Le système des stades doit être profondément intégré aux modules existants d'AgriPro :
+Parcelles, Cultures, Campagnes, Interventions, Irrigation, Fertilisation, Traitements, Récoltes, Stocks, Personnel, Matériel, Rapports et Guide Agricole.
+
+==================================================
+1. OBJECTIF
+==================================================
+
+Permettre à AgriPro de suivre, pour chaque culture et chaque parcelle :
+
+- le cycle de développement ;
+- le stade actuel ;
+- les stades précédents ;
+- les stades suivants ;
+- les dates d'observation ;
+- la progression ;
+- les opérations recommandées ;
+- les interventions réalisées ;
+- les anomalies ;
+- les observations agronomiques ;
+- l'historique phénologique.
+
+Le système doit comprendre qu'il n'existe PAS un nombre universel de stades pour toutes les cultures.
+
+Chaque culture doit disposer de son propre référentiel phénologique.
+
+==================================================
+2. RÈGLE FONDAMENTALE
+==================================================
+
+NE PAS utiliser une liste globale identique pour toutes les cultures.
+
+Exemple :
+
+Blé :
+Germination → Levée → Tallage → Montaison → Épiaison → Floraison → Remplissage → Maturation
+
+Tomate :
+Germination → Levée → Croissance végétative → Floraison → Nouaison → Développement du fruit → Véraison → Maturation
+
+Olivier :
+Repos végétatif → Reprise → Floraison → Nouaison → Développement du fruit → Durcissement du noyau → Véraison → Maturation
+
+Vigne :
+Dormance → Débourrement → Croissance végétative → Floraison → Nouaison → Fermeture de la grappe → Véraison → Maturation → Récolte
+
+Chaque culture doit donc posséder son propre cycle.
+
+==================================================
+3. RÉFÉRENTIEL DES CULTURES
+==================================================
+
+Créer ou utiliser le référentiel existant des cultures.
+
+Chaque culture doit pouvoir contenir :
+
+- ID ;
+- nom ;
+- nom scientifique ;
+- catégorie ;
+- type de culture ;
+- durée indicative du cycle ;
+- culture annuelle ou pérenne ;
+- système phénologique ;
+- statut actif/inactif.
+
+Exemples :
+
+Blé dur
+Blé tendre
+Orge
+Maïs
+Pois chiche
+Lentille
+Tomate
+Pomme de terre
+Oignon
+Poivron
+Aubergine
+Olivier
+Oranger
+Clémentinier
+Pommier
+Pêcher
+Abricotier
+Grenadier
+Amandier
+Pistachier
+Vigne
+Palmier dattier
+Avocatier
+etc.
+
+NE PAS créer de doublons si ces cultures existent déjà dans la base.
+
+==================================================
+4. RÉFÉRENTIEL DES STADES
+==================================================
+
+Créer une structure permettant d'associer plusieurs stades à chaque culture.
+
+Structure logique :
+
+CULTURE
+   ↓
+RÉFÉRENTIEL PHÉNOLOGIQUE
+   ↓
+STADE 1
+STADE 2
+STADE 3
+STADE 4
+...
+STADE N
+
+Chaque stade doit contenir :
+
+- ID ;
+- culture_id ;
+- code ;
+- nom ;
+- nom court ;
+- description ;
+- ordre ;
+- stade précédent ;
+- stade suivant ;
+- durée indicative ;
+- période indicative ;
+- stade critique oui/non ;
+- actif oui/non.
+
+==================================================
+5. BBCH
+==================================================
+
+Lorsque cela est pertinent, permettre d'associer un code BBCH au stade.
+
+Exemple :
+
+Blé :
+BBCH 10 → premières feuilles
+BBCH 21 → début du tallage
+BBCH 30 → début montaison
+BBCH 51 → début épiaison
+BBCH 61 → début floraison
+BBCH 71 → développement du grain
+
+NE PAS imposer BBCH à toutes les cultures si le référentiel utilisé n'est pas approprié.
+
+Prévoir :
+
+- système_phénologique ;
+- code_bbch ;
+- stade_local ;
+- description.
+
+L'interface utilisateur doit afficher un vocabulaire agricole compréhensible.
+
+==================================================
+6. SUIVI PAR PARCELLE
+==================================================
+
+Le stade réel doit être enregistré au niveau de la culture présente sur une parcelle.
+
+Exemple :
+
+Exploitation :
+Ferme El Amel
+
+Parcelle :
+P-001
+
+Culture :
+Blé dur
+
+Campagne :
+2026/2027
+
+Stade actuel :
+Tallage
+
+Date d'observation :
+18/08/2026
+
+Observateur :
+Technicien X
+
+Statut :
+Confirmé
+
+==================================================
+7. HISTORIQUE PHÉNOLOGIQUE
+==================================================
+
+Conserver l'historique.
+
+Exemple :
+
+18/08/2026
+Levée
+
+25/08/2026
+Tallage
+
+10/09/2026
+Montaison
+
+etc.
+
+Ne jamais supprimer automatiquement l'historique lorsqu'un stade est modifié.
+
+Créer un historique :
+
+- date ;
+- ancien stade ;
+- nouveau stade ;
+- utilisateur ;
+- observation ;
+- commentaire ;
+- pièce jointe éventuelle.
+
+==================================================
+8. PROGRESSION VISUELLE
+==================================================
+
+Créer une représentation visuelle du cycle.
+
+Exemple :
+
+[✓] Germination
+     ↓
+[✓] Levée
+     ↓
+[●] Tallage
+     ↓
+[ ] Montaison
+     ↓
+[ ] Épiaison
+     ↓
+[ ] Floraison
+     ↓
+[ ] Remplissage
+     ↓
+[ ] Maturation
+
+Le stade actuel doit être clairement identifiable.
+
+Afficher également :
+
+- progression en % ;
+- nombre de stades réalisés ;
+- stade actuel ;
+- prochain stade ;
+- date du dernier changement ;
+- durée dans le stade.
+
+==================================================
+9. TABLEAU DE BORD CULTURE
+==================================================
+
+Dans la fiche d'une culture/parcelle ajouter une section :
+
+"Suivi phénologique"
+
+Afficher :
+
+Culture :
+Blé dur
+
+Stade actuel :
+Tallage
+
+Progression :
+35 %
+
+Dernière observation :
+18/08/2026
+
+Prochain stade :
+Montaison
+
+Durée dans le stade :
+8 jours
+
+Ajouter :
+
+[Modifier le stade]
+[Ajouter une observation]
+[Voir l'historique]
+[Voir les recommandations]
+
+==================================================
+10. OBSERVATION AGRONOMIQUE
+==================================================
+
+Lorsqu'un utilisateur enregistre un stade, permettre de saisir :
+
+- date ;
+- heure facultative ;
+- stade ;
+- observation ;
+- état général ;
+- vigueur ;
+- homogénéité ;
+- anomalies ;
+- maladies observées ;
+- ravageurs ;
+- stress hydrique ;
+- stress thermique ;
+- commentaire ;
+- photo ;
+- document.
+
+Créer un formulaire simple et rapide.
+
+==================================================
+11. PHOTOS
+==================================================
+
+Permettre d'associer des photos au suivi du stade.
+
+Exemple :
+
+Photo :
+Parcelle P-001
+
+Culture :
+Tomate
+
+Stade :
+Nouaison
+
+Date :
+18/08/2026
+
+Observation :
+Nouaison homogène.
+
+Les photos doivent rester associées à l'historique.
+
+==================================================
+12. LIEN AVEC LES INTERVENTIONS
+==================================================
+
+Le stade doit être disponible dans le module Interventions.
+
+Lorsqu'une intervention est créée :
+
+Parcelle
+↓
+Culture
+↓
+Campagne
+↓
+Stade actuel
+↓
+Intervention
+
+Exemple :
+
+Culture :
+Tomate
+
+Stade :
+Floraison
+
+Intervention :
+Traitement phytosanitaire
+
+L'utilisateur doit pouvoir voir le stade actuel directement dans le formulaire.
+
+==================================================
+13. LIEN AVEC L'IRRIGATION
+==================================================
+
+Le stade doit être disponible dans le module Irrigation.
+
+Exemple :
+
+Culture :
+Maïs
+
+Stade :
+Floraison
+
+Afficher éventuellement :
+
+"Stade sensible"
+
+et permettre de consulter les recommandations définies dans le référentiel.
+
+Ne jamais inventer automatiquement une dose ou une quantité agronomique.
+
+Les recommandations doivent provenir du référentiel AgriPro ou d'une source explicitement définie.
+
+==================================================
+14. LIEN AVEC LA FERTILISATION
+==================================================
+
+Associer les recommandations de fertilisation aux stades lorsque les données existent.
+
+Exemple :
+
+Stade :
+Montaison
+
+Afficher :
+
+"Opérations recommandées"
+
+→ Fertilisation
+
+→ Surveillance
+
+→ Irrigation
+
+Mais ne pas transformer automatiquement une recommandation en intervention.
+
+L'utilisateur doit confirmer l'opération.
+
+==================================================
+15. LIEN AVEC LES TRAITEMENTS
+==================================================
+
+Le stade doit permettre d'afficher :
+
+- risques potentiels ;
+- surveillance recommandée ;
+- interventions possibles ;
+- produits éventuellement autorisés dans le référentiel.
+
+IMPORTANT :
+
+Ne jamais recommander automatiquement un produit phytosanitaire sans disposer d'une source réglementaire/agronomique fiable et à jour.
+
+==================================================
+16. LIEN AVEC LA RÉCOLTE
+==================================================
+
+Le module Récolte doit connaître :
+
+- culture ;
+- parcelle ;
+- campagne ;
+- stade ;
+- date de récolte.
+
+Permettre d'associer la récolte au stade final correspondant.
+
+Exemple :
+
+Olivier
+↓
+Maturation
+↓
+Récolte
+
+==================================================
+17. CULTURES ANNUELLES ET PÉRENNES
+==================================================
+
+Le système doit distinguer :
+
+CULTURES ANNUELLES
+
+Exemple :
+Blé
+Maïs
+Tomate
+Pomme de terre
+
+et
+
+CULTURES PÉRENNES
+
+Exemple :
+Olivier
+Vigne
+Agrumes
+Pommier
+Palmier dattier
+
+Pour les cultures pérennes :
+
+l'historique des années précédentes doit être conservé.
+
+Exemple :
+
+Olivier
+Parcelle P-005
+
+Campagne 2024
+Cycle phénologique
+
+Campagne 2025
+Cycle phénologique
+
+Campagne 2026
+Cycle phénologique
+
+==================================================
+18. VARIÉTÉS
+==================================================
+
+Prévoir la possibilité que les stades et durées varient selon la variété.
+
+Structure :
+
+Culture
+↓
+Variété
+↓
+Référentiel phénologique spécifique éventuel
+
+Si aucune donnée spécifique à la variété n'existe :
+
+utiliser le référentiel générique de la culture.
+
+==================================================
+19. CALENDRIER PHÉNOLOGIQUE
+==================================================
+
+Créer une vue calendrier.
+
+Afficher :
+
+- date de début du stade ;
+- date de fin ;
+- durée ;
+- stade actuel ;
+- stade prévu ;
+- stade réellement observé.
+
+Comparer :
+
+PRÉVISION
+
+vs
+
+RÉALITÉ
+
+Exemple :
+
+Stade prévu :
+Montaison — 10 septembre
+
+Stade réel :
+Montaison — 17 septembre
+
+Retard :
++7 jours
+
+==================================================
+20. DÉTECTION DES ÉCARTS
+==================================================
+
+AgriPro doit pouvoir détecter :
+
+- retard ;
+- avance ;
+- stade inhabituellement long ;
+- progression anormale ;
+- absence d'observation.
+
+Exemple :
+
+⚠️ Alerte
+
+La culture est restée 22 jours au stade "Floraison".
+
+Durée indicative :
+10–15 jours.
+
+Afficher :
+
+[Voir le suivi]
+
+Ne pas déclarer automatiquement qu'il s'agit d'un problème agronomique.
+
+Présenter cela comme une anomalie à vérifier.
+
+==================================================
+21. STADE PROBABLE
+==================================================
+
+Ajouter éventuellement :
+
+"Stade probable"
+
+Calculé à partir de :
+
+- culture ;
+- variété ;
+- date de plantation/semis ;
+- campagne ;
+- historique ;
+- calendrier cultural.
+
+Exemple :
+
+Stade probable :
+Floraison
+
+Confiance :
+Moyenne
+
+Puis :
+
+[Confirmer le stade]
+
+Le stade probable ne doit JAMAIS remplacer l'observation humaine.
+
+==================================================
+22. RÈGLE DE VALIDATION
+==================================================
+
+Un utilisateur peut :
+
+- proposer un stade ;
+- confirmer un stade ;
+- corriger un stade.
+
+Conserver l'historique.
+
+Exemple :
+
+Système :
+Stade probable = Floraison
+
+Technicien :
+Stade confirmé = Nouaison
+
+Conserver les deux informations.
+
+==================================================
+23. ALERTES CONTEXTUELLES
+==================================================
+
+Créer des alertes :
+
+- absence d'observation ;
+- retard potentiel ;
+- changement de stade ;
+- stade critique ;
+- intervention recommandée ;
+- récolte proche.
+
+Les alertes doivent être configurables.
+
+==================================================
+24. RAPPORTS
+==================================================
+
+Ajouter des rapports :
+
+- état phénologique de toutes les parcelles ;
+- cultures par stade ;
+- évolution des stades ;
+- retard/avance ;
+- historique ;
+- comparaison entre parcelles ;
+- comparaison entre campagnes.
+
+Filtres :
+
+- exploitation ;
+- secteur ;
+- parcelle ;
+- culture ;
+- variété ;
+- campagne ;
+- période ;
+- stade.
+
+==================================================
+25. CARTE DES STADES
+==================================================
+
+Dans la cartographie AgriPro, permettre de visualiser les parcelles selon leur stade.
+
+Exemple :
+
+Carte :
+
+P-001 → Tallage
+P-002 → Montaison
+P-003 → Floraison
+P-004 → Maturation
+
+Ajouter un filtre :
+
+"Afficher par stade"
+
+==================================================
+26. GUIDE AGRICOLE
+==================================================
+
+Le Guide Agricole doit être automatiquement connecté au module.
+
+Depuis un stade :
+
+[📚 Comprendre ce stade]
+
+Afficher :
+
+- définition ;
+- caractéristiques ;
+- signes permettant de reconnaître le stade ;
+- opérations généralement associées ;
+- points de surveillance ;
+- erreurs fréquentes ;
+- informations techniques.
+
+Exemple :
+
+Stade :
+Nouaison
+
+→ Qu'est-ce que la nouaison ?
+→ Comment la reconnaître ?
+→ Que surveiller ?
+→ Quelles interventions peuvent être pertinentes ?
+→ Articles du Guide associés.
+
+==================================================
+27. DICTIONNAIRE
+==================================================
+
+Chaque stade doit être indexé dans le dictionnaire AgriPro.
+
+Recherche :
+
+"nouaison"
+
+Résultat :
+
+Définition
+Cultures concernées
+Stades précédents
+Stades suivants
+Photos
+Articles du Guide
+Parcelles actuellement à ce stade
+
+==================================================
+28. BASE DE DONNÉES
+==================================================
+
+Avant de créer des tables :
+
+analyser la base existante.
+
+Réutiliser les entités existantes.
+
+Créer uniquement ce qui manque.
+
+Architecture indicative :
+
+crop_phenology_profiles
+crop_phenological_stages
+crop_stage_observations
+crop_stage_history
+crop_stage_recommendations
+crop_stage_media
+
+Adapter les noms aux conventions du projet existant.
+
+Créer les relations correctement.
+
+==================================================
+29. API
+==================================================
+
+Créer ou compléter les API nécessaires.
+
+Exemples :
+
+GET /cultures/{id}/stages
+
+GET /parcelles/{id}/phenology
+
+POST /parcelles/{id}/phenology
+
+GET /parcelles/{id}/phenology/history
+
+GET /cultures/{id}/phenology/calendar
+
+GET /phenology/stages/{id}
+
+Adapter les routes à l'architecture API existante.
+
+==================================================
+30. PERMISSIONS
+==================================================
+
+Respecter le système de rôles existant.
+
+Exemples :
+
+Ouvrier :
+→ consulter
+→ ajouter une observation selon autorisation
+
+Technicien :
+→ consulter
+→ enregistrer
+→ modifier
+
+Responsable :
+→ valider
+→ corriger
+→ analyser
+
+Administrateur :
+→ gérer les référentiels
+
+Ne jamais contourner le système de permissions existant.
+
+==================================================
+31. INTERFACE
+==================================================
+
+Respecter totalement le design actuel d'AgriPro.
+
+Créer une interface :
+
+- moderne ;
+- professionnelle ;
+- agricole ;
+- claire ;
+- responsive ;
+- cohérente avec les autres modules.
+
+Ne pas créer un nouveau design indépendant.
+
+==================================================
+32. PERFORMANCE
+==================================================
+
+Le suivi doit fonctionner correctement avec :
+
+- quelques parcelles ;
+- centaines de parcelles ;
+- milliers d'observations.
+
+Utiliser :
+
+- pagination ;
+- indexation ;
+- requêtes optimisées ;
+- chargement différé si nécessaire.
+
+==================================================
+33. COHÉRENCE DES DONNÉES
+==================================================
+
+Créer des contrôles :
+
+Une observation doit avoir :
+
+- une culture ;
+- une parcelle ;
+- une campagne ;
+- une date ;
+- un stade valide.
+
+Le stade doit appartenir au référentiel de la culture.
+
+Empêcher :
+
+Culture = Olivier
+Stade = Tallage
+
+si Tallage n'existe pas dans le référentiel de l'olivier.
+
+==================================================
+34. NE PAS SUPPRIMER LES DONNÉES EXISTANTES
+==================================================
+
+Avant toute migration :
+
+- analyser la structure existante ;
+- sauvegarder si nécessaire ;
+- créer les migrations ;
+- migrer progressivement ;
+- tester.
+
+Ne jamais supprimer ou réinitialiser la base existante simplement pour intégrer ce module.
+
+==================================================
+35. TESTS
+==================================================
+
+Créer des tests pour :
+
+- création d'un référentiel de culture ;
+- création des stades ;
+- association culture/stade ;
+- observation ;
+- historique ;
+- changement de stade ;
+- validation ;
+- permissions ;
+- calendrier ;
+- anomalies ;
+- API ;
+- interface ;
+- cohérence.
+
+Tester notamment :
+
+Blé + Tallage = valide
+
+Tomate + Nouaison = valide
+
+Olivier + Tallage = invalide
+
+==================================================
+36. IMPORTATION DU RÉFÉRENTIEL
+==================================================
+
+Prévoir une fonctionnalité d'administration permettant d'importer les stades depuis :
+
+- CSV ;
+- Excel ;
+- JSON.
+
+Cela permettra d'enrichir progressivement la base AgriPro.
+
+Prévoir également l'export.
+
+==================================================
+37. ADMINISTRATION DES STADES
+==================================================
+
+Créer :
+
+Administration
+→ Référentiels
+→ Cultures
+→ Phénologie
+→ Stades
+
+L'administrateur peut :
+
+- créer une culture ;
+- créer un stade ;
+- modifier ;
+- réordonner ;
+- désactiver ;
+- associer un code BBCH ;
+- ajouter une définition ;
+- ajouter une recommandation ;
+- ajouter une image ;
+- définir les stades critiques.
+
+==================================================
+38. RÈGLE IMPORTANTE SUR LES RECOMMANDATIONS
+==================================================
+
+Ne pas inventer les données agronomiques.
+
+Les durées, doses, besoins hydriques, traitements ou recommandations doivent être :
+
+- fournies par le référentiel ;
+- validées par un responsable ;
+- ou présentées comme informations générales.
+
+Ne jamais présenter une estimation comme une règle agronomique certaine.
+
+==================================================
+39. LIVRABLE FINAL
+==================================================
+
+À la fin de l'intégration, fournir :
+
+1. liste des fichiers créés ;
+2. liste des fichiers modifiés ;
+3. tables créées/modifiées ;
+4. migrations ;
+5. API ;
+6. interfaces ;
+7. nouvelles fonctionnalités ;
+8. cultures intégrées ;
+9. stades intégrés ;
+10. règles de cohérence ;
+11. tests réalisés ;
+12. problèmes détectés ;
+13. problèmes corrigés ;
+14. fonctionnalités restantes.
+
+==================================================
+40. ORDRE D'EXÉCUTION OBLIGATOIRE
+==================================================
+
+NE COMMENCE PAS DIRECTEMENT PAR LE CODE.
+
+Procède dans cet ordre :
+
+ÉTAPE 1
+Analyser entièrement AgriPro.
+
+ÉTAPE 2
+Identifier le framework Python.
+
+ÉTAPE 3
+Analyser la base de données.
+
+ÉTAPE 4
+Identifier le module Cultures.
+
+ÉTAPE 5
+Identifier le module Parcelles.
+
+ÉTAPE 6
+Identifier le module Campagnes.
+
+ÉTAPE 7
+Identifier le Guide Agricole.
+
+ÉTAPE 8
+Comparer les fonctionnalités existantes avec le système phénologique demandé.
+
+ÉTAPE 9
+Présenter une matrice :
+
+EXISTANT
+INCOMPLET
+INCOHÉRENT
+MANQUANT
+
+ÉTAPE 10
+Proposer l'architecture technique.
+
+ÉTAPE 11
+Attendre/valider cette architecture si le système de développement l'exige.
+
+ÉTAPE 12
+Implémenter progressivement.
+
+ÉTAPE 13
+Tester après chaque étape.
+
+ÉTAPE 14
+Vérifier qu'aucun module existant n'a été cassé.
+
+==================================================
+OBJECTIF FINAL
+==================================================
+
+Transformer AgriPro en une plateforme capable de répondre à cette question à tout moment :
+
+"À quel stade se trouve actuellement chaque culture de chaque parcelle, quelle a été son évolution, quelle est la prochaine étape, quelles observations ont été faites et quelles informations du Guide Agricole sont associées à ce stade ?"
+
+Le système doit être :
+
+COHÉRENT
++
+TRAÇABLE
++
+ÉVOLUTIF
++
+MULTICULTURES
++
+MULTIPARCELLES
++
+MULTICAMPAGNES
++
+COMPATIBLE AVEC LES VARIÉTÉS
++
+INTÉGRÉ AUX INTERVENTIONS
++
+INTÉGRÉ AUX RAPPORTS
++
+INTÉGRÉ AU GUIDE AGRICOLE.
+
+Ne reconstruis pas AgriPro.
+Évolue à partir de l'architecture existante.
+
+RÈGLE FINALE :
+
+AUDITER → MODÉLISER → COMPARER → INTÉGRER → TESTER → VALIDER.
+
+Ne jamais coder une fonctionnalité dont la logique n'a pas été vérifiée avec l'architecture existante d'AgriPro.

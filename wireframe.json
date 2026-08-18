@@ -1,0 +1,302 @@
+{
+  "version": 4,
+  "app_title": "Plan Application d’Exploitation Végétale",
+  "nav": {
+    "placement": "none",
+    "items": []
+  },
+  "pages": [
+    {
+      "id": "page-eddc8c59",
+      "name": "Tableau de bord",
+      "route": "/",
+      "item_ref": {
+        "index": 1,
+        "text": "Finaliser les contrôles cartographiques : sauvegarde GeoJSON, validation serveur, détails complets liés à la parcelle, historique et messages d’erreur/confirmation."
+      },
+      "blocks": [
+        {
+          "id": "dashboard-hero",
+          "type": "hero",
+          "label": "Cockpit agronomique premium",
+          "hint": "En-tête immersif avec nom de l’exploitation, saison active, actions rapides et ambiance visuelle vert nuit/chlorophylle.",
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 2,
+          "item_ref": {
+            "index": 1,
+            "text": "Finaliser les contrôles cartographiques : sauvegarde GeoJSON, validation serveur, détails complets liés à la parcelle, historique et messages d’erreur/confirmation."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "dashboard-stats",
+          "type": "kpi",
+          "label": "Indicateurs clés",
+          "hint": "Cartes pour hectares suivis, cultures actives, interventions à venir, rendement estimé.",
+          "x": 0,
+          "y": 2,
+          "w": 12,
+          "h": 2,
+          "item_ref": {
+            "index": 1,
+            "text": "Finaliser les contrôles cartographiques : sauvegarde GeoJSON, validation serveur, détails complets liés à la parcelle, historique et messages d’erreur/confirmation."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "dashboard-fields-map",
+          "type": "map",
+          "label": "Carte stylisée des parcelles",
+          "hint": "Vue centrale des parcelles colorées par culture et état sanitaire.",
+          "x": 0,
+          "y": 4,
+          "w": 7,
+          "h": 5,
+          "item_ref": {
+            "index": 1,
+            "text": "Finaliser les contrôles cartographiques : sauvegarde GeoJSON, validation serveur, détails complets liés à la parcelle, historique et messages d’erreur/confirmation."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "dashboard-calendar",
+          "type": "calendar",
+          "label": "Calendrier d’interventions",
+          "hint": "Planning des semis, traitements, irrigations et récoltes à venir.",
+          "x": 7,
+          "y": 4,
+          "w": 5,
+          "h": 5,
+          "item_ref": {
+            "index": 1,
+            "text": "Finaliser les contrôles cartographiques : sauvegarde GeoJSON, validation serveur, détails complets liés à la parcelle, historique et messages d’erreur/confirmation."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "dashboard-trends",
+          "type": "chart_area",
+          "label": "Évolution agronomique",
+          "hint": "Courbes de rendement estimé, humidité et charge d’intervention sur la saison.",
+          "x": 0,
+          "y": 9,
+          "w": 7,
+          "h": 4,
+          "item_ref": {
+            "index": 1,
+            "text": "Finaliser les contrôles cartographiques : sauvegarde GeoJSON, validation serveur, détails complets liés à la parcelle, historique et messages d’erreur/confirmation."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "dashboard-alerts",
+          "type": "list",
+          "label": "Alertes et priorités",
+          "hint": "Alertes phytosanitaires, retards d’intervention, fenêtres météo favorables.",
+          "x": 7,
+          "y": 9,
+          "w": 5,
+          "h": 4,
+          "item_ref": {
+            "index": 1,
+            "text": "Finaliser les contrôles cartographiques : sauvegarde GeoJSON, validation serveur, détails complets liés à la parcelle, historique et messages d’erreur/confirmation."
+          },
+          "type_source": "palette"
+        }
+      ],
+      "deleted_ids": []
+    },
+    {
+      "id": "page-711790ac",
+      "name": "Parcelles et cultures",
+      "route": "/parcelles",
+      "item_ref": {
+        "index": 2,
+        "text": "Relier les stades aux modules opérationnels : interventions, irrigation, fertilisation, traitements, récoltes, cartographie, recherche globale, audit et rapports, avec alertes contextuelles non prescriptives."
+      },
+      "blocks": [
+        {
+          "id": "fields-nav",
+          "type": "nav",
+          "label": "Navigation principale",
+          "hint": "Accès Tableau de bord, Parcelles & cultures, Traitements & récoltes.",
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 1,
+          "item_ref": {
+            "index": 2,
+            "text": "Relier les stades aux modules opérationnels : interventions, irrigation, fertilisation, traitements, récoltes, cartographie, recherche globale, audit et rapports, avec alertes contextuelles non prescriptives."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "fields-form",
+          "type": "form",
+          "label": "Créer ou modifier une parcelle",
+          "hint": "Formulaire avec nom, surface, sol, culture, variété, date de semis, stade et statut.",
+          "x": 0,
+          "y": 1,
+          "w": 4,
+          "h": 6,
+          "item_ref": {
+            "index": 2,
+            "text": "Relier les stades aux modules opérationnels : interventions, irrigation, fertilisation, traitements, récoltes, cartographie, recherche globale, audit et rapports, avec alertes contextuelles non prescriptives."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "fields-table",
+          "type": "table",
+          "label": "Liste filtrable des parcelles",
+          "hint": "Table avec recherche, filtres par culture/statut, surface, stade et actions.",
+          "x": 4,
+          "y": 1,
+          "w": 8,
+          "h": 6,
+          "item_ref": {
+            "index": 2,
+            "text": "Relier les stades aux modules opérationnels : interventions, irrigation, fertilisation, traitements, récoltes, cartographie, recherche globale, audit et rapports, avec alertes contextuelles non prescriptives."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "fields-detail",
+          "type": "text",
+          "label": "Fiche parcelle",
+          "hint": "Résumé visuel de la parcelle sélectionnée, historique et progression culturale.",
+          "x": 0,
+          "y": 7,
+          "w": 6,
+          "h": 4,
+          "item_ref": {
+            "index": 2,
+            "text": "Relier les stades aux modules opérationnels : interventions, irrigation, fertilisation, traitements, récoltes, cartographie, recherche globale, audit et rapports, avec alertes contextuelles non prescriptives."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "crop-timeline",
+          "type": "timeline",
+          "label": "Stades culturaux",
+          "hint": "Progression semis, levée, tallage/floraison, maturité, récolte selon la culture.",
+          "x": 6,
+          "y": 7,
+          "w": 6,
+          "h": 4,
+          "item_ref": {
+            "index": 2,
+            "text": "Relier les stades aux modules opérationnels : interventions, irrigation, fertilisation, traitements, récoltes, cartographie, recherche globale, audit et rapports, avec alertes contextuelles non prescriptives."
+          },
+          "type_source": "palette"
+        }
+      ],
+      "deleted_ids": []
+    },
+    {
+      "id": "page-3b66cdd0",
+      "name": "Traitements et récoltes",
+      "route": "/interventions",
+      "item_ref": {
+        "index": 3,
+        "text": "Ajouter l’administration, l’import/export et les validations finales : gestion des stades, import CSV/JSON, API internes, tests de cohérence Blé/Tallage, Tomate/Nouaison et Olivier/Tallage invalide."
+      },
+      "blocks": [
+        {
+          "id": "ops-nav",
+          "type": "nav",
+          "label": "Navigation principale",
+          "hint": "Accès Tableau de bord, Parcelles & cultures, Traitements & récoltes.",
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 1,
+          "item_ref": {
+            "index": 3,
+            "text": "Ajouter l’administration, l’import/export et les validations finales : gestion des stades, import CSV/JSON, API internes, tests de cohérence Blé/Tallage, Tomate/Nouaison et Olivier/Tallage invalide."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "treatment-form",
+          "type": "form",
+          "label": "Saisir une intervention",
+          "hint": "Type, parcelle, produit, dose, date, coût, statut et notes agronomiques.",
+          "x": 0,
+          "y": 1,
+          "w": 4,
+          "h": 5,
+          "item_ref": {
+            "index": 3,
+            "text": "Ajouter l’administration, l’import/export et les validations finales : gestion des stades, import CSV/JSON, API internes, tests de cohérence Blé/Tallage, Tomate/Nouaison et Olivier/Tallage invalide."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "treatment-table",
+          "type": "table",
+          "label": "Journal des traitements",
+          "hint": "Historique filtrable des interventions, statuts, coûts et conformité délai avant récolte.",
+          "x": 4,
+          "y": 1,
+          "w": 8,
+          "h": 5,
+          "item_ref": {
+            "index": 3,
+            "text": "Ajouter l’administration, l’import/export et les validations finales : gestion des stades, import CSV/JSON, API internes, tests de cohérence Blé/Tallage, Tomate/Nouaison et Olivier/Tallage invalide."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "harvest-form",
+          "type": "form",
+          "label": "Saisir une récolte",
+          "hint": "Parcelle, culture, date, tonnage, humidité, qualité et prix estimé.",
+          "x": 0,
+          "y": 6,
+          "w": 4,
+          "h": 4,
+          "item_ref": {
+            "index": 3,
+            "text": "Ajouter l’administration, l’import/export et les validations finales : gestion des stades, import CSV/JSON, API internes, tests de cohérence Blé/Tallage, Tomate/Nouaison et Olivier/Tallage invalide."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "harvest-chart",
+          "type": "chart_bar",
+          "label": "Rendements comparés",
+          "hint": "Barres visibles comparant rendement par parcelle et culture.",
+          "x": 4,
+          "y": 6,
+          "w": 8,
+          "h": 4,
+          "item_ref": {
+            "index": 3,
+            "text": "Ajouter l’administration, l’import/export et les validations finales : gestion des stades, import CSV/JSON, API internes, tests de cohérence Blé/Tallage, Tomate/Nouaison et Olivier/Tallage invalide."
+          },
+          "type_source": "palette"
+        },
+        {
+          "id": "stock-cards",
+          "type": "card_grid",
+          "label": "Stocks et produits",
+          "hint": "Cartes de stock avec niveaux critiques, coûts et produits utilisés récemment.",
+          "x": 0,
+          "y": 10,
+          "w": 12,
+          "h": 3,
+          "item_ref": {
+            "index": 3,
+            "text": "Ajouter l’administration, l’import/export et les validations finales : gestion des stades, import CSV/JSON, API internes, tests de cohérence Blé/Tallage, Tomate/Nouaison et Olivier/Tallage invalide."
+          },
+          "type_source": "palette"
+        }
+      ],
+      "deleted_ids": []
+    }
+  ],
+  "attached_to_plan": false
+}
