@@ -1,0 +1,756 @@
+PROMPT — CRÉATION DU MODULE « CLIENTS & FOURNISSEURS » — AGRIPRO
+
+Tu es un architecte logiciel senior spécialisé dans les plateformes ERP agricoles, les systèmes de gestion d'exploitation et les interfaces SaaS modernes.
+
+Tu dois concevoir et intégrer dans AgriPro un module complet, professionnel et évolutif de Gestion des Clients & Fournisseurs, parfaitement intégré aux autres modules de la plateforme : Parcelles, Cultures, Interventions, Stocks, Achats, Ventes, Comptabilité, Maintenance et Documents.
+
+1. OBJECTIF DU MODULE
+
+Créer un véritable mini-CRM/ERP agricole permettant à l'utilisateur de :
+
+gérer ses clients ;
+gérer ses fournisseurs ;
+suivre les coordonnées et informations administratives ;
+gérer les contacts ;
+suivre les achats auprès des fournisseurs ;
+suivre les ventes aux clients ;
+suivre les factures et paiements ;
+suivre les dettes et créances ;
+consulter l'historique complet des opérations ;
+associer clients et fournisseurs aux produits agricoles ;
+associer les transactions aux parcelles, cultures, récoltes et campagnes ;
+centraliser tous les documents ;
+disposer d'indicateurs financiers et commerciaux en temps réel.
+
+Le module doit être conçu pour fonctionner aussi bien pour une petite exploitation que pour une grande exploitation agricole ou une entreprise agroalimentaire.
+
+2. STRUCTURE DU MODULE
+
+Créer deux catégories principales :
+
+CLIENTS
+Liste des clients
+Nouveau client
+Fiche client
+Contacts
+Ventes
+Factures
+Paiements
+Créances
+Documents
+Historique
+Statistiques
+FOURNISSEURS
+Liste des fournisseurs
+Nouveau fournisseur
+Fiche fournisseur
+Contacts
+Achats
+Factures fournisseurs
+Paiements
+Dettes
+Documents
+Historique
+Statistiques
+
+Ajouter également une vue :
+
+PARTENAIRES
+
+Une vue centralisée permettant de rechercher tous les tiers :
+
+Client
+Fournisseur
+Client + Fournisseur
+Transporteur
+Prestataire
+Coopérative
+Grossiste
+Distributeur
+Revendeur
+Autre partenaire
+3. TABLEAU DE BORD
+
+Créer un dashboard moderne affichant automatiquement :
+
+KPIs CLIENTS
+Nombre total de clients
+Clients actifs
+Nouveaux clients
+Clients inactifs
+Chiffre d'affaires clients
+Créances clients
+Paiements reçus
+Factures impayées
+Factures en retard
+KPIs FOURNISSEURS
+Nombre total de fournisseurs
+Fournisseurs actifs
+Achats totaux
+Dettes fournisseurs
+Paiements effectués
+Factures impayées
+Factures en retard
+KPIs COMMERCIAUX
+CA du mois
+CA de la campagne agricole
+Achats du mois
+Marge commerciale
+Top 10 clients
+Top 10 fournisseurs
+Produits les plus vendus
+Produits les plus achetés
+
+Ajouter des graphiques interactifs :
+
+CA par mois
+achats par mois
+évolution des créances
+évolution des dettes
+ventes par client
+achats par fournisseur
+répartition des ventes par culture
+répartition des achats par catégorie.
+4. FICHE CLIENT
+
+Créer une fiche client extrêmement complète.
+
+Informations générales
+Code client automatique
+Type : particulier / entreprise / coopérative / grossiste / distributeur / autre
+Nom / raison sociale
+Nom commercial
+Identifiant fiscal
+RC
+NIF
+NIS
+Adresse
+Wilaya
+Commune
+Pays
+Téléphone
+Téléphone secondaire
+Email
+Site web
+WhatsApp
+Personne de contact
+Fonction du contact
+Informations commerciales
+Catégorie client
+Segment
+Commercial responsable
+Conditions de paiement
+Délai de paiement
+Limite de crédit
+Remise habituelle
+Devise
+Mode de paiement préféré
+Statut : actif / inactif / bloqué
+Informations agricoles
+
+Permettre d'associer le client à :
+
+cultures achetées ;
+variétés ;
+produits ;
+campagnes ;
+parcelles concernées ;
+volumes achetés ;
+historique des récoltes vendues.
+5. FICHE FOURNISSEUR
+
+Créer une structure similaire.
+
+Informations générales
+Code fournisseur automatique
+Type
+Raison sociale
+Nom commercial
+NIF
+NIS
+RC
+Adresse
+Wilaya
+Commune
+Pays
+Téléphone
+Email
+Site web
+Contact principal
+Fonction
+Informations commerciales
+Catégorie fournisseur
+Produits fournis
+Conditions de paiement
+Délai de paiement
+Devise
+Mode de paiement
+Remises
+Statut
+Catégories fournisseurs
+
+Prévoir notamment :
+
+Semences
+Engrais
+Produits phytosanitaires
+Matériel agricole
+Pièces détachées
+Carburant
+Irrigation
+Emballage
+Transport
+Services
+Maintenance
+Énergie
+Autre
+6. GESTION DES CONTACTS
+
+Un client ou fournisseur peut avoir plusieurs contacts.
+
+Créer :
+
+nom
+prénom
+fonction
+téléphone
+mobile
+email
+WhatsApp
+contact principal
+notes
+
+Permettre de définir un contact principal.
+
+7. GESTION DES VENTES
+
+Depuis la fiche client, afficher toutes les ventes.
+
+Chaque vente doit contenir :
+
+numéro
+date
+client
+campagne
+culture
+produit
+variété
+parcelle
+quantité
+unité
+prix unitaire
+remise
+montant HT
+TVA
+montant TTC
+devise
+mode de paiement
+statut
+facture associée
+bon de livraison
+documents associés.
+
+Statuts :
+
+Brouillon
+Confirmée
+Préparée
+Livrée
+Facturée
+Partiellement payée
+Payée
+Annulée
+8. GESTION DES ACHATS
+
+Pour les fournisseurs, créer la même logique.
+
+Chaque achat doit pouvoir être associé à :
+
+fournisseur
+date
+campagne
+catégorie
+produit
+quantité
+unité
+prix
+remise
+TVA
+montant total
+parcelle
+culture
+intervention
+bon de commande
+réception
+facture
+paiement.
+9. FACTURATION
+
+Créer une intégration directe avec le module de facturation AgriPro.
+
+Depuis une fiche client :
+
+Client → Vente → Facture → Paiement
+
+Depuis une fiche fournisseur :
+
+Fournisseur → Achat → Facture → Paiement
+
+Afficher automatiquement :
+
+total facturé
+total payé
+restant dû
+échéances
+retard
+historique des paiements.
+10. CRÉANCES CLIENTS
+
+Créer une page dédiée :
+
+Créances clients
+
+Colonnes :
+
+Client
+Facture
+Date
+Échéance
+Montant
+Payé
+Restant
+Jours de retard
+Statut
+
+Filtres :
+
+aujourd'hui
+cette semaine
+ce mois
+en retard
+
+
+
+
+30 jours
+
+
+
+
+60 jours
+
+
+
+
+90 jours.
+
+Créer une alerte automatique pour les factures arrivant à échéance.
+
+11. DETTES FOURNISSEURS
+
+Créer une page équivalente :
+
+Dettes fournisseurs
+
+Afficher :
+
+fournisseur
+facture
+date
+échéance
+montant
+payé
+restant
+retard
+statut.
+12. PAIEMENTS
+
+Créer un registre centralisé des paiements.
+
+Informations :
+
+numéro
+date
+tiers
+client/fournisseur
+facture
+montant
+devise
+mode de paiement
+référence
+banque
+caisse
+commentaire
+utilisateur
+date de saisie.
+
+Modes :
+
+Espèces
+Virement
+Chèque
+Carte
+Autre
+13. DOCUMENTS
+
+Chaque client et fournisseur doit posséder un espace documentaire.
+
+Permettre de stocker :
+
+contrats
+factures
+bons de commande
+bons de livraison
+certificats
+documents fiscaux
+RC
+NIF
+conventions
+devis
+correspondances
+autres documents.
+
+Permettre :
+
+upload
+téléchargement
+prévisualisation
+suppression selon permissions
+classement
+recherche
+historique.
+14. HISTORIQUE 360°
+
+Créer une timeline complète pour chaque tiers.
+
+Exemple :
+
+19/08/2026 — Vente créée
+18/08/2026 — Paiement reçu
+15/08/2026 — Facture générée
+12/08/2026 — Bon de livraison créé
+10/08/2026 — Commande confirmée
+
+L'utilisateur doit pouvoir comprendre toute la relation avec le client ou fournisseur depuis une seule page.
+
+15. RELATION AVEC LES MODULES AGRICOLES
+
+Le module doit être profondément connecté au cœur d'AgriPro.
+
+Relations :
+
+Client
+→ Vente
+→ Produit
+→ Récolte
+→ Culture
+→ Parcelle
+→ Campagne
+
+Et :
+
+Fournisseur
+→ Achat
+→ Produit
+→ Stock
+→ Intervention
+→ Culture
+→ Parcelle
+→ Campagne
+
+Exemple :
+
+Une facture d'achat d'engrais doit pouvoir être reliée à :
+
+Fournisseur → Engrais → Stock → Intervention → Parcelle → Culture → Campagne
+
+Une vente de récolte doit pouvoir être reliée à :
+
+Client → Produit récolté → Récolte → Culture → Parcelle → Campagne
+
+16. RECHERCHE INTELLIGENTE
+
+Créer une recherche globale permettant de rechercher :
+
+nom
+code
+téléphone
+email
+NIF
+NIS
+RC
+facture
+produit
+commande
+document.
+
+Ajouter des filtres avancés.
+
+La recherche doit être rapide et tolérer les fautes de frappe.
+
+17. IMPORT / EXPORT
+
+Prévoir :
+
+Import
+Excel
+CSV
+
+Avec assistant :
+
+Upload
+Détection des colonnes
+Correspondance des champs
+Validation
+Détection des doublons
+Import
+Export
+Excel
+CSV
+PDF
+
+Permettre l'export filtré.
+
+18. DÉTECTION DES DOUBLONS
+
+Avant de créer un client ou fournisseur, vérifier :
+
+téléphone
+email
+NIF
+RC
+nom
+raison sociale.
+
+Afficher :
+
+« Un partenaire similaire existe déjà. Voulez-vous consulter sa fiche ? »
+
+19. NOTIFICATIONS
+
+Créer un centre de notifications :
+
+facture client impayée
+facture fournisseur impayée
+échéance proche
+retard de paiement
+nouveau client
+nouveau fournisseur
+nouveau document
+limite de crédit dépassée.
+20. IA AGRIPRO
+
+Prévoir une couche IA capable d'analyser les données.
+
+Exemples :
+
+Analyse client
+
+« Ce client a généré 32 % du chiffre d'affaires de la campagne. Son délai moyen de paiement est de 18 jours. »
+
+Analyse fournisseur
+
+« Ce fournisseur représente 28 % de vos achats d'engrais et présente un délai moyen de livraison de 6 jours. »
+
+Prévision
+
+L'IA peut identifier :
+
+clients à risque ;
+fournisseurs critiques ;
+factures susceptibles d'être payées en retard ;
+évolution des achats ;
+évolution des ventes ;
+opportunités commerciales.
+
+Ajouter un bouton :
+
+« Analyser avec AgriPro AI »
+
+21. SCORE CLIENT / FOURNISSEUR
+
+Créer un système de scoring.
+
+Score client
+
+Calculer selon :
+
+volume d'achat
+fréquence
+ancienneté
+ponctualité des paiements
+rentabilité
+croissance.
+
+Afficher :
+
+Client Score : 87/100 — Excellent
+
+Score fournisseur
+
+Calculer selon :
+
+prix
+qualité
+délai de livraison
+ponctualité
+fiabilité
+fréquence des problèmes.
+22. INTERFACE UTILISATEUR
+
+Respecter le design global futuriste et premium d'AgriPro.
+
+Interface :
+
+moderne
+claire
+professionnelle
+responsive
+desktop/tablette/mobile
+cartes KPI
+tableaux intelligents
+graphiques interactifs
+animations légères
+navigation fluide
+mode clair/sombre.
+
+Créer une sidebar :
+
+CRM & Partenaires
+
+Vue générale
+Clients
+Fournisseurs
+Partenaires
+Ventes
+Achats
+Créances
+Dettes
+Paiements
+Documents
+Rapports
+23. PERMISSIONS
+
+Prévoir un système RBAC.
+
+Exemples :
+
+Administrateur
+
+Accès complet.
+
+Direction
+
+Lecture complète + rapports.
+
+Commercial
+
+Clients + ventes.
+
+Achats
+
+Fournisseurs + achats.
+
+Comptabilité
+
+Factures + paiements + créances + dettes.
+
+Employé
+
+Accès limité selon les permissions.
+
+Chaque action doit être journalisée :
+
+utilisateur
+date
+heure
+action
+ancienne valeur
+nouvelle valeur.
+24. BASE DE DONNÉES
+
+Concevoir une architecture propre et normalisée.
+
+Prévoir notamment les entités :
+
+customers
+suppliers
+partners
+contacts
+addresses
+sales
+sale_items
+purchases
+purchase_items
+invoices
+invoice_items
+payments
+receivables
+payables
+documents
+document_links
+campaigns
+crops
+plots
+harvests
+products
+audit_logs.
+
+Utiliser des relations cohérentes et éviter toute duplication inutile.
+
+25. RÈGLES MÉTIER
+
+Implémenter notamment :
+
+impossibilité de supprimer un client ayant des transactions ;
+archivage plutôt que suppression ;
+calcul automatique des soldes ;
+calcul automatique des créances ;
+calcul automatique des dettes ;
+calcul automatique des retards ;
+génération automatique des codes ;
+contrôle des doublons ;
+validation des données fiscales ;
+traçabilité complète.
+26. RESPONSIVE
+
+Le module doit être parfaitement utilisable sur :
+
+ordinateur
+tablette
+smartphone.
+
+Sur mobile, transformer les tableaux complexes en cartes intelligentes.
+
+27. OBJECTIF FINAL
+
+Ne crée pas simplement une page « Clients » et une page « Fournisseurs ».
+
+Construis un véritable écosystème de gestion des partenaires commerciaux agricoles, connecté nativement au reste d'AgriPro.
+
+L'utilisateur doit pouvoir partir d'une seule fiche et naviguer vers :
+
+Client → Vente → Récolte → Culture → Parcelle → Campagne → Facture → Paiement
+
+ou :
+
+Fournisseur → Achat → Produit → Stock → Intervention → Parcelle → Culture → Campagne → Facture → Paiement
+
+Le résultat doit donner l'impression d'un véritable ERP agricole professionnel, et non d'un simple CRUD.
+
+Avant de coder :
+
+analyser l'architecture actuelle d'AgriPro ;
+identifier les modules existants ;
+réutiliser les composants UI existants ;
+réutiliser les modèles de données existants ;
+éviter les doublons ;
+identifier les fonctionnalités déjà présentes ;
+compléter uniquement ce qui manque ;
+connecter le nouveau module aux modules existants ;
+préserver la compatibilité avec les données existantes ;
+tester toutes les relations et tous les flux.
+
+Ne casse aucune fonctionnalité existante.
+
+Le module doit être production-ready, sécurisé, scalable, maintenable et entièrement intégré à AgriPro.
