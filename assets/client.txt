@@ -1,4 +1,4 @@
-PROMPT — CRÉATION DU MODULE « CLIENTS & FOURNISSEURS » — AGRIPRO
+
 
 Tu es un architecte logiciel senior spécialisé dans les plateformes ERP agricoles, les systèmes de gestion d'exploitation et les interfaces SaaS modernes.
 
