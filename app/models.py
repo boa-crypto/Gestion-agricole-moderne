@@ -1474,7 +1474,7 @@ class GuideArticleLink(Base):
     position: Mapped[int] = mapped_column(default=0)
 
     article: Mapped["GuideArticle"] = relationship(
-        back_populates="links", default=None, repr=False
+        back_populates="links", init=False, repr=False
     )
 
 
@@ -2780,6 +2780,983 @@ class ActivityLog(Base):
     team_id: Mapped[int | None] = mapped_column(
         ForeignKey("farm_team.id", ondelete="SET NULL"), default=None
     )
+    ip_address: Mapped[str] = mapped_column(String(60), default="")
+    is_sensitive: Mapped[bool] = mapped_column(default=False)
+    occurred_at: Mapped[datetime.datetime | None] = mapped_column(
+        DateTime(timezone=True), default=None
+    )
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+
+# ---------------------------------------------------------------------------
+# CRM & Partenaires : socle métier persistant (clients, fournisseurs, tiers)
+# ---------------------------------------------------------------------------
+
+
+class PartnerKind(str, enum.Enum):
+    """Nature commerciale d'un tiers de l'exploitation."""
+
+    CLIENT = "client"
+    FOURNISSEUR = "fournisseur"
+    MIXTE = "mixte"
+    TRANSPORTEUR = "transporteur"
+    PRESTATAIRE = "prestataire"
+    COOPERATIVE = "cooperative"
+    GROSSISTE = "grossiste"
+    DISTRIBUTEUR = "distributeur"
+    REVENDEUR = "revendeur"
+    AUTRE = "autre"
+
+
+class PartnerLegalForm(str, enum.Enum):
+    """Forme juridique déclarée du tiers."""
+
+    PARTICULIER = "particulier"
+    ENTREPRISE = "entreprise"
+    COOPERATIVE = "cooperative"
+    ASSOCIATION = "association"
+    ADMINISTRATION = "administration"
+    AUTRE = "autre"
+
+
+class PartnerStatus(str, enum.Enum):
+    """Cycle de vie d'un tiers : l'archivage remplace la suppression."""
+
+    ACTIF = "actif"
+    INACTIF = "inactif"
+    BLOQUE = "bloque"
+    PROSPECT = "prospect"
+    ARCHIVE = "archive"
+
+
+class SupplierDomain(str, enum.Enum):
+    """Catégorie d'approvisionnement d'un fournisseur agricole."""
+
+    SEMENCES = "semences"
+    ENGRAIS = "engrais"
+    PHYTOSANITAIRE = "phytosanitaire"
+    MATERIEL = "materiel"
+    PIECES = "pieces"
+    CARBURANT = "carburant"
+    IRRIGATION = "irrigation"
+    EMBALLAGE = "emballage"
+    TRANSPORT = "transport"
+    SERVICES = "services"
+    MAINTENANCE = "maintenance"
+    ENERGIE = "energie"
+    AUTRE = "autre"
+
+
+class SaleStatus(str, enum.Enum):
+    BROUILLON = "brouillon"
+    CONFIRMEE = "confirmee"
+    PREPAREE = "preparee"
+    LIVREE = "livree"
+    FACTUREE = "facturee"
+    PARTIELLEMENT_PAYEE = "partiellement_payee"
+    PAYEE = "payee"
+    ANNULEE = "annulee"
+
+
+class PurchaseStatus(str, enum.Enum):
+    BROUILLON = "brouillon"
+    COMMANDEE = "commandee"
+    RECEPTIONNEE = "receptionnee"
+    FACTUREE = "facturee"
+    PARTIELLEMENT_PAYEE = "partiellement_payee"
+    PAYEE = "payee"
+    ANNULEE = "annulee"
+
+
+class InvoiceKind(str, enum.Enum):
+    """Sens de la facture : émise au client ou reçue du fournisseur."""
+
+    VENTE = "vente"
+    ACHAT = "achat"
+    AVOIR_VENTE = "avoir_vente"
+    AVOIR_ACHAT = "avoir_achat"
+
+
+class InvoiceStatus(str, enum.Enum):
+    BROUILLON = "brouillon"
+    EMISE = "emise"
+    PARTIELLEMENT_PAYEE = "partiellement_payee"
+    PAYEE = "payee"
+    EN_RETARD = "en_retard"
+    ANNULEE = "annulee"
+
+
+class SettlementStatus(str, enum.Enum):
+    """Statut d'une créance client ou d'une dette fournisseur."""
+
+    OUVERTE = "ouverte"
+    PARTIELLE = "partielle"
+    REGLEE = "reglee"
+    EN_RETARD = "en_retard"
+    LITIGE = "litige"
+    IRRECOUVRABLE = "irrecouvrable"
+
+
+class PaymentDirection(str, enum.Enum):
+    ENCAISSEMENT = "encaissement"
+    DECAISSEMENT = "decaissement"
+
+
+class CrmDocumentKind(str, enum.Enum):
+    CONTRAT = "contrat"
+    FACTURE = "facture"
+    BON_COMMANDE = "bon_commande"
+    BON_LIVRAISON = "bon_livraison"
+    DEVIS = "devis"
+    CERTIFICAT = "certificat"
+    DOCUMENT_FISCAL = "document_fiscal"
+    REGISTRE_COMMERCE = "registre_commerce"
+    CONVENTION = "convention"
+    CORRESPONDANCE = "correspondance"
+    PHOTO = "photo"
+    AUTRE = "autre"
+
+
+class CrmEventKind(str, enum.Enum):
+    """Nature d'un événement de l'historique 360° d'un tiers."""
+
+    CREATION = "creation"
+    MISE_A_JOUR = "mise_a_jour"
+    CONTACT = "contact"
+    VENTE = "vente"
+    ACHAT = "achat"
+    LIVRAISON = "livraison"
+    FACTURE = "facture"
+    PAIEMENT = "paiement"
+    RELANCE = "relance"
+    DOCUMENT = "document"
+    SCORE = "score"
+    ALERTE = "alerte"
+    ARCHIVAGE = "archivage"
+    AUTRE = "autre"
+
+
+class CrmScoreKind(str, enum.Enum):
+    CLIENT = "client"
+    FOURNISSEUR = "fournisseur"
+
+
+class CrmScoreGrade(str, enum.Enum):
+    EXCELLENT = "excellent"
+    BON = "bon"
+    MOYEN = "moyen"
+    FRAGILE = "fragile"
+    RISQUE = "risque"
+
+
+class CrmPartner(Base):
+    """Tiers commercial : client, fournisseur, mixte ou autre partenaire.
+
+    Une seule table normalisée porte tous les tiers (le `kind` distingue les
+    clients des fournisseurs et des partenaires mixtes) afin d'éviter la
+    duplication d'identité, d'adresse et de conditions commerciales.
+    """
+
+    __tablename__ = "crm_partner"
+    __table_args__ = (UniqueConstraint("code", name="uq_crm_partner_code"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    code: Mapped[str] = mapped_column(String(40))
+    legal_name: Mapped[str] = mapped_column(String(200))
+    kind: Mapped[PartnerKind] = mapped_column(
+        Enum(PartnerKind, native_enum=False, length=32),
+        default=PartnerKind.CLIENT,
+    )
+    legal_form: Mapped[PartnerLegalForm] = mapped_column(
+        Enum(PartnerLegalForm, native_enum=False, length=32),
+        default=PartnerLegalForm.ENTREPRISE,
+    )
+    status: Mapped[PartnerStatus] = mapped_column(
+        Enum(PartnerStatus, native_enum=False, length=32),
+        default=PartnerStatus.ACTIF,
+    )
+    trade_name: Mapped[str] = mapped_column(String(200), default="")
+    # --- Identifiants fiscaux et administratifs -----------------------
+    tax_id: Mapped[str] = mapped_column(String(60), default="")
+    trade_register: Mapped[str] = mapped_column(String(60), default="")
+    nif: Mapped[str] = mapped_column(String(60), default="")
+    nis: Mapped[str] = mapped_column(String(60), default="")
+    # --- Coordonnées --------------------------------------------------
+    address: Mapped[str] = mapped_column(String(240), default="")
+    wilaya: Mapped[str] = mapped_column(String(120), default="")
+    commune: Mapped[str] = mapped_column(String(120), default="")
+    postal_code: Mapped[str] = mapped_column(String(20), default="")
+    country: Mapped[str] = mapped_column(String(80), default="Algérie")
+    phone: Mapped[str] = mapped_column(String(40), default="")
+    phone_secondary: Mapped[str] = mapped_column(String(40), default="")
+    whatsapp: Mapped[str] = mapped_column(String(40), default="")
+    email: Mapped[str] = mapped_column(String(160), default="")
+    website: Mapped[str] = mapped_column(String(200), default="")
+    latitude: Mapped[float] = mapped_column(Numeric(9, 6), default=0)
+    longitude: Mapped[float] = mapped_column(Numeric(9, 6), default=0)
+    # --- Conditions commerciales --------------------------------------
+    category: Mapped[str] = mapped_column(String(120), default="")
+    segment: Mapped[str] = mapped_column(String(120), default="")
+    supplier_domain: Mapped[SupplierDomain] = mapped_column(
+        Enum(SupplierDomain, native_enum=False, length=32),
+        default=SupplierDomain.AUTRE,
+    )
+    account_manager_id: Mapped[int | None] = mapped_column(
+        ForeignKey("employee.id", ondelete="SET NULL"), default=None
+    )
+    payment_terms: Mapped[str] = mapped_column(String(160), default="")
+    payment_delay_days: Mapped[int] = mapped_column(default=30)
+    credit_limit: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    default_discount_percent: Mapped[float] = mapped_column(
+        Numeric(5, 2), default=0
+    )
+    default_vat_rate: Mapped[float] = mapped_column(Numeric(5, 2), default=19)
+    currency: Mapped[str] = mapped_column(String(10), default="DZD")
+    preferred_payment_method: Mapped[PaymentMethod] = mapped_column(
+        Enum(PaymentMethod, native_enum=False, length=32),
+        default=PaymentMethod.VIREMENT,
+    )
+    # --- Ancrage agricole (réutilisation des modèles existants) --------
+    main_parcel_id: Mapped[int | None] = mapped_column(
+        ForeignKey("parcel.id", ondelete="SET NULL"), default=None
+    )
+    main_culture_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crop_culture.id", ondelete="SET NULL"), default=None
+    )
+    main_product_id: Mapped[int | None] = mapped_column(
+        ForeignKey("product.id", ondelete="SET NULL"), default=None
+    )
+    # --- Suivi ---------------------------------------------------------
+    primary_contact_name: Mapped[str] = mapped_column(String(160), default="")
+    primary_contact_role: Mapped[str] = mapped_column(String(120), default="")
+    first_deal_on: Mapped[datetime.date | None] = mapped_column(
+        Date, default=None
+    )
+    last_activity_on: Mapped[datetime.date | None] = mapped_column(
+        Date, default=None
+    )
+    score_value: Mapped[int] = mapped_column(default=0)
+    is_archived: Mapped[bool] = mapped_column(default=False)
+    archived_on: Mapped[datetime.date | None] = mapped_column(
+        Date, default=None
+    )
+    archive_reason: Mapped[str] = mapped_column(Text, default="")
+    tags: Mapped[str] = mapped_column(Text, default="")
+    notes: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+    # NB : les relations scalaires du CRM sont déclarées `init=False`. Un
+    # `default=None` placerait explicitement la relation à None dans le
+    # constructeur dataclass, ce qui écraserait la clé étrangère fournie
+    # (`partner_id=...`) au moment du flush et produirait un NULL invalide.
+    contacts: Mapped[list["CrmContact"]] = relationship(
+        back_populates="partner", default_factory=list, repr=False
+    )
+    sales: Mapped[list["CrmSale"]] = relationship(
+        back_populates="partner", default_factory=list, repr=False
+    )
+    purchases: Mapped[list["CrmPurchase"]] = relationship(
+        back_populates="partner", default_factory=list, repr=False
+    )
+    invoices: Mapped[list["CrmInvoice"]] = relationship(
+        back_populates="partner", default_factory=list, repr=False
+    )
+    payments: Mapped[list["CrmPayment"]] = relationship(
+        back_populates="partner", default_factory=list, repr=False
+    )
+    documents: Mapped[list["CrmDocument"]] = relationship(
+        back_populates="partner", default_factory=list, repr=False
+    )
+    events: Mapped[list["CrmEvent"]] = relationship(
+        back_populates="partner", default_factory=list, repr=False
+    )
+    scores: Mapped[list["CrmScore"]] = relationship(
+        back_populates="partner", default_factory=list, repr=False
+    )
+
+
+class CrmContact(Base):
+    """Contact physique rattaché à un tiers (plusieurs par partenaire)."""
+
+    __tablename__ = "crm_contact"
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    partner_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_partner.id", ondelete="CASCADE")
+    )
+    last_name: Mapped[str] = mapped_column(String(80))
+    first_name: Mapped[str] = mapped_column(String(80), default="")
+    role: Mapped[str] = mapped_column(String(120), default="")
+    phone: Mapped[str] = mapped_column(String(40), default="")
+    mobile: Mapped[str] = mapped_column(String(40), default="")
+    whatsapp: Mapped[str] = mapped_column(String(40), default="")
+    email: Mapped[str] = mapped_column(String(160), default="")
+    is_primary: Mapped[bool] = mapped_column(default=False)
+    is_archived: Mapped[bool] = mapped_column(default=False)
+    language: Mapped[str] = mapped_column(String(40), default="")
+    notes: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+    partner: Mapped["CrmPartner"] = relationship(
+        back_populates="contacts", init=False, repr=False
+    )
+
+
+class CrmSale(Base):
+    """Transaction de vente à un client, ancrée dans le cycle agricole."""
+
+    __tablename__ = "crm_sale"
+    __table_args__ = (UniqueConstraint("code", name="uq_crm_sale_code"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    partner_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_partner.id", ondelete="RESTRICT")
+    )
+    code: Mapped[str] = mapped_column(String(40))
+    status: Mapped[SaleStatus] = mapped_column(
+        Enum(SaleStatus, native_enum=False, length=32),
+        default=SaleStatus.BROUILLON,
+    )
+    sale_date: Mapped[datetime.date | None] = mapped_column(Date, default=None)
+    delivery_date: Mapped[datetime.date | None] = mapped_column(
+        Date, default=None
+    )
+    season: Mapped[str] = mapped_column(String(40), default="")
+    label: Mapped[str] = mapped_column(String(200), default="")
+    delivery_note: Mapped[str] = mapped_column(String(120), default="")
+    order_reference: Mapped[str] = mapped_column(String(120), default="")
+    # Liens agricoles optionnels (aucune duplication de données agronomiques).
+    parcel_id: Mapped[int | None] = mapped_column(
+        ForeignKey("parcel.id", ondelete="SET NULL"), default=None
+    )
+    crop_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crop.id", ondelete="SET NULL"), default=None
+    )
+    harvest_id: Mapped[int | None] = mapped_column(
+        ForeignKey("harvest.id", ondelete="SET NULL"), default=None
+    )
+    culture_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crop_culture.id", ondelete="SET NULL"), default=None
+    )
+    catalog_variety_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crop_catalog_variety.id", ondelete="SET NULL"), default=None
+    )
+    currency: Mapped[str] = mapped_column(String(10), default="DZD")
+    payment_method: Mapped[PaymentMethod] = mapped_column(
+        Enum(PaymentMethod, native_enum=False, length=32),
+        default=PaymentMethod.VIREMENT,
+    )
+    discount_percent: Mapped[float] = mapped_column(Numeric(5, 2), default=0)
+    amount_ht: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    vat_amount: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    amount_ttc: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    paid_amount: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    transport_cost: Mapped[float] = mapped_column(Numeric(12, 2), default=0)
+    is_archived: Mapped[bool] = mapped_column(default=False)
+    notes: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+    partner: Mapped["CrmPartner"] = relationship(
+        back_populates="sales", init=False, repr=False
+    )
+    items: Mapped[list["CrmSaleItem"]] = relationship(
+        back_populates="sale", default_factory=list, repr=False
+    )
+
+
+class CrmSaleItem(Base):
+    """Ligne d'une vente (produit récolté ou intrant revendu)."""
+
+    __tablename__ = "crm_sale_item"
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    sale_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_sale.id", ondelete="CASCADE")
+    )
+    label: Mapped[str] = mapped_column(String(200))
+    position: Mapped[int] = mapped_column(default=0)
+    product_id: Mapped[int | None] = mapped_column(
+        ForeignKey("product.id", ondelete="SET NULL"), default=None
+    )
+    harvest_id: Mapped[int | None] = mapped_column(
+        ForeignKey("harvest.id", ondelete="SET NULL"), default=None
+    )
+    crop_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crop.id", ondelete="SET NULL"), default=None
+    )
+    parcel_id: Mapped[int | None] = mapped_column(
+        ForeignKey("parcel.id", ondelete="SET NULL"), default=None
+    )
+    catalog_variety_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crop_catalog_variety.id", ondelete="SET NULL"), default=None
+    )
+    quantity: Mapped[float] = mapped_column(Numeric(14, 3), default=0)
+    unit: Mapped[str] = mapped_column(String(20), default="t")
+    unit_price: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    discount_percent: Mapped[float] = mapped_column(Numeric(5, 2), default=0)
+    vat_rate: Mapped[float] = mapped_column(Numeric(5, 2), default=19)
+    amount_ht: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    vat_amount: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    amount_ttc: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    quality_grade: Mapped[str] = mapped_column(String(60), default="")
+    notes: Mapped[str] = mapped_column(Text, default="")
+
+    sale: Mapped["CrmSale"] = relationship(
+        back_populates="items", init=False, repr=False
+    )
+
+
+class CrmPurchase(Base):
+    """Transaction d'achat auprès d'un fournisseur."""
+
+    __tablename__ = "crm_purchase"
+    __table_args__ = (UniqueConstraint("code", name="uq_crm_purchase_code"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    partner_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_partner.id", ondelete="RESTRICT")
+    )
+    code: Mapped[str] = mapped_column(String(40))
+    status: Mapped[PurchaseStatus] = mapped_column(
+        Enum(PurchaseStatus, native_enum=False, length=32),
+        default=PurchaseStatus.BROUILLON,
+    )
+    purchase_date: Mapped[datetime.date | None] = mapped_column(
+        Date, default=None
+    )
+    received_date: Mapped[datetime.date | None] = mapped_column(
+        Date, default=None
+    )
+    season: Mapped[str] = mapped_column(String(40), default="")
+    label: Mapped[str] = mapped_column(String(200), default="")
+    order_reference: Mapped[str] = mapped_column(String(120), default="")
+    receipt_reference: Mapped[str] = mapped_column(String(120), default="")
+    domain: Mapped[SupplierDomain] = mapped_column(
+        Enum(SupplierDomain, native_enum=False, length=32),
+        default=SupplierDomain.AUTRE,
+    )
+    # Liens agricoles et logistiques optionnels.
+    parcel_id: Mapped[int | None] = mapped_column(
+        ForeignKey("parcel.id", ondelete="SET NULL"), default=None
+    )
+    crop_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crop.id", ondelete="SET NULL"), default=None
+    )
+    intervention_id: Mapped[int | None] = mapped_column(
+        ForeignKey("intervention.id", ondelete="SET NULL"), default=None
+    )
+    equipment_id: Mapped[int | None] = mapped_column(
+        ForeignKey("equipment.id", ondelete="SET NULL"), default=None
+    )
+    maintenance_id: Mapped[int | None] = mapped_column(
+        ForeignKey("maintenance_operation.id", ondelete="SET NULL"),
+        default=None,
+    )
+    expense_id: Mapped[int | None] = mapped_column(
+        ForeignKey("expense.id", ondelete="SET NULL"), default=None
+    )
+    currency: Mapped[str] = mapped_column(String(10), default="DZD")
+    payment_method: Mapped[PaymentMethod] = mapped_column(
+        Enum(PaymentMethod, native_enum=False, length=32),
+        default=PaymentMethod.VIREMENT,
+    )
+    discount_percent: Mapped[float] = mapped_column(Numeric(5, 2), default=0)
+    amount_ht: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    vat_amount: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    amount_ttc: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    paid_amount: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    transport_cost: Mapped[float] = mapped_column(Numeric(12, 2), default=0)
+    is_archived: Mapped[bool] = mapped_column(default=False)
+    notes: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+    partner: Mapped["CrmPartner"] = relationship(
+        back_populates="purchases", init=False, repr=False
+    )
+    items: Mapped[list["CrmPurchaseItem"]] = relationship(
+        back_populates="purchase", default_factory=list, repr=False
+    )
+
+
+class CrmPurchaseItem(Base):
+    """Ligne d'achat, reliée si possible au produit d'intrant existant."""
+
+    __tablename__ = "crm_purchase_item"
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    purchase_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_purchase.id", ondelete="CASCADE")
+    )
+    label: Mapped[str] = mapped_column(String(200))
+    position: Mapped[int] = mapped_column(default=0)
+    product_id: Mapped[int | None] = mapped_column(
+        ForeignKey("product.id", ondelete="SET NULL"), default=None
+    )
+    stock_movement_id: Mapped[int | None] = mapped_column(
+        ForeignKey("stock_movement.id", ondelete="SET NULL"), default=None
+    )
+    parcel_id: Mapped[int | None] = mapped_column(
+        ForeignKey("parcel.id", ondelete="SET NULL"), default=None
+    )
+    crop_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crop.id", ondelete="SET NULL"), default=None
+    )
+    intervention_id: Mapped[int | None] = mapped_column(
+        ForeignKey("intervention.id", ondelete="SET NULL"), default=None
+    )
+    domain: Mapped[SupplierDomain] = mapped_column(
+        Enum(SupplierDomain, native_enum=False, length=32),
+        default=SupplierDomain.AUTRE,
+    )
+    quantity: Mapped[float] = mapped_column(Numeric(14, 3), default=0)
+    unit: Mapped[str] = mapped_column(String(20), default="u")
+    unit_price: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    discount_percent: Mapped[float] = mapped_column(Numeric(5, 2), default=0)
+    vat_rate: Mapped[float] = mapped_column(Numeric(5, 2), default=19)
+    amount_ht: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    vat_amount: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    amount_ttc: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    notes: Mapped[str] = mapped_column(Text, default="")
+
+    purchase: Mapped["CrmPurchase"] = relationship(
+        back_populates="items", init=False, repr=False
+    )
+
+
+class CrmInvoice(Base):
+    """Facture client ou fournisseur, pivot des créances et des dettes."""
+
+    __tablename__ = "crm_invoice"
+    __table_args__ = (UniqueConstraint("code", name="uq_crm_invoice_code"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    partner_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_partner.id", ondelete="RESTRICT")
+    )
+    code: Mapped[str] = mapped_column(String(40))
+    kind: Mapped[InvoiceKind] = mapped_column(
+        Enum(InvoiceKind, native_enum=False, length=32),
+        default=InvoiceKind.VENTE,
+    )
+    status: Mapped[InvoiceStatus] = mapped_column(
+        Enum(InvoiceStatus, native_enum=False, length=32),
+        default=InvoiceStatus.BROUILLON,
+    )
+    sale_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_sale.id", ondelete="SET NULL"), default=None
+    )
+    purchase_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_purchase.id", ondelete="SET NULL"), default=None
+    )
+    external_reference: Mapped[str] = mapped_column(String(120), default="")
+    issue_date: Mapped[datetime.date | None] = mapped_column(Date, default=None)
+    due_date: Mapped[datetime.date | None] = mapped_column(Date, default=None)
+    season: Mapped[str] = mapped_column(String(40), default="")
+    currency: Mapped[str] = mapped_column(String(10), default="DZD")
+    amount_ht: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    vat_amount: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    amount_ttc: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    paid_amount: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    remaining_amount: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    overdue_days: Mapped[int] = mapped_column(default=0)
+    is_archived: Mapped[bool] = mapped_column(default=False)
+    notes: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+    partner: Mapped["CrmPartner"] = relationship(
+        back_populates="invoices", init=False, repr=False
+    )
+    items: Mapped[list["CrmInvoiceItem"]] = relationship(
+        back_populates="invoice", default_factory=list, repr=False
+    )
+    payments: Mapped[list["CrmPayment"]] = relationship(
+        back_populates="invoice", default_factory=list, repr=False
+    )
+
+
+class CrmInvoiceItem(Base):
+    """Ligne de facture, reliée à la ligne de vente ou d'achat d'origine."""
+
+    __tablename__ = "crm_invoice_item"
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    invoice_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_invoice.id", ondelete="CASCADE")
+    )
+    label: Mapped[str] = mapped_column(String(200))
+    position: Mapped[int] = mapped_column(default=0)
+    sale_item_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_sale_item.id", ondelete="SET NULL"), default=None
+    )
+    purchase_item_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_purchase_item.id", ondelete="SET NULL"), default=None
+    )
+    product_id: Mapped[int | None] = mapped_column(
+        ForeignKey("product.id", ondelete="SET NULL"), default=None
+    )
+    quantity: Mapped[float] = mapped_column(Numeric(14, 3), default=0)
+    unit: Mapped[str] = mapped_column(String(20), default="u")
+    unit_price: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    discount_percent: Mapped[float] = mapped_column(Numeric(5, 2), default=0)
+    vat_rate: Mapped[float] = mapped_column(Numeric(5, 2), default=19)
+    amount_ht: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    vat_amount: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    amount_ttc: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    notes: Mapped[str] = mapped_column(Text, default="")
+
+    invoice: Mapped["CrmInvoice"] = relationship(
+        back_populates="items", init=False, repr=False
+    )
+
+
+class CrmPayment(Base):
+    """Encaissement client ou décaissement fournisseur (registre unique)."""
+
+    __tablename__ = "crm_payment"
+    __table_args__ = (UniqueConstraint("code", name="uq_crm_payment_code"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    partner_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_partner.id", ondelete="RESTRICT")
+    )
+    code: Mapped[str] = mapped_column(String(40))
+    direction: Mapped[PaymentDirection] = mapped_column(
+        Enum(PaymentDirection, native_enum=False, length=32),
+        default=PaymentDirection.ENCAISSEMENT,
+    )
+    invoice_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_invoice.id", ondelete="SET NULL"), default=None
+    )
+    sale_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_sale.id", ondelete="SET NULL"), default=None
+    )
+    purchase_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_purchase.id", ondelete="SET NULL"), default=None
+    )
+    paid_on: Mapped[datetime.date | None] = mapped_column(Date, default=None)
+    amount: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    currency: Mapped[str] = mapped_column(String(10), default="DZD")
+    method: Mapped[PaymentMethod] = mapped_column(
+        Enum(PaymentMethod, native_enum=False, length=32),
+        default=PaymentMethod.VIREMENT,
+    )
+    reference: Mapped[str] = mapped_column(String(120), default="")
+    bank: Mapped[str] = mapped_column(String(160), default="")
+    cash_desk: Mapped[str] = mapped_column(String(120), default="")
+    recorded_by: Mapped[str] = mapped_column(String(120), default="")
+    is_archived: Mapped[bool] = mapped_column(default=False)
+    comment: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+    partner: Mapped["CrmPartner"] = relationship(
+        back_populates="payments", init=False, repr=False
+    )
+    invoice: Mapped["CrmInvoice | None"] = relationship(
+        back_populates="payments", init=False, repr=False
+    )
+
+
+class CrmReceivable(Base):
+    """Créance client dérivée d'une facture de vente."""
+
+    __tablename__ = "crm_receivable"
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    partner_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_partner.id", ondelete="CASCADE")
+    )
+    invoice_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_invoice.id", ondelete="CASCADE"), default=None
+    )
+    sale_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_sale.id", ondelete="SET NULL"), default=None
+    )
+    status: Mapped[SettlementStatus] = mapped_column(
+        Enum(SettlementStatus, native_enum=False, length=32),
+        default=SettlementStatus.OUVERTE,
+    )
+    issue_date: Mapped[datetime.date | None] = mapped_column(Date, default=None)
+    due_date: Mapped[datetime.date | None] = mapped_column(Date, default=None)
+    amount_due: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    amount_paid: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    amount_remaining: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    overdue_days: Mapped[int] = mapped_column(default=0)
+    aging_bucket: Mapped[str] = mapped_column(String(20), default="0-30")
+    last_reminder_on: Mapped[datetime.date | None] = mapped_column(
+        Date, default=None
+    )
+    reminder_count: Mapped[int] = mapped_column(default=0)
+    is_archived: Mapped[bool] = mapped_column(default=False)
+    notes: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+
+class CrmPayable(Base):
+    """Dette fournisseur dérivée d'une facture d'achat."""
+
+    __tablename__ = "crm_payable"
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    partner_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_partner.id", ondelete="CASCADE")
+    )
+    invoice_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_invoice.id", ondelete="CASCADE"), default=None
+    )
+    purchase_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_purchase.id", ondelete="SET NULL"), default=None
+    )
+    status: Mapped[SettlementStatus] = mapped_column(
+        Enum(SettlementStatus, native_enum=False, length=32),
+        default=SettlementStatus.OUVERTE,
+    )
+    issue_date: Mapped[datetime.date | None] = mapped_column(Date, default=None)
+    due_date: Mapped[datetime.date | None] = mapped_column(Date, default=None)
+    amount_due: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    amount_paid: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    amount_remaining: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    overdue_days: Mapped[int] = mapped_column(default=0)
+    aging_bucket: Mapped[str] = mapped_column(String(20), default="0-30")
+    is_archived: Mapped[bool] = mapped_column(default=False)
+    notes: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+
+class CrmDocument(Base):
+    """Document centralisé d'un tiers (fichier dans le dossier d'upload)."""
+
+    __tablename__ = "crm_document"
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    partner_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_partner.id", ondelete="CASCADE")
+    )
+    title: Mapped[str] = mapped_column(String(200))
+    kind: Mapped[CrmDocumentKind] = mapped_column(
+        Enum(CrmDocumentKind, native_enum=False, length=32),
+        default=CrmDocumentKind.AUTRE,
+    )
+    # Nom de fichier dans le répertoire d'upload Reflex (jamais un chemin dur).
+    filename: Mapped[str] = mapped_column(String(240), default="")
+    mime_type: Mapped[str] = mapped_column(String(120), default="")
+    size_kb: Mapped[float] = mapped_column(Numeric(12, 2), default=0)
+    reference: Mapped[str] = mapped_column(String(120), default="")
+    issued_on: Mapped[datetime.date | None] = mapped_column(Date, default=None)
+    expires_on: Mapped[datetime.date | None] = mapped_column(Date, default=None)
+    author: Mapped[str] = mapped_column(String(120), default="")
+    is_confidential: Mapped[bool] = mapped_column(default=False)
+    is_archived: Mapped[bool] = mapped_column(default=False)
+    tags: Mapped[str] = mapped_column(Text, default="")
+    notes: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+    partner: Mapped["CrmPartner"] = relationship(
+        back_populates="documents", init=False, repr=False
+    )
+    links: Mapped[list["CrmDocumentLink"]] = relationship(
+        back_populates="document", default_factory=list, repr=False
+    )
+
+
+class CrmDocumentLink(Base):
+    """Rattachement d'un document à un objet CRM ou agricole existant."""
+
+    __tablename__ = "crm_document_link"
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    document_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_document.id", ondelete="CASCADE")
+    )
+    label: Mapped[str] = mapped_column(String(200), default="")
+    sale_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_sale.id", ondelete="CASCADE"), default=None
+    )
+    purchase_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_purchase.id", ondelete="CASCADE"), default=None
+    )
+    invoice_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_invoice.id", ondelete="CASCADE"), default=None
+    )
+    payment_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_payment.id", ondelete="CASCADE"), default=None
+    )
+    contact_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_contact.id", ondelete="SET NULL"), default=None
+    )
+    parcel_id: Mapped[int | None] = mapped_column(
+        ForeignKey("parcel.id", ondelete="SET NULL"), default=None
+    )
+    crop_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crop.id", ondelete="SET NULL"), default=None
+    )
+    harvest_id: Mapped[int | None] = mapped_column(
+        ForeignKey("harvest.id", ondelete="SET NULL"), default=None
+    )
+    product_id: Mapped[int | None] = mapped_column(
+        ForeignKey("product.id", ondelete="SET NULL"), default=None
+    )
+    intervention_id: Mapped[int | None] = mapped_column(
+        ForeignKey("intervention.id", ondelete="SET NULL"), default=None
+    )
+    module_route: Mapped[str] = mapped_column(String(160), default="")
+    position: Mapped[int] = mapped_column(default=0)
+    notes: Mapped[str] = mapped_column(Text, default="")
+
+    # `init=False` est impératif : exposer la relation dans le constructeur
+    # dataclass y injecterait `document=None`, ce qui écraserait le
+    # `document_id` fourni au moment du flush et produirait un NULL invalide.
+    document: Mapped["CrmDocument"] = relationship(
+        back_populates="links", init=False, repr=False
+    )
+
+
+class CrmEvent(Base):
+    """Événement de l'historique 360° d'un tiers (timeline consolidée)."""
+
+    __tablename__ = "crm_event"
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    partner_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_partner.id", ondelete="CASCADE")
+    )
+    kind: Mapped[CrmEventKind] = mapped_column(
+        Enum(CrmEventKind, native_enum=False, length=32),
+        default=CrmEventKind.AUTRE,
+    )
+    title: Mapped[str] = mapped_column(String(220), default="")
+    summary: Mapped[str] = mapped_column(Text, default="")
+    occurred_on: Mapped[datetime.date | None] = mapped_column(
+        Date, default=None
+    )
+    amount: Mapped[float] = mapped_column(Numeric(14, 2), default=0)
+    author: Mapped[str] = mapped_column(String(120), default="")
+    contact_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_contact.id", ondelete="SET NULL"), default=None
+    )
+    sale_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_sale.id", ondelete="SET NULL"), default=None
+    )
+    purchase_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_purchase.id", ondelete="SET NULL"), default=None
+    )
+    invoice_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_invoice.id", ondelete="SET NULL"), default=None
+    )
+    payment_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_payment.id", ondelete="SET NULL"), default=None
+    )
+    document_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_document.id", ondelete="SET NULL"), default=None
+    )
+    parcel_id: Mapped[int | None] = mapped_column(
+        ForeignKey("parcel.id", ondelete="SET NULL"), default=None
+    )
+    crop_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crop.id", ondelete="SET NULL"), default=None
+    )
+    harvest_id: Mapped[int | None] = mapped_column(
+        ForeignKey("harvest.id", ondelete="SET NULL"), default=None
+    )
+    module_route: Mapped[str] = mapped_column(String(160), default="/crm")
+    icon: Mapped[str] = mapped_column(String(40), default="history")
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+    partner: Mapped["CrmPartner"] = relationship(
+        back_populates="events", init=False, repr=False
+    )
+
+
+class CrmScore(Base):
+    """Score calculé d'un client ou d'un fournisseur, avec ses composantes."""
+
+    __tablename__ = "crm_score"
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    partner_id: Mapped[int] = mapped_column(
+        ForeignKey("crm_partner.id", ondelete="CASCADE")
+    )
+    kind: Mapped[CrmScoreKind] = mapped_column(
+        Enum(CrmScoreKind, native_enum=False, length=32),
+        default=CrmScoreKind.CLIENT,
+    )
+    grade: Mapped[CrmScoreGrade] = mapped_column(
+        Enum(CrmScoreGrade, native_enum=False, length=32),
+        default=CrmScoreGrade.MOYEN,
+    )
+    computed_on: Mapped[datetime.date | None] = mapped_column(
+        Date, default=None
+    )
+    season: Mapped[str] = mapped_column(String(40), default="")
+    total_score: Mapped[int] = mapped_column(default=0)
+    volume_score: Mapped[int] = mapped_column(default=0)
+    frequency_score: Mapped[int] = mapped_column(default=0)
+    seniority_score: Mapped[int] = mapped_column(default=0)
+    punctuality_score: Mapped[int] = mapped_column(default=0)
+    profitability_score: Mapped[int] = mapped_column(default=0)
+    growth_score: Mapped[int] = mapped_column(default=0)
+    quality_score: Mapped[int] = mapped_column(default=0)
+    lead_time_score: Mapped[int] = mapped_column(default=0)
+    reliability_score: Mapped[int] = mapped_column(default=0)
+    average_payment_delay_days: Mapped[float] = mapped_column(
+        Numeric(8, 2), default=0
+    )
+    turnover_amount: Mapped[float] = mapped_column(Numeric(16, 2), default=0)
+    transaction_count: Mapped[int] = mapped_column(default=0)
+    incident_count: Mapped[int] = mapped_column(default=0)
+    comment: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+    partner: Mapped["CrmPartner"] = relationship(
+        back_populates="scores", init=False, repr=False
+    )
+
+
+class CrmAuditLog(Base):
+    """Journal d'audit CRM : qui, quand, quoi, ancienne et nouvelle valeur."""
+
+    __tablename__ = "crm_audit_log"
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    partner_id: Mapped[int | None] = mapped_column(
+        ForeignKey("crm_partner.id", ondelete="SET NULL"), default=None
+    )
+    user_id: Mapped[int | None] = mapped_column(
+        ForeignKey("app_user.id", ondelete="SET NULL"), default=None
+    )
+    actor_label: Mapped[str] = mapped_column(String(160), default="Système")
+    action: Mapped[str] = mapped_column(String(40), default="consultation")
+    entity_type: Mapped[str] = mapped_column(String(60), default="")
+    entity_id: Mapped[int] = mapped_column(default=0)
+    entity_ref: Mapped[str] = mapped_column(String(200), default="")
+    field_name: Mapped[str] = mapped_column(String(120), default="")
+    old_value: Mapped[str] = mapped_column(Text, default="")
+    new_value: Mapped[str] = mapped_column(Text, default="")
+    summary: Mapped[str] = mapped_column(Text, default="")
+    module_route: Mapped[str] = mapped_column(String(160), default="/crm")
     ip_address: Mapped[str] = mapped_column(String(60), default="")
     is_sensitive: Mapped[bool] = mapped_column(default=False)
     occurred_at: Mapped[datetime.datetime | None] = mapped_column(

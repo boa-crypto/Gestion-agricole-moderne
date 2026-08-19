@@ -11,7 +11,7 @@ devenir prescriptive.
 
 from __future__ import annotations
 
-from typing import TypedDict
+from typing import Any, TypedDict
 
 import reflex as rx
 from sqlalchemy import text
@@ -424,7 +424,7 @@ class PhenologyAdminState(rx.State):
         self.form_errors = []
 
     @rx.event
-    async def submit_profile(self, form_data: dict[str, str]):
+    async def submit_profile(self, form_data: dict[str, Any]):
         data = dict(self.profile_draft)
         for key, value in form_data.items():
             data[key] = str(value)
@@ -501,7 +501,7 @@ class PhenologyAdminState(rx.State):
         self.form_errors = []
 
     @rx.event
-    async def submit_stage(self, form_data: dict[str, str]):
+    async def submit_stage(self, form_data: dict[str, Any]):
         data = dict(self.stage_draft)
         for key, value in form_data.items():
             data[key] = str(value)
@@ -584,7 +584,7 @@ class PhenologyAdminState(rx.State):
         self.form_errors = []
 
     @rx.event
-    async def submit_recommendation(self, form_data: dict[str, str]):
+    async def submit_recommendation(self, form_data: dict[str, Any]):
         data = dict(self.reco_draft)
         for key, value in form_data.items():
             data[key] = str(value)
@@ -631,7 +631,7 @@ class PhenologyAdminState(rx.State):
         ]
 
     @rx.event
-    async def run_import(self, form_data: dict[str, str]):
+    async def run_import(self, form_data: dict[str, Any]):
         payload = str(form_data.get("payload", self.import_payload))
         fmt = str(form_data.get("format", self.import_format)) or "CSV"
         self.import_payload = payload

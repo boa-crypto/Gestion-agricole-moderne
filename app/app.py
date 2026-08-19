@@ -2,11 +2,6 @@ import reflex as rx
 import reflex_enterprise as rxe
 
 from app.components.alerts_panel import alerts_panel
-from app.database import (
-    init_access_tables,
-    init_local_database,
-    init_phenology_tables,
-)
 from app.components.calendar_panel import calendar_panel
 from app.components.cockpit_header import cockpit_header
 from app.components.cockpit_pulse import cockpit_pulse
@@ -20,6 +15,7 @@ from app.pages.administration import administration_page
 from app.pages.audit import audit_page
 from app.pages.cartography import cartography_page
 from app.pages.catalog import catalog_page
+from app.pages.crm import crm_page
 from app.pages.employees import employees_page
 from app.pages.expenses import expenses_page
 from app.pages.guide import guide_page
@@ -35,6 +31,7 @@ from app.states.cartography_state import CartographyState
 from app.states.catalog_browser_state import CatalogBrowserState
 from app.states.catalog_state import CatalogState
 from app.states.contour_state import ContourState
+from app.states.crm_state import CrmState
 from app.states.dashboard_state import DashboardState
 from app.states.employees_state import EmployeesState
 from app.states.maintenance_state import MaintenanceState
@@ -52,14 +49,6 @@ from app.states.search_state import SearchState
 from app.states.security_audit_state import SecurityAuditState
 from app.states.stock_state import StockState
 from app.states.weather_state import WeatherState
-
-
-# Base locale SQLite : création du fichier et des tables au démarrage.
-init_local_database()
-# Tables du suivi phénologique multicultures (idempotent, non destructif).
-init_phenology_tables()
-# Socle utilisateurs, rôles, permissions, périmètres et journal d'activité.
-init_access_tables()
 
 
 def index() -> rx.Component:
@@ -94,7 +83,6 @@ def index() -> rx.Component:
 
 
 app = rxe.App(
-    theme=rx.theme(appearance="light"),
     head_components=[
         rx.el.link(
             rel="stylesheet",
@@ -111,6 +99,7 @@ app = rxe.App(
             rel="stylesheet",
         ),
     ],
+    theme=rx.theme(appearance="light"),
 )
 app.add_page(
     index,
@@ -182,6 +171,11 @@ app.add_page(
     expenses_page,
     route="/charges",
     on_load=ExpensesState.load_expenses,
+)
+app.add_page(
+    crm_page,
+    route="/crm",
+    on_load=CrmState.load_crm,
 )
 app.add_page(
     search_page,

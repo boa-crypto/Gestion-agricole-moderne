@@ -13,6 +13,7 @@ _ITEMS: list[tuple[str, str, str, str]] = [
     ("cartographie", "Cartographie", "/cartographie", "map-pinned"),
     ("maintenance", "Engins & maintenance", "/maintenance", "wrench"),
     ("charges", "Charges & dépenses", "/charges", "coins"),
+    ("crm", "CRM & Partenaires", "/crm", "handshake"),
     ("recherche", "Recherche globale", "/recherche", "radar"),
     ("guide", "Guide Agricole", "/guide", "book-open"),
     (
@@ -54,13 +55,30 @@ def _tooltip(label: str) -> rx.Component:
 
 def _rail_link(label: str, href: str, icon: str, active: bool) -> rx.Component:
     return rx.el.a(
-        rx.el.span(class_name=_MARKER[active]),
-        rx.icon(icon, class_name=_ICON[active]),
+        rx.el.span(
+            class_name=rx.cond(
+                active,
+                _MARKER[True],
+                _MARKER[False],
+            )
+        ),
+        rx.icon(
+            icon,
+            class_name=rx.cond(
+                active,
+                _ICON[True],
+                _ICON[False],
+            ),
+        ),
         _tooltip(label),
         href=href,
         title=label,
         aria_label=label,
-        class_name=_LINK[active],
+        class_name=rx.cond(
+            active,
+            _LINK[True],
+            _LINK[False],
+        ),
     )
 
 
@@ -68,11 +86,22 @@ def _mobile_link(
     label: str, href: str, icon: str, active: bool
 ) -> rx.Component:
     return rx.el.a(
-        rx.icon(icon, class_name=_ICON[active]),
+        rx.icon(
+            icon,
+            class_name=rx.cond(
+                active,
+                _ICON[True],
+                _ICON[False],
+            ),
+        ),
         href=href,
         title=label,
         aria_label=label,
-        class_name=_MOBILE_LINK[active],
+        class_name=rx.cond(
+            active,
+            _MOBILE_LINK[True],
+            _MOBILE_LINK[False],
+        ),
     )
 
 
@@ -131,10 +160,12 @@ def side_rail(active: str) -> rx.Component:
                 class_name="flex h-11 w-11 items-center justify-center rounded-2xl border border-lime-300/20 bg-lime-300/[0.07]",
             ),
             rx.el.div(class_name="h-px w-6 bg-white/10 my-1"),
-            *[
-                _rail_link(label, href, icon, active == key)
-                for key, label, href, icon in _ITEMS
-            ],
+            rx.foreach(
+                _ITEMS,
+                lambda item: _rail_link(
+                    item[1], item[2], item[3], active == item[0]
+                ),
+            ),
             rx.el.div(class_name="h-px w-6 bg-white/10 my-1"),
             _rail_help_button(active),
             aria_label="Navigation principale",
@@ -142,10 +173,12 @@ def side_rail(active: str) -> rx.Component:
         ),
         rx.el.nav(
             rx.el.div(
-                *[
-                    _mobile_link(label, href, icon, active == key)
-                    for key, label, href, icon in _ITEMS
-                ],
+                rx.foreach(
+                    _ITEMS,
+                    lambda item: _mobile_link(
+                        item[1], item[2], item[3], active == item[0]
+                    ),
+                ),
                 _mobile_help_button(active),
                 class_name="flex items-center gap-2 overflow-x-auto",
             ),

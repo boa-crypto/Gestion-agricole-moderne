@@ -1,3 +1,5 @@
-## Cartographie Parcellaire Plan
-- [x] Compléter la carte interactive AgriPro en conservant le design vert nuit/chlorophylle/ambre : outils de dessin/édition de contours de parcelles, sélection au clic et fiche parcellaire enrichie.
-- [x] Finaliser les contrôles cartographiques : sauvegarde GeoJSON, validation serveur, détails complets liés à la parcelle, historique et messages d’erreur/confirmation.
+## CRM Partenaires AgriPro Plan
+- [x] Mettre en place la base métier Clients & Fournisseurs avec le design AgriPro vert nuit/chlorophylle/ambre : partenaires, contacts, ventes, achats, factures, paiements, créances, dettes, documents, scoring et journal 360° reliés aux données agricoles existantes.
+- [x] Construire la vue générale CRM & Partenaires avec navigation dédiée, KPIs clients/fournisseurs/commerciaux, graphiques, alertes d’échéances, recherche centralisée et synthèse intelligente.
+- [x] Construire les espaces Clients, Fournisseurs et Partenaires : listes filtrables, fiches 360°, formulaires de création/édition, contacts, documents, historique, scoring et liens vers parcelles/cultures/produits/campagnes.
+- [ ] Construire les registres Ventes, Achats, Créances, Dettes, Paiements et Rapports : tableaux responsives, calculs automatiques, statuts, validations métier, archivage, exports et intégration dans la navigation AgriPro.

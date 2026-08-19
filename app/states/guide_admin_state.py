@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import datetime
 import re
-from typing import TypedDict
+from typing import Any, TypedDict
 
 import reflex as rx
 from sqlalchemy import text
@@ -1103,7 +1103,7 @@ class GuideAdminState(rx.State):
         )
 
     @rx.event
-    async def save_content(self, form_data: dict[str, str]):
+    async def save_content(self, form_data: dict[str, Any]):
         """Valide puis enregistre le contenu (création ou mise à jour)."""
         kind = self.draft["kind"]
         data = dict(self.draft)
@@ -1582,7 +1582,7 @@ class GuideAdminState(rx.State):
     # ------------------------------------------------------------------
 
     @rx.event
-    async def create_version(self, form_data: dict[str, str]):
+    async def create_version(self, form_data: dict[str, Any]):
         label = str(form_data.get("version_label", "")).strip()
         title = str(form_data.get("title", "")).strip()
         summary = str(form_data.get("summary", "")).strip()

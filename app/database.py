@@ -45,6 +45,22 @@ from app.models import (
     CropStageMedia,
     CropStageObservation,
     CropStageRecommendation,
+    CrmAuditLog,
+    CrmContact,
+    CrmDocument,
+    CrmDocumentLink,
+    CrmEvent,
+    CrmInvoice,
+    CrmInvoiceItem,
+    CrmPartner,
+    CrmPayable,
+    CrmPayment,
+    CrmPurchase,
+    CrmPurchaseItem,
+    CrmReceivable,
+    CrmSale,
+    CrmSaleItem,
+    CrmScore,
     FarmTeam,
     RemediationLog,
     RoleDelegation,
@@ -66,12 +82,15 @@ __all__ = [
     "SYNC_DB_URL",
     "ensure_access_tables",
     "ensure_catalog_tables",
+    "ensure_crm_tables",
     "ensure_local_database",
     "ensure_phenology_tables",
     "ensure_remediation_log_table",
     "init_access_tables",
     "init_catalog_tables",
+    "init_crm_tables",
     "init_local_database",
+    "CRM_MODELS",
     "init_phenology_tables",
     "init_remediation_log_table",
     "local_table_exists",
@@ -243,6 +262,53 @@ def init_access_tables() -> None:
     init_agripro_access_tables()
 
 
+# Ordre de création respectant les dépendances de clés étrangères du CRM.
+CRM_MODELS: tuple[type, ...] = (
+    CrmPartner,
+    CrmContact,
+    CrmSale,
+    CrmSaleItem,
+    CrmPurchase,
+    CrmPurchaseItem,
+    CrmInvoice,
+    CrmInvoiceItem,
+    CrmPayment,
+    CrmReceivable,
+    CrmPayable,
+    CrmDocument,
+    CrmDocumentLink,
+    CrmEvent,
+    CrmScore,
+    CrmAuditLog,
+)
+
+
+def init_crm_tables() -> None:
+    """Crée les tables du module CRM & Partenaires si elles manquent.
+
+    Le socle CRM (tiers, contacts, ventes, achats, factures, paiements,
+    créances, dettes, documents, historique 360°, scores, audit) est postérieur
+    au fichier SQLite d'origine : `create(checkfirst=True)` ne recrée rien
+    d'existant et ne réinitialise jamais la base. Aucune migration protégée
+    n'est touchée.
+    """
+    force_local_database_env()
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    engine = create_engine(SYNC_DB_URL, future=True)
+    try:
+        for model in CRM_MODELS:
+            model.__table__.create(bind=engine, checkfirst=True)
+    except Exception as e:  # noqa: BLE001
+        logging.exception(f"Error: {e}")
+    finally:
+        engine.dispose()
+
+
+async def ensure_crm_tables() -> None:
+    """Version awaitable et non bloquante de `init_crm_tables`."""
+    await asyncio.to_thread(init_crm_tables)
+
+
 async def ensure_access_tables() -> None:
     """Version awaitable et non bloquante de `init_access_tables`."""
     await asyncio.to_thread(init_access_tables)
@@ -279,9 +345,10 @@ async def ensure_local_database() -> None:
     await asyncio.to_thread(init_catalog_tables)
     await asyncio.to_thread(init_phenology_tables)
     await asyncio.to_thread(init_access_tables)
+    await asyncio.to_thread(init_crm_tables)
 
 
-# Introspection portable sans PRAGMA : `sqlite_master` sur SQLite,
+# Introspection portable sans PRAGMA
 # `information_schema` ailleurs. Cela évite les `disk I/O error` observés lors
 # d'accès concurrents en mode WAL.
 _SQLITE_TABLE_QUERY = (
