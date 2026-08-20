@@ -12,15 +12,12 @@ sans aucun service externe.
 
 from __future__ import annotations
 
-import asyncio
 import datetime
 from typing import TypedDict
 
 import reflex as rx
 from sqlalchemy import text
 
-from app.database import ensure_crm_tables, ensure_local_database
-from app.seed_crm import seed_crm_if_empty
 from app.states.dashboard_state import MONTHS, WEEKDAYS_SHORT
 
 # Les colonnes Enum sont stockées par nom SQLAlchemy : on compare toujours en
@@ -177,6 +174,60 @@ def _month_label(key: str) -> str:
         index = int(key[5:7])
         return f"{MONTHS[index - 1]} {key[2:4]}"
     return key
+
+
+def _build_aging_points(
+    rows: list[tuple[object, object, object]],
+) -> list[AgingPoint]:
+    """Construit la balance âgée affichable (fonction privée de module)."""
+    data = {
+        str(row[0] or "0-30"): (_f(row[1]), int(row[2] or 0)) for row in rows
+    }
+    top = max([v[0] for v in data.values()] + [1.0])
+    points: list[AgingPoint] = []
+    for bucket in AGING_BUCKETS:
+        amount, count = data.get(bucket, (0.0, 0))
+        points.append(
+            {
+                "bucket": bucket,
+                "label": f"{bucket} jours"
+                if bucket != "90+"
+                else "Plus de 90 jours",
+                "amount": amount,
+                "count": count,
+                "width": f"{amount / top * 100:.0f}%",
+            }
+        )
+    return points
+
+
+def _build_partner_ranks(
+    rows: list[
+        tuple[object, object, object, object, object, object, object, object]
+    ],
+) -> list[PartnerRank]:
+    """Construit le classement des tiers (fonction privée de module)."""
+    amounts = [_f(row[4]) for row in rows]
+    total = sum(amounts)
+    top = max(amounts + [1.0])
+    ranks: list[PartnerRank] = []
+    for row in rows:
+        amount = _f(row[4])
+        ranks.append(
+            {
+                "id": int(row[0]),
+                "code": str(row[1] or ""),
+                "name": str(row[2] or ""),
+                "kind_label": KIND_LABELS.get(row[3] or "", "Partenaire"),
+                "amount": amount,
+                "deals": int(row[5] or 0),
+                "score": int(row[6] or 0),
+                "outstanding": _f(row[7]),
+                "share": f"{amount / total * 100:.0f}%" if total > 0 else "—",
+                "width": f"{amount / top * 100:.0f}%",
+            }
+        )
+    return ranks
 
 
 def _month_keys(today: datetime.date, count: int = 12) -> list[str]:
@@ -477,44 +528,45 @@ class CrmState(rx.State):
         margin = round(turnover_season - purchases_season, 2)
         receivable = _f(settle[0] if settle else 0)
         payable = _f(debts[0] if debts else 0)
-        self.kpis = {
-            "partners": _f(partners[0] if partners else 0),
-            "clients": _f(partners[1] if partners else 0),
-            "clients_active": _f(partners[2] if partners else 0),
-            "clients_new": _f(partners[3] if partners else 0),
-            "clients_inactive": _f(partners[4] if partners else 0),
-            "clients_blocked": _f(partners[5] if partners else 0),
-            "suppliers": _f(partners[6] if partners else 0),
-            "suppliers_active": _f(partners[7] if partners else 0),
-            "suppliers_new": _f(partners[8] if partners else 0),
-            "turnover": _f(sales[0] if sales else 0),
-            "turnover_month": _f(sales[1] if sales else 0),
-            "turnover_season": turnover_season,
-            "sales_count": _f(sales[3] if sales else 0),
-            "purchases": _f(purchases[0] if purchases else 0),
-            "purchases_month": _f(purchases[1] if purchases else 0),
-            "purchases_season": purchases_season,
-            "purchases_count": _f(purchases[3] if purchases else 0),
-            "margin": margin,
-            "margin_rate": (
-                round(margin / turnover_season * 100, 1)
-                if turnover_season > 0
-                else 0.0
-            ),
-            "receivable": receivable,
-            "receivable_overdue": _f(settle[1] if settle else 0),
-            "due_soon": _f(settle[2] if settle else 0),
-            "payable": payable,
-            "payable_overdue": _f(debts[1] if debts else 0),
-            "received": _f(payments[0] if payments else 0),
-            "paid_out": _f(payments[1] if payments else 0),
-            "unpaid_sales_invoices": _f(invoices[0] if invoices else 0),
-            "late_sales_invoices": _f(invoices[1] if invoices else 0),
-            "unpaid_purchase_invoices": _f(invoices[2] if invoices else 0),
-            "late_purchase_invoices": _f(invoices[3] if invoices else 0),
-            "credit_alerts": _f(credit[0] if credit else 0),
-            "net_cash": round(receivable - payable, 2),
-        }
+        async with self:
+            self.kpis = {
+                "partners": _f(partners[0] if partners else 0),
+                "clients": _f(partners[1] if partners else 0),
+                "clients_active": _f(partners[2] if partners else 0),
+                "clients_new": _f(partners[3] if partners else 0),
+                "clients_inactive": _f(partners[4] if partners else 0),
+                "clients_blocked": _f(partners[5] if partners else 0),
+                "suppliers": _f(partners[6] if partners else 0),
+                "suppliers_active": _f(partners[7] if partners else 0),
+                "suppliers_new": _f(partners[8] if partners else 0),
+                "turnover": _f(sales[0] if sales else 0),
+                "turnover_month": _f(sales[1] if sales else 0),
+                "turnover_season": turnover_season,
+                "sales_count": _f(sales[3] if sales else 0),
+                "purchases": _f(purchases[0] if purchases else 0),
+                "purchases_month": _f(purchases[1] if purchases else 0),
+                "purchases_season": purchases_season,
+                "purchases_count": _f(purchases[3] if purchases else 0),
+                "margin": margin,
+                "margin_rate": (
+                    round(margin / turnover_season * 100, 1)
+                    if turnover_season > 0
+                    else 0.0
+                ),
+                "receivable": receivable,
+                "receivable_overdue": _f(settle[1] if settle else 0),
+                "due_soon": _f(settle[2] if settle else 0),
+                "payable": payable,
+                "payable_overdue": _f(debts[1] if debts else 0),
+                "received": _f(payments[0] if payments else 0),
+                "paid_out": _f(payments[1] if payments else 0),
+                "unpaid_sales_invoices": _f(invoices[0] if invoices else 0),
+                "late_sales_invoices": _f(invoices[1] if invoices else 0),
+                "unpaid_purchase_invoices": _f(invoices[2] if invoices else 0),
+                "late_purchase_invoices": _f(invoices[3] if invoices else 0),
+                "credit_alerts": _f(credit[0] if credit else 0),
+                "net_cash": round(receivable - payable, 2),
+            }
 
     async def _fetch_months(self, today: datetime.date) -> None:
         keys = _month_keys(today)
@@ -559,19 +611,20 @@ class CrmState(rx.State):
         top = max(
             [*sales_map.values(), *purchases_map.values(), 1.0],
         )
-        self.months = [
-            {
-                "key": key,
-                "label": _month_label(key),
-                "sales": sales_map.get(key, 0.0),
-                "purchases": purchases_map.get(key, 0.0),
-                "sales_width": f"{sales_map.get(key, 0.0) / top * 100:.0f}%",
-                "purchases_width": (
-                    f"{purchases_map.get(key, 0.0) / top * 100:.0f}%"
-                ),
-            }
-            for key in keys
-        ]
+        async with self:
+            self.months = [
+                {
+                    "key": key,
+                    "label": _month_label(key),
+                    "sales": sales_map.get(key, 0.0),
+                    "purchases": purchases_map.get(key, 0.0),
+                    "sales_width": f"{sales_map.get(key, 0.0) / top * 100:.0f}%",
+                    "purchases_width": (
+                        f"{purchases_map.get(key, 0.0) / top * 100:.0f}%"
+                    ),
+                }
+                for key in keys
+            ]
 
     async def _fetch_aging(self) -> None:
         async with rx.asession() as asession:
@@ -606,33 +659,9 @@ class CrmState(rx.State):
                 )
             ).all()
 
-        @rx.event
-        def build(
-            rows: list[tuple[object, object, object]],
-        ) -> list[AgingPoint]:
-            data = {
-                str(row[0] or "0-30"): (_f(row[1]), int(row[2] or 0))
-                for row in rows
-            }
-            top = max([v[0] for v in data.values()] + [1.0])
-            points: list[AgingPoint] = []
-            for bucket in AGING_BUCKETS:
-                amount, count = data.get(bucket, (0.0, 0))
-                points.append(
-                    {
-                        "bucket": bucket,
-                        "label": f"{bucket} jours"
-                        if bucket != "90+"
-                        else "Plus de 90 jours",
-                        "amount": amount,
-                        "count": count,
-                        "width": f"{amount / top * 100:.0f}%",
-                    }
-                )
-            return points
-
-        self.receivable_aging = build(receivables)
-        self.payable_aging = build(payables)
+        async with self:
+            self.receivable_aging = _build_aging_points(receivables)
+            self.payable_aging = _build_aging_points(payables)
 
     async def _fetch_tops(self) -> None:
         async with rx.asession() as asession:
@@ -689,49 +718,9 @@ class CrmState(rx.State):
                 )
             ).all()
 
-        @rx.event
-        def build(
-            rows: list[
-                tuple[
-                    object,
-                    object,
-                    object,
-                    object,
-                    object,
-                    object,
-                    object,
-                    object,
-                ]
-            ],
-        ) -> list[PartnerRank]:
-            amounts = [_f(row[4]) for row in rows]
-            total = sum(amounts)
-            top = max(amounts + [1.0])
-            ranks: list[PartnerRank] = []
-            for row in rows:
-                amount = _f(row[4])
-                ranks.append(
-                    {
-                        "id": int(row[0]),
-                        "code": str(row[1] or ""),
-                        "name": str(row[2] or ""),
-                        "kind_label": KIND_LABELS.get(
-                            row[3] or "", "Partenaire"
-                        ),
-                        "amount": amount,
-                        "deals": int(row[5] or 0),
-                        "score": int(row[6] or 0),
-                        "outstanding": _f(row[7]),
-                        "share": f"{amount / total * 100:.0f}%"
-                        if total > 0
-                        else "—",
-                        "width": f"{amount / top * 100:.0f}%",
-                    }
-                )
-            return ranks
-
-        self.top_clients = build(clients)
-        self.top_suppliers = build(suppliers)
+        async with self:
+            self.top_clients = _build_partner_ranks(clients)
+            self.top_suppliers = _build_partner_ranks(suppliers)
 
     async def _fetch_alerts(self, today: datetime.date) -> None:
         horizon = today + datetime.timedelta(days=15)
@@ -868,7 +857,8 @@ class CrmState(rx.State):
             )
         order = {"bad": 0, "warn": 1, "info": 2}
         alerts.sort(key=lambda a: (order.get(a["tone"], 3), -a["amount"]))
-        self.alerts = alerts[:24]
+        async with self:
+            self.alerts = alerts[:24]
 
     async def _fetch_partners(self) -> None:
         query = self.search.strip().lower()
@@ -925,27 +915,28 @@ class CrmState(rx.State):
                 )
             ).all()
 
-        self.search_results = [
-            {
-                "id": int(row[0]),
-                "code": str(row[1] or ""),
-                "name": str(row[2] or ""),
-                "kind_label": KIND_LABELS.get(row[3] or "", "Partenaire"),
-                "status_label": STATUS_LABELS.get(row[4] or "", "Actif"),
-                "city": str(row[5] or "").strip()
-                or "Localisation non précisée",
-                "phone": str(row[6] or "") or "—",
-                "email": str(row[7] or "") or "—",
-                "score": int(row[8] or 0),
-                "turnover": _f(row[9]),
-                "purchases": _f(row[10]),
-                "outstanding": _f(row[11]),
-                "debt": _f(row[12]),
-            }
-            for row in rows
-        ]
+        async with self:
+            self.search_results = [
+                {
+                    "id": int(row[0]),
+                    "code": str(row[1] or ""),
+                    "name": str(row[2] or ""),
+                    "kind_label": KIND_LABELS.get(row[3] or "", "Partenaire"),
+                    "status_label": STATUS_LABELS.get(row[4] or "", "Actif"),
+                    "city": str(row[5] or "").strip()
+                    or "Localisation non précisée",
+                    "phone": str(row[6] or "") or "—",
+                    "email": str(row[7] or "") or "—",
+                    "score": int(row[8] or 0),
+                    "turnover": _f(row[9]),
+                    "purchases": _f(row[10]),
+                    "outstanding": _f(row[11]),
+                    "debt": _f(row[12]),
+                }
+                for row in rows
+            ]
 
-    def _build_insights(self) -> None:
+    async def _build_insights(self) -> None:
         """Synthèse intelligente locale, déduite des agrégats déjà chargés."""
         k = self.kpis
         insights: list[Insight] = []
@@ -1071,19 +1062,17 @@ class CrmState(rx.State):
                     ),
                 }
             )
-        self.insights = insights
+        async with self:
+            self.insights = insights
 
     # ------------------------------------------------------------------
     # Événements
     # ------------------------------------------------------------------
 
-    @rx.event
+    @rx.event(background=True)
     async def load_crm(self):
-        self.is_loading = True
-        yield
-        await ensure_local_database()
-        await ensure_crm_tables()
-        await asyncio.to_thread(seed_crm_if_empty)
+        async with self:
+            self.is_loading = True
         today = datetime.date.today()
         await self._fetch_kpis(today)
         await self._fetch_months(today)
@@ -1091,14 +1080,15 @@ class CrmState(rx.State):
         await self._fetch_tops()
         await self._fetch_alerts(today)
         await self._fetch_partners()
-        self._build_insights()
-        self.today_label = (
-            f"{WEEKDAYS_SHORT[today.weekday()]}. {today.day} "
-            f"{MONTHS[today.month - 1]} {today.year}"
-        )
-        start = today.year if today.month >= 9 else today.year - 1
-        self.season_label = f"Campagne {start}/{start + 1}"
-        self.is_loading = False
+        await self._build_insights()
+        async with self:
+            self.today_label = (
+                f"{WEEKDAYS_SHORT[today.weekday()]}. {today.day} "
+                f"{MONTHS[today.month - 1]} {today.year}"
+            )
+            start = today.year if today.month >= 9 else today.year - 1
+            self.season_label = f"Campagne {start}/{start + 1}"
+            self.is_loading = False
 
     @rx.event
     def set_tab(self, value: str):

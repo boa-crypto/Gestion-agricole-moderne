@@ -237,6 +237,17 @@ def _to_date(raw: object) -> datetime.date | None:
         return None
 
 
+def _link_id(data: dict, name: str) -> int | None:
+    """Convertit un champ de rattachement optionnel en identifiant ou None."""
+    raw = str(data.get(name, "") or "").strip()
+    if not raw:
+        return None
+    try:
+        return int(raw)
+    except ValueError:
+        return None
+
+
 def _options(keys: list[str], labels: dict[str, str]) -> list[Option]:
     return [{"value": key, "label": labels.get(key, key)} for key in keys]
 
@@ -1018,11 +1029,6 @@ class ExpensesState(rx.State):
         if status != "PAYEE":
             paid = None
 
-        @rx.event
-        def link(name: str) -> int | None:
-            raw = str(form_data.get(name, "")).strip()
-            return int(raw) if raw else None
-
         params: dict[str, str | int | float | datetime.date | None] = {
             "expense_type_id": int(form_data.get("expense_type_id")),
             "label": str(form_data.get("label", "")).strip(),
@@ -1041,12 +1047,12 @@ class ExpensesState(rx.State):
             "incurred_on": incurred,
             "due_date": _to_date(form_data.get("due_date")),
             "paid_on": paid,
-            "parcel_id": link("parcel_id"),
-            "crop_id": link("crop_id"),
-            "employee_id": link("employee_id"),
-            "equipment_id": link("equipment_id"),
-            "intervention_id": link("intervention_id"),
-            "maintenance_id": link("maintenance_id"),
+            "parcel_id": _link_id(form_data, "parcel_id"),
+            "crop_id": _link_id(form_data, "crop_id"),
+            "employee_id": _link_id(form_data, "employee_id"),
+            "equipment_id": _link_id(form_data, "equipment_id"),
+            "intervention_id": _link_id(form_data, "intervention_id"),
+            "maintenance_id": _link_id(form_data, "maintenance_id"),
             "notes": str(form_data.get("notes", "")).strip(),
         }
 
