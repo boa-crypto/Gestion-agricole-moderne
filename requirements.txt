@@ -1,5 +1,5 @@
 
-reflex[db]==0.9.8
+reflex[db]==0.9.12
 aiosqlite>=0.20.0
 reflex-enterprise
 requests

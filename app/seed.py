@@ -280,7 +280,7 @@ async def seed_dashboard_data() -> None:
                 ) VALUES (
                     :name, :species, :family, :cycle_days, :expected_yield_t_ha,
                     :sowing_window, :harvest_window, :color_hex, :icon, :notes
-                )
+                ) ON CONFLICT(species, name) DO NOTHING
                 """
             ),
             VARIETIES,
