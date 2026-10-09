@@ -49,6 +49,7 @@ from app.states.search_state import SearchState
 from app.states.security_audit_state import SecurityAuditState
 from app.states.stock_state import StockState
 from app.states.weather_state import WeatherState
+from app.states.navigation_state import NavigationState
 
 
 def index() -> rx.Component:
@@ -72,11 +73,15 @@ def index() -> rx.Component:
                 ),
                 cockpit_pulse(),
                 alert_triage_panel(),
-                calendar_panel(),
+                rx.el.div(
+                    calendar_panel(),
+                    id="nav-calendrier",
+                    class_name="w-full scroll-mt-6",
+                ),
                 crops_panel(),
                 class_name="flex flex-col gap-4 w-full mt-8",
             ),
-            class_name="relative z-10 w-full max-w-[110rem] mx-auto px-4 sm:px-8 md:pl-24 lg:pl-28 py-10 pb-28 md:pb-10 flex flex-col gap-6",
+            class_name="relative z-10 w-full max-w-[110rem] mx-auto px-4 sm:px-8 md:pl-24 lg:pl-28 xl:pl-72 py-10 pb-28 md:pb-10 flex flex-col gap-6",
         ),
         class_name="relative min-h-screen w-full font-['Inter'] bg-[#04120c] bg-[url('/wide_cinematic_background.png')] bg-cover bg-center bg-fixed text-emerald-50 antialiased",
     )
@@ -105,6 +110,7 @@ app.add_page(
     index,
     route="/",
     on_load=[
+        NavigationState.enter_page("cockpit"),
         DashboardState.load_dashboard,
         WeatherState.load_weather,
         GuideState.load_guide,
@@ -118,6 +124,7 @@ app.add_page(
     parcels_page,
     route="/parcelles",
     on_load=[
+        NavigationState.enter_page("parcelles"),
         ParcelsState.load_space,
         CatalogState.load_catalog,
         PhenologyState.load_phenology,
@@ -126,17 +133,24 @@ app.add_page(
 app.add_page(
     catalog_page,
     route="/referentiel",
-    on_load=CatalogBrowserState.load_referentiel,
+    on_load=[
+        NavigationState.enter_page("referentiel"),
+        CatalogBrowserState.load_referentiel,
+    ],
 )
 app.add_page(
     phenology_admin_page,
     route="/phenologie",
-    on_load=PhenologyAdminState.load_admin,
+    on_load=[
+        NavigationState.enter_page("phenologie"),
+        PhenologyAdminState.load_admin,
+    ],
 )
 app.add_page(
     operations_page,
     route="/traitements",
     on_load=[
+        NavigationState.enter_page("traitements"),
         OperationsState.load_operations,
         RemediationState.load_remediation,
         StockState.load_stocks,
@@ -145,17 +159,24 @@ app.add_page(
 app.add_page(
     employees_page,
     route="/employes",
-    on_load=EmployeesState.load_workforce,
+    on_load=[
+        NavigationState.enter_page("employes"),
+        EmployeesState.load_workforce,
+    ],
 )
 app.add_page(
     maintenance_page,
     route="/maintenance",
-    on_load=MaintenanceState.load_fleet,
+    on_load=[
+        NavigationState.enter_page("maintenance"),
+        MaintenanceState.load_fleet,
+    ],
 )
 app.add_page(
     cartography_page,
     route="/cartographie",
     on_load=[
+        NavigationState.enter_page("cartographie"),
         CartographyState.load_map,
         ContourState.load_contours,
         RemediationState.load_remediation,
@@ -165,37 +186,55 @@ app.add_page(
 app.add_page(
     reports_page,
     route="/rapports",
-    on_load=PhenologyOpsState.load_operational,
+    on_load=[
+        NavigationState.enter_page("rapports"),
+        PhenologyOpsState.load_operational,
+    ],
 )
 app.add_page(
     expenses_page,
     route="/charges",
-    on_load=ExpensesState.load_expenses,
+    on_load=[
+        NavigationState.enter_page("charges"),
+        ExpensesState.load_expenses,
+    ],
 )
 app.add_page(
     crm_page,
     route="/crm",
-    on_load=CrmState.load_crm,
+    on_load=[NavigationState.enter_page("crm"), CrmState.load_crm],
 )
 app.add_page(
     search_page,
     route="/recherche",
-    on_load=[SearchState.load_search, PhenologySearchState.load_index],
+    on_load=[
+        NavigationState.enter_page("recherche"),
+        SearchState.load_search,
+        PhenologySearchState.load_index,
+    ],
 )
 app.add_page(
     guide_page,
     route="/guide",
-    on_load=[GuideState.load_guide, GuideAdminState.load_admin],
+    on_load=[
+        NavigationState.enter_page("guide"),
+        GuideState.load_guide,
+        GuideAdminState.load_admin,
+    ],
 )
 app.add_page(
     administration_page,
     route="/administration",
-    on_load=AdministrationState.load_administration,
+    on_load=[
+        NavigationState.enter_page("administration"),
+        AdministrationState.load_administration,
+    ],
 )
 app.add_page(
     audit_page,
     route="/audit",
     on_load=[
+        NavigationState.enter_page("audit"),
         AuditState.load_audit,
         ContourState.load_contours,
         RemediationState.load_remediation,

@@ -126,7 +126,7 @@ def administration_page() -> rx.Component:
                 ),
                 class_name="flex flex-col gap-4 w-full mt-8",
             ),
-            class_name="relative z-10 w-full max-w-[110rem] mx-auto px-4 sm:px-8 md:pl-24 lg:pl-28 py-10 pb-28 md:pb-10",
+            class_name="relative z-10 w-full max-w-[110rem] mx-auto px-4 sm:px-8 md:pl-24 lg:pl-28 xl:pl-72 py-10 pb-28 md:pb-10",
         ),
         class_name="relative min-h-screen w-full font-['Inter'] bg-[#04120c] bg-[url('/wide_cinematic_background.png')] bg-cover bg-center bg-fixed text-emerald-50 antialiased",
     )

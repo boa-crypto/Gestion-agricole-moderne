@@ -14,7 +14,7 @@ def phenology_admin_page() -> rx.Component:
         rx.el.div(
             side_rail("phenologie"),
             phenology_admin(),
-            class_name="relative z-10 w-full max-w-[110rem] mx-auto px-4 sm:px-8 md:pl-24 lg:pl-28 py-10 pb-28 md:pb-10 flex flex-col gap-6",
+            class_name="relative z-10 w-full max-w-[110rem] mx-auto px-4 sm:px-8 md:pl-24 lg:pl-28 xl:pl-72 py-10 pb-28 md:pb-10 flex flex-col gap-6",
         ),
         class_name="relative min-h-screen w-full font-['Inter'] bg-[#04120c] bg-[url('/wide_cinematic_background.png')] bg-cover bg-center bg-fixed text-emerald-50 antialiased",
     )

@@ -92,8 +92,16 @@ def operations_page() -> rx.Component:
             _space_header(),
             rx.el.div(
                 operations_kpis(),
-                intervention_journal(),
-                stock_panel(),
+                rx.el.div(
+                    intervention_journal(),
+                    id="nav-planning",
+                    class_name="w-full scroll-mt-6",
+                ),
+                rx.el.div(
+                    stock_panel(),
+                    id="nav-magasin",
+                    class_name="w-full scroll-mt-6",
+                ),
                 stock_control_panel(),
                 stock_decision_panel(),
                 harvest_panel(),
@@ -101,7 +109,7 @@ def operations_page() -> rx.Component:
                 class_name="flex flex-col gap-4 w-full mt-8",
             ),
             operations_modals(),
-            class_name="relative z-10 w-full max-w-[110rem] mx-auto px-4 sm:px-8 md:pl-24 lg:pl-28 py-10 pb-28 md:pb-10",
+            class_name="relative z-10 w-full max-w-[110rem] mx-auto px-4 sm:px-8 md:pl-24 lg:pl-28 xl:pl-72 py-10 pb-28 md:pb-10",
         ),
         class_name="relative min-h-screen w-full font-['Inter'] bg-[#04120c] bg-[url('/wide_cinematic_background.png')] bg-cover bg-center bg-fixed text-emerald-50 antialiased",
     )
