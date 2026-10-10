@@ -96,7 +96,7 @@ def test_report_scopes_cover_the_automatic_fallback() -> None:
     for key in ("season_current", "season_last", "history", "empty"):
         assert key in REPORT_SCOPES
         assert REPORT_SCOPES[key]
-    assert CrmRegistersState.report_scope != None
+    assert CrmRegistersState().report_scope is not None
 
 
 def test_season_bounds_and_labels() -> None:
