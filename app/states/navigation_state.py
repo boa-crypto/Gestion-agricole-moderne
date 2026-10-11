@@ -11,6 +11,23 @@ from app.navigation import (
 )
 
 
+def resolve_navigation_entry(
+    page: str, cockpit: str = "", tab: str = ""
+) -> NavigationEntry | None:
+    """Résout uniquement les destinations existantes, sinon la vue principale."""
+    if page not in ROUTE_MATRIX:
+        return None
+    for entry in NAVIGATION:
+        if (
+            entry["page"] == page
+            and entry["cockpit"] == cockpit
+            and COCKPIT_BY_KEY[entry["cockpit"]]["available"]
+            and (not tab or entry["tab"] == tab)
+        ):
+            return entry
+    return ROUTE_MATRIX[page]
+
+
 class NavigationState(rx.State):
     page_key: str = "cockpit"
     selected_cockpit: str = "global"
@@ -83,23 +100,18 @@ class NavigationState(rx.State):
         query = self.router.url.query_parameters
         cockpit = str(query.get("cockpit", ""))
         tab = str(query.get("vue", ""))
-        candidates = [
-            entry
-            for entry in NAVIGATION
-            if entry["page"] == page
-            and entry["cockpit"] == cockpit
-            and (not tab or entry["tab"] == tab)
-        ]
-        entry = candidates[0] if candidates else ROUTE_MATRIX[page]
+        entry = resolve_navigation_entry(page, cockpit, tab)
+        if entry is None:
+            return
         self.current_key = entry["key"]
         self.selected_cockpit = entry["cockpit"]
         self.panel_open = False
         self.mobile_open = False
-        if page == "crm" and tab and candidates:
+        if page == "crm":
             from app.states.crm_state import CrmState
 
             crm = await self.get_state(CrmState)
-            crm.set_tab(entry["tab"])
+            crm.active_tab = entry["tab"]
 
     @rx.event
     def select_cockpit(self, key: str):
