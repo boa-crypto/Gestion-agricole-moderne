@@ -89,6 +89,7 @@ def index() -> rx.Component:
 
 app = rxe.App(
     head_components=[
+        rx.el.style("html, body { background-color: #04120c !important; }"),
         rx.el.link(
             rel="stylesheet",
             href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",

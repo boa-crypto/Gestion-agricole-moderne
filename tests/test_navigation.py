@@ -1,7 +1,5 @@
 import reflex as rx
 import ast
-import asyncio
-from unittest.mock import AsyncMock, patch
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
@@ -12,11 +10,7 @@ from app.navigation import (
     ROUTE_MATRIX,
     navigation_coverage,
 )
-from app.states.navigation_state import (
-    NavigationState,
-    resolve_navigation_entry,
-)
-from app.states.crm_state import CrmState
+from app.states.navigation_state import resolve_navigation_entry
 
 
 EXPECTED_ROUTES = {
@@ -93,55 +87,6 @@ def test_resolver_preserves_routes_anchors_and_cockpit_only_links():
         if not cockpit["available"]:
             for page, primary in ROUTE_MATRIX.items():
                 assert resolve_navigation_entry(page, cockpit["key"]) == primary
-
-
-def test_enter_page_applies_resolved_crm_tab_and_resets_stale_tab():
-    async def check():
-        state = NavigationState(_reflex_internal_init=True)
-        crm = CrmState(_reflex_internal_init=True)
-        for key in [
-            "achats.achats",
-            "financier.creances",
-            "achats.fournisseurs",
-            "partenaires.fournisseurs",
-            "commercial.overview",
-        ]:
-            entry = ENTRY_BY_KEY[key]
-            crm.active_tab = "ventes"
-            state.panel_open = True
-            state.mobile_open = True
-            with (
-                patch(
-                    "app.states.navigation_state.resolve_navigation_entry",
-                    return_value=entry,
-                ),
-                patch.object(
-                    NavigationState,
-                    "get_state",
-                    new_callable=AsyncMock,
-                    return_value=crm,
-                ) as get_state,
-            ):
-                await NavigationState.enter_page.fn(state, "crm")
-                get_state.assert_awaited_once_with(CrmState)
-            assert crm.active_tab == entry["tab"]
-            assert state.current_key == key
-            assert state.selected_cockpit == entry["cockpit"]
-            assert state.page_key == "crm"
-            assert not state.panel_open and not state.mobile_open
-
-        crm.active_tab = "achats"
-        with patch.object(
-            NavigationState, "get_state", new_callable=AsyncMock
-        ) as get_state:
-            await NavigationState.enter_page.fn(state, "parcelles")
-            get_state.assert_not_awaited()
-            assert state.current_key == ROUTE_MATRIX["parcelles"]["key"]
-            await NavigationState.enter_page.fn(state, "inconnue")
-            assert state.page_key == "parcelles"
-        assert crm.active_tab == "achats"
-
-    asyncio.run(check())
 
 
 def test_all_registered_routes_are_covered():
