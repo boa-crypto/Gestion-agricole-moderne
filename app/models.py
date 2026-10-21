@@ -10,6 +10,7 @@ import datetime
 import enum
 
 from sqlalchemy import (
+    CheckConstraint,
     Date,
     DateTime,
     Enum,
@@ -18,7 +19,9 @@ from sqlalchemy import (
     String,
     Text,
     UniqueConstraint,
+    false,
     func,
+    true,
 )
 from sqlalchemy.orm import (
     DeclarativeBase,
@@ -26,6 +29,7 @@ from sqlalchemy.orm import (
     MappedAsDataclass,
     mapped_column,
     relationship,
+    validates,
 )
 
 
@@ -3764,4 +3768,106 @@ class CrmAuditLog(Base):
     )
     created_at: Mapped[datetime.datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), init=False
+    )
+
+
+class MenuAuthAccount(Base):
+    """Identité réelle indépendante ; le premier admin sera attribué en transaction."""
+
+    __tablename__ = "menu_auth_account"
+    __table_args__ = (
+        CheckConstraint(
+            "email = lower(trim(email)) AND length(email) > 0",
+            name="ck_menu_auth_account_normalized_email",
+        ),
+        CheckConstraint(
+            "length(password_hash) > 0",
+            name="ck_menu_auth_account_password_hash",
+        ),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    email: Mapped[str] = mapped_column(String(320), unique=True, default="")
+    password_hash: Mapped[str] = mapped_column(Text, default="", repr=False)
+    is_admin: Mapped[bool] = mapped_column(
+        default=False, server_default=false()
+    )
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True),
+        default_factory=lambda: datetime.datetime.now(datetime.UTC),
+        server_default=func.now(),
+        init=False,
+    )
+
+    @validates("email")
+    def _normalize_email(self, key: str, value: str) -> str:
+        return value.strip().lower()
+
+
+class MenuAuthSession(Base):
+    """Session persistante : uniquement l'empreinte du jeton, jamais le secret."""
+
+    __tablename__ = "menu_auth_session"
+    __table_args__ = (
+        CheckConstraint(
+            "length(token_hash) > 0", name="ck_menu_auth_session_token_hash"
+        ),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    account_id: Mapped[int] = mapped_column(
+        ForeignKey("menu_auth_account.id", ondelete="CASCADE"), index=True
+    )
+    token_hash: Mapped[str] = mapped_column(
+        String(128), unique=True, default="", repr=False
+    )
+    expires_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True),
+        default_factory=lambda: datetime.datetime.now(datetime.UTC),
+        index=True,
+    )
+    is_revoked: Mapped[bool] = mapped_column(
+        default=False, server_default=false()
+    )
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True),
+        default_factory=lambda: datetime.datetime.now(datetime.UTC),
+        server_default=func.now(),
+        init=False,
+    )
+
+    @validates("expires_at")
+    def _normalize_expiry(
+        self, key: str, value: datetime.datetime
+    ) -> datetime.datetime:
+        if value.tzinfo is None or value.utcoffset() is None:
+            raise ValueError("L'expiration doit préciser un fuseau horaire.")
+        return value.astimezone(datetime.UTC)
+
+
+class MenuSetting(Base):
+    """Override par clé ; absence = activé, flags parents/enfants indépendants."""
+
+    __tablename__ = "menu_setting"
+    __table_args__ = (
+        CheckConstraint(
+            "length(trim(navigation_key)) > 0",
+            name="ck_menu_setting_navigation_key",
+        ),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    navigation_key: Mapped[str] = mapped_column(
+        String(200), unique=True, default=""
+    )
+    enabled: Mapped[bool] = mapped_column(default=True, server_default=true())
+    updated_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True),
+        default_factory=lambda: datetime.datetime.now(datetime.UTC),
+        server_default=func.now(),
+        onupdate=lambda: datetime.datetime.now(datetime.UTC),
+        init=False,
+    )
+    updated_by_account_id: Mapped[int | None] = mapped_column(
+        ForeignKey("menu_auth_account.id", ondelete="SET NULL"), default=None
     )
