@@ -1,6 +1,6 @@
 
 reflex[db]==0.9.12
 aiosqlite>=0.20.0
-reflex-enterprise
+reflex-enterprise>=0.9.7
 requests
 pillow

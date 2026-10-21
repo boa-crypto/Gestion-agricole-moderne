@@ -1,0 +1,144 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1036{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang12 # PROMPT \f1\emdash  AJOUT D\rquote UN MODULE DE CONFIGURATION ET DE GESTION DYNAMIQUE DES MENUS\par
+\par
+## OBJECTIF\par
+\par
+Analyse l\rquote application existante et impl\f0\'e9mente un nouveau menu principal intitul\'e9 **\'ab Configuration \'bb**, permettant \'e0 l\rquote administrateur de g\'e9rer centralement l\rquote ensemble des menus de l\rquote application, sans modifier manuellement le code \'e0 chaque activation ou d\'e9sactivation.\par
+\par
+### 1. Ajouter un menu \'ab Configuration \'bb\par
+\par
+Ajoute une entr\'e9e **Configuration** dans le menu principal ou la barre lat\'e9rale de navigation de l\rquote application, en respectant strictement le design, l\rquote architecture et les conventions graphiques existantes.\par
+\par
+Cette section doit permettre d\rquote acc\'e9der \'e0 une interface centralis\'e9e de gestion des menus.\par
+\par
+### 2. Afficher la liste compl\'e8te des menus\par
+\par
+Dans la section Configuration, afficher automatiquement **tous les menus et sous-menus existants** dans l\rquote application.\par
+\par
+Pour chaque menu, pr\'e9senter les informations suivantes :\par
+- Nom du menu.\par
+- Identifiant unique ou cl\'e9 technique.\par
+- Menu parent, si applicable.\par
+- Niveau hi\'e9rarchique : menu principal ou sous-menu.\par
+- \'c9tat actuel : activ\'e9 ou d\'e9sactiv\'e9.\par
+- Action permettant de modifier son \'e9tat.\par
+\par
+La liste doit \'eatre g\'e9n\'e9r\'e9e dynamiquement \'e0 partir de la configuration r\'e9elle de l\rquote application, et non constitu\'e9e d\rquote une liste statique saisie manuellement.\par
+\par
+### 3. Activer ou d\'e9sactiver un menu\par
+\par
+Ajouter un interrupteur (toggle switch) pour chaque menu.\par
+\par
+**Comportement attendu :**\par
+- Lorsque le menu est activ\'e9, il est visible et accessible dans la navigation pour les utilisateurs autoris\'e9s.\par
+- Lorsque le menu est d\'e9sactiv\'e9, il dispara\'eet de la navigation utilisateur.\par
+- La d\'e9sactivation d\rquote un menu parent doit \'e9galement masquer ses sous-menus, sans supprimer leurs configurations.\par
+- La r\'e9activation d\rquote un menu parent doit restaurer la visibilit\'e9 de ses sous-menus selon leurs propres \'e9tats.\par
+- La modification de l\rquote\'e9tat doit \'eatre enregistr\'e9e en base de donn\'e9es ou dans le m\'e9canisme de persistance adapt\'e9 \'e0 l\rquote architecture existante.\par
+- L\rquote\'e9tat doit \'eatre conserv\'e9 apr\'e8s actualisation de la page, d\'e9connexion et reconnexion.\par
+- Afficher une confirmation visuelle apr\'e8s chaque modification r\'e9ussie et un message explicite en cas d\rquote erreur.\par
+\par
+La d\'e9sactivation d\rquote un menu ne doit jamais supprimer les donn\'e9es, les routes, les composants ou les fonctionnalit\'e9s associ\'e9es.\par
+\par
+### 4. Ajouter une recherche directe de menu\par
+\par
+En haut de l\rquote interface Configuration, ajouter une **barre de recherche instantan\'e9e** permettant de retrouver rapidement un menu ou un sous-menu.\par
+\par
+Fonctionnalit\'e9s requises :\par
+- Recherche au fur et \'e0 mesure de la saisie, sans rechargement de la page.\par
+- Recherche par nom du menu.\par
+- Recherche par identifiant technique, si disponible.\par
+- Recherche insensible aux majuscules et aux minuscules.\par
+- Recherche tol\'e9rante aux accents.\par
+- Affichage imm\'e9diat des r\'e9sultats correspondants.\par
+- Possibilit\'e9 de retrouver un sous-menu m\'eame lorsqu\rquote il est situ\'e9 dans une arborescence profonde.\par
+- Affichage d\rquote un message clair lorsqu\rquote aucun r\'e9sultat ne correspond \'e0 la recherche.\par
+- Bouton permettant d\rquote effacer rapidement la recherche et de r\'e9afficher tous les menus.\par
+\par
+Ajouter \'e9galement des filtres :\par
+- Tous les menus.\par
+- Menus activ\'e9s.\par
+- Menus d\'e9sactiv\'e9s.\par
+- Menus principaux.\par
+- Sous-menus.\par
+\par
+La recherche et les filtres doivent fonctionner ensemble.\par
+\par
+### 5. Concevoir une interface claire et professionnelle\par
+\par
+Cr\'e9er une interface moderne, intuitive, responsive et coh\'e9rente avec l\rquote application existante.\par
+\par
+Pr\'e9voir :\par
+- Un titre : \'ab Configuration des menus \'bb.\par
+- Un champ de recherche facilement accessible.\par
+- Des indicateurs statistiques : nombre total de menus, menus activ\'e9s et menus d\'e9sactiv\'e9s.\par
+- Une liste ou un tableau hi\'e9rarchique des menus.\par
+- Des interrupteurs clairement identifiables.\par
+- Une distinction visuelle entre les menus principaux et les sous-menus.\par
+- Un \'e9tat de chargement, un \'e9tat vide et une gestion des erreurs.\par
+- Une navigation utilisable sur ordinateur, tablette et mobile.\par
+\par
+Ne pas modifier inutilement le design global de l\rquote application.\par
+\par
+### 6. Respecter les droits d\rquote acc\'e8s et la s\'e9curit\'e9\par
+\par
+La gestion des menus doit \'eatre r\'e9serv\'e9e aux utilisateurs disposant des autorisations administratives appropri\'e9es.\par
+\par
+- V\'e9rifier les permissions c\'f4t\'e9 serveur, et pas uniquement dans l\rquote interface.\par
+- Emp\'eacher les utilisateurs non autoris\'e9s de modifier l\rquote\'e9tat des menus via une requ\'eate directe \'e0 l\rquote API.\par
+- Respecter le syst\'e8me d\rquote authentification et les r\'f4les d\'e9j\'e0 pr\'e9sents.\par
+- Ne pas confondre visibilit\'e9 d\rquote un menu et autorisation d\rquote acc\'e9der \'e0 une fonctionnalit\'e9.\par
+- Maintenir les contr\'f4les d\rquote acc\'e8s sur toutes les routes et toutes les op\'e9rations m\'e9tier, m\'eame lorsque le menu correspondant est d\'e9sactiv\'e9.\par
+- Emp\'eacher la d\'e9sactivation accidentelle du menu Configuration ou pr\'e9voir un m\'e9canisme de r\'e9cup\'e9ration administrative pour \'e9viter de perdre l\rquote acc\'e8s \'e0 cette fonctionnalit\'e9.\par
+\par
+### 7. Int\'e9gration technique\par
+\par
+Avant de commencer le d\'e9veloppement :\par
+\par
+1. Analyse la structure compl\'e8te du projet.\par
+2. Identifie le syst\'e8me actuel de navigation, les menus, les sous-menus, les routes, les permissions, les API et le m\'e9canisme de stockage.\par
+3. D\'e9termine la solution la plus coh\'e9rente avec la stack technique existante.\par
+4. R\'e9utilise les composants et les conventions d\'e9j\'e0 en place.\par
+5. \'c9vite les duplications de code et les modifications inutiles.\par
+6. Pr\'e9serve toutes les fonctionnalit\'e9s existantes.\par
+\par
+Impl\'e9mente ensuite la solution compl\'e8te, y compris les modifications n\'e9cessaires au frontend, au backend, \'e0 la base de donn\'e9es et aux API, si l\rquote architecture l\rquote exige.\par
+\par
+Si un registre centralis\'e9 des menus existe d\'e9j\'e0, \'e9tends-le au lieu de cr\'e9er un syst\'e8me parall\'e8le.\par
+\par
+Si aucun m\'e9canisme de configuration dynamique n\rquote existe, cr\'e9e une structure adapt\'e9e permettant de centraliser les m\'e9tadonn\'e9es et l\rquote\'e9tat de chaque menu.\par
+\par
+### 8. Tests et crit\'e8res de validation\par
+\par
+Consid\'e8re le travail termin\'e9 uniquement apr\'e8s avoir v\'e9rifi\'e9 les sc\'e9narios suivants :\par
+\par
+- Tous les menus et sous-menus existants apparaissent dans Configuration.\par
+- La recherche retrouve correctement un menu par son nom.\par
+- Les accents et les majuscules ne perturbent pas la recherche.\par
+- Un menu activ\'e9 appara\'eet dans la navigation.\par
+- Un menu d\'e9sactiv\'e9 dispara\'eet de la navigation.\par
+- La d\'e9sactivation d\rquote un parent masque ses sous-menus.\par
+- La r\'e9activation du parent respecte les \'e9tats individuels des sous-menus.\par
+- Les modifications persistent apr\'e8s actualisation et reconnexion.\par
+- Les filtres fonctionnent correctement avec la recherche.\par
+- Les utilisateurs non autoris\'e9s ne peuvent pas modifier la configuration.\par
+- La d\'e9sactivation d\rquote un menu ne supprime aucune donn\'e9e.\par
+- Les autres fonctionnalit\'e9s de l\rquote application continuent de fonctionner normalement.\par
+\par
+Ajoute ou adapte les tests automatis\'e9s lorsque le projet en dispose.\par
+\par
+## INSTRUCTION FINALE\par
+\par
+Ne te contente pas de proposer une maquette ou un exemple de code isol\'e9. **Impl\'e9mente cette fonctionnalit\'e9 directement dans le projet existant**, avec tous les fichiers, composants, API, migrations et tests n\'e9cessaires.\par
+\par
+Commence par analyser le code existant, puis r\'e9alise les modifications. \'c0 la fin, fournis un compte rendu pr\'e9cis indiquant :\par
+- Les fichiers cr\'e9\'e9s ou modifi\'e9s.\par
+- Les changements apport\'e9s \'e0 la base de donn\'e9es.\par
+- Le fonctionnement de la recherche et de l\rquote activation/d\'e9sactivation.\par
+- Les tests ex\'e9cut\'e9s et leurs r\'e9sultats.\par
+- Les \'e9ventuelles op\'e9rations restant \'e0 effectuer manuellement.\par
+\par
+Ne supprime, ne remplace et ne r\'e9\'e9cris aucune fonctionnalit\'e9 existante sans n\'e9cessit\'e9 technique d\'e9montr\'e9e.\par
+}
+ 
