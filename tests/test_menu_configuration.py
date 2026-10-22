@@ -124,9 +124,9 @@ class PersistenceTests(unittest.IsolatedAsyncioTestCase):
         async def initialized():
             return
 
-        self.session_patch = patch.object(rx, "asession", self.factory)
+        self.session_patch = patch.object(service, "menu_session", self.factory)
         self.ensure_patch = patch.object(
-            service, "ensure_local_database", initialized
+            service, "ensure_menu_database", initialized
         )
         self.session_patch.start()
         self.ensure_patch.start()
@@ -211,6 +211,36 @@ class PersistenceTests(unittest.IsolatedAsyncioTestCase):
             await session.commit()
         with self.assertRaises(PermissionError):
             await service.resolve_account(expiring)
+
+    async def test_reload_keeps_identity_session_and_settings(self):
+        token, account = await service.authenticate(
+            "reload@example.com", "long-password-reload", True
+        )
+        await service.toggle_setting(token, "agricole.parcelles")
+        await self.engine.dispose()
+        replacement = create_async_engine(
+            f"sqlite+aiosqlite:///{self.temp.name}/test.db"
+        )
+        try:
+            with patch.object(
+                service, "menu_session", async_sessionmaker(replacement)
+            ):
+                self.assertEqual(await service.resolve_account(token), account)
+                self.assertFalse(
+                    (await service.read_settings(token, True))[
+                        "agricole.parcelles"
+                    ]
+                )
+                _, restored = await service.authenticate(
+                    "reload@example.com", "long-password-reload", False
+                )
+                self.assertEqual(restored, account)
+                _, viewer = await service.authenticate(
+                    "after@example.com", "long-password-after", True
+                )
+                self.assertFalse(viewer["admin"])
+        finally:
+            await replacement.dispose()
 
     async def test_duplicate_email_and_wrong_password_do_not_elevate(self):
         await service.authenticate(

@@ -1,6 +1,7 @@
 import reflex as rx
 import reflex_enterprise as rxe
 
+from app.menu_database import menu_database_lifespan
 from app.components.alerts_panel import alerts_panel
 from app.components.calendar_panel import calendar_panel
 from app.components.cockpit_header import cockpit_header
@@ -110,6 +111,7 @@ app = rxe.App(
     ],
     theme=rx.theme(appearance="light"),
 )
+app.register_lifespan_task(menu_database_lifespan)
 app.add_page(
     index,
     route="/",

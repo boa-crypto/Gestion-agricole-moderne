@@ -12,7 +12,11 @@ from typing import TypedDict
 from sqlalchemy import text
 from sqlalchemy.exc import IntegrityError
 
-from app.database import ensure_local_database
+from app.menu_database import (
+    ensure_menu_database,
+    lock_menu_transaction,
+    menu_session,
+)
 from app.navigation import COCKPITS, NAVIGATION
 
 SESSION_SECONDS = 60 * 60 * 24 * 7
@@ -128,12 +132,12 @@ def token_hash(token: str) -> str:
     return hashlib.sha256(token.encode()).hexdigest()
 
 
-def now_string() -> str:
-    return (
-        dt.datetime.now(dt.UTC)
-        .replace(tzinfo=None)
-        .isoformat(sep=" ", timespec="microseconds")
-    )
+def session_timestamp(session, value: dt.datetime) -> dt.datetime | str:
+    if session.get_bind().dialect.name == "sqlite":
+        return value.replace(tzinfo=None).isoformat(
+            sep=" ", timespec="microseconds"
+        )
+    return value.astimezone(dt.UTC)
 
 
 async def account_in_session(
@@ -144,10 +148,13 @@ async def account_in_session(
             text("""
         SELECT a.id, a.email, a.is_admin FROM menu_auth_account a
         JOIN menu_auth_session s ON s.account_id = a.id
-        WHERE s.token_hash = :token AND s.is_revoked = 0
+        WHERE s.token_hash = :token AND s.is_revoked = FALSE
           AND s.expires_at > :now LIMIT 1
     """),
-            {"token": token_hash(token), "now": now_string()},
+            {
+                "token": token_hash(token),
+                "now": session_timestamp(session, dt.datetime.now(dt.UTC)),
+            },
         )
     ).first()
     if row is None or not token or (admin and not bool(row[2])):
@@ -156,8 +163,8 @@ async def account_in_session(
 
 
 async def resolve_account(token: str) -> Account:
-    await ensure_local_database()
-    async with rx.asession() as session:
+    await ensure_menu_database()
+    async with menu_session() as session:
         return await account_in_session(session, token)
 
 
@@ -175,7 +182,7 @@ async def authenticate(
     encoded = await asyncio.to_thread(hash_password, password) if signup else ""
     async with rx.asession() as session:
         if signup:
-            await session.execute(text("BEGIN IMMEDIATE"))
+            await lock_menu_transaction(session)
             count = int(
                 (
                     await session.execute(
@@ -189,7 +196,7 @@ async def authenticate(
                     text(
                         "INSERT INTO menu_auth_account (email, password_hash, is_admin) VALUES (:email, :hash, :admin) RETURNING id"
                     ),
-                    {"email": email, "hash": encoded, "admin": int(count == 0)},
+                    {"email": email, "hash": encoded, "admin": count == 0},
                 )
                 account: Account = {
                     "id": int(result.scalar_one()),
@@ -197,7 +204,7 @@ async def authenticate(
                     "admin": count == 0,
                 }
             except IntegrityError as e:
-                logging.exception(f"Error: {e}")
+                logging.exception("Error: menu account creation failed")
                 await session.rollback()
                 raise ValueError(
                     "Impossible de créer ce compte. Utilisez la connexion si vous êtes déjà inscrit."
@@ -226,21 +233,20 @@ async def authenticate(
                 "admin": bool(row[3]),
             }
         token = secrets.token_urlsafe(48)
-        expires = (
-            (dt.datetime.now(dt.UTC) + dt.timedelta(seconds=SESSION_SECONDS))
-            .replace(tzinfo=None)
-            .isoformat(sep=" ")
+        expires = session_timestamp(
+            session,
+            dt.datetime.now(dt.UTC) + dt.timedelta(seconds=SESSION_SECONDS),
         )
         if old_token:
             await session.execute(
                 text(
-                    "UPDATE menu_auth_session SET is_revoked = 1 WHERE token_hash = :token"
+                    "UPDATE menu_auth_session SET is_revoked = TRUE WHERE token_hash = :token"
                 ),
                 {"token": token_hash(old_token)},
             )
         await session.execute(
             text(
-                "INSERT INTO menu_auth_session (account_id, token_hash, expires_at, is_revoked) VALUES (:id, :token, :expires, 0)"
+                "INSERT INTO menu_auth_session (account_id, token_hash, expires_at, is_revoked) VALUES (:id, :token, :expires, FALSE)"
             ),
             {
                 "id": account["id"],
@@ -257,7 +263,7 @@ async def revoke_session(token: str) -> None:
     async with rx.asession() as session:
         await session.execute(
             text(
-                "UPDATE menu_auth_session SET is_revoked = 1 WHERE token_hash = :token"
+                "UPDATE menu_auth_session SET is_revoked = TRUE WHERE token_hash = :token"
             ),
             {"token": token_hash(token)},
         )
@@ -292,11 +298,15 @@ async def toggle_setting(token: str, key: str) -> dict[str, bool]:
         await session.execute(
             text("""
             INSERT INTO menu_setting (navigation_key, enabled, updated_at, updated_by_account_id)
-            VALUES (:key, 0, :now, :account)
+            VALUES (:key, FALSE, :now, :account)
             ON CONFLICT(navigation_key) DO UPDATE SET enabled = NOT menu_setting.enabled,
                 updated_at = :now, updated_by_account_id = :account
         """),
-            {"key": key, "now": now_string(), "account": account["id"]},
+            {
+                "key": key,
+                "now": session_timestamp(session, dt.datetime.now(dt.UTC)),
+                "account": account["id"],
+            },
         )
         rows = (
             await session.execute(
