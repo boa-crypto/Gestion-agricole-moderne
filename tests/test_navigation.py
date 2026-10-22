@@ -29,6 +29,7 @@ EXPECTED_ROUTES = {
     "/guide",
     "/administration",
     "/audit",
+    "/configuration",
 }
 
 
@@ -113,7 +114,6 @@ def test_only_real_destinations_and_explicit_upcoming_categories():
     assert {item["key"] for item in COCKPITS if not item["available"]} == {
         "infrastructures",
         "elevage",
-        "configuration",
     }
     assert len(ENTRY_BY_KEY) == len(NAVIGATION)
     available = {item["key"] for item in COCKPITS if item["available"]}

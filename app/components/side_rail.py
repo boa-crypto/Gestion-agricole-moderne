@@ -3,6 +3,7 @@ import reflex as rx
 from app.states.navigation_state import NavigationState
 from app.components.guide_help import guide_help_panel
 from app.states.help_state import HelpState
+from app.components.menu_auth import account_controls
 
 
 def _cockpit_item(item, compact: bool = False) -> rx.Component:
@@ -217,8 +218,16 @@ def side_rail(active: str) -> rx.Component:
                 aria_label="AgriPro — cockpit global",
                 class_name="flex items-center gap-3 p-3 mb-3 focus-visible:outline-2 focus-visible:outline-lime-300",
             ),
-            _persistent_link("Cockpit global", "/", "house"),
-            _persistent_link("Recherche globale", "/recherche", "search"),
+            rx.cond(
+                NavigationState.global_visible,
+                _persistent_link("Cockpit global", "/", "house"),
+                rx.fragment(),
+            ),
+            rx.cond(
+                NavigationState.search_visible,
+                _persistent_link("Recherche globale", "/recherche", "search"),
+                rx.fragment(),
+            ),
             rx.el.nav(
                 rx.foreach(
                     NavigationState.cockpits,
@@ -249,27 +258,49 @@ def side_rail(active: str) -> rx.Component:
                     title="Ouvrir ou fermer les domaines du cockpit",
                     class_name="rounded-xl border border-white/10 bg-white/5 p-2.5 text-xs text-emerald-50 flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-lime-300",
                 ),
-                rx.el.a(
-                    rx.icon("house", class_name="h-4 w-4"),
-                    href="/",
-                    title="Cockpit global",
-                    aria_label="Cockpit global",
-                    class_name="ml-auto rounded-xl border border-white/10 bg-white/5 p-2.5 text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
+                rx.cond(
+                    NavigationState.global_visible,
+                    rx.el.a(
+                        rx.icon("house", class_name="h-4 w-4"),
+                        href="/",
+                        title="Cockpit global",
+                        aria_label="Cockpit global",
+                        class_name="ml-auto rounded-xl border border-white/10 bg-white/5 p-2.5 text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
+                    ),
+                    rx.fragment(),
                 ),
-                rx.el.a(
-                    rx.icon("search", class_name="h-4 w-4"),
-                    href="/recherche",
-                    title="Recherche globale",
-                    aria_label="Recherche globale",
-                    class_name="rounded-xl border border-white/10 bg-white/5 p-2.5 text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
+                rx.cond(
+                    NavigationState.search_visible,
+                    rx.el.a(
+                        rx.icon("search", class_name="h-4 w-4"),
+                        href="/recherche",
+                        title="Recherche globale",
+                        aria_label="Recherche globale",
+                        class_name="rounded-xl border border-white/10 bg-white/5 p-2.5 text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
+                    ),
+                    rx.fragment(),
                 ),
+                account_controls(),
                 class_name="flex items-center gap-2 w-full",
             ),
+            rx.cond(
+                NavigationState.navigation_error != "",
+                rx.el.p(
+                    NavigationState.navigation_error,
+                    role="alert",
+                    class_name="mt-3 text-xs text-amber-200",
+                ),
+                rx.fragment(),
+            ),
             rx.el.nav(
-                rx.el.a(
-                    "AgriPro",
-                    href="/",
-                    class_name="text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
+                rx.cond(
+                    NavigationState.global_visible,
+                    rx.el.a(
+                        "AgriPro",
+                        href="/",
+                        class_name="text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
+                    ),
+                    rx.el.span("AgriPro", class_name="text-lime-300"),
                 ),
                 rx.icon(
                     "chevron-right", class_name="h-3 w-3 text-emerald-100/40"

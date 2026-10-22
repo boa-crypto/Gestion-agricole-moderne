@@ -16,6 +16,7 @@ from app.pages.audit import audit_page
 from app.pages.cartography import cartography_page
 from app.pages.catalog import catalog_page
 from app.pages.crm import crm_page
+from app.pages.configuration import configuration_page
 from app.pages.employees import employees_page
 from app.pages.expenses import expenses_page
 from app.pages.guide import guide_page
@@ -122,6 +123,12 @@ app.add_page(
         ContourState.load_contours,
         CatalogState.load_catalog,
     ],
+)
+app.add_page(
+    configuration_page,
+    route="/configuration",
+    title="Configuration des menus — AgriPro",
+    on_load=[NavigationState.enter_page("configuration")],
 )
 app.add_page(
     parcels_page,

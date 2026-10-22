@@ -141,8 +141,8 @@ COCKPITS: list[Cockpit] = [
         "key": "configuration",
         "label": "Configuration",
         "icon": "settings",
-        "available": False,
-        "note": "À venir — aucune page dédiée.",
+        "available": True,
+        "note": "Configuration des menus — réservée à l’administrateur.",
     },
 ]
 
@@ -181,6 +181,15 @@ def _entry(
 
 
 NAVIGATION: list[NavigationEntry] = [
+    _entry(
+        "configuration.menus",
+        "configuration",
+        "/configuration",
+        "configuration",
+        "Navigation",
+        "Configuration des menus",
+        "settings",
+    ),
     _entry(
         "global.overview",
         "cockpit",
@@ -497,6 +506,7 @@ NAVIGATION: list[NavigationEntry] = [
 ]
 
 PRIMARY_KEYS: dict[str, str] = {
+    "configuration": "configuration.menus",
     "cockpit": "global.overview",
     "parcelles": "agricole.parcelles",
     "referentiel": "agricole.referentiel",

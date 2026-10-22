@@ -1,6 +1,7 @@
 
-reflex[db]==0.9.12
+reflex[db]==0.10.0
 aiosqlite>=0.20.0
 reflex-enterprise>=0.9.7
 requests
 pillow
+psycopg[binary]>=3.1.8
