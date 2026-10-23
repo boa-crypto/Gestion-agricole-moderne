@@ -100,12 +100,15 @@ class LocalRights(TypedDict):
 
 
 def validate_policy_key(key: str) -> bool:
+    if not isinstance(key, str) or len(key) > 200:
+        return False
     parts = key.split(":")
     if len(parts) < 4 or parts[0] != "policy":
         return False
     if parts[1] == "account":
         if (
-            not parts[2].isascii()
+            len(parts[2]) > 19
+            or not parts[2].isascii()
             or not parts[2].isdigit()
             or str(int(parts[2])) != parts[2]
             or int(parts[2]) < 1

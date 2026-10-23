@@ -91,6 +91,13 @@ class NavigationState(rx.State):
                 auth.permissions = policy["permissions"]
                 auth.allowed_crm_tabs = policy["crm_tabs"]
                 auth.admin = policy["admin"]
+                if not auth.admin:
+                    from app.states.menu_configuration_state import (
+                        MenuConfigurationState,
+                    )
+
+                    config = await self.get_state(MenuConfigurationState)
+                    config._clear_sensitive()
                 auth.has_modules = bool(policy["navigation"])
                 auth.page_allowed = any(
                     entry["key"] == auth.requested_entry
@@ -110,6 +117,20 @@ class NavigationState(rx.State):
                 auth.allowed_crm_tabs = []
                 auth.page_allowed = False
                 auth.has_modules = False
+                auth.admin = False
+                if isinstance(e, PermissionError):
+                    auth.authenticated = False
+                    auth.email = ""
+                    auth.token = ""
+                    auth.error = (
+                        "Votre session a expiré. Veuillez vous reconnecter."
+                    )
+                from app.states.menu_configuration_state import (
+                    MenuConfigurationState,
+                )
+
+                config = await self.get_state(MenuConfigurationState)
+                config._clear_sensitive()
                 auth.ready = True
                 self.navigation_error = (
                     "Navigation indisponible. Réessayez en changeant de page."

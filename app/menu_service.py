@@ -274,16 +274,13 @@ async def read_settings(
     await ensure_menu_database()
     async with menu_session() as session:
         if require_admin:
-            from app.menu_policy import policy_in_session
+            from app.menu_policy_admin import require_configuration
 
-            account = await account_in_session(session, token)
-            policy = await policy_in_session(session, account)
-            if not policy["admin"]:
-                raise PermissionError("Droit de configuration requis.")
+            await require_configuration(session, token)
         rows = (
             await session.execute(
                 text(
-                    "SELECT navigation_key, enabled FROM menu_setting WHERE navigation_key NOT LIKE 'policy:%'"
+                    "SELECT navigation_key, enabled FROM menu_setting WHERE navigation_key NOT LIKE '%:%'"
                 )
             )
         ).all()
@@ -295,37 +292,7 @@ async def read_settings(
 
 
 async def toggle_setting(token: str, key: str) -> dict[str, bool]:
-    await ensure_menu_database()
-    async with menu_session() as session:
-        await lock_menu_transaction(session)
-        from app.menu_policy import policy_in_session
+    from app.menu_policy_admin import edit_policy
 
-        account = await account_in_session(session, token)
-        policy = await policy_in_session(session, account)
-        if not policy["admin"]:
-            raise PermissionError("Droit de configuration requis.")
-        allowed = {row["key"] for row in menu_catalog({})}
-        if key not in allowed or key in PROTECTED_KEYS:
-            raise ValueError("Ce menu ne peut pas être modifié.")
-        await session.execute(
-            text("""
-            INSERT INTO menu_setting (navigation_key, enabled, updated_at, updated_by_account_id)
-            VALUES (:key, FALSE, :now, :account)
-            ON CONFLICT(navigation_key) DO UPDATE SET enabled = NOT menu_setting.enabled,
-                updated_at = :now, updated_by_account_id = :account
-        """),
-            {
-                "key": key,
-                "now": session_timestamp(session, dt.datetime.now(dt.UTC)),
-                "account": account["id"],
-            },
-        )
-        rows = (
-            await session.execute(
-                text(
-                    "SELECT navigation_key, enabled FROM menu_setting WHERE navigation_key NOT LIKE 'policy:%'"
-                )
-            )
-        ).all()
-        await session.commit()
-    return {str(row[0]): bool(row[1]) for row in rows}
+    await edit_policy(token, key, "toggle")
+    return await read_settings(token, require_admin=True)

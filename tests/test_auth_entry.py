@@ -11,6 +11,7 @@ from app.auth_dispatch import safe_destination
 from app.navigation import ROUTE_MATRIX
 from app.states.menu_auth_state import MenuAuthState
 from app.states.navigation_state import NavigationState
+from app.states.menu_configuration_state import MenuConfigurationState
 from app.menu_policy import evaluate_policy
 
 
@@ -55,6 +56,7 @@ def context(token=""):
         allowed_crm_tabs=[],
         has_modules=False,
         nav=NavigationState(),
+        config=MenuConfigurationState(),
     )
 
 
@@ -195,9 +197,9 @@ class EntryTests(unittest.IsolatedAsyncioTestCase):
         state.authenticated = True
         state.nav.cockpits = [{"key": "global"}]
         state.nav.visible_navigation = [{"key": "global.overview"}]
-        state.config = SimpleNamespace(
-            rows=[1], allowed=True, error="", notice="", _generation=0
-        )
+        state.config.allowed = True
+        state.config.error = ""
+        state.config.notice = ""
         with patch(
             "app.states.menu_auth_state.revoke_session", new_callable=AsyncMock
         ) as revoke:

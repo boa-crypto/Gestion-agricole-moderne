@@ -223,7 +223,7 @@ app.add_page(
 app.add_page(
     lambda: guarded_page(configuration_page(), "/configuration"),
     route="/configuration",
-    title="Configuration des menus — AgriPro",
+    title="Configuration & accès — AgriPro",
     on_load=NavigationState.enter_page("configuration"),
 )
 app.add_page(

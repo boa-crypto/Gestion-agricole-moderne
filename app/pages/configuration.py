@@ -1,7 +1,7 @@
 import reflex as rx
 
 from app.components.menu_auth import login_panel
-from app.components.menu_configuration import menu_configuration_panel
+from app.components.menu_policy_admin import configuration_administration
 from app.components.side_rail import side_rail
 from app.states.menu_auth_state import MenuAuthState
 from app.states.menu_configuration_state import MenuConfigurationState
@@ -12,15 +12,15 @@ def configuration_page() -> rx.Component:
         rx.el.div(
             side_rail("configuration"),
             rx.el.h1(
-                "Configuration des menus",
+                "Configuration & accès",
                 class_name="font-['Instrument_Serif'] text-4xl sm:text-5xl text-emerald-50",
             ),
             rx.el.p(
-                "Personnalisez les cockpits et leurs sous-menus. Les routes directes et les permissions métier restent inchangées.",
+                "Administrez les menus, les rôles et les comptes connectés. Consultez les droits effectifs et le journal des modifications.",
                 class_name="mt-3 text-sm text-emerald-100/80",
             ),
             rx.el.p(
-                "Désactiver un cockpit masque ses enfants sans modifier leurs réglages. La Configuration reste toujours activée.",
+                "Les refus sont prioritaires. La Configuration reste activée et au moins un administrateur doit conserver son accès.",
                 class_name="mt-2 text-sm text-amber-200",
             ),
             rx.cond(
@@ -58,7 +58,7 @@ def configuration_page() -> rx.Component:
                         MenuAuthState.authenticated,
                         rx.cond(
                             MenuConfigurationState.allowed,
-                            menu_configuration_panel(),
+                            configuration_administration(),
                             rx.el.section(
                                 rx.icon(
                                     "shield",
@@ -69,7 +69,7 @@ def configuration_page() -> rx.Component:
                                     class_name="mt-3 font-['Instrument_Serif'] text-3xl text-emerald-50",
                                 ),
                                 rx.el.p(
-                                    "Votre compte lecteur ne peut ni consulter ni modifier les réglages des menus.",
+                                    "Votre session est valide, mais les droits de configuration requis ne sont pas accordés à votre compte.",
                                     class_name="mt-3 text-sm text-emerald-100/80",
                                 ),
                                 class_name="w-full rounded-2xl border border-amber-300/20 bg-[#071c13] p-6",

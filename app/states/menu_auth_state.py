@@ -106,6 +106,13 @@ class MenuAuthState(rx.State):
                 self._verified_token = token
                 self.verified_path = ROUTE_MATRIX[page]["route"]
                 self.error = ""
+            if isinstance(result, Exception) or not self.admin:
+                from app.states.menu_configuration_state import (
+                    MenuConfigurationState,
+                )
+
+                config = await self.get_state(MenuConfigurationState)
+                config._clear_sensitive()
         if isinstance(result, Exception):
             if isinstance(result, PermissionError) and page != "cockpit":
                 yield rx.redirect("/")
@@ -149,6 +156,12 @@ class MenuAuthState(rx.State):
                 if isinstance(result, PermissionError):
                     self.token = ""
                 self.ready = True
+                from app.states.menu_configuration_state import (
+                    MenuConfigurationState,
+                )
+
+                config = await self.get_state(MenuConfigurationState)
+                config._clear_sensitive()
             else:
                 nav = await self.get_state(NavigationState)
                 nav._apply_policy(result)
@@ -160,6 +173,13 @@ class MenuAuthState(rx.State):
                     entry["key"] == self.requested_entry
                     for entry in result["navigation"]
                 )
+                if not self.admin:
+                    from app.states.menu_configuration_state import (
+                        MenuConfigurationState,
+                    )
+
+                    config = await self.get_state(MenuConfigurationState)
+                    config._clear_sensitive()
                 if not self.page_allowed:
                     self._pending_loader = ""
                     return
@@ -237,6 +257,13 @@ class MenuAuthState(rx.State):
             self.has_modules = bool(account.get("navigation", []))
             self.page_allowed = False
             self.ready = True
+            if not self.admin:
+                from app.states.menu_configuration_state import (
+                    MenuConfigurationState,
+                )
+
+                config = await self.get_state(MenuConfigurationState)
+                config._clear_sensitive()
         from app.states.menu_configuration_state import MenuConfigurationState
 
         yield MenuConfigurationState.load_configuration
@@ -327,11 +354,8 @@ class MenuAuthState(rx.State):
             nav.current_key = "global.overview"
             nav.selected_cockpit = "global"
             config = await self.get_state(MenuConfigurationState)
-            config.rows = []
-            config.allowed = False
+            config._clear_sensitive()
             config.error = ""
-            config.notice = ""
-            config._generation += 1
         try:
             await revoke_session(token)
         except Exception as e:

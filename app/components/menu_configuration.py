@@ -130,7 +130,7 @@ def menu_configuration_panel() -> rx.Component:
                     id="menu-search",
                     placeholder="Ex. récoltes, agricole.parcelles…",
                     default_value=MenuConfigurationState.search,
-                    on_change=MenuConfigurationState.set_search,
+                    on_change=MenuConfigurationState.set_search.debounce(500),
                     class_name="min-w-0 flex-1 rounded-xl border border-white/20 bg-[#04120c] px-4 py-3 text-sm text-emerald-50 focus-visible:outline-2 focus-visible:outline-lime-300",
                 ),
                 rx.el.button(

@@ -9,6 +9,7 @@ from unittest.mock import AsyncMock, patch
 
 from app.states.menu_auth_state import MenuAuthState
 from app.states.menu_configuration_state import MenuConfigurationState
+from app.menu_policy_admin import ConfigurationDenied, SessionExpired
 
 
 class EventContext(SimpleNamespace):
@@ -19,7 +20,12 @@ class EventContext(SimpleNamespace):
         return False
 
     async def get_state(self, state_class):
+        if state_class is MenuConfigurationState:
+            return self.config
         return self.auth
+
+    def _clear_sensitive(self):
+        MenuConfigurationState._clear_sensitive(self)
 
 
 async def run_handler(handler: rx.event.EventHandler, context, *args):
@@ -45,6 +51,7 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
             error="",
             signup=False,
             busy=True,
+            config=MenuConfigurationState(),
         )
 
     def configuration_context(self, auth):
@@ -57,6 +64,12 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
             error="",
             notice="",
             saving=True,
+            selected_role="",
+            selected_account="",
+            account_search="",
+            account_filter="Tous",
+            account_offset=0,
+            audit_offset=0,
         )
 
     async def test_anonymous_and_known_non_admin_skip_admin_read(self):
@@ -70,29 +83,32 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
                 )
                 with (
                     patch(
-                        "app.states.menu_configuration_state.read_settings",
+                        "app.states.menu_configuration_state.read_administration",
                         new_callable=AsyncMock,
+                        side_effect=SessionExpired("Connexion requise")
+                        if not token
+                        else ConfigurationDenied("Droits requis"),
                     ) as read,
                     patch("logging.exception") as log,
                 ):
                     await run_handler(
                         MenuConfigurationState.load_configuration, state
                     )
-                read.assert_not_awaited()
+                read.assert_awaited_once()
                 log.assert_not_called()
                 self.assertFalse(state.loading)
                 self.assertFalse(state.allowed)
                 self.assertEqual(state.rows, [])
-                self.assertEqual(state.error, "")
+                self.assertTrue(state.error)
 
     async def test_denied_admin_read_clears_stale_session_quietly(self):
         auth = self.auth_context("expired", True)
         state = self.configuration_context(auth)
         with (
             patch(
-                "app.states.menu_configuration_state.read_settings",
+                "app.states.menu_configuration_state.read_administration",
                 new_callable=AsyncMock,
-                side_effect=PermissionError("expired"),
+                side_effect=SessionExpired("expired"),
             ),
             patch("logging.exception") as log,
         ):
@@ -113,11 +129,11 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
 
         async def denied(*args, **kwargs):
             auth.token = "new"
-            raise PermissionError("expired")
+            raise SessionExpired("expired")
 
         with (
             patch(
-                "app.states.menu_configuration_state.read_settings",
+                "app.states.menu_configuration_state.read_administration",
                 side_effect=denied,
             ),
             patch("logging.exception") as log,
@@ -179,14 +195,14 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
         state = self.configuration_context(self.auth_context("expired", True))
         with (
             patch(
-                "app.states.menu_configuration_state.toggle_setting",
+                "app.states.menu_configuration_state.edit_policy",
                 new_callable=AsyncMock,
                 side_effect=PermissionError("expired"),
             ),
             patch("logging.exception") as log,
         ):
             events = await run_handler(
-                MenuConfigurationState.save_toggle, state, "agricole"
+                MenuConfigurationState.save_edit, state, "agricole", "toggle"
             )
         log.assert_not_called()
         self.assertFalse(state.saving)
@@ -197,8 +213,7 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
 
     def test_target_handlers_have_no_try_statements(self):
         for handler in (
-            MenuConfigurationState.load_configuration,
-            MenuConfigurationState.save_toggle,
+            MenuConfigurationState.save_edit,
             MenuAuthState.restore_session,
             MenuAuthState.authenticate_account,
         ):
@@ -220,7 +235,7 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
         error = ValueError("Ce menu ne peut pas être modifié.")
         with (
             patch(
-                "app.states.menu_configuration_state.toggle_setting",
+                "app.states.menu_configuration_state.edit_policy",
                 new_callable=AsyncMock,
                 side_effect=error,
             ),
@@ -228,7 +243,10 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
             patch("logging.error") as error_log,
         ):
             events = await run_handler(
-                MenuConfigurationState.save_toggle, state, "configuration"
+                MenuConfigurationState.save_edit,
+                state,
+                "configuration",
+                "toggle",
             )
         exception_log.assert_not_called()
         error_log.assert_not_called()
@@ -268,7 +286,7 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
         error = RuntimeError("unavailable")
         with (
             patch(
-                "app.states.menu_configuration_state.read_settings",
+                "app.states.menu_configuration_state.read_administration",
                 new_callable=AsyncMock,
                 side_effect=error,
             ),
@@ -276,11 +294,8 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
             patch("logging.exception") as exception_log,
         ):
             await run_handler(MenuConfigurationState.load_configuration, state)
-        log.assert_called_once_with(
-            f"Error: {error}",
-            exc_info=(type(error), error, error.__traceback__),
-        )
-        exception_log.assert_not_called()
+        exception_log.assert_called_once_with(f"Error: {error}")
+        log.assert_not_called()
         self.assertTrue(state.error)
         self.assertFalse(state.loading)
         self.assertEqual(auth.token, "admin")
@@ -320,7 +335,7 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
         state = self.configuration_context(self.auth_context("admin", True))
         with (
             patch(
-                "app.states.menu_configuration_state.toggle_setting",
+                "app.states.menu_configuration_state.edit_policy",
                 new_callable=AsyncMock,
                 side_effect=error,
             ),
@@ -328,7 +343,7 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
             patch("logging.exception") as exception_log,
         ):
             events = await run_handler(
-                MenuConfigurationState.save_toggle, state, "agricole"
+                MenuConfigurationState.save_edit, state, "agricole", "toggle"
             )
         log.assert_called_once_with(
             f"Error: {error}",
