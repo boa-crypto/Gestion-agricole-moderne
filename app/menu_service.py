@@ -54,7 +54,7 @@ def menu_catalog(overrides: dict[str, bool]) -> list[MenuRow]:
         if not cockpit["available"]:
             continue
         key = cockpit["key"]
-        enabled = key in PROTECTED_KEYS or overrides.get(key, True)
+        enabled = overrides.get(key, True)
         rows.append(
             {
                 "key": key,
@@ -68,9 +68,7 @@ def menu_catalog(overrides: dict[str, bool]) -> list[MenuRow]:
         )
         for entry in NAVIGATION:
             if entry["cockpit"] == key:
-                individual = entry["key"] in PROTECTED_KEYS or overrides.get(
-                    entry["key"], True
-                )
+                individual = overrides.get(entry["key"], True)
                 rows.append(
                     {
                         "key": entry["key"],
@@ -276,22 +274,36 @@ async def read_settings(
     await ensure_menu_database()
     async with menu_session() as session:
         if require_admin:
-            await account_in_session(session, token, admin=True)
+            from app.menu_policy import policy_in_session
+
+            account = await account_in_session(session, token)
+            policy = await policy_in_session(session, account)
+            if not policy["admin"]:
+                raise PermissionError("Droit de configuration requis.")
         rows = (
             await session.execute(
                 text(
-                    "SELECT navigation_key, enabled FROM menu_setting LIMIT 10000"
+                    "SELECT navigation_key, enabled FROM menu_setting WHERE navigation_key NOT LIKE 'policy:%'"
                 )
             )
         ).all()
-    return {str(row[0]): bool(row[1]) for row in rows}
+    from app.menu_policy import GLOBAL_KEYS
+
+    return {
+        str(row[0]): bool(row[1]) for row in rows if str(row[0]) in GLOBAL_KEYS
+    }
 
 
 async def toggle_setting(token: str, key: str) -> dict[str, bool]:
     await ensure_menu_database()
     async with menu_session() as session:
         await lock_menu_transaction(session)
-        account = await account_in_session(session, token, admin=True)
+        from app.menu_policy import policy_in_session
+
+        account = await account_in_session(session, token)
+        policy = await policy_in_session(session, account)
+        if not policy["admin"]:
+            raise PermissionError("Droit de configuration requis.")
         allowed = {row["key"] for row in menu_catalog({})}
         if key not in allowed or key in PROTECTED_KEYS:
             raise ValueError("Ce menu ne peut pas être modifié.")
@@ -311,7 +323,7 @@ async def toggle_setting(token: str, key: str) -> dict[str, bool]:
         rows = (
             await session.execute(
                 text(
-                    "SELECT navigation_key, enabled FROM menu_setting LIMIT 10000"
+                    "SELECT navigation_key, enabled FROM menu_setting WHERE navigation_key NOT LIKE 'policy:%'"
                 )
             )
         ).all()

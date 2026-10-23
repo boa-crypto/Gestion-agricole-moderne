@@ -157,8 +157,7 @@ class MenuConfigurationState(rx.State):
                         "Modification enregistrée. Navigation mise à jour."
                     )
                     self.error = ""
-                    nav = await self.get_state(NavigationState)
-                    nav._apply_settings(result)
+            yield NavigationState.refresh_navigation
             yield rx.toast("Modification enregistrée.")
         async with self:
             self.saving = False

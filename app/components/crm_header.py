@@ -2,6 +2,7 @@ import reflex as rx
 
 from app.components.guide_help import help_button
 from app.states.crm_state import CrmState, Tab
+from app.states.menu_auth_state import MenuAuthState
 
 
 def _pill(icon: str, label: rx.Var | str) -> rx.Component:
@@ -42,7 +43,14 @@ def _tab(item: Tab) -> rx.Component:
 
 def crm_tabs() -> rx.Component:
     return rx.el.nav(
-        rx.foreach(CrmState.tabs, lambda item: _tab(item)),
+        rx.foreach(
+            CrmState.tabs,
+            lambda item: rx.cond(
+                MenuAuthState.allowed_crm_tabs.contains(item["key"]),
+                _tab(item),
+                rx.fragment(),
+            ),
+        ),
         aria_label="Navigation CRM",
         class_name="flex flex-wrap items-center gap-2 w-full",
     )

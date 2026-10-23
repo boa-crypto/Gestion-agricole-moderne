@@ -1092,7 +1092,9 @@ class CrmState(rx.State):
 
     @rx.event
     def set_tab(self, value: str):
-        self.active_tab = value
+        from app.states.navigation_state import NavigationState
+
+        return NavigationState.select_crm_tab(value)
 
     @rx.event
     async def set_search(self, value: str):

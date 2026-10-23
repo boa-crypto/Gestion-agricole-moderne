@@ -1,6 +1,7 @@
 import reflex as rx
 
 from app.states.menu_auth_state import MenuAuthState
+from app.states.navigation_state import NavigationState
 
 
 def account_controls() -> rx.Component:
@@ -22,7 +23,7 @@ def account_controls() -> rx.Component:
             ),
             rx.el.a(
                 "Connexion",
-                href="/configuration",
+                href="/",
                 class_name="rounded-xl border border-lime-300/25 bg-lime-300/10 px-3 py-2 text-xs text-lime-200 focus-visible:outline-2 focus-visible:outline-lime-300",
             ),
         ),
@@ -41,7 +42,7 @@ def login_panel() -> rx.Component:
             class_name="font-['Instrument_Serif'] text-3xl text-emerald-50",
         ),
         rx.el.p(
-            "Le premier compte créé devient administrateur des menus. Les comptes suivants sont lecteurs.",
+            "Connectez-vous pour accéder à votre exploitation. La session est vérifiée avant tout chargement métier.",
             class_name="mt-3 text-sm text-emerald-100/80",
         ),
         rx.el.form(
@@ -120,4 +121,125 @@ def login_panel() -> rx.Component:
             class_name="mt-5 rounded-lg py-2 text-sm text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
         ),
         class_name="w-full max-w-xl rounded-3xl border border-lime-300/20 bg-[#071c13] p-6 sm:p-8",
+    )
+
+
+def authentication_shell() -> rx.Component:
+    return rx.el.main(
+        rx.el.div(
+            rx.el.div(
+                rx.icon("leaf", class_name="h-8 w-8 text-[#a3e635]"),
+                rx.el.h1(
+                    "AgriPro",
+                    class_name="font-['Instrument_Serif'] text-5xl text-emerald-50",
+                ),
+                class_name="mb-8 flex items-center justify-center gap-3",
+            ),
+            rx.cond(
+                ~MenuAuthState.ready,
+                rx.el.section(
+                    rx.el.p(
+                        "Vérification de votre session…",
+                        role="status",
+                        class_name="text-emerald-100 text-base",
+                    ),
+                    rx.el.div(
+                        class_name="mt-5 h-2 w-full animate-pulse rounded-full bg-[#a3e635]/30"
+                    ),
+                    class_name="w-full max-w-xl rounded-3xl border border-lime-300/20 bg-[#071c13] p-8",
+                ),
+                rx.cond(
+                    (MenuAuthState.error != "") & (MenuAuthState.token != ""),
+                    rx.el.section(
+                        rx.el.h2(
+                            "Vérification indisponible",
+                            class_name="font-['Instrument_Serif'] text-3xl text-emerald-50",
+                        ),
+                        rx.el.p(
+                            MenuAuthState.error,
+                            role="alert",
+                            class_name="mt-4 text-sm text-amber-200",
+                        ),
+                        rx.el.button(
+                            "Réessayer",
+                            on_click=MenuAuthState.retry_page,
+                            class_name="mt-6 rounded-xl bg-[#a3e635] px-4 py-3 font-semibold text-[#04120c] focus-visible:outline-2 focus-visible:outline-amber-300",
+                        ),
+                        rx.el.button(
+                            "Déconnexion",
+                            on_click=MenuAuthState.logout,
+                            disabled=MenuAuthState.busy,
+                            class_name="ml-3 mt-6 rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-emerald-50 focus-visible:outline-2 focus-visible:outline-lime-300 disabled:opacity-50",
+                        ),
+                        class_name="w-full max-w-xl rounded-3xl border border-amber-300/25 bg-[#071c13] p-8",
+                    ),
+                    login_panel(),
+                ),
+            ),
+            class_name="mx-auto flex w-full max-w-2xl flex-col items-center px-4 py-12 sm:py-20",
+        ),
+        class_name="min-h-dvh w-full bg-[#04120c] font-['Inter'] text-emerald-50 antialiased",
+    )
+
+
+def no_module_panel() -> rx.Component:
+    return rx.el.main(
+        rx.el.section(
+            rx.icon("leaf", class_name="h-9 w-9 text-[#a3e635]"),
+            rx.el.h1(
+                "AgriPro",
+                class_name="mt-4 font-['Instrument_Serif'] text-4xl text-emerald-50",
+            ),
+            rx.el.h2(
+                rx.cond(
+                    MenuAuthState.has_modules,
+                    "Destination non accessible",
+                    "Aucun module accessible",
+                ),
+                class_name="mt-6 text-xl font-semibold text-emerald-50",
+            ),
+            rx.el.p(
+                rx.cond(
+                    MenuAuthState.has_modules,
+                    "Cette destination n’est pas disponible avec vos droits actuels. Choisissez un accès autorisé ci-dessous.",
+                    "Votre compte est connecté, mais aucun module n’est activé pour vous. Contactez le responsable des accès de votre exploitation.",
+                ),
+                role="status",
+                class_name="mt-3 text-sm text-emerald-100/80",
+            ),
+            rx.el.nav(
+                rx.foreach(
+                    NavigationState.visible_navigation,
+                    lambda entry: rx.el.a(
+                        rx.icon(
+                            entry["icon"], class_name="h-4 w-4 text-lime-300"
+                        ),
+                        entry["label"],
+                        href=entry["href"],
+                        class_name="flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-emerald-50 focus-visible:outline-2 focus-visible:outline-lime-300 hover:border-lime-300/40",
+                    ),
+                ),
+                aria_label="Destinations autorisées",
+                class_name="mt-6 flex flex-col gap-2",
+            ),
+            rx.el.button(
+                "Vérifier à nouveau mes accès",
+                on_click=MenuAuthState.retry_page,
+                class_name="mt-6 rounded-xl bg-[#a3e635] px-4 py-3 font-semibold text-[#04120c] focus-visible:outline-2 focus-visible:outline-amber-300",
+            ),
+            rx.el.div(account_controls(), class_name="mt-5"),
+            class_name="mx-auto w-full max-w-2xl rounded-3xl border border-lime-300/20 bg-[#071c13] p-6 sm:p-10",
+        ),
+        class_name="min-h-dvh w-full bg-[#04120c] px-4 py-12 font-['Inter'] text-emerald-50",
+    )
+
+
+def guarded_page(content: rx.Component, route: str) -> rx.Component:
+    return rx.cond(
+        MenuAuthState.ready
+        & MenuAuthState.authenticated
+        & (MenuAuthState.verified_path == route)
+        & (MenuAuthState.router.url.path == route),
+        rx.cond(MenuAuthState.page_allowed, content, no_module_panel()),
+        authentication_shell(),
     )

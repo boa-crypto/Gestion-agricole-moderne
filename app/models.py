@@ -10,15 +10,19 @@ import datetime
 import enum
 
 from sqlalchemy import (
+    Boolean,
     CheckConstraint,
     Date,
     DateTime,
     Enum,
     ForeignKey,
+    Index,
     Numeric,
     String,
     Text,
     UniqueConstraint,
+    column,
+    event,
     false,
     func,
     true,
@@ -30,6 +34,14 @@ from sqlalchemy.orm import (
     mapped_column,
     relationship,
     validates,
+)
+
+
+from app.access_reference import (
+    ACCESS_MODULES,
+    ROLES,
+    ROLE_MATRIX,
+    permission_key,
 )
 
 

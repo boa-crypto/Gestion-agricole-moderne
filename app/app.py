@@ -2,6 +2,9 @@ import reflex as rx
 import reflex_enterprise as rxe
 
 from app.menu_database import menu_database_lifespan
+from app.auth_dispatch import register_loaders
+from app.components.menu_auth import guarded_page
+from app.states.menu_configuration_state import MenuConfigurationState
 from app.components.alerts_panel import alerts_panel
 from app.components.calendar_panel import calendar_panel
 from app.components.cockpit_header import cockpit_header
@@ -54,7 +57,7 @@ from app.states.weather_state import WeatherState
 from app.states.navigation_state import NavigationState
 
 
-def index() -> rx.Component:
+def cockpit_content() -> rx.Component:
     return rx.el.main(
         rx.el.div(
             class_name="pointer-events-none fixed inset-0 z-0 bg-gradient-to-b from-[#04120c]/35 via-[#04120c]/45 to-[#020a07]/60",
@@ -89,6 +92,106 @@ def index() -> rx.Component:
     )
 
 
+def index() -> rx.Component:
+    return guarded_page(cockpit_content(), "/")
+
+
+register_loaders(
+    "cockpit",
+    NavigationState.refresh_navigation,
+    DashboardState.load_dashboard,
+    WeatherState.load_weather,
+    GuideState.load_guide,
+    RemediationState.load_remediation,
+    StockState.load_stocks,
+    ContourState.load_contours,
+    CatalogState.load_catalog,
+)
+register_loaders(
+    "configuration",
+    NavigationState.refresh_navigation,
+    MenuConfigurationState.load_configuration,
+)
+register_loaders(
+    "parcelles",
+    NavigationState.refresh_navigation,
+    ParcelsState.load_space,
+    CatalogState.load_catalog,
+    PhenologyState.load_phenology,
+)
+register_loaders(
+    "referentiel",
+    NavigationState.refresh_navigation,
+    CatalogBrowserState.load_referentiel,
+)
+register_loaders(
+    "phenologie",
+    NavigationState.refresh_navigation,
+    PhenologyAdminState.load_admin,
+)
+register_loaders(
+    "traitements",
+    NavigationState.refresh_navigation,
+    OperationsState.load_operations,
+    RemediationState.load_remediation,
+    StockState.load_stocks,
+)
+register_loaders(
+    "employes",
+    NavigationState.refresh_navigation,
+    EmployeesState.load_workforce,
+)
+register_loaders(
+    "maintenance",
+    NavigationState.refresh_navigation,
+    MaintenanceState.load_fleet,
+)
+register_loaders(
+    "cartographie",
+    NavigationState.refresh_navigation,
+    CartographyState.load_map,
+    ContourState.load_contours,
+    RemediationState.load_remediation,
+    PhenologyOpsState.load_operational,
+)
+register_loaders(
+    "rapports",
+    NavigationState.refresh_navigation,
+    PhenologyOpsState.load_operational,
+)
+register_loaders(
+    "charges", NavigationState.refresh_navigation, ExpensesState.load_expenses
+)
+register_loaders("crm", NavigationState.refresh_navigation, CrmState.load_crm)
+register_loaders(
+    "recherche",
+    NavigationState.refresh_navigation,
+    SearchState.load_search,
+    PhenologySearchState.load_index,
+)
+register_loaders(
+    "guide",
+    NavigationState.refresh_navigation,
+    GuideState.load_guide,
+    GuideAdminState.load_admin,
+)
+register_loaders(
+    "administration",
+    NavigationState.refresh_navigation,
+    AdministrationState.load_administration,
+)
+register_loaders(
+    "audit",
+    NavigationState.refresh_navigation,
+    AuditState.load_audit,
+    ContourState.load_contours,
+    RemediationState.load_remediation,
+    StockState.load_stocks,
+    PhenologyOpsState.load_operational,
+    SecurityAuditState.load_security,
+)
+
+
 app = rxe.App(
     head_components=[
         rx.el.style(
@@ -115,143 +218,81 @@ app.register_lifespan_task(menu_database_lifespan)
 app.add_page(
     index,
     route="/",
-    on_load=[
-        NavigationState.enter_page("cockpit"),
-        DashboardState.load_dashboard,
-        WeatherState.load_weather,
-        GuideState.load_guide,
-        RemediationState.load_remediation,
-        StockState.load_stocks,
-        ContourState.load_contours,
-        CatalogState.load_catalog,
-    ],
+    on_load=NavigationState.enter_page("cockpit"),
 )
 app.add_page(
-    configuration_page,
+    lambda: guarded_page(configuration_page(), "/configuration"),
     route="/configuration",
     title="Configuration des menus — AgriPro",
-    on_load=[NavigationState.enter_page("configuration")],
+    on_load=NavigationState.enter_page("configuration"),
 )
 app.add_page(
-    parcels_page,
+    lambda: guarded_page(parcels_page(), "/parcelles"),
     route="/parcelles",
-    on_load=[
-        NavigationState.enter_page("parcelles"),
-        ParcelsState.load_space,
-        CatalogState.load_catalog,
-        PhenologyState.load_phenology,
-    ],
+    on_load=NavigationState.enter_page("parcelles"),
 )
 app.add_page(
-    catalog_page,
+    lambda: guarded_page(catalog_page(), "/referentiel"),
     route="/referentiel",
-    on_load=[
-        NavigationState.enter_page("referentiel"),
-        CatalogBrowserState.load_referentiel,
-    ],
+    on_load=NavigationState.enter_page("referentiel"),
 )
 app.add_page(
-    phenology_admin_page,
+    lambda: guarded_page(phenology_admin_page(), "/phenologie"),
     route="/phenologie",
-    on_load=[
-        NavigationState.enter_page("phenologie"),
-        PhenologyAdminState.load_admin,
-    ],
+    on_load=NavigationState.enter_page("phenologie"),
 )
 app.add_page(
-    operations_page,
+    lambda: guarded_page(operations_page(), "/traitements"),
     route="/traitements",
-    on_load=[
-        NavigationState.enter_page("traitements"),
-        OperationsState.load_operations,
-        RemediationState.load_remediation,
-        StockState.load_stocks,
-    ],
+    on_load=NavigationState.enter_page("traitements"),
 )
 app.add_page(
-    employees_page,
+    lambda: guarded_page(employees_page(), "/employes"),
     route="/employes",
-    on_load=[
-        NavigationState.enter_page("employes"),
-        EmployeesState.load_workforce,
-    ],
+    on_load=NavigationState.enter_page("employes"),
 )
 app.add_page(
-    maintenance_page,
+    lambda: guarded_page(maintenance_page(), "/maintenance"),
     route="/maintenance",
-    on_load=[
-        NavigationState.enter_page("maintenance"),
-        MaintenanceState.load_fleet,
-    ],
+    on_load=NavigationState.enter_page("maintenance"),
 )
 app.add_page(
-    cartography_page,
+    lambda: guarded_page(cartography_page(), "/cartographie"),
     route="/cartographie",
-    on_load=[
-        NavigationState.enter_page("cartographie"),
-        CartographyState.load_map,
-        ContourState.load_contours,
-        RemediationState.load_remediation,
-        PhenologyOpsState.load_operational,
-    ],
+    on_load=NavigationState.enter_page("cartographie"),
 )
 app.add_page(
-    reports_page,
+    lambda: guarded_page(reports_page(), "/rapports"),
     route="/rapports",
-    on_load=[
-        NavigationState.enter_page("rapports"),
-        PhenologyOpsState.load_operational,
-    ],
+    on_load=NavigationState.enter_page("rapports"),
 )
 app.add_page(
-    expenses_page,
+    lambda: guarded_page(expenses_page(), "/charges"),
     route="/charges",
-    on_load=[
-        NavigationState.enter_page("charges"),
-        ExpensesState.load_expenses,
-    ],
+    on_load=NavigationState.enter_page("charges"),
 )
 app.add_page(
-    crm_page,
+    lambda: guarded_page(crm_page(), "/crm"),
     route="/crm",
-    on_load=[NavigationState.enter_page("crm"), CrmState.load_crm],
+    on_load=NavigationState.enter_page("crm"),
 )
 app.add_page(
-    search_page,
+    lambda: guarded_page(search_page(), "/recherche"),
     route="/recherche",
-    on_load=[
-        NavigationState.enter_page("recherche"),
-        SearchState.load_search,
-        PhenologySearchState.load_index,
-    ],
+    on_load=NavigationState.enter_page("recherche"),
 )
 app.add_page(
-    guide_page,
+    lambda: guarded_page(guide_page(), "/guide"),
     route="/guide",
-    on_load=[
-        NavigationState.enter_page("guide"),
-        GuideState.load_guide,
-        GuideAdminState.load_admin,
-    ],
+    on_load=NavigationState.enter_page("guide"),
 )
 app.add_page(
-    administration_page,
+    lambda: guarded_page(administration_page(), "/administration"),
     route="/administration",
-    on_load=[
-        NavigationState.enter_page("administration"),
-        AdministrationState.load_administration,
-    ],
+    on_load=NavigationState.enter_page("administration"),
 )
 app.add_page(
-    audit_page,
+    lambda: guarded_page(audit_page(), "/audit"),
     route="/audit",
-    on_load=[
-        NavigationState.enter_page("audit"),
-        AuditState.load_audit,
-        ContourState.load_contours,
-        RemediationState.load_remediation,
-        StockState.load_stocks,
-        PhenologyOpsState.load_operational,
-        SecurityAuditState.load_security,
-    ],
+    on_load=NavigationState.enter_page("audit"),
 )

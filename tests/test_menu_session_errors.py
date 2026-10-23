@@ -133,7 +133,7 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
                 auth = self.auth_context(token, True)
                 with (
                     patch(
-                        "app.states.menu_auth_state.resolve_account",
+                        "app.states.menu_auth_state.resolve_policy",
                         new_callable=AsyncMock,
                         side_effect=PermissionError("expired"),
                     ) as resolve,
@@ -285,7 +285,7 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
         self.assertFalse(state.loading)
         self.assertEqual(auth.token, "admin")
         for handler, service, args in (
-            (MenuAuthState.restore_session, "resolve_account", ()),
+            (MenuAuthState.restore_session, "resolve_policy", ()),
             (
                 MenuAuthState.authenticate_account,
                 "authenticate",

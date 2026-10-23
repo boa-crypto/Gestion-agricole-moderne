@@ -14,6 +14,7 @@ from app import menu_service as service
 from app.models import MenuAuthAccount, MenuAuthSession, MenuSetting
 from app.navigation import COCKPITS, NAVIGATION
 from app.states.navigation_state import NavigationState
+from app.menu_policy import evaluate_policy
 
 
 class CatalogTests(unittest.TestCase):
@@ -43,7 +44,7 @@ class CatalogTests(unittest.TestCase):
             )
         }
         self.assertTrue(
-            all(protected[k]["effective"] for k in service.PROTECTED_KEYS)
+            all(not protected[k]["effective"] for k in service.PROTECTED_KEYS)
         )
 
     def test_accent_case_key_and_composed_filters(self):
@@ -70,7 +71,13 @@ class CatalogTests(unittest.TestCase):
 
     def test_navigation_filters_every_surface_and_falls_back(self):
         nav = NavigationState()
-        nav._apply_settings({"global": False, "agricole": False})
+        nav._apply_policy(
+            evaluate_policy(
+                {"id": 1, "email": "owner@example.test", "admin": True},
+                {"global": False, "agricole": False},
+                first_account_id=1,
+            )
+        )
         self.assertFalse(nav.global_visible)
         self.assertFalse(nav.search_visible)
         self.assertNotIn("global", {c["key"] for c in nav.cockpits})
