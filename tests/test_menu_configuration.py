@@ -137,6 +137,35 @@ class PersistenceTests(unittest.IsolatedAsyncioTestCase):
         await self.engine.dispose()
         self.temp.cleanup()
 
+    async def test_public_settings_and_revocation_use_isolated_database(self):
+        self.assertEqual(await service.read_settings("", False), {})
+        with self.assertRaises(PermissionError):
+            await service.read_settings("", True)
+        token, _ = await service.authenticate(
+            "navigation@example.com", "long-password-navigation", True
+        )
+        expected = await service.toggle_setting(token, "agricole.parcelles")
+        self.assertEqual(expected, {"agricole.parcelles": False})
+        self.assertEqual(await service.read_settings("", False), expected)
+        await service.revoke_session(token)
+        async with self.factory() as session:
+            revoked = (
+                await session.execute(
+                    text(
+                        "SELECT is_revoked FROM menu_auth_session WHERE token_hash = :token"
+                    ),
+                    {"token": service.token_hash(token)},
+                )
+            ).scalar_one()
+        self.assertTrue(revoked)
+        with self.assertRaises(PermissionError):
+            await service.resolve_account(token)
+        with self.assertRaises(PermissionError):
+            await service.read_settings(token, True)
+        with self.assertRaises(PermissionError):
+            await service.toggle_setting(token, "agricole.parcelles")
+        self.assertEqual(await service.read_settings("", False), expected)
+
     async def test_first_signup_atomic_role_and_persistent_flags(self):
         accounts = await asyncio.gather(
             service.authenticate("one@example.com", "long-password-one", True),

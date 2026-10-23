@@ -178,9 +178,9 @@ async def authenticate(
         raise ValueError(
             "Le mot de passe doit contenir entre 12 et 256 caractères."
         )
-    await ensure_local_database()
+    await ensure_menu_database()
     encoded = await asyncio.to_thread(hash_password, password) if signup else ""
-    async with rx.asession() as session:
+    async with menu_session() as session:
         if signup:
             await lock_menu_transaction(session)
             count = int(
@@ -259,8 +259,8 @@ async def authenticate(
 
 
 async def revoke_session(token: str) -> None:
-    await ensure_local_database()
-    async with rx.asession() as session:
+    await ensure_menu_database()
+    async with menu_session() as session:
         await session.execute(
             text(
                 "UPDATE menu_auth_session SET is_revoked = TRUE WHERE token_hash = :token"
@@ -273,8 +273,8 @@ async def revoke_session(token: str) -> None:
 async def read_settings(
     token: str = "", require_admin: bool = False
 ) -> dict[str, bool]:
-    await ensure_local_database()
-    async with rx.asession() as session:
+    await ensure_menu_database()
+    async with menu_session() as session:
         if require_admin:
             await account_in_session(session, token, admin=True)
         rows = (
@@ -288,9 +288,9 @@ async def read_settings(
 
 
 async def toggle_setting(token: str, key: str) -> dict[str, bool]:
-    await ensure_local_database()
-    async with rx.asession() as session:
-        await session.execute(text("BEGIN IMMEDIATE"))
+    await ensure_menu_database()
+    async with menu_session() as session:
+        await lock_menu_transaction(session)
         account = await account_in_session(session, token, admin=True)
         allowed = {row["key"] for row in menu_catalog({})}
         if key not in allowed or key in PROTECTED_KEYS:
