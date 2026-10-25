@@ -242,8 +242,8 @@ class MenuConfigurationState(rx.State):
             account_filter = self.account_filter
             offset = self.account_offset
             audit_offset = self.audit_offset
-        try:
-            result = await read_administration(
+        (result,) = await asyncio.gather(
+            read_administration(
                 token,
                 role=role,
                 account_id=account_id,
@@ -251,16 +251,19 @@ class MenuConfigurationState(rx.State):
                 account_filter=account_filter,
                 offset=offset,
                 audit_offset=audit_offset,
-            )
-        except (SessionExpired, ConfigurationDenied, ValueError) as e:
-            logging.exception("Unexpected error")
+            ),
+            return_exceptions=True,
+        )
+        if isinstance(
+            result, (SessionExpired, ConfigurationDenied, ValueError)
+        ):
             async with self:
                 auth = await self.get_state(MenuAuthState)
                 if generation != self._generation or token != auth.token:
                     return
                 self._clear_sensitive()
-                self.error = str(e)
-                if isinstance(e, SessionExpired):
+                self.error = str(result)
+                if isinstance(result, SessionExpired):
                     auth.token = ""
                     auth.authenticated = False
                     auth.admin = False
@@ -269,15 +272,18 @@ class MenuConfigurationState(rx.State):
                     auth.allowed_crm_tabs = []
                     auth.page_allowed = False
                     auth.ready = True
-                    auth.error = str(e)
-                elif isinstance(e, ConfigurationDenied):
+                    auth.error = str(result)
+                elif isinstance(result, ConfigurationDenied):
                     auth.admin = False
             from app.states.navigation_state import NavigationState
 
             yield NavigationState.refresh_navigation
             return
-        except Exception as e:
-            logging.exception(f"Error: {e}")
+        elif isinstance(result, Exception):
+            logging.error(
+                f"Error: {result}",
+                exc_info=(type(result), result, result.__traceback__),
+            )
             async with self:
                 if generation == self._generation:
                     self._clear_sensitive()
@@ -285,24 +291,25 @@ class MenuConfigurationState(rx.State):
                         "Impossible de charger la configuration. Réessayez."
                     )
             return
-        async with self:
-            auth = await self.get_state(MenuAuthState)
-            if generation != self._generation or token != auth.token:
-                return
-            self.loading = False
-            self.rows = menu_catalog(result["settings"])
-            self.roles = result["roles"]
-            self.accounts = result["accounts"]
-            self.permissions = result["permissions"]
-            self.assignments = result["assignments"]
-            self.audit = result["audit"]
-            self.selected_email = result["selected_email"]
-            self.selected_active = result["selected_active"]
-            self.active_target = result["active_target"]
-            self.active_explicit = result["active_explicit"]
-            self.account_total = result["account_total"]
-            self.audit_total = result["audit_total"]
-            self.allowed = True
+        else:
+            async with self:
+                auth = await self.get_state(MenuAuthState)
+                if generation != self._generation or token != auth.token:
+                    return
+                self.loading = False
+                self.rows = menu_catalog(result["settings"])
+                self.roles = result["roles"]
+                self.accounts = result["accounts"]
+                self.permissions = result["permissions"]
+                self.assignments = result["assignments"]
+                self.audit = result["audit"]
+                self.selected_email = result["selected_email"]
+                self.selected_active = result["selected_active"]
+                self.active_target = result["active_target"]
+                self.active_explicit = result["active_explicit"]
+                self.account_total = result["account_total"]
+                self.audit_total = result["audit_total"]
+                self.allowed = True
 
     @rx.event
     def toggle_menu(self, key: str):
@@ -320,7 +327,6 @@ class MenuConfigurationState(rx.State):
         async with self:
             auth = await self.get_state(MenuAuthState)
             token = auth.token
-        (result,)
         (result,) = await asyncio.gather(
             edit_policy(token, key, mode), return_exceptions=True
         )

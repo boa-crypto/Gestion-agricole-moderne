@@ -294,8 +294,11 @@ class SessionErrorTests(unittest.IsolatedAsyncioTestCase):
             patch("logging.exception") as exception_log,
         ):
             await run_handler(MenuConfigurationState.load_configuration, state)
-        exception_log.assert_called_once_with(f"Error: {error}")
-        log.assert_not_called()
+        log.assert_called_once_with(
+            f"Error: {error}",
+            exc_info=(type(error), error, error.__traceback__),
+        )
+        exception_log.assert_not_called()
         self.assertTrue(state.error)
         self.assertFalse(state.loading)
         self.assertEqual(auth.token, "admin")

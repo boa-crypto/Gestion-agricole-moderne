@@ -7,5 +7,5 @@
 - [x] Relier les accès aux sous-sections existantes, contrôler les routes orphelines et valider la navigation, le clavier et l’affichage responsive sans exposer de fausses fonctionnalités ni contourner les permissions existantes.
 - [x] Faire de la connexion existante l’entrée unique et vérifier côté serveur identité, statut, session et droits avant d’afficher les pages métier, dans l’identité AgriPro vert nuit/chlorophylle/ambre et typographies Inter/Instrument Serif.
 - [x] Construire la navigation par droits effectifs (rôles multiples, restrictions individuelles, modules, menus, actions et désactivation globale), sans groupes vides ni affichage transitoire interdit.
-- [ ] Compléter Configuration pour administrer les droits de rôles et d’utilisateurs, voir les droits effectifs, enregistrer les modifications avec auteur, horodatage et avant/après, et rafraîchir les sessions.
+- [x] Compléter Configuration pour administrer les droits de rôles et d’utilisateurs, voir les droits effectifs, enregistrer les modifications avec auteur, horodatage et avant/après, et rafraîchir les sessions.
 - [ ] Protéger routes directes, actions et interfaces Python/API côté serveur puis tester les scénarios d’anonymat, rôles, refus, expiration, révocation, rechargement et maintien des fonctions métier.
