@@ -22,6 +22,8 @@ import datetime
 from typing import TypedDict
 
 import reflex as rx
+
+from app.server_guard import checked_service
 from sqlalchemy import text
 
 from app.database import ensure_local_database
@@ -552,6 +554,7 @@ async def validate_observation(
 # ---------------------------------------------------------------------------
 
 
+@checked_service(("cultures", "CREER"))
 async def record_stage_observation(
     crop_id: int,
     stage_label: str,

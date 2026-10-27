@@ -10,13 +10,15 @@ from app.local_db_env import (  # noqa: E402
 force_local_database_env()
 
 import reflex as rx  # noqa: E402
+import reflex_enterprise as rxe  # noqa: E402
 
-config = rx.Config(
+config = rxe.Config(
     app_name="app",
     db_url=SYNC_DB_URL,
     async_db_url=ASYNC_DB_URL,
     plugins=[
         rx.plugins.SitemapPlugin(),
         rx.plugins.TailwindV4Plugin(),
+        rxe.AuthPlugin(auth=True, login_page="app.pages.auth_login.login_page"),
     ],
 )

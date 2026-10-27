@@ -13,7 +13,6 @@ from app.access_control import (
     effective_permissions as user_permissions,
     expire_stale_delegations,
     log_activity,
-    user_by_matricule,
     user_scope_summary,
 )
 from app.access_reference import (
@@ -857,7 +856,20 @@ class AdministrationState(rx.State):
         yield
         await ensure_admin_data()
         self.today = await today_label()
-        self.actor_id = await user_by_matricule("U001")
+        from app.states.menu_auth_state import MenuAuthState
+
+        auth = await self.get_state(MenuAuthState)
+        async with rx.asession() as session:
+            actors = (
+                await session.execute(
+                    text(
+                        "SELECT id FROM app_user WHERE lower(trim(email)) = :email AND status = 'ACTIF' LIMIT 2"
+                    ),
+                    {"email": auth.email.strip().lower()},
+                )
+            ).all()
+        self.actor_id = int(actors[0][0]) if len(actors) == 1 else 0
+        self.actor_label = auth.email
         self.kpis = await load_overview()
         (
             self.status_options,

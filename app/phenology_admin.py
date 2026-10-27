@@ -28,6 +28,8 @@ import re
 from typing import TypedDict
 
 import reflex as rx
+
+from app.server_guard import checked_service
 from sqlalchemy import text
 
 from app.database import ensure_local_database
@@ -383,6 +385,7 @@ def _validate_profile(data: dict[str, str]) -> list[str]:
     return errors
 
 
+@checked_service(("parametres", "MODIFIER"))
 async def save_profile(
     data: dict[str, str], profile_id: int = 0
 ) -> dict[str, str | int | bool | list[str]]:
@@ -491,6 +494,7 @@ async def save_profile(
     }
 
 
+@checked_service(("parametres", "MODIFIER"))
 async def set_profile_active(profile_id: int, active: bool) -> str:
     """Active ou désactive un profil sans jamais le supprimer."""
     await ensure_local_database()
@@ -591,6 +595,7 @@ _STAGE_UPDATE_SQL: str = """
 """
 
 
+@checked_service(("parametres", "MODIFIER"))
 async def save_stage(
     profile_id: int, data: dict[str, str], stage_id: int = 0
 ) -> dict[str, str | int | bool | list[str]]:
@@ -690,6 +695,7 @@ async def save_stage(
     }
 
 
+@checked_service(("parametres", "MODIFIER"))
 async def set_stage_active(stage_id: int, active: bool) -> str:
     """Désactive (ou réactive) un stade : les observations sont conservées."""
     await ensure_local_database()
@@ -709,6 +715,7 @@ async def set_stage_active(stage_id: int, active: bool) -> str:
     )
 
 
+@checked_service(("parametres", "MODIFIER"))
 async def set_stage_critical(stage_id: int, critical: bool) -> str:
     """Marque ou démarque un stade comme sensible."""
     await ensure_local_database()
@@ -728,6 +735,7 @@ async def set_stage_critical(stage_id: int, critical: bool) -> str:
     )
 
 
+@checked_service(("parametres", "MODIFIER"))
 async def move_stage(stage_id: int, direction: int) -> str:
     """Réordonne un stade dans son profil puis renumérote les positions."""
     await ensure_local_database()
@@ -808,6 +816,7 @@ def _validate_reco(data: dict[str, str]) -> list[str]:
     return errors
 
 
+@checked_service(("parametres", "MODIFIER"))
 async def save_recommendation(
     stage_id: int, data: dict[str, str], reco_id: int = 0
 ) -> dict[str, str | int | bool | list[str]]:
@@ -917,6 +926,7 @@ def _parse_payload(payload: str, fmt: str) -> list[dict[str, str]]:
     return rows
 
 
+@checked_service(("parametres", "MODIFIER"))
 async def import_stages(
     profile_id: int, payload: str, fmt: str = "CSV"
 ) -> dict[str, int | list[str] | bool]:
@@ -1115,6 +1125,7 @@ async def _export_tree(profile_id: int = 0) -> list[dict]:
     return tree
 
 
+@checked_service(("parametres", "CONSULTER"), ("rapports", "EXPORTER"))
 async def export_phenology_json(profile_id: int = 0) -> str:
     """Export JSON des profils, stades et recommandations."""
     tree = await _export_tree(profile_id)
@@ -1127,6 +1138,7 @@ async def export_phenology_json(profile_id: int = 0) -> str:
     return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
+@checked_service(("parametres", "CONSULTER"), ("rapports", "EXPORTER"))
 async def export_phenology_csv(profile_id: int = 0) -> str:
     """Export CSV à plat des stades et de leurs recommandations."""
     tree = await _export_tree(profile_id)

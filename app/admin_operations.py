@@ -22,6 +22,8 @@ import logging
 from typing import TypedDict
 
 import reflex as rx
+
+from app.server_guard import checked_service
 from sqlalchemy import text
 
 from app.access_control import (
@@ -860,6 +862,7 @@ async def _intervention_context(
     return int(row[0] or 0), str(row[1]), str(row[2]), str(row[3])
 
 
+@checked_service(("interventions", "CLOTURER"))
 async def complete_task(
     actor_id: int, intervention_id: int
 ) -> tuple[bool, str]:
@@ -915,6 +918,7 @@ async def complete_task(
     return True, f"Chantier clôturé : {title}."
 
 
+@checked_service(("interventions", "VALIDER"))
 async def validate_task(
     actor_id: int, intervention_id: int
 ) -> tuple[bool, str]:
@@ -1085,6 +1089,7 @@ async def load_delegation_options() -> tuple[
     return users, roles, teams
 
 
+@checked_service(("utilisateurs", "AFFECTER"))
 async def create_delegation(
     actor_id: int,
     delegator_id: int,
@@ -1195,6 +1200,7 @@ async def create_delegation(
     return True, f"Délégation accordée à {delegate}."
 
 
+@checked_service(("utilisateurs", "AFFECTER"))
 async def revoke_delegation(
     actor_id: int, delegation_id: int
 ) -> tuple[bool, str]:

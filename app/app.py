@@ -3,6 +3,7 @@ import reflex_enterprise as rxe
 
 from app.menu_database import menu_database_lifespan
 from app.auth_dispatch import register_loaders
+from app.server_guard import install_event_gate
 from app.components.menu_auth import guarded_page
 from app.states.menu_configuration_state import MenuConfigurationState
 from app.components.alerts_panel import alerts_panel
@@ -190,6 +191,9 @@ register_loaders(
     PhenologyOpsState.load_operational,
     SecurityAuditState.load_security,
 )
+
+
+install_event_gate()
 
 
 app = rxe.App(

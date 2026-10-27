@@ -59,6 +59,8 @@ class MenuAuthState(rx.State):
             )
         else:
             result = PermissionError("Connexion requise.")
+        if not isinstance(result, Exception) and not result.get("active", True):
+            result = PermissionError("Compte désactivé.")
         if isinstance(result, Exception) and not isinstance(
             result, PermissionError
         ):
@@ -78,6 +80,13 @@ class MenuAuthState(rx.State):
             nav.cockpits = []
             nav.visible_navigation = []
             if isinstance(result, Exception):
+                from app.server_guard import clear_session_views
+
+                await clear_session_views(
+                    self,
+                    clear_token=isinstance(result, PermissionError),
+                    auth_state=self,
+                )
                 self.authenticated = False
                 self.admin = False
                 self.email = ""
@@ -356,6 +365,10 @@ class MenuAuthState(rx.State):
             config = await self.get_state(MenuConfigurationState)
             config._clear_sensitive()
             config.error = ""
+            from app.server_guard import clear_session_views
+
+            await clear_session_views(self, auth_state=self)
+            self.ready = False
         try:
             await revoke_session(token)
         except Exception as e:

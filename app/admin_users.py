@@ -16,6 +16,8 @@ import logging
 from typing import TypedDict
 
 import reflex as rx
+
+from app.server_guard import checked_service
 from sqlalchemy import text
 
 from app.access_control import (
@@ -954,6 +956,7 @@ async def load_activity(user_id: int = 0, limit: int = 16) -> list[ActivityRow]:
 # ---------------------------------------------------------------------------
 
 
+@checked_service(("utilisateurs", "MODIFIER"))
 async def change_user_status(
     actor_id: int, user_id: int, action: str
 ) -> tuple[bool, str]:

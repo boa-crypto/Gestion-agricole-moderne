@@ -26,6 +26,7 @@ from typing import TypedDict
 import reflex as rx
 from sqlalchemy import text
 
+from app.server_guard import checked_service
 from app.database import ensure_local_database
 from app.date_utils import as_date
 from app.phenology_ops import StageContextRow, stage_context_rows
@@ -264,6 +265,7 @@ async def _resolve_profile_id(asession, culture: str | int) -> int:
     return int(profile_id or 0)
 
 
+@checked_service(("cultures", "CONSULTER"))
 async def get_culture_stages(
     culture: str | int, include_inactive: bool = False
 ) -> list[StageSummary]:
@@ -315,11 +317,13 @@ async def get_culture_stages(
 # ---------------------------------------------------------------------------
 
 
+@checked_service(("cultures", "CONSULTER"))
 async def get_parcel_phenology(parcel_id: int) -> list[StageContextRow]:
     """Phénologie de toutes les cultures suivies d'une parcelle."""
     return await stage_context_rows(parcel_id=int(parcel_id))
 
 
+@checked_service(("cultures", "CONSULTER"))
 async def get_crop_phenology(crop_id: int) -> StageContextRow | None:
     """Phénologie d'une culture précise (stade actuel, suivant, progression)."""
     rows = await stage_context_rows()
@@ -334,6 +338,7 @@ async def get_crop_phenology(crop_id: int) -> StageContextRow | None:
 # ---------------------------------------------------------------------------
 
 
+@checked_service(("cultures", "CREER"))
 async def post_observation(
     crop_id: int,
     stage_label: str,
@@ -369,6 +374,7 @@ async def post_observation(
 # ---------------------------------------------------------------------------
 
 
+@checked_service(("cultures", "CONSULTER"))
 async def get_phenology_history(
     crop_id: int, limit: int = 60
 ) -> list[dict[str, str | int]]:
@@ -393,6 +399,7 @@ _CALENDAR_OBS_SQL: str = """
 """
 
 
+@checked_service(("cultures", "CONSULTER"))
 async def get_phenology_calendar(crop_id: int) -> list[CalendarEntry]:
     """Calendrier phénologique prévu / réel d'une culture de parcelle."""
     from app.phenology_validation import profile_for_crop, profile_stages
@@ -516,6 +523,7 @@ _STAGE_RECO_SQL: str = """
 """
 
 
+@checked_service(("cultures", "CONSULTER"))
 async def get_stage_detail(stage_id: int) -> StageDetail:
     """Détail complet d'un stade, recommandations indicatives incluses."""
     await ensure_local_database()

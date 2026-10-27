@@ -19,10 +19,13 @@ def resolve_navigation_entry(
     """Résout uniquement les destinations existantes, sinon la vue principale."""
     if page not in ROUTE_MATRIX:
         return None
+    if page == "crm" and tab and not cockpit:
+        return ROUTE_MATRIX[page]
     for entry in NAVIGATION:
         if (
             entry["page"] == page
-            and entry["cockpit"] == cockpit
+            and (not cockpit or entry["cockpit"] == cockpit)
+            and (cockpit or tab)
             and COCKPIT_BY_KEY[entry["cockpit"]]["available"]
             and (not tab or entry["tab"] == tab)
         ):
@@ -106,7 +109,8 @@ class NavigationState(rx.State):
                 auth.ready = True
                 self.navigation_error = ""
         except Exception as e:
-            logging.exception(f"Error: {e}")
+            if not isinstance(e, PermissionError):
+                logging.exception(f"Error: {e}")
             async with self:
                 auth = await self.get_state(MenuAuthState)
                 if token != auth.token or generation != auth._generation:
@@ -122,6 +126,9 @@ class NavigationState(rx.State):
                     auth.authenticated = False
                     auth.email = ""
                     auth.token = ""
+                    auth.verified_path = ""
+                    auth._verified_token = ""
+                    auth._pending_loader = ""
                     auth.error = (
                         "Votre session a expiré. Veuillez vous reconnecter."
                     )
