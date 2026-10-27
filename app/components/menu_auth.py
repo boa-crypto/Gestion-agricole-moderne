@@ -109,16 +109,34 @@ def login_panel() -> rx.Component:
             reset_on_submit=True,
             class_name="mt-6",
         ),
-        rx.el.button(
-            rx.cond(
-                MenuAuthState.signup,
+        rx.cond(
+            MenuAuthState.signup,
+            rx.el.button(
                 "Déjà inscrit ? Se connecter",
-                "Pas encore de compte ? S’inscrire",
+                type="button",
+                on_click=MenuAuthState.change_mode,
+                disabled=MenuAuthState.busy,
+                class_name="mt-5 rounded-lg px-2 py-3 text-sm text-lime-300 hover:text-lime-200 focus-visible:outline-2 focus-visible:outline-lime-300 disabled:opacity-50",
             ),
-            type="button",
-            on_click=MenuAuthState.change_mode,
-            disabled=MenuAuthState.busy,
-            class_name="mt-5 rounded-lg py-2 text-sm text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
+            rx.el.div(
+                rx.el.p(
+                    "Première visite ? Créez votre compte pour accéder à AgriPro.",
+                    id="auth-first-visit",
+                    class_name="text-sm leading-relaxed text-emerald-100",
+                ),
+                rx.el.button(
+                    rx.icon(
+                        "user-plus", class_name="h-5 w-5", aria_hidden=True
+                    ),
+                    "Créer mon compte",
+                    type="button",
+                    on_click=MenuAuthState.change_mode,
+                    disabled=MenuAuthState.busy,
+                    aria_describedby="auth-first-visit",
+                    class_name="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-[#a3e635] bg-[#a3e635]/10 px-4 py-3 font-semibold text-[#a3e635] hover:bg-[#a3e635]/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 disabled:opacity-50",
+                ),
+                class_name="mt-6 border-t border-lime-300/20 pt-5",
+            ),
         ),
         class_name="w-full max-w-xl rounded-3xl border border-lime-300/20 bg-[#071c13] p-6 sm:p-8",
     )
