@@ -187,3 +187,37 @@ l'unification des champs. Trois primitives ont été ajoutées à
   `*_display`, pagination en index.
 - États vides : unifier les squelettes et les messages vides sur le registre
   éditorial (filet + ligne + légende).
+
+## 8. Mouvement et micro-interactions
+
+Le mouvement sert la lecture, jamais le spectacle. Il tient dans une poignée de
+classes globales (`app/components/design.py`, `GLOBAL_CSS`) que les primitives
+appliquent d'elles-mêmes.
+
+| Classe | Effet | Où |
+| --- | --- | --- |
+| `ap-reveal` | entrée du héros : opacité + 10 px de montée, 620 ms | `page_hero` |
+| `ap-stagger` | apparition séquencée des enfants (55 ms d'écart, 12 crans) | grilles de `stat` (12 grilles) |
+| `ap-press` | retour au clic : translation de 1 px, 140 ms | `action_button`, `refresh_button`, `index_tab` |
+| `ap-lift` | transition de bordure et de fond | cartes cliquables |
+| `ap-panel` | bordure réactive au survol | panneaux, tuiles |
+| `ap-row` | fond très légèrement éclairci au survol | lignes de tableau |
+| `ap-skeleton` | balayage d'encre (1,7 s) sur les zones en chargement | `skeleton()`, et par extension les 67 `animate-pulse` héritées |
+| `ap-overlay` / `ap-sheet` | fondu 180 ms, feuille 260 ms | modales, panneaux, états vides |
+| `ap-toast` | entrée par le haut, 220 ms | notifications |
+
+Règles :
+
+- Aucune animation ne dépasse 620 ms ; aucune ne retarde une action.
+- Pas de déplacement de mise en page : uniquement opacité, transformation et
+  couleur.
+- `prefers-reduced-motion: reduce` neutralise toutes les durées (bloc CSS
+  existant), y compris les squelettes.
+- Une seule animation par élément, une seule séquence par écran.
+- Les compteurs ne s'animent pas : un chiffre métier doit être lisible
+  immédiatement.
+
+Deux primitives complètent le lot : `skeleton()` (ligne de chargement) et
+`empty_state(icon, title, description, action=…)` (filet supérieur, icône
+carrée, titre serif, chapô, action optionnelle), déjà appliquées au registre RH
+et à la carte de santé de la flotte.

@@ -1,5 +1,6 @@
 import reflex as rx
 
+from app.components.design import empty_state
 from app.states.maintenance_state import (
     DeadlineRow,
     EquipmentRow,
@@ -312,9 +313,12 @@ def fleet_health_map() -> rx.Component:
                 ),
                 class_name="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4",
             ),
-            rx.el.p(
+            empty_state(
+                "tractor",
                 "Aucun engin pour ces filtres.",
-                class_name="text-sm font-medium text-[#c9c5b4]/50 mt-4",
+                "Assouplissez la catégorie ou la santé pour retrouver "
+                "la flotte suivie.",
+                class_name="mt-4",
             ),
         ),
         rx.el.div(

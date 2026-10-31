@@ -76,7 +76,7 @@ def audit_kpis() -> rx.Component:
         _stat("Incohérents", AuditState.kpis["incoherent"], "à corriger"),
         _stat("Constats", AuditState.kpis["issues"], "dont bloquants"),
         class_name=(
-            "grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
+            "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
             "xl:grid-cols-3 w-full"
         ),
     )

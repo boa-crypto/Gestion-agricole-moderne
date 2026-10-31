@@ -65,7 +65,7 @@ def fleet_filters() -> rx.Component:
                 "unités",
             ),
             class_name=(
-                "grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
+                "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
                 "xl:grid-cols-4 w-full"
             ),
         ),

@@ -89,7 +89,7 @@ def crm_client_kpis() -> rx.Component:
                 "h-4 w-4 text-[#ff8a5b]",
             ),
             class_name=(
-                "grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
+                "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
                 "xl:grid-cols-3 w-full mt-5"
             ),
         ),
@@ -152,7 +152,7 @@ def crm_supplier_kpis() -> rx.Component:
                 "h-4 w-4 text-[#d8fa5e]",
             ),
             class_name=(
-                "grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
+                "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
                 "xl:grid-cols-3 w-full mt-5"
             ),
         ),
@@ -215,7 +215,7 @@ def crm_commercial_kpis() -> rx.Component:
                 "h-4 w-4 text-[#ff8a5b]",
             ),
             class_name=(
-                "grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
+                "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
                 "xl:grid-cols-3 w-full mt-5"
             ),
         ),

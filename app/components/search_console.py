@@ -144,7 +144,7 @@ def search_console() -> rx.Component:
             _stat("Types couverts", SearchState.tables_touched, "tables"),
             _stat("Sections affichées", SearchState.section_count, "blocs"),
             class_name=(
-                "grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
+                "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
                 "xl:grid-cols-3 w-full"
             ),
         ),

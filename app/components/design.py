@@ -211,6 +211,81 @@ input, select, textarea { font-family: var(--ap-sans); }
   to { transform: translateX(-50%); }
 }
 
+/* Séquences d'apparition ------------------------------------------------ */
+
+.ap-stagger > * {
+  animation: ap-rise 520ms cubic-bezier(.2, .7, .2, 1) both;
+}
+.ap-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.ap-stagger > *:nth-child(2) { animation-delay: 55ms; }
+.ap-stagger > *:nth-child(3) { animation-delay: 110ms; }
+.ap-stagger > *:nth-child(4) { animation-delay: 165ms; }
+.ap-stagger > *:nth-child(5) { animation-delay: 220ms; }
+.ap-stagger > *:nth-child(6) { animation-delay: 275ms; }
+.ap-stagger > *:nth-child(7) { animation-delay: 330ms; }
+.ap-stagger > *:nth-child(8) { animation-delay: 385ms; }
+.ap-stagger > *:nth-child(9) { animation-delay: 440ms; }
+.ap-stagger > *:nth-child(10) { animation-delay: 495ms; }
+.ap-stagger > *:nth-child(n+11) { animation-delay: 550ms; }
+
+/* Retour au clic -------------------------------------------------------- */
+
+.ap-press {
+  transition: transform 140ms cubic-bezier(.2, .7, .2, 1),
+    background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+.ap-press:active { transform: translateY(1px); }
+
+/* Panneaux et lignes ---------------------------------------------------- */
+
+.ap-panel { transition: border-color 200ms ease, background-color 200ms ease; }
+.ap-panel:hover { border-color: rgba(242, 239, 228, 0.22); }
+
+.ap-row { transition: background-color 160ms ease, color 160ms ease; }
+.ap-row:hover { background-color: rgba(242, 239, 228, 0.03); }
+
+/* Squelettes : balayage d'encre, pas de gris générique ------------------ */
+
+@keyframes ap-sweep {
+  0% { opacity: 0.55; background-position: 180% 0; }
+  50% { opacity: 0.9; background-position: 60% 0; }
+  100% { opacity: 0.55; background-position: -60% 0; }
+}
+
+.ap-skeleton,
+.animate-pulse {
+  background-image: linear-gradient(
+    90deg,
+    rgba(242, 239, 228, 0) 0%,
+    rgba(242, 239, 228, 0.07) 45%,
+    rgba(242, 239, 228, 0) 100%
+  );
+  background-size: 220% 100%;
+  background-repeat: no-repeat;
+  animation: ap-sweep 1.7s cubic-bezier(.4, 0, .2, 1) infinite !important;
+}
+
+/* Superpositions : modales, panneaux, notifications --------------------- */
+
+@keyframes ap-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ap-sheet {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes ap-toast {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.ap-overlay { animation: ap-fade 180ms ease-out both; }
+.ap-sheet { animation: ap-sheet 260ms cubic-bezier(.2, .7, .2, 1) both; }
+.ap-toast { animation: ap-toast 220ms cubic-bezier(.2, .7, .2, 1) both; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -343,7 +418,8 @@ def action_button(
         children.append(rx.icon(icon, class_name="h-3.5 w-3.5 shrink-0"))
     children.append(rx.el.span(label))
     shared = (
-        "ap-mono inline-flex w-fit items-center justify-center gap-2 px-3.5 py-2.5 "
+        "ap-press ap-mono inline-flex w-fit items-center justify-center "
+        "gap-2 px-3.5 py-2.5 "
         f"text-[10px] uppercase tracking-[0.18em] transition-colors {styles[tone]} "
         "disabled:cursor-not-allowed disabled:opacity-45 "
         f"{class_name}"
@@ -582,8 +658,8 @@ def page_hero(
         ),
         right,
         class_name=(
-            "flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between "
-            f"lg:gap-16 {class_name}"
+            "ap-reveal flex flex-col gap-8 lg:flex-row lg:items-end "
+            f"lg:justify-between lg:gap-16 {class_name}"
         ),
     )
 
@@ -617,10 +693,10 @@ def index_tab(
         aria_pressed=active,
         class_name=rx.cond(
             active,
-            "ap-mono inline-flex items-center gap-2 border-b border-[#D8FA5E] pb-2 "
+            "ap-press ap-mono inline-flex items-center gap-2 border-b border-[#D8FA5E] pb-2 "
             "pt-1 text-[10px] uppercase tracking-[0.18em] text-[#D8FA5E] "
             "transition-colors " + class_name,
-            "ap-mono inline-flex items-center gap-2 border-b border-transparent pb-2 "
+            "ap-press ap-mono inline-flex items-center gap-2 border-b border-transparent pb-2 "
             "pt-1 text-[10px] uppercase tracking-[0.18em] text-[#C9C5B4]/55 "
             "transition-colors hover:border-[#F2EFE4]/30 hover:text-[#F2EFE4] "
             + class_name,
@@ -663,8 +739,8 @@ def refresh_button(
         on_click=on_click,
         disabled=loading,
         class_name=(
-            "ap-mono inline-flex w-fit items-center justify-center gap-2 border "
-            "border-[#D8FA5E] bg-[#D8FA5E] px-3.5 py-2.5 text-[10px] uppercase "
+            "ap-press ap-mono inline-flex w-fit items-center justify-center "
+            "gap-2 border border-[#D8FA5E] bg-[#D8FA5E] px-3.5 py-2.5 text-[10px] uppercase "
             "tracking-[0.18em] text-[#0A0A08] transition-colors "
             "hover:border-[#E4FF9B] hover:bg-[#E4FF9B] "
             "disabled:cursor-not-allowed disabled:opacity-45 "
@@ -749,4 +825,54 @@ def select_field(
             ),
         ),
         class_name=f"relative {width}",
+    )
+
+
+def skeleton(class_name: str = "h-4 w-full") -> rx.Component:
+    """Ligne de chargement : balayage d'encre, jamais un bloc gris."""
+    return rx.el.div(
+        class_name=f"ap-skeleton bg-[#191C13]/70 {class_name}",
+        aria_hidden="true",
+    )
+
+
+def empty_state(
+    icon: str,
+    title: rx.Var | str,
+    description: rx.Var | str = "",
+    *,
+    action: rx.Component | None = None,
+    class_name: str = "",
+) -> rx.Component:
+    """État vide éditorial : filet supérieur, icône discrète, titre serif."""
+    children: list[rx.Component] = [
+        rx.el.div(
+            rx.icon(icon, class_name="h-4 w-4 text-[#C9C5B4]/50"),
+            class_name=(
+                "flex h-11 w-11 items-center justify-center border "
+                "border-[#F2EFE4]/12"
+            ),
+        ),
+        rx.el.h3(
+            title,
+            class_name="ap-serif mt-5 text-xl text-[#F2EFE4]",
+        ),
+    ]
+    if not isinstance(description, str) or description:
+        children.append(
+            rx.el.p(
+                description,
+                class_name=(
+                    "mt-2 max-w-md text-[12px] leading-relaxed text-[#C9C5B4]/60"
+                ),
+            )
+        )
+    if action is not None:
+        children.append(rx.el.div(action, class_name="mt-5"))
+    return rx.el.div(
+        *children,
+        class_name=(
+            f"ap-sheet flex w-full flex-col items-start border-t border-[#F2EFE4]/12 "
+            f"pt-8 pb-2 {class_name}"
+        ),
     )
