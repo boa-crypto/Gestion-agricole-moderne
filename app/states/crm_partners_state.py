@@ -1491,7 +1491,7 @@ class CrmPartnersState(rx.State):
         yield
         await self._load()
 
-    async def enter_space_now(self, space: str) -> None:
+    async def _enter_space_now(self, space: str) -> None:
         """Prépare et charge un espace tiers depuis un autre état."""
         target = space if space in SPACE_TITLES else "partenaires"
         if target == self.loading_space:

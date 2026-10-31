@@ -270,7 +270,7 @@ PHENOLOGY_PROFILES: list[ProfileSpec] = [
                 "watchpoints": "Pucerons vecteurs de viroses, ravageurs du sol.",
                 "days_min": 10,
                 "days_max": 20,
-                "icon": "seedling",
+                "icon": "sprout",
                 "color_hex": "#C2E847",
             },
             {

@@ -46,10 +46,10 @@ async def _load_crm_panel(state, tab: str) -> None:
 
     if tab in REGISTERS:
         registers = await state.get_state(CrmRegistersState)
-        await registers.enter_register_now(tab)
+        await registers._enter_register_now(tab)
     elif tab in SPACE_TITLES:
         partners = await state.get_state(CrmPartnersState)
-        await partners.enter_space_now(tab)
+        await partners._enter_space_now(tab)
 
 
 class NavigationState(rx.State):

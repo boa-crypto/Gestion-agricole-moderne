@@ -1484,7 +1484,7 @@ class CrmRegistersState(rx.State):
         yield
         await self._load()
 
-    async def enter_register_now(self, register: str) -> None:
+    async def _enter_register_now(self, register: str) -> None:
         """Prépare et charge un registre depuis un autre état (navigation)."""
         target = register if register in REGISTERS else "ventes"
         if target == self.loading_register:

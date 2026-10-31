@@ -191,7 +191,7 @@ VARIETIES: list[dict[str, str | int | float]] = [
         "sowing_window": "Avril - Mai",
         "harvest_window": "Octobre",
         "color_hex": "#C2E847",
-        "icon": "corn",
+        "icon": "wheat",
         "notes": "Indice précoce, bon stay-green.",
     },
     {

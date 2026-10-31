@@ -362,7 +362,7 @@ CATALOG: list[dict] = [
                 "family": "Poaceae",
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
-                "icon": "corn",
+                "icon": "wheat",
                 "color_hex": "#C2E847",
                 "usage": "Grain, ensilage, semence",
                 "description": "Culture d'été très exigeante en eau à la floraison.",
@@ -2064,7 +2064,7 @@ CATALOG: list[dict] = [
                 "family": "Poaceae",
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
-                "icon": "corn",
+                "icon": "wheat",
                 "color_hex": "#A9C98B",
                 "usage": "Ensilage plante entière, ration hivernale",
                 "description": (
