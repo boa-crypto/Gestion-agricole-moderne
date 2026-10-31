@@ -388,5 +388,5 @@ def weather_panel() -> rx.Component:
         ),
         _hourly_rail(),
         _daily_grid(),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

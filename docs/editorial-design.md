@@ -349,3 +349,38 @@ reçoit maintenant un simple filet supérieur, l'en-tête `ap-eyebrow` restant
 inchangé. Son état vide passe par `empty_state()` avec l'action
 « Réinitialiser les filtres » (`action_button`, ton filet), au lieu d'un bloc
 centré et d'un bouton hérité.
+
+## 12. Balayage final des surfaces et des silhouettes (lot 7)
+
+Les lots précédents avaient traité les écrans « vitrines » ; il restait soixante
+fichiers où les mêmes cartes encadrées revenaient.
+
+1. **Balayage des surfaces** — toutes les chaînes de classe qui cumulaient
+   `rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4|p-5|p-6` (et leurs
+   variantes `#14160f` / `#0d0f09`) ont été converties en filet supérieur
+   (`border-t … pt-4|5|6`, filet `/8` pour les fonds secondaires). 187 chaînes
+   dans 66 fichiers ; il ne reste qu'un panneau encadré dans tout `app/`.
+   Les surfaces légitimes sont conservées : champs, badges, médaillons d'icône,
+   boutons, encarts d'avertissement et le cadre de la carte cartographique.
+2. **Sélection harmonisée** — les branches « sélectionné » qui gardaient une
+   boîte chlorophylle et un anneau (`ring-2`) auraient détonné à côté de
+   lignes devenues des filets. Elles passent au filet gauche
+   (`border-l-2 border-l-[#D8FA5E]`) avec un fond à 7 % : administration
+   (organigramme, utilisateurs), employés, engins, flotte, parcelles.
+3. **Silhouettes** — nouvelle primitive `skeleton_rows(count, avatar=True)` :
+   médaillon, deux lignes de texte, filet bas. Elle remplace les blocs
+   `animate-pulse h-28` des listes (utilisateurs, employés, engins, parcelles,
+   îlots, recherche). Le chargement ressemble désormais à ce qui va apparaître,
+   et `aria_busy` signale l'attente aux lecteurs d'écran.
+4. **Surfaces restantes** — panneaux de bibliothèque, organigramme et fiche
+   utilisateur d'administration, phénologie (panneau, administration, fiches) :
+   tous passés en filets, y compris les encarts d'alerte ambre et vermillon
+   (`border-l-2`).
+
+### Décompte après ce lot
+
+| Élément | Avant lot 7 | Après lot 7 |
+| --- | --- | --- |
+| Panneaux encadrés (`border` + `bg` + `p-4/5/6`) | ~110 | 1 |
+| Sélections en anneau `ring-2` | 6 | 0 (hors pastille de fiche parcelle) |
+| Blocs de chargement massifs `h-28` en liste | 12 | 0 |

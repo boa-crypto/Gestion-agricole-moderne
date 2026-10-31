@@ -212,7 +212,7 @@ def _yield_bar(row: YieldRow, key: str = "") -> rx.Component:
             class_name="flex items-center gap-1.5 border-t border-[#f2efe4]/8 pt-2.5 mt-3",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -276,7 +276,7 @@ def yield_comparison() -> rx.Component:
                 class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-14 mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -352,5 +352,5 @@ def harvest_panel() -> rx.Component:
                 class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-14 mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

@@ -181,7 +181,7 @@ def _linked_card(crop: CropRow) -> rx.Component:
             class_name="flex items-start gap-3 w-full mt-3 pt-3 border-t border-[#f2efe4]/8",
         ),
         key=crop["id"].to_string(),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -282,7 +282,7 @@ def catalog_context_panel() -> rx.Component:
                     "automatiquement.",
                     class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-1.5 max-w-xl",
                 ),
-                class_name="flex flex-col items-start rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-5 mt-4",
+                class_name="border-t border-[#F2EFE4]/8 flex flex-col items-start pt-5 mt-4",
             ),
         ),
         rx.cond(
@@ -302,5 +302,5 @@ def catalog_context_panel() -> rx.Component:
             ),
             rx.fragment(),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6  mt-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6 mt-4",
     )

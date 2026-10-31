@@ -1,5 +1,7 @@
 import reflex as rx
 
+from app.components.design import skeleton_rows
+
 from app.states.search_state import SearchHit, SearchSection, SearchState
 
 
@@ -125,7 +127,7 @@ def _hit_card(hit: SearchHit, key: str = "") -> rx.Component:
             class_name="flex flex-wrap items-center gap-2 w-full mt-4 pt-3 border-t border-[#f2efe4]/8",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -179,7 +181,7 @@ def _section(section: SearchSection, key: str = "") -> rx.Component:
             class_name="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-3 w-full mt-5",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -188,19 +190,8 @@ def _skeleton() -> rx.Component:
         rx.el.div(
             class_name="animate-pulse h-8 w-56 rounded-none bg-[#191c13]"
         ),
-        rx.el.div(
-            rx.el.div(
-                class_name="animate-pulse h-40 rounded-none bg-[#16190f]"
-            ),
-            rx.el.div(
-                class_name="animate-pulse h-40 rounded-none bg-[#16190f]"
-            ),
-            rx.el.div(
-                class_name="animate-pulse h-40 rounded-none bg-[#16190f]"
-            ),
-            class_name="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-3 w-full mt-5",
-        ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        rx.el.div(skeleton_rows(3), class_name="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-3 w-full mt-5"),
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 

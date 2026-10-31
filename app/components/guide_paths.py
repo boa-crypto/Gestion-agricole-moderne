@@ -55,7 +55,7 @@ def _path_card(path: PathCard, key: str = "") -> rx.Component:
         class_name=rx.cond(
             GuideState.active_path_slug == path["slug"],
             "w-full rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/[0.07] p-4 text-left ring-2 ring-[#d8fa5e]/30 transition-all",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 text-left hover:border-[#d8fa5e]/25 transition-all",
+            "border-t border-[#F2EFE4]/12 w-full pt-4 text-left hover:border-t-[#D8FA5E]/40 transition-all",
         ),
     )
 
@@ -148,7 +148,7 @@ def _path_step(step: PathStep, key: str = "") -> rx.Component:
             class_name="flex items-start gap-3 w-full",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-4",
+        class_name="border-t border-[#F2EFE4]/8 w-full pt-4",
     )
 
 
@@ -244,5 +244,5 @@ def guide_paths() -> rx.Component:
             ),
             rx.fragment(),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

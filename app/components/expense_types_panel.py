@@ -100,7 +100,7 @@ def _type_card(item: TypeRow, key: str = "") -> rx.Component:
             class_name="flex flex-wrap items-center gap-2 border-t border-[#f2efe4]/8 pt-3 mt-3",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -133,5 +133,5 @@ def expense_types_panel() -> rx.Component:
             ),
             class_name="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-3 w-full mt-5",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

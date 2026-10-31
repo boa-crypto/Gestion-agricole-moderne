@@ -168,7 +168,7 @@ def _skill_card(skill: SkillRow, key: str = "") -> rx.Component:
             class_name="flex flex-wrap items-center gap-2 mt-3",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -258,7 +258,7 @@ def _skill_form() -> rx.Component:
         ),
         on_submit=EmployeesState.submit_skill,
         reset_on_submit=True,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 mt-4",
     )
 
 
@@ -396,7 +396,7 @@ def _availability_form() -> rx.Component:
         ),
         on_submit=EmployeesState.submit_availability,
         reset_on_submit=True,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 mt-4",
     )
 
 
@@ -468,7 +468,7 @@ def _assignment_row(item: AssignmentRow, key: str = "") -> rx.Component:
             class_name="flex flex-wrap items-center gap-2 border-t border-[#f2efe4]/8 pt-3 mt-3",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -665,5 +665,5 @@ def employee_detail() -> rx.Component:
                 "Sélectionnez un salarié dans le registre ou créez une première fiche.",
             ),
         ),
-        class_name="flex-1 min-w-0 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-0 w-full pt-6",
     )

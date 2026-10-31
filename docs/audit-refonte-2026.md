@@ -77,9 +77,9 @@ Trois lots ont été livrés (`b8b7edd`, `6c19339`, `4da760d`) :
 
 | Catégorie | Constat | Portée |
 | --- | --- | --- |
-| Surfaces | **résolues** : cartes `CARD`, parcelles, cartographie et contrôles de contour en filet supérieur ; restent quelques tuiles interactives et champs | ~6 composants |
+| Surfaces | **résolues** : balayage de 187 chaînes dans 66 fichiers ; un seul panneau encadré subsiste (tiroir `nav-context`, volontairement flottant) | 1 composant |
 | Tableaux | en-têtes non normalisés en mono, pagination hétérogène, densité variable | CRM, stocks, charges |
-| Chargements | 67 `animate-pulse` bruts : squelettes gris génériques, sans lien avec la silhouette réelle ; **registres CRM traités** (`_register_skeleton`) | 53 fichiers |
+| Chargements | `animate-pulse` balayé par la feuille globale ; listes converties en silhouettes (`skeleton_rows`) ; restent des blocs de page pleine qui simulent la mise en page | 58 blocs |
 | Mouvement | **résolu** : héros en `ap-reveal`, grilles en `ap-stagger`, clic en `ap-press`, squelettes balayés | global |
 | États vides | **résolus sur 17 blocs** via `empty_state()` ; quelques messages ponctuels subsistent | ~4 écrans |
 | Responsive | vérifié sur 390 px pour le cockpit et les RH ; non revérifié sur les écrans lourds (CRM, administration, cartographie) | 6 écrans |

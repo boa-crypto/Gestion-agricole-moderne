@@ -138,7 +138,7 @@ def _version_card(item: VersionRow, key: str = "") -> rx.Component:
         class_name=rx.cond(
             item["is_current"],
             "w-full rounded-none border border-[#d8fa5e]/35 bg-[#d8fa5e]/[0.05] p-4",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+            "border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
         ),
     )
 
@@ -357,9 +357,9 @@ def guide_admin_versions() -> rx.Component:
                         class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-4",
                     ),
                 ),
-                class_name="flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-5",
+                class_name="border-t border-[#F2EFE4]/8 flex-1 min-w-0 pt-5",
             ),
             class_name="flex flex-col xl:flex-row gap-4 w-full mt-5",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

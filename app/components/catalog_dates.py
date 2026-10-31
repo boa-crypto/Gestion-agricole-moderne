@@ -88,7 +88,7 @@ def _date_variety(variety: VarietyRow) -> rx.Component:
             ),
             rx.fragment(),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-4 hover:border-[#ff8a5b]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/8 w-full pt-4 hover:border-[#ff8a5b]/25 transition-colors",
     )
 
 
@@ -233,7 +233,7 @@ def catalog_dates() -> rx.Component:
                             ),
                             rx.fragment(),
                         ),
-                        class_name="w-full xl:w-[28rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5",
+                        class_name="border-t border-[#F2EFE4]/12 w-full xl:w-[28rem] shrink-0 pt-5",
                     ),
                     rx.el.div(
                         rx.foreach(
@@ -250,5 +250,5 @@ def catalog_dates() -> rx.Component:
                 ),
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

@@ -90,7 +90,7 @@ def crm_tops() -> rx.Component:
                 ),
                 _empty("Aucune vente client enregistrée pour le moment."),
             ),
-            class_name="flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+            class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-0 pt-6",
         ),
         rx.el.div(
             rx.el.div(
@@ -121,7 +121,7 @@ def crm_tops() -> rx.Component:
                 ),
                 _empty("Aucun achat fournisseur enregistré pour le moment."),
             ),
-            class_name="flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+            class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-0 pt-6",
         ),
         class_name="flex flex-col xl:flex-row gap-4 w-full",
     )

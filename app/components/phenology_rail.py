@@ -147,5 +147,5 @@ def phenology_rail() -> rx.Component:
             ),
             class_name="relative w-full overflow-x-auto pb-2 mt-4",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )

@@ -270,7 +270,7 @@ def _delegation_form() -> rx.Component:
         ),
         on_submit=AdministrationState.submit_delegation,
         reset_on_submit=True,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 mt-5",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-5 mt-5",
     )
 
 
@@ -338,7 +338,7 @@ def _delegation_card(item: DelegationRow, key: str = "") -> rx.Component:
             class_name="flex flex-wrap items-center gap-2 border-t border-[#f2efe4]/10 pt-3 mt-3",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 

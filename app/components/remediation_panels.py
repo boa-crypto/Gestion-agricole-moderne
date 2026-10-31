@@ -151,7 +151,7 @@ def remediation_note_bar() -> rx.Component:
             "La note est attachée à chaque décision consignée : elle rend l'arbitrage relisible six mois plus tard.",
             class_name="text-[10px] font-medium text-[#c9c5b4]/40 mt-2",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -243,7 +243,7 @@ def _alert_card(item: AlertTriage, key: str = "") -> rx.Component:
                 "ATTENTION",
                 "w-full rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/[0.06] p-4",
             ),
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+            "border-t border-[#F2EFE4]/12 w-full pt-4",
         ),
     )
 
@@ -279,7 +279,7 @@ def alert_triage_panel() -> rx.Component:
                 class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-4",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -370,7 +370,7 @@ def _stock_card(item: StockDecision, key: str = "") -> rx.Component:
             class_name="flex flex-wrap items-center gap-2 w-full mt-3",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -405,7 +405,7 @@ def stock_decision_panel() -> rx.Component:
                 class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-4",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -488,7 +488,7 @@ def _contour_card(item: ContourCheck, key: str = "") -> rx.Component:
             class_name="flex flex-wrap items-center gap-2 w-full mt-3",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -540,7 +540,7 @@ def contour_validation_panel() -> rx.Component:
                 class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-4",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -698,5 +698,5 @@ def remediation_summary() -> rx.Component:
                 class_name="text-sm font-medium text-[#c9c5b4]/50 mt-6",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

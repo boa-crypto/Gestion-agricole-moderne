@@ -66,8 +66,8 @@ def _node_card(node: OrgNode, key: str = "") -> rx.Component:
         key=key,
         class_name=rx.cond(
             AdministrationState.org_selected_id == node["id"],
-            "w-[17rem] shrink-0 rounded-none border border-[#d8fa5e]/45 bg-[#d8fa5e]/[0.08] p-4 text-left ring-2 ring-[#d8fa5e]/40 transition-all",
-            "w-[17rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 text-left hover:border-[#d8fa5e]/30 transition-all",
+            "w-[17rem] shrink-0 border-t border-[#F2EFE4]/12 border-l-2 border-l-[#D8FA5E] bg-[#D8FA5E]/[0.07] pl-3 pr-2 pt-4 text-left transition-colors",
+            "border-t border-[#F2EFE4]/12 w-[17rem] shrink-0 pt-4 text-left hover:border-[#d8fa5e]/30 transition-all",
         ),
     )
 
@@ -156,7 +156,7 @@ def _node_detail() -> rx.Component:
             ),
             class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit mt-4",
         ),
-        class_name="w-full xl:w-[22rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5",
+        class_name="w-full xl:w-[22rem] shrink-0 border-t border-[#F2EFE4]/12 pt-5 xl:border-l xl:border-l-[#F2EFE4]/8 xl:pl-5",
     )
 
 
@@ -254,7 +254,7 @@ def task_card(task: TaskRow, key: str = "") -> rx.Component:
             class_name="flex flex-wrap items-center gap-2 border-t border-[#f2efe4]/10 pt-3 mt-3",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-4 transition-colors hover:border-t-[#D8FA5E]/40",
     )
 
 
@@ -291,7 +291,7 @@ def _responsibility_card(item: ResponsibilityRow) -> rx.Component:
             item["detail"],
             class_name="text-[11px] font-medium text-[#c9c5b4]/55 mt-1",
         ),
-        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 w-full",
+        class_name="border-t border-[#F2EFE4]/12 pt-4 w-full",
     )
 
 
@@ -315,7 +315,7 @@ def _personal_tile(
             caption,
             class_name="text-[10px] font-medium text-[#c9c5b4]/40 mt-2",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] p-4",
+        class_name="w-full border-t border-[#F2EFE4]/8 pt-4",
     )
 
 

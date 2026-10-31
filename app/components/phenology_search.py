@@ -59,7 +59,7 @@ def _section(section: SearchSection) -> rx.Component:
             rx.foreach(section["hits"], lambda hit: _hit(hit)),
             class_name="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mt-3",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -148,5 +148,5 @@ def phenology_search_panel() -> rx.Component:
                 ),
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

@@ -93,7 +93,7 @@ def _faq_row(item: FaqCard, key: str = "") -> rx.Component:
         class_name=rx.cond(
             GuideState.open_faq_id == item["id"],
             "w-full rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/[0.05] p-4",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+            "border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
         ),
     )
 
@@ -147,5 +147,5 @@ def guide_faq() -> rx.Component:
                 class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

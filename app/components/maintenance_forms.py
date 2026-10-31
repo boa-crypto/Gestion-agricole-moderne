@@ -367,7 +367,7 @@ def _equipment_body() -> rx.Component:
                 ),
                 class_name="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-3",
             ),
-            class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-5",
+            class_name="border-t border-[#F2EFE4]/12 pt-4 mt-5",
         ),
         _field(
             "Notes atelier",
@@ -573,7 +573,7 @@ def _operation_body() -> rx.Component:
                 "Si le statut est « Réalisée », les échéances de l'engin et du plan préventif sont recalculées automatiquement.",
                 class_name="text-[10px] font-medium text-[#e4ff9b]/70 mt-3",
             ),
-            class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-5",
+            class_name="border-t border-[#F2EFE4]/12 pt-4 mt-5",
         ),
         rx.el.div(
             _field(

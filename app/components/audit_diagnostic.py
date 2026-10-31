@@ -159,7 +159,7 @@ def _distribution_card(
             ),
             class_name="flex flex-col gap-3 w-full mt-4",
         ),
-        class_name="flex-1 min-w-[16rem] w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-[16rem] w-full pt-4",
     )
 
 
@@ -264,7 +264,7 @@ def diagnostic_synthesis() -> rx.Component:
             ),
             class_name="flex flex-col xl:flex-row gap-3 w-full mt-5",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -309,7 +309,7 @@ def _column(
         ),
         body,
         footer,
-        class_name="flex-1 min-w-[16rem] w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 flex flex-col",
+        class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-[16rem] w-full pt-4 flex flex-col",
     )
 
 
@@ -514,7 +514,7 @@ def diagnostic_triage() -> rx.Component:
             ),
             class_name="flex flex-col xl:flex-row gap-3 w-full mt-5",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -586,7 +586,7 @@ def _action_row(row: ActionRow, key: str = "") -> rx.Component:
             class_name="flex items-start gap-3 w-full",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/8 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -633,7 +633,7 @@ def diagnostic_actions() -> rx.Component:
                 class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -694,7 +694,7 @@ def _watch_card(row: ModuleRow, key: str = "") -> rx.Component:
         ),
         on_click=AuditState.focus_module(row["key"]),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 text-left hover:border-[#d8fa5e]/30 hover:bg-[#191c13] transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 text-left hover:border-[#d8fa5e]/30 hover:bg-[#191c13] transition-colors",
     )
 
 
@@ -737,5 +737,5 @@ def diagnostic_watchlist() -> rx.Component:
                 class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

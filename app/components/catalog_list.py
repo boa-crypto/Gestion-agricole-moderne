@@ -81,7 +81,7 @@ def _culture_button(culture: CultureRow) -> rx.Component:
         class_name=rx.cond(
             CatalogBrowserState.selected_culture == culture["key"],
             "w-full rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/[0.07] p-4 text-left ring-2 ring-[#d8fa5e]/25 transition-all",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 text-left hover:border-[#d8fa5e]/25 hover:bg-[#16190f] transition-all",
+            "border-t border-[#F2EFE4]/12 w-full pt-4 text-left hover:border-t-[#D8FA5E]/40 hover:bg-[#16190f] transition-all",
         ),
     )
 
@@ -121,7 +121,7 @@ def _empty() -> rx.Component:
             on_click=CatalogBrowserState.reset_filters,
             class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2 text-xs font-semibold hover:bg-[#e4ff9b] transition-colors w-fit mt-4",
         ),
-        class_name="flex flex-col items-start rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-5",
+        class_name="border-t border-[#F2EFE4]/8 flex flex-col items-start pt-5",
     )
 
 
@@ -164,5 +164,5 @@ def catalog_list() -> rx.Component:
                 _empty(),
             ),
         ),
-        class_name="w-full xl:w-[24rem] shrink-0 flex flex-col gap-4 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full xl:w-[24rem] shrink-0 flex flex-col gap-4 pt-5",
     )

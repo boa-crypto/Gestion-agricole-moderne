@@ -80,7 +80,7 @@ def _health_tile(machine: EquipmentRow, key: str = "") -> rx.Component:
         key=key,
         class_name=rx.cond(
             MaintenanceState.selected_equipment_id == machine["id"],
-            "w-full rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/[0.08] p-3 text-left ring-2 ring-[#d8fa5e]/40 transition-all",
+            "w-full border-t border-[#F2EFE4]/12 border-l-2 border-l-[#D8FA5E] bg-[#D8FA5E]/[0.07] pl-3 pr-2 pt-3 text-left transition-colors",
             "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-3 text-left hover:border-[#d8fa5e]/25 transition-all",
         ),
     )
@@ -213,7 +213,7 @@ def _alert_card(alert: FleetAlert, key: str = "") -> rx.Component:
                 "ATTENTION",
                 "w-full rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/[0.06] p-4 text-left hover:border-[#ff8a5b]/45 transition-colors",
             ),
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 text-left hover:border-[#d8fa5e]/25 transition-colors",
+            "border-t border-[#F2EFE4]/12 w-full pt-4 text-left hover:border-t-[#D8FA5E]/40 transition-colors",
         ),
     )
 
@@ -287,7 +287,7 @@ def deadline_planner() -> rx.Component:
                 class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 mt-5",
             ),
         ),
-        class_name="flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-0 pt-6",
     )
 
 
@@ -342,5 +342,5 @@ def fleet_health_map() -> rx.Component:
             ),
             class_name="mt-6 border-t border-[#f2efe4]/12 pt-5",
         ),
-        class_name="w-full xl:w-[28rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full xl:w-[28rem] shrink-0 pt-6",
     )

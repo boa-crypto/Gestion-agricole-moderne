@@ -223,5 +223,5 @@ def phenology_form() -> rx.Component:
         ),
         on_submit=PhenologyState.submit_observation,
         reset_on_submit=True,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 mt-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-5 mt-4",
     )

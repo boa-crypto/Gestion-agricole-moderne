@@ -90,7 +90,7 @@ def crm_flow_chart() -> rx.Component:
                 class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
             ),
         ),
-        class_name="flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-0 pt-6",
     )
 
 
@@ -163,7 +163,7 @@ def crm_aging_panel() -> rx.Component:
             ),
             class_name="flex flex-col gap-2.5 mt-2.5",
         ),
-        class_name="w-full xl:w-[26rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full xl:w-[26rem] shrink-0 pt-6",
     )
 
 

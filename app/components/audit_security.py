@@ -59,7 +59,7 @@ def _tile(
             caption,
             class_name="text-[10px] font-medium text-[#c9c5b4]/40 mt-2",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] p-4",
+        class_name="border-t border-[#F2EFE4]/8 w-full pt-4",
     )
 
 
@@ -87,7 +87,7 @@ def _finding(item: SecurityFinding, key: str = "") -> rx.Component:
             class_name="inline-block rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[9px] font-mono text-[#c9c5b4]/45 w-fit mt-2",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -122,7 +122,7 @@ def _event(item: SecurityEvent, key: str = "") -> rx.Component:
             class_name="flex flex-wrap items-center gap-2 mt-2",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -256,5 +256,5 @@ def audit_security_panel() -> rx.Component:
             ),
             class_name="flex flex-col xl:flex-row gap-6 w-full mt-6 border-t border-[#f2efe4]/12 pt-6",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

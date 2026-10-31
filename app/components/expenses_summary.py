@@ -100,7 +100,7 @@ def expenses_summary() -> rx.Component:
                     class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
                 ),
             ),
-            class_name="flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+            class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-0 pt-6",
         ),
         rx.el.div(
             rx.el.div(
@@ -121,7 +121,7 @@ def expenses_summary() -> rx.Component:
                 ),
                 class_name="flex flex-col gap-2.5 mt-5 max-h-[26rem] overflow-y-auto pr-1",
             ),
-            class_name="w-full xl:w-[26rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+            class_name="border-t border-[#F2EFE4]/12 w-full xl:w-[26rem] shrink-0 pt-6",
         ),
         class_name="flex flex-col xl:flex-row gap-4 w-full",
     )

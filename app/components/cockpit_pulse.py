@@ -165,7 +165,7 @@ def _priority_card(
                 "warn",
                 "w-full rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/[0.05] p-4",
             ),
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+            "border-t border-[#F2EFE4]/12 w-full pt-4",
         ),
     )
 
@@ -404,5 +404,5 @@ def cockpit_pulse() -> rx.Component:
             ),
             class_name="w-full mt-6 border-t border-[#f2efe4]/12 pt-5",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

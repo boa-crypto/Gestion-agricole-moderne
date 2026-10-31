@@ -1,6 +1,6 @@
 import reflex as rx
 
-from app.components.design import empty_state
+from app.components.design import empty_state, skeleton_rows
 from app.states.maintenance_state import EquipmentRow, MaintenanceState
 
 
@@ -117,8 +117,8 @@ def _equipment_card(machine: EquipmentRow, key: str = "") -> rx.Component:
         key=key,
         class_name=rx.cond(
             MaintenanceState.selected_equipment_id == machine["id"],
-            "w-full rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/[0.07] p-4 text-left ring-2 ring-[#d8fa5e]/40 transition-all",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 text-left hover:border-[#d8fa5e]/25 transition-all",
+            "w-full border-t border-[#F2EFE4]/12 border-l-2 border-l-[#D8FA5E] bg-[#D8FA5E]/[0.07] pl-3 pr-2 pt-4 text-left transition-colors",
+            "border-t border-[#F2EFE4]/12 w-full pt-4 text-left hover:border-t-[#D8FA5E]/40 transition-all",
         ),
     )
 
@@ -145,18 +145,7 @@ def equipment_list() -> rx.Component:
         ),
         rx.cond(
             MaintenanceState.is_loading,
-            rx.el.div(
-                rx.el.div(
-                    class_name="animate-pulse h-28 rounded-none bg-[#16190f]"
-                ),
-                rx.el.div(
-                    class_name="animate-pulse h-28 rounded-none bg-[#16190f]"
-                ),
-                rx.el.div(
-                    class_name="animate-pulse h-28 rounded-none bg-[#16190f]"
-                ),
-                class_name="flex flex-col gap-3 mt-5",
-            ),
+            rx.el.div(skeleton_rows(3), class_name="mt-5"),
             rx.cond(
                 MaintenanceState.equipments.length() > 0,
                 rx.el.div(
@@ -173,5 +162,5 @@ def equipment_list() -> rx.Component:
                 ),
             ),
         ),
-        class_name="w-full xl:w-[24rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full xl:w-[24rem] shrink-0 pt-5",
     )

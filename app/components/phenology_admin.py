@@ -153,7 +153,7 @@ def _header() -> rx.Component:
             ),
             rx.fragment(),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 md:p-8 ",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
     )
 
 
@@ -201,7 +201,7 @@ def _profile_card(profile: ProfileAdminRow, key: str = "") -> rx.Component:
             class_name=rx.cond(
                 PhenologyAdminState.selected_profile_id == profile["id"],
                 "w-full rounded-none border border-[#d8fa5e]/45 bg-[#d8fa5e]/[0.09] p-4 text-left transition-colors",
-                "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 text-left hover:border-[#d8fa5e]/25 hover:bg-[#191c13] transition-colors",
+                "w-full border-t border-[#F2EFE4]/12 pt-4 text-left hover:border-[#d8fa5e]/25 hover:bg-[#191c13] transition-colors",
             ),
         ),
         rx.el.div(
@@ -264,7 +264,7 @@ def _profiles_panel() -> rx.Component:
             ),
             class_name="flex flex-col gap-3 w-full mt-4 max-h-[46rem] overflow-y-auto pr-1",
         ),
-        class_name="w-full xl:w-[24rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+        class_name="w-full xl:w-[24rem] shrink-0 border-t border-[#F2EFE4]/12 pt-5 xl:border-l xl:border-l-[#F2EFE4]/8 xl:pl-5",
     )
 
 
@@ -380,7 +380,7 @@ def _stage_row(stage: StageAdminRow, key: str = "") -> rx.Component:
         class_name=rx.cond(
             PhenologyAdminState.selected_stage_id == stage["id"],
             "flex flex-col lg:flex-row lg:items-center gap-3 w-full rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/[0.07] p-4",
-            "flex flex-col lg:flex-row lg:items-center gap-3 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/20 transition-colors",
+            "flex flex-col lg:flex-row lg:items-center gap-3 w-full border-t border-[#F2EFE4]/12 pt-4 hover:border-[#d8fa5e]/20 transition-colors",
         ),
     )
 
@@ -441,7 +441,7 @@ def _stages_panel() -> rx.Component:
                 class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-14 w-full mt-5",
             ),
         ),
-        class_name="flex-1 min-w-0 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="flex-1 min-w-0 w-full border-t border-[#F2EFE4]/12 pt-6",
     )
 
 
@@ -482,7 +482,7 @@ def _reco_card(reco: RecoAdminRow) -> rx.Component:
             ),
             class_name="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-[#f2efe4]/8",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-4",
+        class_name="w-full border-t border-[#F2EFE4]/8 pt-4",
     )
 
 
@@ -521,7 +521,7 @@ def _stage_detail_panel() -> rx.Component:
                             PhenologyAdminState.stage_preview["description"],
                             class_name="text-[12px] font-medium text-[#c9c5b4]/70 mt-1.5 leading-relaxed whitespace-pre-line",
                         ),
-                        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+                        class_name="w-full border-t border-[#F2EFE4]/12 pt-4",
                     ),
                     rx.el.div(
                         rx.el.span(
@@ -532,7 +532,7 @@ def _stage_detail_panel() -> rx.Component:
                             PhenologyAdminState.stage_preview["recognition"],
                             class_name="text-[12px] font-medium text-[#c9c5b4]/70 mt-1.5 leading-relaxed whitespace-pre-line",
                         ),
-                        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+                        class_name="w-full border-t border-[#F2EFE4]/12 pt-4",
                     ),
                     rx.el.div(
                         rx.el.span(
@@ -543,7 +543,7 @@ def _stage_detail_panel() -> rx.Component:
                             PhenologyAdminState.stage_preview["watchpoints"],
                             class_name="text-[12px] font-medium text-[#ffdccb]/70 mt-1.5 leading-relaxed whitespace-pre-line",
                         ),
-                        class_name="w-full rounded-none border border-[#ff8a5b]/20 bg-[#ff8a5b]/[0.05] p-4",
+                        class_name="w-full border-l-2 border-[#FF8A5B] bg-[#FF8A5B]/[0.05] pl-3 pr-2 py-3",
                     ),
                     rx.el.div(
                         rx.el.span(
@@ -554,7 +554,7 @@ def _stage_detail_panel() -> rx.Component:
                             PhenologyAdminState.stage_preview["common_errors"],
                             class_name="text-[12px] font-medium text-[#ffe0da]/65 mt-1.5 leading-relaxed whitespace-pre-line",
                         ),
-                        class_name="w-full rounded-none border border-[#ff6b5a]/20 bg-[#f2452c]/[0.05] p-4",
+                        class_name="w-full border-l-2 border-[#FF6B5A] bg-[#F2452C]/[0.05] pl-3 pr-2 py-3",
                     ),
                     class_name="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mt-5",
                 ),
@@ -596,7 +596,7 @@ def _stage_detail_panel() -> rx.Component:
                 class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
     )
 
 
@@ -691,7 +691,7 @@ def _checks_panel() -> rx.Component:
             ),
             class_name="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 w-full mt-5",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
     )
 
 

@@ -147,7 +147,7 @@ def _profile_block() -> rx.Component:
             ),
             rx.fragment(),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-4",
     )
 
 
@@ -242,7 +242,7 @@ def _reco_card(reco: RecoRow) -> rx.Component:
             ),
             class_name="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-[#f2efe4]/8",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-4",
+        class_name="w-full border-t border-[#F2EFE4]/8 pt-4",
     )
 
 
@@ -273,7 +273,7 @@ def _recommendations() -> rx.Component:
                 class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-3",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-4",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-4 mt-4",
     )
 
 
@@ -320,7 +320,7 @@ def _guide_block() -> rx.Component:
                 class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-3",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-4",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-4 mt-4",
     )
 
 
@@ -475,7 +475,7 @@ def _journal() -> rx.Component:
                     class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-3",
                 ),
             ),
-            class_name="flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+            class_name="flex-1 min-w-0 border-t border-[#F2EFE4]/12 pt-4",
         ),
         rx.el.div(
             rx.el.div(
@@ -510,7 +510,7 @@ def _journal() -> rx.Component:
                     class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-3",
                 ),
             ),
-            class_name="w-full xl:w-[26rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+            class_name="w-full xl:w-[26rem] shrink-0 border-t border-[#F2EFE4]/12 pt-4 xl:border-l xl:border-l-[#F2EFE4]/8 xl:pl-4",
         ),
         class_name="flex flex-col xl:flex-row gap-4 w-full mt-4",
     )
@@ -565,5 +565,5 @@ def phenology_panel() -> rx.Component:
                 _empty(),
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
     )

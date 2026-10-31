@@ -57,7 +57,7 @@ def _function_card(item: FunctionRow) -> rx.Component:
             ),
             class_name="flex items-center gap-1.5 mt-3 border-t border-[#f2efe4]/10 pt-3",
         ),
-        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors w-full",
+        class_name="border-t border-[#F2EFE4]/12 pt-4 transition-colors hover:border-t-[#D8FA5E]/40 w-full",
     )
 
 
@@ -138,7 +138,7 @@ def _team_card(team: TeamRow) -> rx.Component:
             chip(team["schedule"]),
             class_name="flex flex-wrap items-center gap-2 mt-3 border-t border-[#f2efe4]/10 pt-3",
         ),
-        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors w-full",
+        class_name="border-t border-[#F2EFE4]/12 pt-4 transition-colors hover:border-t-[#D8FA5E]/40 w-full",
     )
 
 

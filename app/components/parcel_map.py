@@ -126,7 +126,7 @@ def _selected_panel() -> rx.Component:
             ),
             class_name="mt-2",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] p-5 ",
+        class_name="border-t border-[#F2EFE4]/8 w-full pt-5",
     )
 
 
@@ -193,7 +193,7 @@ def parcel_map() -> rx.Component:
                 ),
                 class_name="relative mt-6 w-full min-h-[26rem] h-[34rem] rounded-none border border-[#f2efe4]/12 bg-[#0D0F09]/70 overflow-hidden",
             ),
-            class_name="flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+            class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-0 pt-6",
         ),
         rx.el.div(
             _selected_panel(),
@@ -229,7 +229,7 @@ def parcel_map() -> rx.Component:
                         class_name="w-full mt-3",
                     ),
                 ),
-                class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] p-5 ",
+                class_name="border-t border-[#F2EFE4]/8 w-full pt-5",
             ),
             class_name="flex flex-col gap-4 w-full xl:w-80 shrink-0",
         ),

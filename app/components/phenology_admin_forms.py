@@ -633,11 +633,11 @@ def phenology_import_panel() -> rx.Component:
                         class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-1.5 leading-relaxed",
                     ),
                 ),
-                class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-5",
+                class_name="border-t border-[#F2EFE4]/12 w-full pt-4 mt-5",
             ),
             rx.fragment(),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -700,7 +700,7 @@ def phenology_export_panel() -> rx.Component:
             PhenologyAdminState.export_payload != "",
             rx.el.pre(
                 PhenologyAdminState.export_payload,
-                class_name="w-full max-h-80 overflow-auto rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] p-4 text-[11px] font-mono text-[#c9c5b4]/70 mt-5 whitespace-pre",
+                class_name="border-t border-[#F2EFE4]/12 w-full max-h-80 overflow-auto bg-[#0A0A08] pt-4 text-[11px] font-mono text-[#c9c5b4]/70 mt-5 whitespace-pre",
             ),
             rx.el.p(
                 "Choisissez un format puis générez l'export : le contenu "
@@ -708,5 +708,5 @@ def phenology_export_panel() -> rx.Component:
                 class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

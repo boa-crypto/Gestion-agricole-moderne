@@ -63,7 +63,7 @@ def _tile(
             ),
             class_name="flex items-end gap-1.5 mt-3",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] p-4 ",
+        class_name="border-t border-[#F2EFE4]/8 w-full pt-4",
     )
 
 
@@ -158,7 +158,7 @@ def phenology_filters() -> rx.Component:
             ),
             class_name="grid grid-cols-1 lg:grid-cols-3 gap-3 w-full",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-5",
     )
 
 
@@ -264,7 +264,7 @@ def _context_row(row: StageContextRow, key: str = "") -> rx.Component:
             class_name="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-[#f2efe4]/8",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -309,7 +309,7 @@ def phenology_stage_board() -> rx.Component:
                 class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -337,7 +337,7 @@ def _alert_card(alert: AlertRow, key: str = "") -> rx.Component:
             class_name="text-[11px] font-medium text-[#c9c5b4]/55 mt-1.5 leading-relaxed",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-4",
+        class_name="border-t border-[#F2EFE4]/8 w-full pt-4",
     )
 
 
@@ -380,7 +380,7 @@ def phenology_alerts_panel() -> rx.Component:
                 class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -411,7 +411,7 @@ def _reco_card(reco: RecoRow) -> rx.Component:
             ),
             class_name="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-[#f2efe4]/8",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-4",
+        class_name="border-t border-[#F2EFE4]/8 w-full pt-4",
     )
 
 
@@ -448,7 +448,7 @@ def _domain_block(
                 class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-3",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -500,7 +500,7 @@ def phenology_operations_panel() -> rx.Component:
             ),
             class_name="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -615,5 +615,5 @@ def phenology_planned_panel() -> rx.Component:
                 class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

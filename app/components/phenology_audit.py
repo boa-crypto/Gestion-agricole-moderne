@@ -19,7 +19,7 @@ def _counter(label: str, value: rx.Var | str, icon: str) -> rx.Component:
             value,
             class_name="ap-serif text-2xl text-[#f2efe4] mt-2",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] p-4",
+        class_name="border-t border-[#F2EFE4]/8 w-full pt-4",
     )
 
 
@@ -132,5 +132,5 @@ def phenology_audit_panel() -> rx.Component:
             ),
             class_name="mt-8 border-t border-[#f2efe4]/12 pt-6",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

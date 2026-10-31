@@ -221,5 +221,5 @@ def crm_partner_list() -> rx.Component:
                 class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
             ),
         ),
-        class_name="w-full xl:w-[27rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full xl:w-[27rem] shrink-0 pt-5",
     )

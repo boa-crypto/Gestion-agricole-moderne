@@ -132,7 +132,7 @@ def _header() -> rx.Component:
             ),
             rx.fragment(),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 md:p-8 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6 md:p-8",
     )
 
 
@@ -330,7 +330,7 @@ def _content_row(item: ContentRow, key: str = "") -> rx.Component:
             class_name="flex flex-col lg:flex-row gap-4 w-full",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -386,7 +386,7 @@ def _register() -> rx.Component:
                 class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-14 w-full mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 

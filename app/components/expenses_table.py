@@ -275,5 +275,5 @@ def expenses_table() -> rx.Component:
                 class_name="flex flex-col items-center justify-center py-16",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

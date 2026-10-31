@@ -82,7 +82,7 @@ def _node_card(node: RelationNode, key: str = "") -> rx.Component:
         class_name=rx.cond(
             GuideState.active_relation == node["key"],
             "w-full rounded-none border border-[#d8fa5e]/45 bg-[#d8fa5e]/[0.09] p-4 text-left ring-2 ring-[#d8fa5e]/30 transition-all",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 text-left hover:border-[#d8fa5e]/25 hover:bg-[#191c13] transition-all",
+            "border-t border-[#F2EFE4]/12 w-full pt-4 text-left hover:border-t-[#D8FA5E]/40 hover:bg-[#191c13] transition-all",
         ),
     )
 
@@ -247,5 +247,5 @@ def guide_relations() -> rx.Component:
             class_name="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 w-full mt-5",
         ),
         _detail(),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

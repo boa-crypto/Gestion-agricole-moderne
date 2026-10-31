@@ -72,7 +72,7 @@ def _kpi(label: str, value: rx.Var | str, unit: str, tone: str) -> rx.Component:
             ),
             class_name=f"flex items-end gap-1.5 mt-2 {tone}",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] p-4",
+        class_name="border-t border-[#F2EFE4]/8 w-full pt-4",
     )
 
 
@@ -354,7 +354,7 @@ def _identity() -> rx.Component:
                 ),
                 rx.fragment(),
             ),
-            class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-4",
+            class_name="border-t border-[#F2EFE4]/12 w-full pt-4 mt-4",
         ),
         _score_panel(),
         class_name="flex flex-col gap-4 w-full",
@@ -436,7 +436,7 @@ def _score_panel() -> rx.Component:
             ),
             class_name="flex flex-wrap items-center gap-2 mt-4",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -500,7 +500,7 @@ def _contact_card(item: ContactRow) -> rx.Component:
             class_name="flex flex-wrap items-center gap-2 mt-3",
         ),
         key=item["id"].to_string(),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -564,7 +564,7 @@ def _tx_card(item: TxRow, tone: str) -> rx.Component:
         ),
         _link_chips(item["links"]),
         key=item["id"].to_string(),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -853,7 +853,7 @@ def _document_card(item: DocumentRow) -> rx.Component:
             rx.fragment(),
         ),
         key=item["id"].to_string(),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -931,7 +931,7 @@ def _event_card(item: EventRow) -> rx.Component:
             class_name="flex items-start gap-3 w-full min-w-0",
         ),
         key=item["id"].to_string(),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -1001,5 +1001,5 @@ def crm_partner_detail() -> rx.Component:
                 class_name="flex flex-col items-center justify-center py-24 w-full",
             ),
         ),
-        class_name="flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-0 pt-6",
     )

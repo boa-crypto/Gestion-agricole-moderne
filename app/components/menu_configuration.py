@@ -107,7 +107,7 @@ def menu_stats(label: str, count) -> rx.Component:
             count,
             class_name="mt-2 ap-serif text-4xl text-[#d8fa5e]",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160F] p-5",
+        class_name="border-t border-[#F2EFE4]/12 w-full bg-[#14160F] pt-5",
     )
 
 
@@ -192,7 +192,7 @@ def menu_configuration_panel() -> rx.Component:
                 ),
                 class_name="mt-4 flex flex-wrap gap-5",
             ),
-            class_name="my-5 rounded-none border border-[#f2efe4]/12 bg-[#14160F] p-5",
+            class_name="border-t border-[#F2EFE4]/12 my-5 bg-[#14160F] pt-5",
         ),
         rx.el.p(
             MenuConfigurationState.notice,

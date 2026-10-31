@@ -222,7 +222,7 @@ def _schedule_card(schedule: ScheduleRow, key: str = "") -> rx.Component:
             class_name="text-[10px] font-medium text-[#c9c5b4]/35 mt-2 leading-relaxed",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -410,7 +410,7 @@ def _cost_form() -> rx.Component:
         ),
         on_submit=MaintenanceState.submit_cost,
         reset_on_submit=True,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 mt-4",
     )
 
 
@@ -528,7 +528,7 @@ def _usage_form() -> rx.Component:
         ),
         on_submit=MaintenanceState.submit_usage,
         reset_on_submit=True,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 mt-4",
     )
 
 
@@ -750,5 +750,5 @@ def equipment_detail() -> rx.Component:
                 "Sélectionnez un engin dans la flotte ou ajoutez une première machine.",
             ),
         ),
-        class_name="flex-1 min-w-0 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-0 w-full pt-6",
     )

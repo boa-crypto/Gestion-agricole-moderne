@@ -89,7 +89,7 @@ def _partner_card(item: PartnerHit) -> rx.Component:
             class_name="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full mt-3 border-t border-[#f2efe4]/12 pt-3",
         ),
         key=item["id"].to_string(),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/30 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-[#d8fa5e]/30 transition-colors",
     )
 
 
@@ -137,5 +137,5 @@ def crm_search() -> rx.Component:
                 class_name="text-sm font-medium text-[#c9c5b4]/50 mt-4",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

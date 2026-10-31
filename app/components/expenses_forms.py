@@ -112,7 +112,7 @@ def _shell(
                     class_name="flex items-center gap-3 w-full pb-5 border-b border-[#f2efe4]/12",
                 ),
                 body,
-                class_name="w-full max-w-4xl max-h-[88vh] overflow-y-auto rounded-none border border-[#f2efe4]/12 bg-[#0A0A08]/95 p-6 ",
+                class_name="border-t border-[#F2EFE4]/12 w-full max-w-4xl max-h-[88vh] overflow-y-auto bg-[#0A0A08]/95 pt-6",
             ),
             class_name="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4",
         ),
@@ -311,7 +311,7 @@ def expense_form_dialog() -> rx.Component:
                     ),
                     class_name="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3",
                 ),
-                class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-5",
+                class_name="border-t border-[#F2EFE4]/12 w-full pt-4 mt-5",
             ),
             _field(
                 "Commentaire",

@@ -194,7 +194,7 @@ def _module_card(row: ModuleRow, key: str = "") -> rx.Component:
             class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1 text-[10px] font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit mt-3",
         ),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -229,7 +229,7 @@ def audit_modules() -> rx.Component:
             ),
             class_name="grid grid-cols-1 xl:grid-cols-2 gap-3 w-full mt-5",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -305,7 +305,7 @@ def audit_filters() -> rx.Component:
             on_click=AuditState.reset_filters,
             class_name="flex items-center justify-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-full",
         ),
-        class_name="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+        class_name="border-t border-[#F2EFE4]/12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3 w-full pt-5",
     )
 
 
@@ -429,7 +429,7 @@ def audit_issues() -> rx.Component:
                 class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -520,7 +520,7 @@ def audit_categories() -> rx.Component:
             ),
             class_name="w-full overflow-x-auto rounded-none border border-[#f2efe4]/12 bg-[#0A0A08]/60 mt-5",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -593,7 +593,7 @@ def audit_entities() -> rx.Component:
             ),
             class_name="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 w-full mt-5",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 

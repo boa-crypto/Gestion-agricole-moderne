@@ -1,7 +1,7 @@
 import reflex as rx
 import reflex_enterprise as rxe
 
-from app.components.design import empty_state
+from app.components.design import empty_state, skeleton_rows
 from app.states.cartography_state import CartographyState, Option, ParcelShape
 
 _SELECT = "w-full appearance-none cursor-pointer rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2.5 pl-9 pr-9 text-sm font-medium text-[#f2efe4] focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors"
@@ -198,18 +198,7 @@ def map_sidebar() -> rx.Component:
         ),
         rx.cond(
             CartographyState.is_loading,
-            rx.el.div(
-                rx.el.div(
-                    class_name="animate-pulse h-28 rounded-none bg-[#16190f]"
-                ),
-                rx.el.div(
-                    class_name="animate-pulse h-28 rounded-none bg-[#16190f]"
-                ),
-                rx.el.div(
-                    class_name="animate-pulse h-28 rounded-none bg-[#16190f]"
-                ),
-                class_name="flex flex-col gap-3 mt-5",
-            ),
+            rx.el.div(skeleton_rows(3), class_name="flex flex-col gap-3 mt-5"),
             rx.cond(
                 CartographyState.shapes.length() > 0,
                 rx.el.div(

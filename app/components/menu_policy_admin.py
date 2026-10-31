@@ -169,7 +169,7 @@ def role_card(row) -> rx.Component:
         class_name=rx.cond(
             State.selected_role == row["key"],
             "w-full rounded-none border border-[#d8fa5e]/60 bg-[#d8fa5e]/5 p-5 text-left focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#14160F] p-5 text-left hover:border-[#d8fa5e]/40 focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
+            "border-t border-[#F2EFE4]/12 w-full bg-[#14160F] pt-5 text-left hover:border-[#d8fa5e]/40 focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
         ),
     )
 
@@ -236,7 +236,7 @@ def account_card(row) -> rx.Component:
         class_name=rx.cond(
             State.selected_account == row["id"],
             "w-full rounded-none border border-[#d8fa5e]/60 bg-[#d8fa5e]/5 p-5 text-left focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#14160F] p-5 text-left hover:border-[#d8fa5e]/40 focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
+            "border-t border-[#F2EFE4]/12 w-full bg-[#14160F] pt-5 text-left hover:border-[#d8fa5e]/40 focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
         ),
     )
 
@@ -254,7 +254,7 @@ def assignment_row(row) -> rx.Component:
         ),
         override_controls(row["target"], row["explicit"]),
         key=row["key"],
-        class_name="flex flex-wrap items-center justify-between gap-3 rounded-none border border-[#f2efe4]/12 bg-[#14160F] p-4",
+        class_name="border-t border-[#F2EFE4]/12 flex flex-wrap items-center justify-between gap-3 bg-[#14160F] pt-4",
     )
 
 
@@ -293,7 +293,7 @@ def account_detail() -> rx.Component:
             class_name="grid w-full grid-cols-1 gap-3 lg:grid-cols-2",
         ),
         permission_editor(),
-        class_name="mt-6 w-full rounded-none border border-[#f2efe4]/12 bg-[#14160F] p-4 sm:p-6",
+        class_name="border-t border-[#F2EFE4]/12 mt-6 w-full bg-[#14160F] pt-4 sm:pt-6",
     )
 
 
@@ -369,7 +369,7 @@ def audit_card(row) -> rx.Component:
         ),
         rx.el.p(row["date"], class_name="mt-1 text-xs text-[#ffb894]"),
         key=row["id"],
-        class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160F] p-5",
+        class_name="border-t border-[#F2EFE4]/12 bg-[#14160F] pt-5",
     )
 
 

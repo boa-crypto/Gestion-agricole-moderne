@@ -167,7 +167,7 @@ def _variety_card(variety: VarietyRow) -> rx.Component:
             ),
             rx.fragment(),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="border-t border-[#F2EFE4]/8 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
     )
 
 
@@ -298,7 +298,7 @@ def _species_card(species: SpeciesCard) -> rx.Component:
             ),
             class_name="w-full mt-5 pt-5 border-t border-white/[0.07]",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-5",
     )
 
 
@@ -339,7 +339,7 @@ def _consumer_card(consumer: ConsumerHint) -> rx.Component:
             class_name="flex items-center gap-1.5 w-full mt-3 pt-3 border-t border-[#f2efe4]/8",
         ),
         href=consumer["route"],
-        class_name="block w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-4 hover:border-[#d8fa5e]/25 hover:bg-[#16190f] transition-colors",
+        class_name="border-t border-[#F2EFE4]/8 block w-full pt-4 hover:border-t-[#D8FA5E]/40 hover:bg-[#16190f] transition-colors",
     )
 
 
@@ -416,7 +416,7 @@ def _culture_head() -> rx.Component:
             ),
             class_name="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-2.5 w-full mt-4",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-5",
     )
 
 
@@ -442,7 +442,7 @@ def _consumers_block() -> rx.Component:
             rx.foreach(CatalogBrowserState.consumers, _consumer_card),
             class_name="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-3 w-full mt-4",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-5",
     )
 
 

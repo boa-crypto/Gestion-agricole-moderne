@@ -263,7 +263,7 @@ def _parcel_body() -> rx.Component:
                 ),
                 class_name="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3",
             ),
-            class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-5",
+            class_name="border-t border-[#F2EFE4]/12 pt-4 mt-5",
         ),
         rx.el.div(
             rx.el.label(
@@ -325,7 +325,7 @@ def _catalog_hint() -> rx.Component:
             href="/referentiel",
             class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-3 py-1.5 text-[11px] font-semibold hover:bg-[#d8fa5e]/20 transition-colors w-fit shrink-0",
         ),
-        class_name="flex flex-col sm:flex-row sm:items-center gap-3 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-6",
+        class_name="border-t border-[#F2EFE4]/12 flex flex-col sm:flex-row sm:items-center gap-3 w-full pt-4 mt-6",
     )
 
 

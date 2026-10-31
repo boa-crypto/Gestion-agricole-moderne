@@ -48,7 +48,7 @@ def _detail_block(title: str, body: rx.Var, icon: str) -> rx.Component:
             body,
             class_name="text-sm font-medium text-[#c9c5b4]/70 leading-relaxed mt-2",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -172,9 +172,9 @@ def guide_dictionary() -> rx.Component:
                     ),
                     rx.fragment(),
                 ),
-                class_name="flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-5",
+                class_name="border-t border-[#F2EFE4]/8 flex-1 min-w-0 pt-5",
             ),
             class_name="flex flex-col xl:flex-row gap-4 w-full mt-5",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

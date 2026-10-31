@@ -124,7 +124,7 @@ def stock_note_bar() -> rx.Component:
             "La note accompagne chaque décision : elle explique six mois plus tard pourquoi le chantier a été tenu ou reporté.",
             class_name="text-[10px] font-medium text-[#c9c5b4]/40 mt-2",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -314,7 +314,7 @@ def _item_card(item: StockItem, key: str = "") -> rx.Component:
                 "warn",
                 "w-full rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/[0.06] p-4",
             ),
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+            "border-t border-[#F2EFE4]/12 w-full pt-4",
         ),
     )
 
@@ -427,7 +427,7 @@ def _selection_block() -> rx.Component:
                         class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-3 leading-relaxed",
                     ),
                 ),
-                class_name="flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+                class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-0 pt-4",
             ),
             rx.el.div(
                 rx.el.span(
@@ -450,7 +450,7 @@ def _selection_block() -> rx.Component:
                         class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-3",
                     ),
                 ),
-                class_name="w-full xl:w-[26rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+                class_name="border-t border-[#F2EFE4]/12 w-full xl:w-[26rem] shrink-0 pt-4",
             ),
             class_name="flex flex-col xl:flex-row gap-3 w-full mt-4",
         ),
@@ -595,7 +595,7 @@ def stock_control_panel() -> rx.Component:
                 class_name="text-sm font-medium text-[#c9c5b4]/50 mt-6",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )
 
 
@@ -659,5 +659,5 @@ def stock_diagnostic_tile() -> rx.Component:
                 class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

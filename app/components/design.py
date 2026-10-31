@@ -852,6 +852,26 @@ def skeleton(class_name: str = "h-4 w-full") -> rx.Component:
     )
 
 
+def skeleton_rows(count: int = 4, *, avatar: bool = True) -> rx.Component:
+    """Silhouette d'une liste : médaillon puis deux lignes de texte."""
+    return rx.el.div(
+        *[
+            rx.el.div(
+                skeleton("h-10 w-10 shrink-0") if avatar else rx.fragment(),
+                rx.el.div(
+                    skeleton("h-3 w-40"),
+                    skeleton("h-3 w-24"),
+                    class_name="flex flex-col gap-2",
+                ),
+                class_name="flex items-center gap-3 border-b border-[#F2EFE4]/8 py-4",
+            )
+            for _ in range(count)
+        ],
+        class_name="flex flex-col w-full",
+        aria_busy="true",
+    )
+
+
 def empty_state(
     icon: str,
     title: rx.Var | str,

@@ -148,7 +148,7 @@ def _profil() -> rx.Component:
                 AdministrationState.detail["notes"],
                 class_name="text-sm font-medium text-[#c9c5b4]/70 mt-2",
             ),
-            class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 md:col-span-2",
+            class_name="border-t border-[#F2EFE4]/12 pt-4 md:col-span-2",
         ),
         class_name="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5",
     )
@@ -192,7 +192,7 @@ def _organisation() -> rx.Component:
                 AdministrationState.detail["function_responsibilities"],
                 class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-2",
             ),
-            class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+            class_name="border-t border-[#F2EFE4]/12 pt-4",
         ),
         class_name="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5",
     )
@@ -220,7 +220,7 @@ def _role_card(role: RoleRow) -> rx.Component:
             "Attribué par " + role["granted_by"] + " · " + role["granted_on"],
             class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-1",
         ),
-        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 w-full",
+        class_name="border-t border-[#F2EFE4]/12 pt-4 w-full",
     )
 
 
@@ -250,7 +250,7 @@ def _perm_group(group: PermGroup) -> rx.Component:
             rx.foreach(group["actions"], chip),
             class_name="flex flex-wrap items-center gap-1.5 mt-2",
         ),
-        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 w-full",
+        class_name="border-t border-[#F2EFE4]/12 pt-4 w-full",
     )
 
 
@@ -298,7 +298,7 @@ def _scope_card(scope: ScopeRow) -> rx.Component:
             scope["detail"],
             class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-1",
         ),
-        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 w-full",
+        class_name="border-t border-[#F2EFE4]/12 pt-4 w-full",
     )
 
 
@@ -326,7 +326,7 @@ def _assignment_card(item: AssignmentRow) -> rx.Component:
             chip(item["season"]),
             class_name="flex flex-wrap items-center gap-1.5 mt-2",
         ),
-        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 w-full",
+        class_name="border-t border-[#F2EFE4]/12 pt-4 w-full",
     )
 
 
@@ -360,7 +360,7 @@ def _scope_tab() -> rx.Component:
                 ),
                 class_name="flex flex-wrap items-center gap-2 mt-2",
             ),
-            class_name="rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/[0.05] p-4 w-full",
+            class_name="border-l-2 border-[#D8FA5E] bg-[#D8FA5E]/[0.05] pl-3 pr-2 py-3 w-full",
         ),
         rx.el.div(
             rx.el.p(
@@ -419,7 +419,7 @@ def activity_row(item: ActivityRow) -> rx.Component:
             ),
             class_name="flex flex-wrap items-center gap-2 mt-2",
         ),
-        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 w-full",
+        class_name="border-t border-[#F2EFE4]/12 pt-4 w-full",
     )
 
 

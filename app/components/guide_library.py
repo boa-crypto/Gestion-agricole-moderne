@@ -51,7 +51,7 @@ def _article_item(article: ArticleCard, key: str = "") -> rx.Component:
         class_name=rx.cond(
             GuideState.active_article_slug == article["slug"],
             "w-full rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/[0.07] p-4 text-left ring-2 ring-[#d8fa5e]/30 transition-all",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 text-left hover:border-[#d8fa5e]/25 transition-all",
+            "border-t border-[#F2EFE4]/12 w-full pt-4 text-left hover:border-t-[#D8FA5E]/40 transition-all",
         ),
     )
 
@@ -91,7 +91,7 @@ def _article_list() -> rx.Component:
                 class_name="mt-5",
             ),
         ),
-        class_name="w-full xl:w-[22rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full xl:w-[22rem] shrink-0 pt-5",
     )
 
 
@@ -143,7 +143,7 @@ def _reading_block(
             rx.foreach(paragraphs, _paragraph),
             class_name="flex flex-col gap-3 w-full mt-4",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-5",
     )
 
 
@@ -212,7 +212,7 @@ def _procedure_card(procedure: ProcedureCard, key: str = "") -> rx.Component:
         class_name=rx.cond(
             GuideState.open_procedure_slug == procedure["slug"],
             "w-full rounded-none border border-[#ff8a5b]/40 bg-[#ff8a5b]/[0.07] p-4 text-left transition-all",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 text-left hover:border-[#ff8a5b]/30 transition-all",
+            "border-t border-[#F2EFE4]/12 w-full pt-4 text-left hover:border-[#ff8a5b]/30 transition-all",
         ),
     )
 
@@ -355,7 +355,7 @@ def _step(step: ProcedureStep, key: str = "") -> rx.Component:
         class_name=rx.cond(
             GuideState.done_steps.contains(step["id"]),
             "w-full rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/[0.05] p-4",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-4",
+            "border-t border-[#F2EFE4]/8 w-full pt-4",
         ),
     )
 
@@ -572,7 +572,7 @@ def _article_reader() -> rx.Component:
             ),
             rx.fragment(),
         ),
-        class_name="w-full flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 md:p-8 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full flex-1 min-w-0 pt-6 md:p-8",
     )
 
 

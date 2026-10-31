@@ -49,7 +49,7 @@ def _kpi(label: str, value: rx.Var | str, unit: str, tone: str) -> rx.Component:
             ),
             class_name=f"flex items-end gap-1.5 mt-2 {tone}",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] p-4",
+        class_name="border-t border-[#F2EFE4]/8 w-full pt-4",
     )
 
 
@@ -331,7 +331,7 @@ def crm_register_toolbar() -> rx.Component:
                 class_name="w-full mt-5 border-t border-[#f2efe4]/12 pt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-5",
     )
 
 
@@ -584,8 +584,8 @@ def _card(row: RegisterRow) -> rx.Component:
         key=row["id"].to_string(),
         class_name=rx.cond(
             row["is_archived"],
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-4 opacity-60",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+            "border-t border-[#F2EFE4]/8 w-full pt-4 opacity-60",
+            "border-t border-[#F2EFE4]/12 w-full pt-4",
         ),
     )
 
@@ -712,7 +712,7 @@ def _partner_card(item: ReportPartner) -> rx.Component:
             class_name="grid grid-cols-2 gap-2 w-full mt-3 border-t border-[#f2efe4]/12 pt-3",
         ),
         key=item["id"].to_string(),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
     )
 
 
@@ -782,7 +782,7 @@ def crm_register_reports() -> rx.Component:
                 rx.foreach(CrmRegistersState.report_months, _month_bar),
                 class_name="flex flex-col gap-3 w-full mt-4",
             ),
-            class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+            class_name="border-t border-[#F2EFE4]/12 w-full pt-5",
         ),
         rx.el.div(
             rx.el.div(
@@ -841,7 +841,7 @@ def crm_register_reports() -> rx.Component:
                 rx.foreach(CrmRegistersState.report_partners, _partner_card),
                 class_name="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mt-4 lg:hidden",
             ),
-            class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+            class_name="border-t border-[#F2EFE4]/12 w-full pt-5",
         ),
         class_name="flex flex-col gap-4 w-full",
     )

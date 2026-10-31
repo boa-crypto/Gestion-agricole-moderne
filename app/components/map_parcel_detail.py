@@ -206,7 +206,7 @@ def _draft_status() -> rx.Component:
             CartographyState.draw_hint,
             class_name="text-[11px] font-medium text-[#c9c5b4]/50 leading-relaxed mt-3",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-8",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 mt-8",
     )
 
 
@@ -310,7 +310,7 @@ def _geometry_history() -> rx.Component:
                 class_name="text-[11px] font-medium text-[#c9c5b4]/45 leading-relaxed mt-3",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-8",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 mt-8",
     )
 
 
@@ -382,7 +382,7 @@ def _geometry_form() -> rx.Component:
             class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit mt-3",
         ),
         on_submit=CartographyState.submit_geometry,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-8",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 mt-8",
     )
 
 
@@ -595,5 +595,5 @@ def map_parcel_detail() -> rx.Component:
                 "Cliquez une parcelle sur la carte ou dans la liste pour afficher sa fiche complète.",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
     )

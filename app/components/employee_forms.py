@@ -222,7 +222,7 @@ def _body() -> rx.Component:
                 ),
                 class_name="flex items-center gap-2.5 cursor-pointer w-fit",
             ),
-            class_name="flex flex-wrap items-center gap-6 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-5",
+            class_name="border-t border-[#F2EFE4]/12 flex flex-wrap items-center gap-6 pt-4 mt-5",
         ),
         _field(
             "Notes RH",
