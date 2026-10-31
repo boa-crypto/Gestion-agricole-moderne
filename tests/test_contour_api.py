@@ -32,7 +32,7 @@ async def main():
         assert state.summary[key] >= 0, f"Compteur manquant : {key}"
     assert state.summary["total"] == state.kpis["parcels"]
     assert state.has_items != None
-    assert state.item_count == state.items.length()
+    assert state.item_count == len(state.items)
 
     if state.items:
         row = state.items[0]

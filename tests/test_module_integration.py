@@ -37,13 +37,13 @@ async def main():
     assert contours.control_rate_pct != "", "Taux de contrôle affiché"
     assert contours.open_total >= 0
 
-    if stocks.items.length() > 0:
+    if len(stocks.items) > 0:
         product_id = stocks.items[0]["id"]
         await run_event(
             stocks.order_stock, product_id, "Intégration: commande engagée."
         )
         assert stocks.notice != "", "La décision doit être annoncée"
-    if contours.items.length() > 0:
+    if len(contours.items) > 0:
         parcel_id = contours.items[0]["id"]
         await run_event(
             contours.mark_verified, parcel_id, "Intégration: contour vérifié."
@@ -63,7 +63,7 @@ async def main():
     audit = AuditState()
     await run_event(audit.load_audit)
     assert audit.triage_label != "", "Le tri doit être lisible"
-    assert audit.healthy_module_count == audit.healthy_modules.length()
+    assert audit.healthy_module_count == len(audit.healthy_modules)
     for module in audit.healthy_modules:
         assert module["status"] == "PRESENT", "Un module sain est présent"
         assert module["blocking_count"] == 0, (
@@ -88,7 +88,7 @@ async def main():
     await run_event(search.load_search)
     assert search.error == ""
     kinds = [section["kind"] for section in search.sections]
-    assert kinds.contains("remediation"), (
+    assert ("remediation") in kinds, (
         "Les décisions de remédiation doivent être indexées"
     )
     remediation_section = [
@@ -126,7 +126,7 @@ async def main():
         await run_event(help_state.open_topic, context_key, topic)
         assert help_state.has_focus is True
         assert help_state.focus_hint != ""
-        assert help_state.focus_rules.length() > 0, (
+        assert len(help_state.focus_rules) > 0, (
             f"Aucune règle de cohérence pour {topic}"
         )
     await run_event(help_state.close_panel)

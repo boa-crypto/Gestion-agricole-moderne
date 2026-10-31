@@ -69,7 +69,7 @@ async def main():
 
     keys = [category["key"] for category in state.categories]
     for expected in EXPECTED_KEYS:
-        assert keys.contains(expected), f"Catégorie manquante : {expected}"
+        assert (expected) in keys, f"Catégorie manquante : {expected}"
 
     for article in state.articles:
         assert article["body_farmer"] != "", (
@@ -79,14 +79,14 @@ async def main():
             "Chaque article doit avoir sa lecture AgriPro"
         )
 
-    assert state.featured_articles.length() > 0, (
+    assert len(state.featured_articles) > 0, (
         "Des articles mis en avant doivent exister"
     )
-    assert state.why_rules.length() > 0, "Des règles « Pourquoi ? » attendues"
-    assert state.warning_rules.length() > 0, (
+    assert len(state.why_rules) > 0, "Des règles « Pourquoi ? » attendues"
+    assert len(state.warning_rules) > 0, (
         "Des règles « Attention » attendues"
     )
-    assert state.frequent_questions.length() > 0, (
+    assert len(state.frequent_questions) > 0, (
         "Des questions fréquentes doivent être marquées"
     )
     assert state.current_version["entry_count"] > 0, (

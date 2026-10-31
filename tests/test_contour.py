@@ -38,7 +38,7 @@ async def main():
     await run_event(state.load_contours)
     assert state.is_loading is False, "Le chargement doit être terminé"
     assert state.today_label != "", "La date doit être calculée"
-    assert state.rows.length() > 0, "Des îlots doivent être audités"
+    assert len(state.rows) > 0, "Des îlots doivent être audités"
 
     for row in state.rows:
         assert CONTROL_ORDER.count(row["control"]) == 1, (
@@ -49,7 +49,7 @@ async def main():
         assert row["validation_label"] != ""
         assert row["gap_pct"] >= 0
 
-    assert state.kpis["parcels"] == state.rows.length()
+    assert state.kpis["parcels"] == len(state.rows)
     assert (state.control_rate >= 0) & (state.control_rate <= 100)
     assert state.verdict_label != ""
 
@@ -63,7 +63,7 @@ async def main():
     await run_event(state.verify_contour, parcel_id)
     assert await log_count() == before + 1, "La décision doit être consignée"
     updated = [row for row in state.rows if row["id"] == parcel_id]
-    assert updated.length() == 1
+    assert len(updated) == 1
     assert updated[0]["validation"] == VALIDATION_VERIFIE
     assert updated[0]["decision_count"] > 0
 
@@ -75,7 +75,7 @@ async def main():
     updated = [row for row in state.rows if row["id"] == parcel_id]
     assert updated[0]["validation"] == VALIDATION_A_RELEVER
 
-    assert state.logs.length() > 0, "Le journal doit être alimenté"
+    assert len(state.logs) > 0, "Le journal doit être alimenté"
     for entry in state.logs:
         assert entry["action_label"] != ""
         assert entry["label"] != ""
@@ -88,7 +88,7 @@ async def main():
     for row in state.visible_rows:
         assert row["validation"] == VALIDATION_NONE
     await run_event(state.reset_filters)
-    assert state.visible_count == state.rows.length()
+    assert state.visible_count == len(state.rows)
 
     control_key = state.rows[0]["control"]
     await run_event(state.focus_control, control_key)
@@ -97,7 +97,7 @@ async def main():
     await run_event(state.reset_filters)
 
     await run_event(state.set_search, state.rows[0]["name"][:5])
-    assert state.rows.length() >= 1, "La recherche doit trouver un îlot"
+    assert len(state.rows) >= 1, "La recherche doit trouver un îlot"
     await run_event(state.reset_filters)
 
     total = state.kpis["conforme"] + state.kpis["a_verifier"]

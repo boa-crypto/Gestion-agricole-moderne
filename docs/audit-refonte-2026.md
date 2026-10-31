@@ -106,13 +106,14 @@ python -m pytest tests/test_access.py tests/test_crm.py tests/test_crm_overview.
   tests/test_local_login.py tests/test_menu_policy.py -q
 ```
 
-**État réel de la suite.** `pytest` fonctionne ; c'est `tests/test_utils.py`
-qui manque au dépôt (jamais versionné). Vingt-cinq modules l'importent
-(`from test_utils import run_event`) et ne peuvent donc pas être collectés :
-`test_stock`, `test_maintenance`, `test_expenses`, `test_guide*`,
-`test_remediation*`, `test_contour*`, `test_phenology*`, `test_search`,
-`test_admin_operations`, `test_cartography`, `test_catalog`, etc. Ils sont
-écrits comme des scripts (`async def main()`), pas comme des cas pytest.
+**État réel de la suite.** `pytest` fonctionne sur vingt modules. Les
+vingt-cinq autres fichiers de `tests/` sont des scripts autonomes
+(`async def main()`) qui importaient un `tests/test_utils.py` jamais versionné.
+Ce fichier est désormais reconstitué, et `scripts/run_legacy_tests.py` les
+exécute : **16 sur 25 réussissent**, les neuf autres étant documentés dans
+`docs/validation-scripts-2026.md`. Le rétablissement du harnais a révélé deux
+bugs applicatifs réels (appels de méthodes privées sans `self` dans
+`contour_state.py` et `remediation_state.py`), corrigés depuis.
 
 Le sous-ensemble exécutable — vingt modules — donne **124 tests réussis et un
 seul échec** : `test_weather::test_build_payload_from_api`, qui sort sur le

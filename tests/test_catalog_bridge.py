@@ -63,10 +63,10 @@ async def main():
     assert int(unlinked or 0) == 0, "Variétés non reliées restantes"
 
     # --- Options variétales du référentiel structuré ----------------------
-    assert parcels.variety_options.length() > 100, (
+    assert len(parcels.variety_options) > 100, (
         "Les parcelles doivent proposer les variétés du référentiel"
     )
-    assert parcels.catalog_variety_count == parcels.variety_options.length()
+    assert parcels.catalog_variety_count == len(parcels.variety_options)
     for option in parcels.variety_options[:20]:
         assert option["label"].count("·") >= 2, (
             f"Libellé non hiérarchisé : {option['label']}"
@@ -75,10 +75,10 @@ async def main():
             f"Variété absente du libellé : {option['label']}"
         )
     assert parcels.catalog_totals["categories"] >= 12
-    assert parcels.catalog_coverage_label.contains("catégories")
+    assert ("catégories") in parcels.catalog_coverage_label
 
     # --- Lecture référentielle des fiches culturales ----------------------
-    assert parcels.parcel_crops.length() > 0, (
+    assert len(parcels.parcel_crops) > 0, (
         "La parcelle doit porter des cultures"
     )
     assert parcels.has_catalog_links is True, (
@@ -95,7 +95,7 @@ async def main():
         assert crop["catalog_cycle_label"] != ""
         assert crop["catalog_water_label"] != ""
         assert crop["catalog_cycle_tone"] != ""
-    assert parcels.catalog_link_label.contains("reliée")
+    assert ("reliée") in parcels.catalog_link_label
 
     # --- Recherche globale ------------------------------------------------
     search = SearchState()
@@ -103,11 +103,11 @@ async def main():
     assert search.error == "", "Aucune erreur au chargement de la recherche"
     kinds = [chip["value"] for chip in search.chips]
     for kind in CATALOG_SEARCH_KINDS:
-        assert kinds.contains(kind), f"Type de recherche manquant : {kind}"
+        assert (kind) in kinds, f"Type de recherche manquant : {kind}"
 
     await run_event(search.set_term, "Deglet")
     found = [section["kind"] for section in search.sections]
-    assert found.contains("variete_referentiel"), (
+    assert ("variete_referentiel") in found, (
         "Les variétés du référentiel doivent être retrouvées"
     )
     for section in search.sections:
@@ -125,12 +125,12 @@ async def main():
         for section in search.sections
         if section["kind"] in CATALOG_SEARCH_KINDS
     ]
-    assert catalog_sections.length() >= 2, (
+    assert len(catalog_sections) >= 2, (
         "Cultures et espèces du référentiel doivent remonter"
     )
 
     await run_event(search.set_entity_filter, "categorie_referentiel")
-    assert search.sections.length() == 1
+    assert len(search.sections) == 1
     assert search.sections[0]["count"] >= 1
 
     await run_event(search.reset_search)
@@ -140,12 +140,12 @@ async def main():
     await run_event(audit.load_audit)
     assert audit.is_loading is False
     modules = {item["key"]: item for item in audit.modules}
-    assert modules.contains("referentiel"), "Le référentiel doit être audité"
+    assert ("referentiel") in modules, "Le référentiel doit être audité"
     referentiel = modules["referentiel"]
     assert referentiel["route"] == "/referentiel"
     assert referentiel["records"] > 100, "Volumes du référentiel non comptés"
     assert referentiel["tables"] == 4
-    assert referentiel["empty_tables"].length() == 0, (
+    assert referentiel["empty_tables"] == [], (
         f"Entités vides : {referentiel['empty_tables']}"
     )
     assert referentiel["status"] != "MANQUANT", (
@@ -161,13 +161,13 @@ async def main():
         "crop_species",
         "crop_catalog_variety",
     ):
-        assert tables.contains(table), f"Entité absente de l'audit : {table}"
+        assert (table) in tables, f"Entité absente de l'audit : {table}"
     unlinked_issues = [
         issue
         for issue in audit.issues
         if issue["id"] == "catalog-variete-non-liee"
     ]
-    assert unlinked_issues.length() == 0, (
+    assert len(unlinked_issues) == 0, (
         "Aucun lien historique ne doit manquer après matérialisation"
     )
 
@@ -179,7 +179,7 @@ async def main():
         assert spec["title"] != "" and spec["detail"] != ""
 
     print(
-        f"✓ {totals['varieties']} variétés reliées · {parcels.variety_options.length()} options parcellaires · {parcels.catalog_linked_crops.length()} culture(s) documentée(s) · module d'audit « {referentiel['label']} » à {referentiel['coverage_pct']}"
+        f"✓ {totals['varieties']} variétés reliées · {len(parcels.variety_options)} options parcellaires · {len(parcels.catalog_linked_crops)} culture(s) documentée(s) · module d'audit « {referentiel['label']} » à {referentiel['coverage_pct']}"
     )
     print("=== Test réussi ===")
 

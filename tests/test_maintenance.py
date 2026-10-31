@@ -9,20 +9,20 @@ async def main():
     state = MaintenanceState()
     await run_event(state.load_fleet)
     assert state.is_loading is False, "Le chargement doit être terminé"
-    assert state.equipments.length() > 0, "La flotte doit être alimentée"
+    assert len(state.equipments) > 0, "La flotte doit être alimentée"
     assert state.selected_equipment_id > 0, "Un engin doit être sélectionné"
-    assert state.operations.length() > 0, (
+    assert len(state.operations) > 0, (
         "Le journal de maintenance doit être alimenté"
     )
-    assert state.deadlines.length() > 0, (
+    assert len(state.deadlines) > 0, (
         "Le planning d'échéances doit être alimenté"
     )
-    assert state.employee_options.length() > 0, (
+    assert len(state.employee_options) > 0, (
         "Les responsables doivent être disponibles"
     )
 
     await run_event(state.set_search, "Tracteur")
-    assert state.equipments.length() >= 1, "La recherche doit trouver un engin"
+    assert len(state.equipments) >= 1, "La recherche doit trouver un engin"
     await run_event(state.reset_filters)
     assert state.search == "", "Les filtres doivent être réinitialisés"
 
@@ -71,7 +71,7 @@ async def main():
 
     await run_event(state.open_operation_create)
     operation = {
-        "equipment_id": state.selected_equipment_id.to_string(),
+        "equipment_id": str(state.selected_equipment_id),
         "schedule_id": "",
         "title": "Révision de test 100 h",
         "kind": "PREVENTIVE",
@@ -103,13 +103,13 @@ async def main():
         for operation in state.operations
         if operation["title"] == "Révision de test 100 h"
     ]
-    assert created_operations.length() > 0, (
+    assert len(created_operations) > 0, (
         "L'opération créée doit apparaître au journal"
     )
 
     operation_id = created_operations[0]["id"]
     cost_form = {
-        "maintenance_id": operation_id.to_string(),
+        "maintenance_id": str(operation_id),
         "type": "PIECE",
         "label": "Filtre à huile test",
         "reference": "FLT-99",
@@ -121,7 +121,7 @@ async def main():
     }
     await run_event(state.submit_cost, cost_form)
     assert state.cost_error == "", "La ligne de coût doit être acceptée"
-    assert state.costs.length() >= 1, "La ligne de coût doit apparaître"
+    assert len(state.costs) >= 1, "La ligne de coût doit apparaître"
 
     usage_form = {
         "used_on": today.isoformat(),
@@ -133,11 +133,11 @@ async def main():
     }
     await run_event(state.submit_usage, usage_form)
     assert state.usage_error == "", "Le relevé doit être accepté"
-    assert state.usage_logs.length() >= 1, "Le relevé d'usage doit apparaître"
+    assert len(state.usage_logs) >= 1, "Le relevé d'usage doit apparaître"
 
     await run_event(state.mark_operation_done, operation_id)
     print(
-        f"✓ Engins : {state.equipments.length()}, opérations : {state.operations.length()}, échéances : {state.deadlines.length()}, alertes : {state.fleet_alerts.length()}"
+        f"✓ Engins : {len(state.equipments)}, opérations : {len(state.operations)}, échéances : {len(state.deadlines)}, alertes : {len(state.fleet_alerts)}"
     )
     print("=== Test réussi ===")
 
