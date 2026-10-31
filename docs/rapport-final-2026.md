@@ -161,16 +161,21 @@ orpheline rejetée par la clé étrangère) — détail dans
    d'événement Reflex, quatre portent sur des jeux de démonstration incomplets
    ou sur des assertions antérieures à la refonte. Détail et causes :
    `docs/validation-scripts-2026.md`.
-3. **Chargement au montage** : les panneaux CRM sont corrigés — le chargement
-   est déclenché côté serveur, après `verify_page`, par
-   `NavigationState.load_crm_panel` ; vérifié à l'écran sur `?vue=ventes`
-   (3 pièces) et `?vue=clients` (3 tiers). **Restent ouvertes** : `/parcelles`
-   (0 îlot, listes en squelette) et `/phenologie`. Sur `/parcelles`, le
-   chargeur `ParcelsState.load_space` est bien dépêché, mais l'écran ne reçoit
-   jamais son résultat ; le même code exécuté hors serveur renvoie 7 parcelles.
-   La cause n'est pas établie : à instruire en priorité au lot suivant, en
-   comparant le comportement du gestionnaire enchaîné (`dispatch_loader`) et
-   celui du montage.
+3. **Chargement au montage** : **résolu**. Deux causes distinctes, toutes deux
+   corrigées.
+   - *Panneaux CRM* : `on_mount` n'étant pas rejoué en navigation cliente ni en
+     accès direct, le chargement est déclenché côté serveur, après
+     `verify_page`, par `NavigationState.load_crm_panel` (`register_loaders`).
+   - *Pages en squelette* (`/parcelles`, `/cartographie`, `/phenologie`) :
+     `rx.asession` est un attribut paresseux du paquet `reflex` ; le premier
+     accès importait `reflex.model` (alembic et tous les dialectes SQLAlchemy)
+     au cœur de la requête, verrou d'import en main, et figeait la boucle
+     d'événements. Le module est désormais chargé à l'import de
+     `app/database.py`.
+   Vérifié à l'écran : `/parcelles` (7 îlots, 155.3 ha), `/cartographie`
+   (7 contours), `/phenologie` (11 profils, 88 stades), CRM `?vue=ventes`
+   (3 pièces), `?vue=clients` (3 tiers), `?cockpit=financier&vue=creances`
+   (3 lignes), `?cockpit=achats&vue=fournisseurs` (5 tiers).
 4. **Données de démonstration incomplètes** : les seeders ne couvrent ni le
    guide, ni les charges, ni l'administration, ni l'audit — ces écrans
    s'affichent avec leurs états vides.

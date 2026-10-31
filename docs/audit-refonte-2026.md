@@ -87,6 +87,7 @@ Trois lots ont été livrés (`b8b7edd`, `6c19339`, `4da760d`) :
 | Données de démonstration | les seeders ne couvrent ni le guide, ni les charges, ni l'administration, ni l'audit | aperçus |
 | Chargement initial CRM | **résolu** : l'événement `on_mount` du panneau n'étant pas rejoué en navigation cliente ni en accès direct, le chargement est désormais déclenché côté serveur par `NavigationState.load_crm_panel`, branché dans `register_loaders("crm", …)` donc après `verify_page`. Vérifié à l'écran sur `?vue=ventes` (3 pièces) et `?vue=clients` (3 tiers) | 2 panneaux |
 | Suite de tests | **résolu** : `tests/test_utils.py` versionné ; 26 scripts hérités exécutables, 19 réussissent | 26 fichiers |
+| Pages figées en squelette | **résolu** : `rx.asession` est un attribut paresseux ; son premier accès importait `reflex.model` (alembic) dans la boucle d'événements et la bloquait. `import reflex.model` ajouté à l'import de `app/database.py`. `/parcelles`, `/cartographie` et `/phenologie` s'affichent désormais | 3 écrans |
 
 ## 6. Commandes de lancement, de test et de validation
 

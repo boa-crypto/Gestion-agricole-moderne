@@ -32,9 +32,10 @@ node scripts/tools/route_tour.js http://127.0.0.1:3000 rapport.json 4000
 | `/administration` | 200 | Utilisateurs, rôles & permissions |
 | `/audit` | 200 | Cartographie AgriPro ↔ Guide |
 
-`/phenologie` n'affiche pas de titre au moment de la mesure : sa page est en
-squelette (`phenology_admin` charge son référentiel au montage). Le titre
-apparaît dès que le chargement aboutit.
+`/phenologie` n'affiche pas de titre au moment de la mesure : sa page était en
+squelette. La cause est identifiée et corrigée (import paresseux de
+`reflex.model` bloquant la boucle d'événements, voir `docs/rapport-final-2026.md`
+§10) ; la page rend désormais son contenu (11 profils, 88 stades).
 
 ### Panneaux CRM en accès direct (lot 10)
 
@@ -46,6 +47,11 @@ navigation préalable :
 | --- | --- | --- |
 | `/crm?cockpit=commercial&vue=ventes` | registre des ventes | 3 pièces, HT 27 496 800 · TVA 5 224 392 · TTC 32 721 192 DA, réglé 23 802 475, reste dû 8 918 717 |
 | `/crm?cockpit=commercial&vue=clients` | espace clients | 3 tiers, fiche « Coopérative Dattes El Oued » ouverte, indicateurs clients renseignés |
+| `/crm?cockpit=financier&vue=creances` | registre des créances | 3 lignes, TTC 32 721 192, reste dû 8 918 717 |
+| `/crm?cockpit=achats&vue=fournisseurs` | espace fournisseurs | 5 tiers, fiche « Atelier Mécanique Batna SARL » ouverte |
+
+Chaque onglet appartient à un cockpit : `vue=creances` sous `cockpit=commercial`
+retombe sur la vue générale, comportement normal de `resolve_navigation_entry`.
 
 Un onglet absent du cockpit demandé (`vue=achats` sous `cockpit=commercial`)
 retombe sur la vue générale : c'est le comportement de `resolve_navigation_entry`,
