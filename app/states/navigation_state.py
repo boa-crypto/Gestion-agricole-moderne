@@ -33,6 +33,25 @@ def resolve_navigation_entry(
     return ROUTE_MATRIX[page]
 
 
+async def _load_crm_panel(state, tab: str) -> None:
+    """Charge côté serveur le contenu d'un onglet CRM.
+
+    Le montage des composants (`on_mount`) n'est pas toujours exécuté — accès
+    direct par URL, onglet changé avant l'hydratation. La navigation déclenche
+    donc elle-même le chargement du registre ou de l'espace tiers concerné ;
+    le montage reste un filet de sécurité, pas la seule voie.
+    """
+    from app.states.crm_partners_state import SPACE_TITLES, CrmPartnersState
+    from app.states.crm_registers_state import REGISTERS, CrmRegistersState
+
+    if tab in REGISTERS:
+        registers = await state.get_state(CrmRegistersState)
+        await registers.enter_register_now(tab)
+    elif tab in SPACE_TITLES:
+        partners = await state.get_state(CrmPartnersState)
+        await partners.enter_space_now(tab)
+
+
 class NavigationState(rx.State):
     page_key: str = "cockpit"
     selected_cockpit: str = "global"
@@ -249,6 +268,21 @@ class NavigationState(rx.State):
             crm.active_tab = entry["tab"]
         yield MenuAuthState.verify_page(page, generation)
 
+    @rx.event
+    async def load_crm_panel(self):
+        """Charge le contenu de l'onglet CRM courant après vérification.
+
+        Déclaré comme chargeur de page (`register_loaders`) : il s'exécute
+        dans la chaîne de `dispatch_loader`, donc après `verify_page`, y
+        compris lors d'un accès direct par URL.
+        """
+        if self.page_key != "crm":
+            return
+        from app.states.crm_state import CrmState
+
+        crm = await self.get_state(CrmState)
+        await _load_crm_panel(self, crm.active_tab)
+
     @rx.event(background=True)
     async def select_crm_tab(self, tab: str):
         from app.states.menu_auth_state import MenuAuthState
@@ -306,6 +340,7 @@ class NavigationState(rx.State):
                 auth.requested_entry = matches[0]["key"]
                 self.current_key = matches[0]["key"]
                 self.selected_cockpit = matches[0]["cockpit"]
+        await _load_crm_panel(self, tab)
 
     @rx.event
     def select_cockpit(self, key: str):

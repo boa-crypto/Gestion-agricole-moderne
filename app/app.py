@@ -160,7 +160,12 @@ register_loaders(
 register_loaders(
     "charges", NavigationState.refresh_navigation, ExpensesState.load_expenses
 )
-register_loaders("crm", NavigationState.refresh_navigation, CrmState.load_crm)
+register_loaders(
+    "crm",
+    NavigationState.refresh_navigation,
+    CrmState.load_crm,
+    NavigationState.load_crm_panel,
+)
 register_loaders(
     "recherche",
     NavigationState.refresh_navigation,

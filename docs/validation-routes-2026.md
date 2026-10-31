@@ -33,9 +33,23 @@ node scripts/tools/route_tour.js http://127.0.0.1:3000 rapport.json 4000
 | `/audit` | 200 | Cartographie AgriPro ↔ Guide |
 
 `/phenologie` n'affiche pas de titre au moment de la mesure : sa page est en
-squelette (`phenology_admin` charge son référentiel au montage, même symptôme
-que les panneaux CRM décrit dans `docs/audit-refonte-2026.md` §5). Le titre
+squelette (`phenology_admin` charge son référentiel au montage). Le titre
 apparaît dès que le chargement aboutit.
+
+### Panneaux CRM en accès direct (lot 10)
+
+Le CRM tient sur une route unique `/crm` ; l'onglet est porté par la requête
+(`?cockpit=commercial&vue=…`). Vérifié à la capture, en arrivant par l'URL, sans
+navigation préalable :
+
+| URL | Contenu attendu | Constaté |
+| --- | --- | --- |
+| `/crm?cockpit=commercial&vue=ventes` | registre des ventes | 3 pièces, HT 27 496 800 · TVA 5 224 392 · TTC 32 721 192 DA, réglé 23 802 475, reste dû 8 918 717 |
+| `/crm?cockpit=commercial&vue=clients` | espace clients | 3 tiers, fiche « Coopérative Dattes El Oued » ouverte, indicateurs clients renseignés |
+
+Un onglet absent du cockpit demandé (`vue=achats` sous `cockpit=commercial`)
+retombe sur la vue générale : c'est le comportement de `resolve_navigation_entry`,
+inchangé.
 
 ## Erreurs console
 

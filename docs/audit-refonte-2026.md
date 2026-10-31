@@ -85,8 +85,8 @@ Trois lots ont été livrés (`b8b7edd`, `6c19339`, `4da760d`) :
 | Responsive | vérifié sur 390 px pour le cockpit et les RH ; non revérifié sur les écrans lourds (CRM, administration, cartographie) | 6 écrans |
 | Accessibilité | focus visible global présent ; contrastes des légendes `text-[#C9C5B4]/45` à surveiller (≈ 3:1 sur encre) | global |
 | Données de démonstration | les seeders ne couvrent ni le guide, ni les charges, ni l'administration, ni l'audit | aperçus |
-| Chargement initial CRM | dans l'aperçu, les onglets Ventes/Clients s'affichent vides au premier rendu : l'événement `on_mount` du panneau n'est pas exécuté, il faut cliquer « Actualiser ». Reproduit à l'écran le 31/10 ; les mêmes données apparaissent immédiatement après le clic | 2 panneaux |
-| Suite de tests | `tests/test_utils.py` absent du dépôt : 25 modules non collectables | 25 fichiers |
+| Chargement initial CRM | **résolu** : l'événement `on_mount` du panneau n'étant pas rejoué en navigation cliente ni en accès direct, le chargement est désormais déclenché côté serveur par `NavigationState.load_crm_panel`, branché dans `register_loaders("crm", …)` donc après `verify_page`. Vérifié à l'écran sur `?vue=ventes` (3 pièces) et `?vue=clients` (3 tiers) | 2 panneaux |
+| Suite de tests | **résolu** : `tests/test_utils.py` versionné ; 26 scripts hérités exécutables, 19 réussissent | 26 fichiers |
 
 ## 6. Commandes de lancement, de test et de validation
 
@@ -110,7 +110,7 @@ python -m pytest tests/test_access.py tests/test_crm.py tests/test_crm_overview.
 vingt-cinq autres fichiers de `tests/` sont des scripts autonomes
 (`async def main()`) qui importaient un `tests/test_utils.py` jamais versionné.
 Ce fichier est désormais reconstitué, et `scripts/run_legacy_tests.py` les
-exécute : **18 sur 25 réussissent**, les sept autres étant documentés dans
+exécute : **19 sur 26 réussissent**, les sept autres étant documentés dans
 `docs/validation-scripts-2026.md`. Le rétablissement du harnais a révélé deux
 bugs applicatifs réels (appels de méthodes privées sans `self` dans
 `contour_state.py` et `remediation_state.py`), corrigés depuis.

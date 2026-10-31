@@ -144,7 +144,7 @@ Documents de référence :
 | Compilation | `python scripts/preflight.py --compile` | `compileall : OK` |
 | Construction des écrans | `python scripts/preflight.py` | 16/16, « Tous les écrans se construisent. » |
 | Tests exécutables | `python -m pytest` sur les 20 modules collectables | **124 réussis, 1 échec réseau** (`test_weather`, sortie internet coupée) |
-| Scripts hérités | `python scripts/run_legacy_tests.py` | **18 scripts sur 25** (détail : `docs/validation-scripts-2026.md`) |
+| Scripts hérités | `python scripts/run_legacy_tests.py` | **19 scripts sur 26** (détail : `docs/validation-scripts-2026.md`) |
 | Parcours des routes | `node scripts/tools/route_tour.js` | 16 routes sur 16 en 200, aucune erreur applicative en console |
 
 Quatre tests périmés ont été réparés (comparaisons de copie, attributs
@@ -161,11 +161,11 @@ orpheline rejetée par la clé étrangère) — détail dans
    d'événement Reflex, quatre portent sur des jeux de démonstration incomplets
    ou sur des assertions antérieures à la refonte. Détail et causes :
    `docs/validation-scripts-2026.md`.
-3. **Chargement au montage peu fiable dans l'aperçu** : les panneaux CRM, la
-   liste des parcelles et la page phénologie restent en squelette tant qu'un
-   clic « Actualiser » n'a pas eu lieu. Reproduit et consigné ; la cause
-   probable est la perte des événements `on_mount` au moment où le WebSocket de
-   l'aperçu se coupe.
+3. **Chargement au montage** : les panneaux CRM sont corrigés — le chargement
+   est déclenché côté serveur, après `verify_page`, par
+   `NavigationState.load_crm_panel` ; vérifié à l'écran sur `?vue=ventes`
+   (3 pièces) et `?vue=clients` (3 tiers). La liste des parcelles et la page
+   phénologie attendent le même traitement.
 4. **Données de démonstration incomplètes** : les seeders ne couvrent ni le
    guide, ni les charges, ni l'administration, ni l'audit — ces écrans
    s'affichent avec leurs états vides.

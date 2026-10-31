@@ -434,6 +434,7 @@ class CrmRegistersState(rx.State):
 
     is_loading: bool = False
     load_error: str = ""
+    loaded_register: str = ""
     is_saving: bool = False
     register: str = "ventes"
     search: str = ""
@@ -1452,17 +1453,17 @@ class CrmRegistersState(rx.State):
             await self._fetch_payments()
         self._compute_totals()
 
-    @rx.event
-    async def load_registers(self):
+    async def _load(self) -> None:
+        """Chargement complet du registre, indépendant du montage."""
         self.is_loading = True
         self.load_error = ""
-        yield
         try:
             await ensure_local_database()
             await ensure_crm_tables()
             await asyncio.to_thread(seed_crm_if_empty)
             await self._refresh_rows()
             await self._fetch_options()
+            self.loaded_register = self.register
         except Exception:  # noqa: BLE001 - l'écran doit rester lisible
             logging.exception("Chargement du registre impossible")
             self.load_error = (
@@ -1475,8 +1476,30 @@ class CrmRegistersState(rx.State):
             self.is_loading = False
 
     @rx.event
+    async def load_registers(self):
+        self.is_loading = True
+        yield
+        await self._load()
+
+    async def enter_register_now(self, register: str) -> None:
+        """Prépare et charge un registre depuis un autre état (navigation)."""
+        target = register if register in REGISTERS else "ventes"
+        if target == self.register and target == self.loaded_register:
+            return
+        if target != self.register:
+            self.status_filter = ""
+            self.type_filter = ""
+            self.period = "all"
+            self.search = ""
+        self.register = target
+        await self._load()
+
+    @rx.event
     async def enter_register(self, register: str):
         target = register if register in REGISTERS else "ventes"
+        if target == self.register and target == self.loaded_register:
+            # Déjà chargé côté serveur (navigation) : le montage ne recharge pas.
+            return
         if target != self.register:
             self.status_filter = ""
             self.type_filter = ""

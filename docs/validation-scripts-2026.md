@@ -1,6 +1,6 @@
 # Scripts de vérification hérités — état au 31 octobre 2026
 
-Vingt-cinq fichiers de `tests/` ne sont pas des modules pytest : ce sont des
+Vingt-six fichiers de `tests/` ne sont pas des modules pytest : ce sont des
 scripts autonomes (`async def main()`), écrits avant l'adoption de pytest. Tous
 importaient `run_event` depuis `tests/test_utils.py`, **fichier jamais
 versionné** : aucun ne pouvait s'exécuter.
@@ -37,7 +37,10 @@ python scripts/run_legacy_tests.py            # tout
 python scripts/run_legacy_tests.py stock guide
 ```
 
-## Résultat : 18 scripts sur 25 réussis
+`test_crm_panel_load` est le seul script écrit après coup : il verrouille le
+chargement serveur des panneaux CRM (voir plus bas).
+
+## Résultat : 19 scripts sur 26 réussis
 
 | Script | État | Remarque |
 | --- | --- | --- |
@@ -48,6 +51,7 @@ python scripts/run_legacy_tests.py stock guide
 | `test_catalog_browser` | réussi | |
 | `test_contour` | réussi | après correctif `self` |
 | `test_contour_api` | réussi | |
+| `test_crm_panel_load` | réussi | chargement des panneaux CRM hors montage |
 | `test_expenses` | réussi | |
 | `test_guide_admin` | réussi | |
 | `test_guide_interface` | réussi | après correctif `~` → `not in` |
@@ -66,6 +70,27 @@ python scripts/run_legacy_tests.py stock guide
 | `test_security_integration` | échec | idem |
 | `test_corrections` | échec | 15 sous-entités non amorcées (`expense`, `assignment`, `employee_skill`, `equipment`, `product`…) |
 | `test_guide` | échec | 12 procédures en base contre 6 dans `PROCEDURES` |
+
+## Chargement serveur des panneaux CRM
+
+`on_mount` n'est pas rejoué lors d'une navigation cliente ni lors d'un accès
+direct par URL : `/crm?cockpit=commercial&vue=ventes` affichait un registre vide
+alors que la base contenait trois pièces. Le lot 10 déplace le chargement dans
+la chaîne d'événements du serveur :
+
+1. `CrmRegistersState._load()` / `CrmPartnersState._load()` portent le
+   chargement complet (base, semis, requêtes, totalisation) hors de tout
+   montage ; `load_registers` / `load_space` ne font plus qu'afficher puis
+   appeler `_load()`.
+2. `enter_register_now()` / `enter_space_now()` permettent à un autre état de
+   préparer et charger un panneau (filtres remis à zéro si la cible change).
+3. `NavigationState.load_crm_panel` est déclaré chargeur de page dans
+   `register_loaders("crm", …)`, donc exécuté **après** `verify_page` : c'est le
+   seul point où `page_allowed` est fiable. Un `yield` ne suffisait pas, la
+   suite du gestionnaire s'exécutant avant la vérification.
+4. Chaque panneau mémorise ce qu'il a chargé (`loaded_register`, `loaded_space`) :
+   le montage ne recharge pas un panneau déjà en mémoire, ce qui évite qu'un
+   second chargement concurrent écrase la liste affichée.
 
 ### Les cinq échecs de sécurité
 

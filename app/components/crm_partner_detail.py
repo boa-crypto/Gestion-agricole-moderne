@@ -64,7 +64,7 @@ def _kpi(label: str, value: rx.Var | str, unit: str, tone: str) -> rx.Component:
         rx.el.div(
             rx.el.span(
                 value,
-                class_name="ap-serif text-2xl leading-none",
+                class_name="ap-serif text-xl leading-none tabular-nums whitespace-nowrap",
             ),
             rx.el.span(
                 unit,
@@ -211,7 +211,7 @@ def _header() -> rx.Component:
                 "%",
                 "text-[#ffb894]",
             ),
-            class_name="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 w-full mt-5",
+            class_name="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-5 w-full mt-5",
         ),
         rx.el.nav(
             rx.foreach(CrmPartnersState.detail_tabs, _detail_tab),
