@@ -317,6 +317,7 @@ def init_crm_tables() -> None:
 async def ensure_crm_tables() -> None:
     """Version awaitable et non bloquante de `init_crm_tables`."""
     await asyncio.to_thread(init_crm_tables)
+    await asyncio.to_thread(normalize_legacy_icon_names)
 
 
 async def ensure_access_tables() -> None:
@@ -337,6 +338,50 @@ async def ensure_catalog_tables() -> None:
 async def ensure_remediation_log_table() -> None:
     """Version awaitable et non bloquante de `init_remediation_log_table`."""
     await asyncio.to_thread(init_remediation_log_table)
+
+
+# Noms d'icônes retirés du jeu Lucide : conservés en base par les
+# installations antérieures, ils produisent un pictogramme vide et une erreur
+# console (« Name in Lucide DynamicIcon not found »). On les réécrit au
+# démarrage, une fois, sans toucher aux autres colonnes.
+LEGACY_ICON_NAMES = {"corn": "wheat", "seedling": "sprout"}
+
+
+def normalize_legacy_icon_names() -> None:
+    """Aligne les icônes stockées sur le jeu Lucide courant (idempotent)."""
+    force_local_database_env()
+    engine = create_engine(SYNC_DB_URL, future=True)
+    try:
+        with engine.begin() as connection:
+            tables = [
+                row[0]
+                for row in connection.execute(
+                    text(
+                        "SELECT name FROM sqlite_master "
+                        "WHERE type = 'table' AND name NOT LIKE 'sqlite_%'"
+                    )
+                )
+            ]
+            for table in tables:
+                columns = {
+                    row[1]
+                    for row in connection.execute(
+                        text(f'PRAGMA table_info("{table}")')
+                    )
+                }
+                if "icon" not in columns:
+                    continue
+                for old, new in LEGACY_ICON_NAMES.items():
+                    connection.execute(
+                        text(
+                            f'UPDATE "{table}" SET icon = :new WHERE icon = :old'
+                        ),
+                        {"new": new, "old": old},
+                    )
+    except Exception as e:  # noqa: BLE001
+        logging.exception(f"Error: {e}")
+    finally:
+        engine.dispose()
 
 
 async def ensure_local_database() -> None:

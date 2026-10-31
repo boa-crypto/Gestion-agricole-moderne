@@ -222,6 +222,17 @@ def _text(value: object) -> str:
     return str(value or "").strip()
 
 
+# Certaines bases ont été amorcées avec des noms d'icônes Lucide depuis
+# renommés : on neutralise les alias à la lecture pour éviter un pictogramme
+# vide et une erreur console.
+ICON_ALIASES = {"corn": "wheat", "seedling": "sprout"}
+
+
+def _icon(value: object, fallback: str = "sprout") -> str:
+    name = _text(value) or fallback
+    return ICON_ALIASES.get(name, name)
+
+
 def _consistency(quality: str) -> str:
     low = quality.lower()
     if "demi-molle" in low:
@@ -494,7 +505,7 @@ class CatalogBrowserState(rx.State):
                     "key": _text(db_row[0]),
                     "name": _text(db_row[1]),
                     "tagline": _text(db_row[2]),
-                    "icon": _text(db_row[3]) or "sprout",
+                    "icon": _icon(db_row[3]),
                     "color": _text(db_row[4]) or "#D8FA5E",
                     "accent": _text(db_row[5]) or "#FF8A5B",
                     "cultures": int(db_row[6] or 0),
@@ -693,7 +704,7 @@ class CatalogBrowserState(rx.State):
                     "water_label": water_label(water_key),
                     "water_short": water_short_label(water_key),
                     "water_tone": water_tone(water_key),
-                    "icon": _text(row[6]) or "sprout",
+                    "icon": _icon(row[6]),
                     "color": _text(row[7]) or "#A9C98B",
                     "usage": _text(row[8]) or "Débouché non précisé",
                     "description": _text(row[9]),
