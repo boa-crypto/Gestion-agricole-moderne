@@ -131,5 +131,5 @@ def parcel_list() -> rx.Component:
                 ),
             ),
         ),
-        class_name="w-full xl:w-[24rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+        class_name="w-full xl:w-[24rem] shrink-0 border-t border-[#F2EFE4]/12 pt-6",
     )

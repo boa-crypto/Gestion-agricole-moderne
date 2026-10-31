@@ -441,16 +441,12 @@ def parcel_detail() -> rx.Component:
                             ),
                             class_name="flex flex-col gap-3 mt-4",
                         ),
-                        rx.el.div(
-                            rx.icon(
-                                "sprout",
-                                class_name="h-6 w-6 text-[#d8fa5e]",
-                            ),
-                            rx.el.p(
-                                "Aucune culture pour ce filtre. Créez une fiche culturale pour démarrer le suivi.",
-                                class_name="text-sm font-medium text-[#c9c5b4]/55 mt-2 text-center max-w-sm",
-                            ),
-                            class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-10 mt-4",
+                        empty_state(
+                            "sprout",
+                            "Aucune culture pour ce filtre.",
+                            "Créez une fiche culturale pour démarrer le suivi "
+                            "du cycle.",
+                            class_name="mt-4",
                         ),
                     ),
                     class_name="mt-8",
@@ -496,5 +492,5 @@ def parcel_detail() -> rx.Component:
                 "Sélectionnez une parcelle dans la liste ou créez votre premier îlot.",
             ),
         ),
-        class_name="flex-1 min-w-0 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="flex-1 min-w-0 w-full border-t border-[#F2EFE4]/12 pt-6",
     )

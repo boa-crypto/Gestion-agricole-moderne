@@ -245,6 +245,11 @@ toucher aux routes ni aux états :
    unique et le focus chlorophylle de `select_field` ; les anneaux
    `focus:ring` gris disparaissent.
 
+5. **Parcelles** — les deux colonnes (liste d'assolement, fiche détaillée)
+   perdent leur fond et leur cadre au profit d'un filet supérieur et d'un
+   séparateur vertical : la page se lit comme une double page, et les états
+   vides s'alignent sur la grille.
+
 ### Contrôle pré-vol
 
 `scripts/preflight.py` comble un angle mort : importer une page ne construit
