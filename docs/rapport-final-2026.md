@@ -164,8 +164,13 @@ orpheline rejetée par la clé étrangère) — détail dans
 3. **Chargement au montage** : les panneaux CRM sont corrigés — le chargement
    est déclenché côté serveur, après `verify_page`, par
    `NavigationState.load_crm_panel` ; vérifié à l'écran sur `?vue=ventes`
-   (3 pièces) et `?vue=clients` (3 tiers). La liste des parcelles et la page
-   phénologie attendent le même traitement.
+   (3 pièces) et `?vue=clients` (3 tiers). **Restent ouvertes** : `/parcelles`
+   (0 îlot, listes en squelette) et `/phenologie`. Sur `/parcelles`, le
+   chargeur `ParcelsState.load_space` est bien dépêché, mais l'écran ne reçoit
+   jamais son résultat ; le même code exécuté hors serveur renvoie 7 parcelles.
+   La cause n'est pas établie : à instruire en priorité au lot suivant, en
+   comparant le comportement du gestionnaire enchaîné (`dispatch_loader`) et
+   celui du montage.
 4. **Données de démonstration incomplètes** : les seeders ne couvrent ni le
    guide, ni les charges, ni l'administration, ni l'audit — ces écrans
    s'affichent avec leurs états vides.
