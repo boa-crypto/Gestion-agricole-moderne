@@ -127,3 +127,63 @@ Règles issues des aperçus (`docs/apercus/`) :
   unique de `parcel_filters`.
 - Tables de données (CRM, stocks) : passer les en-têtes en mono et les
   montants par les variables `*_display`.
+
+## 7. Registres et postes de travail (lot 3)
+
+Le troisième lot étend les primitives aux pages de registre et achève
+l'unification des champs. Trois primitives ont été ajoutées à
+`app/components/design.py` :
+
+| Primitive | Rôle |
+| --- | --- |
+| `refresh_button(on_click, loading, label)` | action principale d'actualisation : icône animée pendant le chargement, bouton désactivé |
+| `field(control, icon, suffix)` | enveloppe de positionnement d'un champ (icône à gauche, suffixe à droite) |
+| `input_class(icon=…, extra=…)` | classes uniques du champ de saisie : filet `#F2EFE4/14`, fond `#0F110A`, focus chlorophylle |
+| `select_field(*options, name, icon, …)` | sélecteur complet : icône, chevron, `form_key` pour rejouer le DOM après chargement |
+
+### Pages migrées
+
+| Page | En-tête | Chiffres | Filtres |
+| --- | --- | --- | --- |
+| `/employes` | `page_hero` + registre (jour, absences) | `stat` ×6 + 4 compteurs | `field` + `select_field` ×3 |
+| `/charges` | `page_hero` + registre (jour, reste à régler) | `stat` ×6 | `section_header`, `field`, `select_field` ×4, dates, pastilles mono |
+| `/maintenance` | `page_hero` + registre (jour, opérations en retard) | `stat` ×6 + 4 compteurs | `field` + `select_field` ×3 |
+| `/traitements` | `page_hero` + registre (jour, chantiers en retard) | `stat` ×6 | inchangés (lot 4) |
+| `/administration` | `page_hero` + registre (jour, session) | `stat` ×6 | `field` + `select_field` ×3, `action_button` |
+| `/administration` (sections) | `index_tab` remplace les boutons pleins | — | — |
+| `/cartographie` | `page_hero` + registre (jour, contours) | — | panneaux intérieurs à migrer |
+| `/rapports` | `page_hero` + registre (jour) | — | — |
+| `/recherche` | `page_hero` + registre (jour, périmètre) | `stat` ×3 | barre soulignée, dates `field`, pastilles mono |
+| `/audit` | `page_hero` + registre (relevé, constats) | `stat` ×6 | — |
+| `/configuration` | `page_hero` (titre à italique chlorophylle) + registre (session, périmètre) | — | erreurs à filet vermillon |
+
+### Règles complémentaires
+
+- Un en-tête de page ne se compose plus à la main : `page_hero` fournit le
+  sur-titre, le titre, le chapô, le registre et la colonne d'actions. Les pages
+  conservent seulement une fonction locale (`_space_header`, `_header`) qui
+  l'appelle, pour ne pas toucher aux points d'entrée.
+- La recherche globale occupe toujours une ligne entière, au-dessus des
+  sélecteurs : un champ partagé avec quatre sélecteurs tombe sous 100 px.
+- Les unités de `stat` restent courtes (`h/sem`, `€/sem`, `/ 100`) ; au-delà,
+  elles débordent de la colonne de 352 px.
+- Les libellés de sélecteur français dépassent 200 px : largeur minimale
+  `sm:w-64`, jamais `sm:w-52`.
+- Un `stat` ne porte pas de texte libre long (« Tout l'historique ») : ce
+  genre de valeur va dans une étiquette (`tag`) ou dans le registre du héros.
+- Les états d'erreur passent au filet latéral vermillon, avec
+  `action_button(..., tone="outline")` pour la relance.
+
+### Chantiers restants
+
+- Cartographie : barre d'îlots, outils de dessin et panneaux de navigation
+  encore en cartes encadrées ; migrer vers `section_header` + `field`.
+- Administration : panneaux internes (`admin_library`, `admin_org`,
+  `admin_operations`, `admin_user_detail`) toujours en cartes `CARD` ;
+  prévoir une variante « fiche » de `stat` et un `panel` à filet supérieur.
+- Traitements, rapports et audit : barres de filtres et tableaux à aligner sur
+  `select_field` et les en-têtes mono.
+- Tables de données (CRM, stocks, charges) : en-têtes mono, montants via
+  `*_display`, pagination en index.
+- États vides : unifier les squelettes et les messages vides sur le registre
+  éditorial (filet + ligne + légende).

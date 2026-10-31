@@ -642,3 +642,111 @@ def index_rail(
             f"border-[#F2EFE4]/12 pt-3 {class_name}"
         ),
     )
+
+
+def refresh_button(
+    *,
+    on_click=None,
+    loading=None,
+    label: str = "Actualiser",
+    class_name: str = "",
+) -> rx.Component:
+    """Action principale de rafraîchissement, icône animée pendant le chargement."""
+    return rx.el.button(
+        rx.cond(
+            loading,
+            rx.icon("loader-circle", class_name="h-3.5 w-3.5 animate-spin"),
+            rx.icon("refresh-cw", class_name="h-3.5 w-3.5"),
+        ),
+        rx.el.span(label),
+        type="button",
+        on_click=on_click,
+        disabled=loading,
+        class_name=(
+            "ap-mono inline-flex w-fit items-center justify-center gap-2 border "
+            "border-[#D8FA5E] bg-[#D8FA5E] px-3.5 py-2.5 text-[10px] uppercase "
+            "tracking-[0.18em] text-[#0A0A08] transition-colors "
+            "hover:border-[#E4FF9B] hover:bg-[#E4FF9B] "
+            "disabled:cursor-not-allowed disabled:opacity-45 "
+            f"{class_name}"
+        ),
+    )
+
+
+def field(
+    control: rx.Component,
+    *,
+    icon: str = "",
+    suffix: rx.Component | None = None,
+    class_name: str = "",
+) -> rx.Component:
+    """Champ de saisie à filet unique, sans halo, icône à gauche."""
+    children: list[rx.Component] = []
+    if icon:
+        children.append(
+            rx.icon(
+                icon,
+                class_name=(
+                    "pointer-events-none absolute left-3 top-1/2 h-4 w-4 "
+                    "-translate-y-1/2 text-[#C9C5B4]/40"
+                ),
+            )
+        )
+    children.append(control)
+    if suffix is not None:
+        children.append(suffix)
+    return rx.el.div(*children, class_name=f"relative w-full min-w-0 {class_name}")
+
+
+def input_class(*, icon: bool = False, extra: str = "") -> str:
+    """Classes du champ de saisie éditorial (filet unique, sans halo)."""
+    pad = "pl-9" if icon else "pl-3"
+    return (
+        "w-full border border-[#F2EFE4]/14 bg-[#0F110A] py-2.5 pr-3 "
+        f"{pad} text-sm text-[#F2EFE4] outline-hidden transition-colors "
+        "placeholder:text-[#C9C5B4]/30 focus:border-[#D8FA5E] "
+        f"{extra}"
+    )
+
+
+def select_field(
+    *children: rx.Component,
+    name: str,
+    icon: str = "list-filter",
+    default_value=None,
+    on_change=None,
+    form_key=None,
+    width: str = "w-full sm:w-64",
+) -> rx.Component:
+    """Sélecteur à filet unique, icône à gauche, chevron discret."""
+    kwargs = {"name": name}
+    if default_value is not None:
+        kwargs["default_value"] = default_value
+    if on_change is not None:
+        kwargs["on_change"] = on_change
+    if form_key is not None:
+        kwargs["key"] = f"{name}-{form_key}"
+    return rx.el.div(
+        rx.icon(
+            icon,
+            class_name=(
+                "pointer-events-none absolute left-3 top-1/2 h-4 w-4 "
+                "-translate-y-1/2 text-[#C9C5B4]/40"
+            ),
+        ),
+        rx.el.select(
+            *children,
+            class_name=input_class(
+                icon=True, extra="cursor-pointer appearance-none pr-9"
+            ),
+            **kwargs,
+        ),
+        rx.icon(
+            "chevron-down",
+            class_name=(
+                "pointer-events-none absolute right-3 top-1/2 h-4 w-4 "
+                "-translate-y-1/2 text-[#C9C5B4]/40"
+            ),
+        ),
+        class_name=f"relative {width}",
+    )

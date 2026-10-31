@@ -1,11 +1,12 @@
 """Consultation minimale de l'audit fonctionnel CMS² AgriPro.
 
-Identité visuelle inchangée : cockpit vert nuit, accents chlorophylle et ambre,
-surfaces vitrées et typographie éditoriale Instrument Serif.
+Registre éditorial : encre verte nuit, accents chlorophylle et vermillon,
+filets fins et typographie serif de maison.
 """
 
 import reflex as rx
 
+from app.components.design import stat as design_stat
 from app.states.audit_state import (
     AuditState,
     CategoryRow,
@@ -61,24 +62,9 @@ def _accent(tone: rx.Var) -> rx.Component:
 
 
 def _stat(label: str, value: rx.Var | str, unit: str) -> rx.Component:
-    return rx.el.div(
-        rx.el.span(
-            label,
-            class_name="ap-eyebrow text-[#c9c5b4]/45",
-        ),
-        rx.el.div(
-            rx.el.span(
-                value,
-                class_name="ap-serif text-2xl leading-none text-[#f2efe4]",
-            ),
-            rx.el.span(
-                unit,
-                class_name="text-[11px] font-medium text-[#c9c5b4]/50 mb-0.5",
-            ),
-            class_name="flex items-end gap-1.5 mt-2",
-        ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-3",
-    )
+    return design_stat(label, value, unit)
+
+
 
 
 def audit_kpis() -> rx.Component:
@@ -89,7 +75,10 @@ def audit_kpis() -> rx.Component:
         _stat("À compléter", AuditState.kpis["incomplete"], "incomplets"),
         _stat("Incohérents", AuditState.kpis["incoherent"], "à corriger"),
         _stat("Constats", AuditState.kpis["issues"], "dont bloquants"),
-        class_name="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 w-full",
+        class_name=(
+            "grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
+            "xl:grid-cols-3 w-full"
+        ),
     )
 
 

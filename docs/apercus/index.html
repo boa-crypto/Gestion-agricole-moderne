@@ -156,6 +156,7 @@
     <div><span>Registre</span><span>Éditorial</span></div>
     <div><span>Palette</span><span>Encre · papier · chlorophylle</span></div>
     <div><span>Coque</span><span>Masthead + index lateral</span></div>
+    <div><span>Lots</span><span>Coque · primitives · registres</span></div>
     <div><span>Largeur capturée</span><span>1440 / 390 px</span></div>
   </div>
 </header>
@@ -244,17 +245,18 @@
 
   <figure>
     <p class="fig-index"><b>06</b> — Cartographie</p>
-    <h2>Le chantier restant</h2>
+    <h2>La carte et ses outils</h2>
     <figcaption>
       <p>
-        Cette page n'a pas reçu les primitives partagées : cartes encadrées,
-        petits blocs de chiffres, boutons en boîtes. Elle marque le prochain
-        lot de migration — panneaux, barres d'outils et sélecteurs — pour
-        aligner le reste de l'application sur le registre du cockpit.
+        L'en-tête de la cartographie est passé à <code>page_hero</code> : le
+        sur-titre géomatique, le titre serif, le chapô et le registre de droite
+        (jour, contours) suivent désormais le même rythme que le cockpit. Les
+        panneaux intérieurs — barre d'îlots, outils de dessin, navigation —
+        restent le prochain chantier : ils gardent leurs encadrés.
       </p>
     </figcaption>
-    <div class="shot"><img src="06-cartographie.jpg" alt="Cartographie : interface encore composée de cartes encadrées et de boutons en boîtes." /></div>
-    <p class="note">À migrer : panneaux, barres d'outils, sélecteurs</p>
+    <div class="shot"><img src="06-cartographie.jpg" alt="Cartographie : en-tête éditorial, barre d'îlots et outils de dessin de contour." /></div>
+    <p class="note">En-tête migré · panneaux de dessin encore encadrés</p>
   </figure>
 
   <figure>
@@ -268,6 +270,86 @@
       </p>
     </figcaption>
     <div class="shot narrow"><img src="07-cockpit-mobile.jpg" alt="Cockpit AgriPro en 390 px : masthead compact, titre serif et chiffres clés en deux colonnes." /></div>
+  </figure>
+  <figure>
+    <p class="fig-index"><b>08</b> — Ressources humaines</p>
+    <h2>Le registre du personnel</h2>
+    <figcaption>
+      <p>
+        La page RH n'a plus d'en-tête maison : elle hérite de
+        <code>page_hero</code> et de son registre (« Jour », « Absences » en
+        vermillon). Les six indicateurs passent sur la primitive
+        <code>stat</code> — filet supérieur, valeur serif, unité mono — et la
+        barre de filtres se compose d'une ligne de recherche pleine largeur,
+        de sélecteurs à filet unique et de deux actions carrées.
+      </p>
+    </figcaption>
+    <div class="shot"><img src="08-employes.jpg" alt="Employés et compétences : en-tête éditorial, indicateurs RH, recherche et sélecteurs à filet." /></div>
+    <p class="note">Jeu de démonstration RH non peuplé · structure et typographie visibles</p>
+  </figure>
+
+  <figure>
+    <p class="fig-index"><b>09</b> — Charges &amp; dépenses</p>
+    <h2>La lecture du registre</h2>
+    <figcaption>
+      <p>
+        Le registre financier ouvre par un titre de section numéroté
+        (« Filtres », puis « Lecture du registre ») et deux étiquettes de
+        portée. Les filtres perdent leur carte encadrée : champs à filet,
+        sélecteurs à chevron discret, périodes en pastilles mono et
+        « Réinitialiser » en bouton fantôme aligné à droite.
+      </p>
+    </figcaption>
+    <div class="shot"><img src="09-charges.jpg" alt="Charges et dépenses : indicateurs de charges, titre de section et barre de filtres éditoriale." /></div>
+    <p class="note">Registre vide dans l'aperçu · mise en page complète</p>
+  </figure>
+
+  <figure>
+    <p class="fig-index"><b>10</b> — Administration</p>
+    <h2>Les droits, en index</h2>
+    <figcaption>
+      <p>
+        Les onze sections de l'administration ne sont plus des boutons pleins :
+        elles forment un index souligné, filet chlorophylle pour la section
+        active, comme les vues du CRM. Les indicateurs de gouvernance suivent
+        <code>stat</code>, et la barre de filtres s'ouvre sur un champ unique
+        avant les sélecteurs de statut, rôle et équipe.
+      </p>
+    </figcaption>
+    <div class="shot"><img src="10-administration.jpg" alt="Administration : en-tête serif, indicateurs de gouvernance et index des sections." /></div>
+    <p class="note">Comptes non peuplés dans l'aperçu · navigation et filtres réels</p>
+  </figure>
+
+  <figure>
+    <p class="fig-index"><b>11</b> — Recherche globale</p>
+    <h2>Une seule ligne, puis les filtres</h2>
+    <figcaption>
+      <p>
+        La console transversale abandonne le halo dégradé de sa barre de
+        recherche : le champ devient une ligne soulignée, large, avec
+        l'indicateur de balayage à droite. Les trois compteurs passent en
+        chiffres à filet, les dates en champs à icône, les périodes en
+        pastilles mono.
+      </p>
+    </figcaption>
+    <div class="shot"><img src="11-recherche.jpg" alt="Recherche globale : champ souligné, compteurs éditoriaux et filtres de période." /></div>
+    <p class="note">Recherche vide dans l'aperçu · les 30 tables sont interrogées en production</p>
+  </figure>
+
+  <figure>
+    <p class="fig-index"><b>12</b> — Configuration</p>
+    <h2>Le titre porte l'italique</h2>
+    <figcaption>
+      <p>
+        La configuration reprend <code>page_hero</code> avec un titre à deux
+        registres — romain puis italique chlorophylle — et un registre de
+        session. L'avertissement métier (« Les refus sont prioritaires »)
+        reste sur un filet vermillon. Les messages d'erreur passent eux aussi
+        au filet latéral, avec une action « Réessayer » carrée.
+      </p>
+    </figcaption>
+    <div class="shot"><img src="12-configuration.jpg" alt="Configuration et accès : titre serif à accent italique, registre de session et avertissement à filet vermillon." /></div>
+    <p class="note">Service de menus absent de l'aperçu · message d'erreur réel</p>
   </figure>
 </main>
 

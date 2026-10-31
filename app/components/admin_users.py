@@ -9,6 +9,7 @@ from app.components.admin_shared import (
     section_title,
     tone_badge,
 )
+from app.components.design import action_button, field, input_class, select_field
 from app.states.administration_state import AdministrationState
 
 
@@ -20,45 +21,33 @@ def _select(
     first: rx.Component,
     options: rx.Var[list[Option]],
 ) -> rx.Component:
-    return rx.el.div(
-        rx.icon(
-            icon,
-            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d8fa5e]/80 pointer-events-none",
+    return select_field(
+        first,
+        rx.foreach(
+            options,
+            lambda opt: rx.el.option(opt["label"], value=opt["value"]),
         ),
-        rx.el.select(
-            first,
-            rx.foreach(
-                options,
-                lambda opt: rx.el.option(opt["label"], value=opt["value"]),
-            ),
-            name=name,
-            default_value=value,
-            key=f"admin-{name}-{AdministrationState.form_key}",
-            on_change=on_change,
-            class_name=SELECT,
-        ),
-        rx.icon(
-            "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/40 pointer-events-none",
-        ),
-        class_name="relative w-full sm:w-52",
+        name=name,
+        icon=icon,
+        default_value=value,
+        on_change=on_change,
+        form_key=AdministrationState.form_key,
     )
 
 
 def admin_filters() -> rx.Component:
     return rx.el.div(
-        rx.el.div(
-            rx.icon(
-                "search",
-                class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/40 pointer-events-none",
-            ),
+        field(
             rx.el.input(
-                placeholder="Rechercher un nom, un matricule, une fonction, un rôle ou une équipe…",
+                placeholder=(
+                    "Rechercher un nom, un matricule, une fonction, "
+                    "un rôle ou une équipe…"
+                ),
                 default_value=AdministrationState.search,
                 on_change=AdministrationState.set_search.debounce(400),
-                class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2.5 pl-9 pr-3 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/30 focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors",
+                class_name=input_class(icon=True),
             ),
-            class_name="relative flex-1 min-w-0",
+            icon="search",
         ),
         _select(
             "status",
@@ -84,19 +73,21 @@ def admin_filters() -> rx.Component:
             rx.el.option("Toutes les équipes", value="TOUTES"),
             AdministrationState.team_options,
         ),
-        rx.el.button(
-            rx.icon("download", class_name="h-4 w-4 text-[#0A0A08]"),
-            rx.el.span("Exporter (CSV)", class_name="text-[#0A0A08]"),
+        action_button(
+            "Exporter (CSV)",
+            icon="download",
             on_click=AdministrationState.export_users,
-            class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
         ),
-        rx.el.button(
-            rx.icon("rotate-ccw", class_name="h-4 w-4"),
-            rx.el.span("Réinitialiser"),
+        action_button(
+            "Réinitialiser",
+            icon="rotate-ccw",
+            tone="outline",
             on_click=AdministrationState.reset_filters,
-            class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
         ),
-        class_name="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 w-full",
+        class_name=(
+            "flex flex-col sm:flex-row sm:flex-wrap items-stretch "
+            "sm:items-center gap-3 w-full mt-5"
+        ),
     )
 
 

@@ -1,6 +1,13 @@
 import reflex as rx
 
-from app.components.design import eyebrow
+from app.components.design import (
+    action_button,
+    eyebrow,
+    meta_ledger,
+    meta_row,
+    page_hero,
+    refresh_button,
+)
 from app.components.menu_auth import login_panel
 from app.components.menu_policy_admin import configuration_administration
 from app.components.shell import app_shell
@@ -11,39 +18,61 @@ from app.states.menu_configuration_state import MenuConfigurationState
 def configuration_page() -> rx.Component:
     return app_shell(
         rx.el.div(
-            rx.el.header(
-                eyebrow("Administration des accès", tone="accent"),
-                rx.el.h1(
+            page_hero(
+                "Administration des accès",
+                rx.el.span(
                     rx.el.span("Configuration & "),
                     rx.el.span("accès", class_name="ap-italic text-[#D8FA5E]"),
-                    class_name="ap-display mt-5 text-[clamp(2.4rem,4.6vw,4.1rem)] text-[#f2efe4]",
                 ),
-                rx.el.p(
-                    "Administrez les menus, les rôles et les comptes connectés. "
-                    "Consultez les droits effectifs et le journal des modifications.",
-                    class_name="mt-4 max-w-3xl text-[13px] leading-relaxed text-[#C9C5B4]/70",
+                "Administrez les menus, les rôles et les comptes connectés. "
+                "Consultez les droits effectifs et le journal des modifications.",
+                meta=meta_ledger(
+                    meta_row("Session", MenuAuthState.email),
+                    meta_row("Périmètre", "Menus · rôles · comptes", tone="muted"),
                 ),
-                rx.el.p(
-                    "Les refus sont prioritaires. La Configuration reste activée et "
-                    "au moins un administrateur doit conserver son accès.",
-                    class_name="mt-3 border-l-2 border-[#FF5A2B] pl-3 text-[12px] leading-relaxed text-[#FF8A5B]",
+                actions=rx.el.div(
+                    refresh_button(
+                        on_click=MenuConfigurationState.load_configuration,
+                        loading=MenuConfigurationState.loading,
+                        label="Recharger",
+                    ),
+                    class_name="flex flex-wrap items-center gap-2",
                 ),
-                class_name="w-full border-b border-[#F2EFE4]/12 pb-8",
+            ),
+            rx.el.p(
+                "Les refus sont prioritaires. La Configuration reste activée et "
+                "au moins un administrateur doit conserver son accès.",
+                class_name=(
+                    "mt-5 border-l-2 border-[#FF5A2B] pl-3 text-[12px] "
+                    "leading-relaxed text-[#FF8A5B]"
+                ),
             ),
             rx.cond(
                 MenuConfigurationState.error != "",
                 rx.el.div(
-                    rx.el.p(
-                        MenuConfigurationState.error,
-                        role="alert",
-                        class_name="text-sm text-[#ff9b8c]",
+                    rx.icon(
+                        "octagon-alert",
+                        class_name="h-4 w-4 shrink-0 text-[#FF8A5B]",
                     ),
-                    rx.el.button(
-                        "Réessayer",
-                        on_click=MenuConfigurationState.load_configuration,
-                        class_name="mt-2 rounded-none border border-[#f2efe4]/22 bg-[#14160f] px-3 py-2 text-sm text-[#d8fa5e] focus-visible:outline-2 focus-visible:outline-[#d8fa5e]",
+                    rx.el.div(
+                        rx.el.p(
+                            MenuConfigurationState.error,
+                            role="alert",
+                            class_name="text-sm text-[#FFBCB0]",
+                        ),
+                        action_button(
+                            "Réessayer",
+                            icon="rotate-ccw",
+                            tone="outline",
+                            on_click=MenuConfigurationState.load_configuration,
+                            class_name="mt-3",
+                        ),
+                        class_name="min-w-0",
                     ),
-                    class_name="mt-5 rounded-none border border-[#ff9b8c]/25 bg-[#2a0d08]/20 p-4",
+                    class_name=(
+                        "flex items-start gap-3 border-l-2 border-[#FF5A2B] "
+                        "bg-[#FF5A2B]/[0.06] px-4 py-4 mt-6"
+                    ),
                 ),
                 rx.fragment(),
             ),
