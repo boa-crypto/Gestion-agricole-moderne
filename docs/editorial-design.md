@@ -221,3 +221,40 @@ Deux primitives complètent le lot : `skeleton()` (ligne de chargement) et
 `empty_state(icon, title, description, action=…)` (filet supérieur, icône
 carrée, titre serif, chapô, action optionnelle), déjà appliquées au registre RH
 et à la carte de santé de la flotte.
+
+## 9. Passage de cohérence (lot 4)
+
+Quatre chantiers issus de l'audit ont été traités d'un seul tenant, sans
+toucher aux routes ni aux états :
+
+1. **Panneaux d'administration** — la constante `CARD` de
+   `app/components/admin_shared.py` ne pose plus de fond ni de cadre : elle
+   devient un filet supérieur (`border-t … pt-6`). Les 15 panneaux des sections
+   Utilisateurs, Fonctions, Équipes, Rôles, Organigramme, Mon espace,
+   Validations, Délégations, Affectations et Journal basculent d'un coup vers le
+   registre éditorial, sans retouche écran par écran.
+2. **États vides** — 17 blocs centrés sur fond sombre sont remplacés par
+   `empty_state()` : filet supérieur, icône carrée, titre serif, chapô. Écrans
+   concernés : parcelles, carte et îlots, guide, catalogue, employés, engins,
+   atelier, journal des interventions, matrice de compétences, administration.
+3. **Affordance globale** — `button` et `a[role="button"]` reçoivent une
+   transition uniforme et un enfoncement d'un pixel au clic ; les boutons
+   désactivés baissent d'opacité avec un curseur explicite. Cela couvre les
+   boutons hérités qui n'utilisent pas `action_button`.
+4. **Sélecteurs** — la constante `SELECT` d'administration adopte le filet
+   unique et le focus chlorophylle de `select_field` ; les anneaux
+   `focus:ring` gris disparaissent.
+
+### Contrôle pré-vol
+
+`scripts/preflight.py` comble un angle mort : importer une page ne construit
+pas ses composants, donc une primitive manquante n'apparaît qu'au premier
+rendu. Le script construit **tous** les écrans et échoue proprement :
+
+```powershell
+python scripts/preflight.py --compile
+```
+
+Sortie attendue : `compileall : OK` puis `Tous les écrans se construisent.`
+C'est ce contrôle qui a révélé un import manquant dans `map_sidebar.py`, réparé
+depuis.

@@ -1,5 +1,6 @@
 import reflex as rx
 
+from app.components.design import empty_state
 from app.states.maintenance_state import (
     CostRow,
     MaintenanceState,
@@ -744,13 +745,9 @@ def equipment_detail() -> rx.Component:
                 _usage_block(),
                 class_name="w-full",
             ),
-            rx.el.div(
-                rx.icon("tractor", class_name="h-7 w-7 text-[#d8fa5e]"),
-                rx.el.p(
-                    "Sélectionnez un engin dans la flotte ou ajoutez une première machine.",
-                    class_name="mt-4 text-[13px] leading-relaxed text-[#C9C5B4]/70 text-center max-w-sm",
-                ),
-                class_name="flex flex-col items-center justify-center py-24",
+            empty_state(
+                "tractor",
+                "Sélectionnez un engin dans la flotte ou ajoutez une première machine.",
             ),
         ),
         class_name="flex-1 min-w-0 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",

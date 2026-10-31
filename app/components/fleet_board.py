@@ -335,13 +335,9 @@ def fleet_health_map() -> rx.Component:
                     ),
                     class_name="flex flex-col gap-3 mt-3 max-h-[26rem] overflow-y-auto pr-1",
                 ),
-                rx.el.div(
-                    rx.icon("shield-check", class_name="h-5 w-5 text-[#d8fa5e]"),
-                    rx.el.p(
-                        "Aucune échéance d'assurance, de contrôle ou d'entretien à traiter.",
-                        class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 text-center",
-                    ),
-                    class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-10 mt-3",
+                empty_state(
+                    "shield-check",
+                    "Aucune échéance d'assurance, de contrôle ou d'entretien à traiter.",
                 ),
             ),
             class_name="mt-6 border-t border-[#f2efe4]/12 pt-5",

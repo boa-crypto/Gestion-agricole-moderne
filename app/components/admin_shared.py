@@ -1,7 +1,11 @@
 import reflex as rx
 
-CARD = "rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 "
-SELECT = "w-full appearance-none cursor-pointer rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2.5 pl-9 pr-9 text-sm font-medium text-[#f2efe4] focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors"
+CARD = "border-t border-[#F2EFE4]/12 pt-6 "
+SELECT = (
+    "w-full cursor-pointer appearance-none border border-[#F2EFE4]/14 "
+    "bg-[#0F110A] py-2.5 pl-9 pr-9 text-sm text-[#F2EFE4] outline-hidden "
+    "transition-colors focus:border-[#D8FA5E]"
+)
 
 
 def tone_badge(label: rx.Var | str, tone: rx.Var | str) -> rx.Component:

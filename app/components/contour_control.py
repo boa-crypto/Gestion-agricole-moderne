@@ -12,6 +12,7 @@ vitrées, typographie éditoriale Instrument Serif.
 
 import reflex as rx
 
+from app.components.design import empty_state
 from app.components.guide_help import help_icon_button, help_topic_button
 from app.states.contour_state import (
     ContourLog,
@@ -584,13 +585,10 @@ def contour_control_board() -> rx.Component:
                     ),
                     class_name="grid grid-cols-1 xl:grid-cols-2 gap-3 w-full mt-4",
                 ),
-                rx.el.div(
-                    rx.icon("circle-check", class_name="h-6 w-6 text-[#d8fa5e]"),
-                    rx.el.p(
-                        "Aucun îlot ne correspond à ce périmètre de contrôle.",
-                        class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 text-center",
-                    ),
-                    class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-4",
+                empty_state(
+                    "circle-check",
+                    "Aucun îlot ne correspond à ce périmètre de contrôle.",
+                    class_name="mt-4",
                 ),
             ),
         ),
@@ -667,13 +665,10 @@ def contour_history_panel() -> rx.Component:
                 ),
                 class_name="flex flex-col gap-2 w-full mt-5",
             ),
-            rx.el.div(
-                rx.icon("history", class_name="h-6 w-6 text-[#d8fa5e]"),
-                rx.el.p(
-                    "Aucune décision de contour consignée pour le moment.",
-                    class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 text-center",
-                ),
-                class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-5",
+            empty_state(
+                "history",
+                "Aucune décision de contour consignée pour le moment.",
+                class_name="mt-5",
             ),
         ),
         class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",

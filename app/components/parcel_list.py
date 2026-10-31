@@ -1,5 +1,6 @@
 import reflex as rx
 
+from app.components.design import empty_state
 from app.states.parcels_state import ParcelRow, ParcelsState
 
 
@@ -123,13 +124,10 @@ def parcel_list() -> rx.Component:
                     ),
                     class_name="flex flex-col gap-3 mt-5 max-h-[46rem] overflow-y-auto pr-1",
                 ),
-                rx.el.div(
-                    rx.icon("search-x", class_name="h-6 w-6 text-[#ff8a5b]"),
-                    rx.el.p(
-                        "Aucune parcelle ne correspond aux filtres.",
-                        class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 text-center",
-                    ),
-                    class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 mt-5",
+                empty_state(
+                    "search-x",
+                    "Aucune parcelle ne correspond aux filtres.",
+                    class_name="mt-5",
                 ),
             ),
         ),

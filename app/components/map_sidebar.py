@@ -1,6 +1,7 @@
 import reflex as rx
 import reflex_enterprise as rxe
 
+from app.components.design import empty_state
 from app.states.cartography_state import CartographyState, Option, ParcelShape
 
 _SELECT = "w-full appearance-none cursor-pointer rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2.5 pl-9 pr-9 text-sm font-medium text-[#f2efe4] focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors"
@@ -218,13 +219,10 @@ def map_sidebar() -> rx.Component:
                     ),
                     class_name="flex flex-col gap-3 mt-5 max-h-[38rem] overflow-y-auto pr-1",
                 ),
-                rx.el.div(
-                    rx.icon("search-x", class_name="h-6 w-6 text-[#ff8a5b]"),
-                    rx.el.p(
-                        "Aucun îlot ne correspond aux filtres.",
-                        class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 text-center",
-                    ),
-                    class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 mt-5",
+                empty_state(
+                    "search-x",
+                    "Aucun îlot ne correspond aux filtres.",
+                    class_name="mt-5",
                 ),
             ),
         ),

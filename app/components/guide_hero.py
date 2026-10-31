@@ -1,6 +1,7 @@
 import reflex as rx
 
 from app.components.design import (
+    empty_state,
     meta_ledger,
     meta_row,
     page_hero,
@@ -92,13 +93,9 @@ def _search_panel() -> rx.Component:
                 ),
                 class_name="flex flex-col gap-5 w-full mt-4",
             ),
-            rx.el.div(
-                rx.icon("search-x", class_name="h-6 w-6 text-[#ff8a5b]"),
-                rx.el.p(
-                    "Aucun contenu du guide ne correspond à cette recherche.",
-                    class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 text-center",
-                ),
-                class_name="flex flex-col items-center justify-center py-10 w-full",
+            empty_state(
+                "search-x",
+                "Aucun contenu du guide ne correspond à cette recherche.",
             ),
         ),
         class_name="w-full border-t border-[#F2EFE4]/12 pt-5 mt-6",

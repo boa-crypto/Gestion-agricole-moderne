@@ -1,5 +1,6 @@
 import reflex as rx
 
+from app.components.design import empty_state
 from app.states.operations_state import JournalRow, Option, OperationsState
 
 _SELECT = "w-full appearance-none cursor-pointer rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2.5 pl-9 pr-9 text-sm font-medium text-[#f2efe4] focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors"
@@ -405,13 +406,9 @@ def intervention_journal() -> rx.Component:
                     ),
                     class_name="mt-6 w-full rounded-none border border-[#f2efe4]/12 bg-[#0D0F09]/60 overflow-hidden max-h-[42rem] overflow-y-auto",
                 ),
-                rx.el.div(
-                    rx.icon("search-x", class_name="h-6 w-6 text-[#ff8a5b]"),
-                    rx.el.p(
-                        "Aucun chantier ne correspond aux filtres sélectionnés.",
-                        class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 text-center",
-                    ),
-                    class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-14 mt-6",
+                empty_state(
+                    "search-x",
+                    "Aucun chantier ne correspond aux filtres sélectionnés.",
                 ),
             ),
         ),

@@ -1,5 +1,6 @@
 import reflex as rx
 
+from app.components.design import empty_state
 from app.components.guide_help import guide_error, help_icon_button
 from app.states.cartography_state import (
     CartographyState,
@@ -589,13 +590,9 @@ def map_parcel_detail() -> rx.Component:
                 ),
                 class_name="w-full",
             ),
-            rx.el.div(
-                rx.icon("map-pinned", class_name="h-7 w-7 text-[#d8fa5e]"),
-                rx.el.p(
-                    "Cliquez une parcelle sur la carte ou dans la liste pour afficher sa fiche complète.",
-                    class_name="mt-4 text-[13px] leading-relaxed text-[#C9C5B4]/70 text-center max-w-sm",
-                ),
-                class_name="flex flex-col items-center justify-center py-24",
+            empty_state(
+                "map-pinned",
+                "Cliquez une parcelle sur la carte ou dans la liste pour afficher sa fiche complète.",
             ),
         ),
         class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",

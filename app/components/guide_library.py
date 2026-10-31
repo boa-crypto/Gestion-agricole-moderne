@@ -1,5 +1,6 @@
 import reflex as rx
 
+from app.components.design import empty_state
 from app.states.guide_state import (
     ArticleCard,
     ArticleLink,
@@ -84,13 +85,10 @@ def _article_list() -> rx.Component:
                 ),
                 class_name="flex flex-col gap-3 mt-5 max-h-[48rem] overflow-y-auto pr-1",
             ),
-            rx.el.div(
-                rx.icon("book-dashed", class_name="h-6 w-6 text-[#ff8a5b]"),
-                rx.el.p(
-                    "Aucun article dans cette catégorie.",
-                    class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 text-center",
-                ),
-                class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 mt-5",
+            empty_state(
+                "book-dashed",
+                "Aucun article dans cette catégorie.",
+                class_name="mt-5",
             ),
         ),
         class_name="w-full xl:w-[22rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",

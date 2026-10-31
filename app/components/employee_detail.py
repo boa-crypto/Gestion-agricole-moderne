@@ -1,5 +1,6 @@
 import reflex as rx
 
+from app.components.design import empty_state
 from app.states.employees_state import (
     AssignmentRow,
     AvailabilityRow,
@@ -659,13 +660,9 @@ def employee_detail() -> rx.Component:
                 _assignment_block(),
                 class_name="w-full",
             ),
-            rx.el.div(
-                rx.icon("users-round", class_name="h-7 w-7 text-[#d8fa5e]"),
-                rx.el.p(
-                    "Sélectionnez un salarié dans le registre ou créez une première fiche.",
-                    class_name="mt-4 text-[13px] leading-relaxed text-[#C9C5B4]/70 text-center max-w-sm",
-                ),
-                class_name="flex flex-col items-center justify-center py-24",
+            empty_state(
+                "users-round",
+                "Sélectionnez un salarié dans le registre ou créez une première fiche.",
             ),
         ),
         class_name="flex-1 min-w-0 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",

@@ -9,7 +9,7 @@ from app.components.admin_shared import (
     section_title,
     tone_badge,
 )
-from app.components.design import action_button, field, input_class, select_field
+from app.components.design import empty_state, action_button, field, input_class, select_field
 from app.states.administration_state import AdministrationState
 
 
@@ -188,13 +188,10 @@ def admin_user_list() -> rx.Component:
                     ),
                     class_name="flex flex-col gap-3 mt-5 max-h-[48rem] overflow-y-auto pr-1",
                 ),
-                rx.el.div(
-                    rx.icon("user-x", class_name="h-6 w-6 text-[#ff8a5b]"),
-                    rx.el.p(
-                        "Aucun compte pour ces critères.",
-                        class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 text-center",
-                    ),
-                    class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 mt-5",
+                empty_state(
+                    "user-x",
+                    "Aucun compte pour ces critères.",
+                    class_name="mt-5",
                 ),
             ),
         ),

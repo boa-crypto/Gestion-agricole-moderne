@@ -236,6 +236,22 @@ input, select, textarea { font-family: var(--ap-sans); }
 }
 .ap-press:active { transform: translateY(1px); }
 
+/* Affordance globale des contrôles ------------------------------------- */
+
+button:not(:disabled),
+a[role="button"] {
+  transition: transform 140ms cubic-bezier(.2, .7, .2, 1),
+    background-color 200ms ease, border-color 200ms ease, color 200ms ease,
+    opacity 200ms ease;
+}
+
+button:not(:disabled):active,
+a[role="button"]:active {
+  transform: translateY(1px);
+}
+
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
 /* Panneaux et lignes ---------------------------------------------------- */
 
 .ap-panel { transition: border-color 200ms ease, background-color 200ms ease; }

@@ -77,11 +77,11 @@ Trois lots ont été livrés (`b8b7edd`, `6c19339`, `4da760d`) :
 
 | Catégorie | Constat | Portée |
 | --- | --- | --- |
-| Surfaces | cartes encadrées `CARD` encore utilisées dans l'administration (bibliothèque, organigramme, opérations, fiche utilisateur) et les panneaux de cartographie | ~30 composants |
+| Surfaces | cartes encadrées `CARD` **résolues** (filet supérieur) ; restent les panneaux de cartographie et les tuiles interactives | ~10 composants |
 | Tableaux | en-têtes non normalisés en mono, pagination hétérogène, densité variable | CRM, stocks, charges |
 | Chargements | 67 `animate-pulse` bruts : squelettes gris génériques, sans lien avec la silhouette réelle | 54 fichiers |
-| Mouvement | une seule animation disponible (`ap-reveal`), appliquée à 2 endroits ; aucun stagger, aucune transition de vue, aucun retour au clic | global |
-| États vides | messages hétérogènes, parfois un simple paragraphe centré | ~15 écrans |
+| Mouvement | **résolu** : héros en `ap-reveal`, grilles en `ap-stagger`, clic en `ap-press`, squelettes balayés | global |
+| États vides | **résolus sur 17 blocs** via `empty_state()` ; quelques messages ponctuels subsistent | ~4 écrans |
 | Responsive | vérifié sur 390 px pour le cockpit et les RH ; non revérifié sur les écrans lourds (CRM, administration, cartographie) | 6 écrans |
 | Accessibilité | focus visible global présent ; contrastes des légendes `text-[#C9C5B4]/45` à surveiller (≈ 3:1 sur encre) | global |
 | Données de démonstration | les seeders ne couvrent ni le guide, ni les charges, ni l'administration, ni l'audit | aperçus |
