@@ -4,30 +4,14 @@ from __future__ import annotations
 
 import reflex as rx
 
-from app.components.design import action_button, eyebrow, hairline
+from app.components.design import (
+    action_button,
+    eyebrow,
+    meta_ledger,
+    meta_row,
+)
 from app.components.guide_help import help_button
 from app.states.dashboard_state import DashboardState
-
-
-def _meta_row(label: str, value: rx.Var | str, *, tone: str = "paper") -> rx.Component:
-    return rx.el.div(
-        rx.el.span(
-            label,
-            class_name="ap-mono text-[9px] uppercase tracking-[0.22em] text-[#C9C5B4]/40",
-        ),
-        rx.el.span(
-            value,
-            class_name=(
-                "ap-mono text-[10px] uppercase tracking-[0.14em] "
-                + (
-                    "text-[#FF8A5B]"
-                    if tone == "flame"
-                    else "text-[#F2EFE4]"
-                )
-            ),
-        ),
-        class_name="flex items-center justify-between gap-6 py-2",
-    )
 
 
 def cockpit_header() -> rx.Component:
@@ -53,15 +37,14 @@ def cockpit_header() -> rx.Component:
             class_name="min-w-0 max-w-3xl",
         ),
         rx.el.div(
-            rx.el.div(
-                _meta_row("Jour", DashboardState.today_label),
-                _meta_row("Saison", DashboardState.season_label),
-                _meta_row(
+            meta_ledger(
+                meta_row("Jour", DashboardState.today_label),
+                meta_row("Saison", DashboardState.season_label),
+                meta_row(
                     "Alertes critiques",
                     DashboardState.critical_alerts.to_string(),
                     tone="flame",
                 ),
-                class_name="divide-y divide-[#F2EFE4]/10 border-y border-[#F2EFE4]/12",
             ),
             rx.el.div(
                 action_button(

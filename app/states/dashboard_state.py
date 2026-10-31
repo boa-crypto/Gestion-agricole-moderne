@@ -388,6 +388,12 @@ class DashboardState(rx.State):
     def critical_alerts(self) -> int:
         return len([a for a in self.alerts if a["level"] == "CRITIQUE"])
 
+    @rx.var
+    def revenue_display(self) -> str:
+        """Produit brut lisible : séparateur de milliers fin."""
+        value = float(self.kpis.get("revenue", 0.0))
+        return f"{value:,.0f}".replace(",", "\u202f")
+
     @rx.event
     def select_parcel(self, parcel_id: int):
         self.selected_parcel_id = parcel_id

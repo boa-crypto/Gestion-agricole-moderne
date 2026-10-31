@@ -66,7 +66,7 @@ def kpi_strip() -> rx.Component:
                 "Récolté / valorisé",
                 f"{DashboardState.kpis['harvest_qty']:.1f}",
                 "t",
-                f"{DashboardState.kpis['revenue']:.0f} € de produit brut",
+                DashboardState.revenue_display + " € de produit brut",
                 index="06",
                 tone="accent",
             ),

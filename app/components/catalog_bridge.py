@@ -63,12 +63,20 @@ def catalog_shortcut(context: str) -> rx.Component:
             class_name="min-w-0 flex-1",
         ),
         rx.el.a(
-            rx.icon("sprout", class_name="h-3.5 w-3.5 text-[#0A0A08]"),
-            rx.el.span(spec["cta"], class_name="text-[#0A0A08]"),
+            rx.el.span(spec["cta"]),
+            rx.icon("arrow-up-right", class_name="h-3.5 w-3.5"),
             href=spec["route"],
-            class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2 text-xs font-semibold hover:bg-[#e4ff9b] transition-colors w-fit shrink-0",
+            class_name=(
+                "ap-mono inline-flex shrink-0 items-center gap-2 border-b "
+                "border-[#D8FA5E] pb-1 text-[10px] uppercase tracking-[0.18em] "
+                "text-[#D8FA5E] transition-colors hover:border-[#F2EFE4] "
+                "hover:text-[#F2EFE4]"
+            ),
         ),
-        class_name="flex flex-col sm:flex-row sm:items-center gap-3 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] px-4 py-3  mt-6",
+        class_name=(
+            "flex w-full flex-col items-start gap-3 border-y "
+            "border-[#F2EFE4]/12 py-3 sm:flex-row sm:items-center mt-6"
+        ),
     )
 
 

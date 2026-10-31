@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AgriPro — aperçus de la refonte « Encre &amp; Chlorophylle »</title>
+<style>
+  :root {
+    --ink: #0a0a08;
+    --surface: #101208;
+    --paper: #f2efe4;
+    --muted: #c9c5b4;
+    --accent: #d8fa5e;
+    --line: rgba(242, 239, 228, 0.14);
+    --serif: "Instrument Serif", "Times New Roman", Georgia, serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: "Inter Tight", "Inter", system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { color-scheme: dark; }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    letter-spacing: -0.012em;
+    -webkit-font-smoothing: antialiased;
+  }
+  header.cover {
+    padding: 72px clamp(20px, 6vw, 96px) 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 6px; height: 6px;
+    background: var(--accent);
+    display: inline-block;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 0.94;
+    font-size: clamp(2.6rem, 7vw, 5.4rem);
+    margin: 22px 0 0;
+    max-width: 20ch;
+  }
+  h1 em { color: var(--accent); }
+  .lede {
+    margin-top: 24px;
+    max-width: 62ch;
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(201, 197, 180, 0.75);
+  }
+  .meta {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    border-top: 1px solid var(--line);
+  }
+  .meta div {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .meta span:first-child { color: rgba(201, 197, 180, 0.45); }
+  main { padding: 8px clamp(20px, 6vw, 96px) 96px; }
+  figure {
+    margin: 0;
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  figure:last-of-type { border-bottom: 0; }
+  .fig-index {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(201, 197, 180, 0.4);
+  }
+  .fig-index b { color: var(--accent); font-weight: 500; }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    font-size: clamp(1.7rem, 3vw, 2.6rem);
+    margin: 14px 0 8px;
+  }
+  figcaption p {
+    margin: 0 0 22px;
+    max-width: 74ch;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: rgba(201, 197, 180, 0.72);
+  }
+  .shot {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 6px;
+  }
+  .shot img { display: block; width: 100%; height: auto; }
+  .shot.narrow { max-width: 420px; }
+  .note {
+    margin-top: 18px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(201, 197, 180, 0.42);
+  }
+  footer {
+    padding: 40px clamp(20px, 6vw, 96px) 72px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(201, 197, 180, 0.45);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+<header class="cover">
+  <p class="eyebrow">AgriPro · direction artistique</p>
+  <h1>Encre &amp; <em>Chlorophylle</em></h1>
+  <p class="lede">
+    Aperçus de la refonte éditoriale de l'application de gestion agricole : une
+    maison d'édition agronomique contemporaine — papier encre chaude, filets
+    d'un pixel, serif de registre (Instrument Serif), grotesque de lecture
+    (Inter Tight), mono de données (JetBrains Mono), accent chlorophylle acide
+    et vermillon de signal. Captures prises sur l'application réelle, données
+    SQLite de démonstration.
+  </p>
+  <div class="meta">
+    <div><span>Registre</span><span>Éditorial</span></div>
+    <div><span>Palette</span><span>Encre · papier · chlorophylle</span></div>
+    <div><span>Coque</span><span>Masthead + index lateral</span></div>
+    <div><span>Largeur capturée</span><span>1440 / 390 px</span></div>
+  </div>
+</header>
+
+<main>
+  <figure>
+    <p class="fig-index"><b>01</b> — Cockpit agronomique</p>
+    <h2>La page de couverture</h2>
+    <figcaption>
+      <p>
+        Titre serif à deux registres (romain + italique chlorophylle), chapô
+        court, registre de métadonnées à droite (jour, campagne, alertes
+        critiques) et deux actions : « Actualiser » en plein chlorophylle,
+        « Guide du cockpit » en filet. Les chiffres clés suivent une grille
+        éditoriale sans encadrés : filet supérieur, valeur serif, unité mono,
+        légende. La carte d'assolement et la fiche parcelle occupent la
+        seconde double page.
+      </p>
+    </figcaption>
+    <div class="shot"><img src="01-cockpit-agronomique.jpg" alt="Cockpit agronomique d'AgriPro : en-tête serif, chiffres clés et carte d'assolement." /></div>
+    <p class="note">Données réelles · 155,3 ha · 7 parcelles · campagne 2026</p>
+  </figure>
+
+  <figure>
+    <p class="fig-index"><b>02</b> — CRM &amp; partenaires</p>
+    <h2>Le grand livre commercial</h2>
+    <figcaption>
+      <p>
+        Même en-tête que le cockpit, donc même rythme : sur-titre, titre serif,
+        chapô, registre à droite. Les quatorze vues du CRM forment un index
+        éditorial — mono, souligné d'un filet chlorophylle pour la vue active —
+        et non une rangée de pastilles. Les indicateurs passent en tableaux de
+        trois colonnes, chiffres serif à séparateurs fins, icônes discrètes en
+        tête de colonne.
+      </p>
+    </figcaption>
+    <div class="shot"><img src="02-crm-synthese.jpg" alt="CRM : en-tête éditorial, index des vues, indicateurs clients, fournisseurs et commerciaux." /></div>
+    <p class="note">Montants 32 721 192 DA · séparateur de milliers U+202F</p>
+  </figure>
+
+  <figure>
+    <p class="fig-index"><b>03</b> — Parcelles &amp; cultures</p>
+    <h2>Le formulaire devient un index</h2>
+    <figcaption>
+      <p>
+        L'en-tête de page est factorisé (<code>page_hero</code>) : le bandeau
+        d'encadré disparaît au profit d'un filet supérieur. Les quatre compteurs
+        de filtrage suivent la même primitive que les chiffres clés du cockpit,
+        et la barre de filtres reprend des champs à filet unique, sans halo ni
+        ombre.
+      </p>
+    </figcaption>
+    <div class="shot"><img src="03-parcelles.jpg" alt="Parcelles et cultures : en-tête éditorial, compteurs de filtrage et barre de recherche." /></div>
+    <p class="note">État de chargement du jeu de démonstration visible sur les listes</p>
+  </figure>
+
+  <figure>
+    <p class="fig-index"><b>04</b> — Guide agricole</p>
+    <h2>La bibliothèque</h2>
+    <figcaption>
+      <p>
+        Le guide abandonne sa carte encadrée et son halo de recherche : le
+        titre respire sur l'encre, la recherche devient une ligne soulignée, et
+        les huit sections du guide utilisent le même index que le CRM. Les six
+        totaux éditoriaux suivent la primitive <code>stat</code>.
+      </p>
+    </figcaption>
+    <div class="shot"><img src="04-guide.jpg" alt="Guide agricole : en-tête serif, totaux éditoriaux, recherche et index des sections." /></div>
+    <p class="note">État vide : le seeder du guide n'a pas été rejoué dans cet aperçu</p>
+  </figure>
+
+  <figure>
+    <p class="fig-index"><b>05</b> — Référentiel cultures</p>
+    <h2>L'herbier</h2>
+    <figcaption>
+      <p>
+        Le titre du référentiel conserve sa phrase-taxonomie en serif, le
+        registre de droite reprend l'inventaire, et les tuiles de couverture
+        deviennent des chiffres à filet. Les squelettes de chargement sont
+        dessinés comme des lignes éditoriales plutôt que comme des blocs.
+      </p>
+    </figcaption>
+    <div class="shot"><img src="05-referentiel.jpg" alt="Référentiel cultures : titre taxonomie, registre d'inventaire et planche de l'herbier." /></div>
+    <p class="note">État vide : référentiel non peuplé dans cet aperçu</p>
+  </figure>
+
+  <figure>
+    <p class="fig-index"><b>06</b> — Cartographie</p>
+    <h2>Le chantier restant</h2>
+    <figcaption>
+      <p>
+        Cette page n'a pas reçu les primitives partagées : cartes encadrées,
+        petits blocs de chiffres, boutons en boîtes. Elle marque le prochain
+        lot de migration — panneaux, barres d'outils et sélecteurs — pour
+        aligner le reste de l'application sur le registre du cockpit.
+      </p>
+    </figcaption>
+    <div class="shot"><img src="06-cartographie.jpg" alt="Cartographie : interface encore composée de cartes encadrées et de boutons en boîtes." /></div>
+    <p class="note">À migrer : panneaux, barres d'outils, sélecteurs</p>
+  </figure>
+
+  <figure>
+    <p class="fig-index"><b>07</b> — Mobile</p>
+    <h2>390 px, même maison</h2>
+    <figcaption>
+      <p>
+        Le masthead se resserre : marque, fil d'Ariane, aide, session et menu.
+        Le registre passe sous le chapô, les actions restent sur une ligne, et
+        les chiffres clés s'alignent en deux colonnes sans perdre la serif.
+      </p>
+    </figcaption>
+    <div class="shot narrow"><img src="07-cockpit-mobile.jpg" alt="Cockpit AgriPro en 390 px : masthead compact, titre serif et chiffres clés en deux colonnes." /></div>
+  </figure>
+</main>
+
+<footer>
+  <span>AgriPro · Refonte « Encre &amp; Chlorophylle »</span>
+  <span>docs/editorial-design.md</span>
+  <span>Captures 1440 × 1050 @2x · 390 × 844 @2x</span>
+</footer>
+</body>
+</html>

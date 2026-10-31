@@ -436,14 +436,15 @@ def stat(
     *,
     index: rx.Var | str = "",
     tone: str = "paper",
-    icon: str = "",
+    icon: rx.Var | str | None = None,
 ) -> rx.Component:
     """Chiffre éditorial : filet supérieur, valeur en serif, légende mono."""
     value_children: list[rx.Component] = [
         rx.el.span(
             value,
             class_name=(
-                "ap-serif block text-[2.35rem] leading-[0.85] " f"{_tone_text(tone)}"
+                "ap-serif block whitespace-nowrap text-[2.35rem] leading-[0.85] "
+                f"{_tone_text(tone)}"
             ),
         )
     ]
@@ -458,14 +459,23 @@ def stat(
             )
         )
     value_row = rx.el.div(*value_children, class_name="mt-4 flex items-end gap-2")
+    marks: list[rx.Component] = []
+    if icon is not None:
+        marks.append(
+            rx.icon(icon, class_name="h-3.5 w-3.5 shrink-0 text-[#C9C5B4]/30")
+        )
+    if not (isinstance(index, str) and not index):
+        marks.append(
+            rx.el.span(
+                index,
+                class_name="ap-mono text-[9px] tracking-[0.2em] text-[#C9C5B4]/30",
+            )
+        )
     children: list[rx.Component] = [
         rx.el.div(
             rx.el.div(
                 rx.el.span(label, class_name="ap-eyebrow text-[#C9C5B4]/55"),
-                rx.el.span(
-                    index,
-                    class_name="ap-mono text-[9px] tracking-[0.2em] text-[#C9C5B4]/30",
-                ),
+                rx.el.div(*marks, class_name="flex shrink-0 items-start gap-2"),
                 class_name="flex items-start justify-between gap-3",
             ),
             value_row,
@@ -478,11 +488,157 @@ def stat(
                 class_name="mt-3 text-[11px] leading-relaxed text-[#C9C5B4]/55",
             )
         )
-    if icon:
-        children.append(
-            rx.icon(icon, class_name="mt-4 h-3.5 w-3.5 text-[#C9C5B4]/35")
-        )
     return rx.el.div(
         *children,
         class_name="group border-t border-[#F2EFE4]/12 pt-4 pb-1",
+    )
+
+
+def meta_row(
+    label: rx.Var | str,
+    value: rx.Var | str,
+    *,
+    tone: str = "paper",
+) -> rx.Component:
+    """Ligne de registre : intitulé mono discret, valeur alignée à droite."""
+    value_class = {
+        "paper": "text-[#F2EFE4]",
+        "flame": "text-[#FF8A5B]",
+        "accent": "text-[#D8FA5E]",
+        "muted": "text-[#C9C5B4]",
+    }.get(tone, "text-[#F2EFE4]")
+    return rx.el.div(
+        rx.el.span(
+            label,
+            class_name=(
+                "ap-mono text-[9px] uppercase tracking-[0.22em] text-[#C9C5B4]/40"
+            ),
+        ),
+        rx.el.span(
+            value,
+            class_name=(
+                "ap-mono text-right text-[10px] uppercase leading-relaxed "
+                "tracking-[0.14em] " + value_class
+            ),
+        ),
+        class_name="flex items-center justify-between gap-6 py-2",
+    )
+
+
+def meta_ledger(*rows: rx.Component, class_name: str = "") -> rx.Component:
+    """Registre de métadonnées, filets haut et bas, sans encadré."""
+    return rx.el.div(
+        *rows,
+        class_name=(
+            "divide-y divide-[#F2EFE4]/10 border-y border-[#F2EFE4]/12 "
+            f"{class_name}"
+        ),
+    )
+
+
+def page_hero(
+    eyebrow_text: rx.Var | str,
+    title: rx.Component | rx.Var | str,
+    lede: rx.Var | str,
+    *,
+    tone: str = "accent",
+    meta: rx.Component | None = None,
+    actions: rx.Component | None = None,
+    class_name: str = "",
+) -> rx.Component:
+    """En-tête de page unique : sur-titre, titre serif, chapô, registre, actions."""
+    has_right = meta is not None or actions is not None
+    right_children: list[rx.Component] = []
+    if meta is not None:
+        right_children.append(meta)
+    if actions is not None:
+        right_children.append(actions)
+    right = (
+        rx.el.div(
+            *right_children,
+            class_name=(
+                "flex w-full flex-col gap-5 lg:max-w-sm lg:shrink-0 lg:self-end"
+            ),
+        )
+        if has_right
+        else rx.fragment()
+    )
+    return rx.el.header(
+        rx.el.div(
+            eyebrow(eyebrow_text, tone=tone),
+            rx.el.h1(
+                title,
+                class_name=(
+                    "ap-display mt-5 text-[clamp(2.3rem,4.2vw,3.8rem)] text-[#F2EFE4]"
+                ),
+            ),
+            rx.el.p(
+                lede,
+                class_name=(
+                    "mt-5 max-w-2xl text-[13px] leading-relaxed text-[#C9C5B4]/70"
+                ),
+            ),
+            class_name="min-w-0 max-w-3xl",
+        ),
+        right,
+        class_name=(
+            "flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between "
+            f"lg:gap-16 {class_name}"
+        ),
+    )
+
+
+def index_tab(
+    label: rx.Var | str,
+    *,
+    active,
+    on_click=None,
+    icon: rx.Var | str | None = None,
+    class_name: str = "",
+) -> rx.Component:
+    """Onglet éditorial : index mono souligné, sans pastille pleine."""
+    children: list[rx.Component] = []
+    if icon is not None:
+        children.append(
+            rx.icon(
+                icon,
+                class_name=rx.cond(
+                    active,
+                    "h-3.5 w-3.5 shrink-0 text-[#D8FA5E]",
+                    "h-3.5 w-3.5 shrink-0 text-[#C9C5B4]/40",
+                ),
+            )
+        )
+    children.append(rx.el.span(label))
+    return rx.el.button(
+        *children,
+        type="button",
+        on_click=on_click,
+        aria_pressed=active,
+        class_name=rx.cond(
+            active,
+            "ap-mono inline-flex items-center gap-2 border-b border-[#D8FA5E] pb-2 "
+            "pt-1 text-[10px] uppercase tracking-[0.18em] text-[#D8FA5E] "
+            "transition-colors " + class_name,
+            "ap-mono inline-flex items-center gap-2 border-b border-transparent pb-2 "
+            "pt-1 text-[10px] uppercase tracking-[0.18em] text-[#C9C5B4]/55 "
+            "transition-colors hover:border-[#F2EFE4]/30 hover:text-[#F2EFE4] "
+            + class_name,
+        ),
+    )
+
+
+def index_rail(
+    *children: rx.Component,
+    label: str = "",
+    class_name: str = "",
+) -> rx.Component:
+    """Bandeau d'onglets éditorial, filet supérieur, retrait régulier."""
+    return rx.el.nav(
+        *children,
+        aria_label=label,
+        class_name=(
+            "flex w-full flex-wrap items-center gap-x-7 gap-y-2 border-t "
+            f"border-[#F2EFE4]/12 pt-3 {class_name}"
+        ),
     )

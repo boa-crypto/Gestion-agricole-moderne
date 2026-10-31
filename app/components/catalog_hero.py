@@ -2,6 +2,12 @@
 
 import reflex as rx
 
+from app.components.design import (
+    meta_ledger,
+    meta_row,
+    page_hero,
+    stat,
+)
 from app.components.guide_help import help_button
 from app.states.catalog_browser_state import (
     CatalogBrowserState,
@@ -10,83 +16,61 @@ from app.states.catalog_browser_state import (
 )
 
 
-def catalog_header() -> rx.Component:
-    return rx.el.header(
-        rx.el.div(
-            rx.el.div(
-                rx.el.div(
-                    rx.icon("sprout", class_name="h-4 w-4 text-[#d8fa5e]"),
-                    rx.el.span(
-                        "Référentiel agronomique",
-                        class_name="ap-eyebrow text-[#D8FA5E]",
-                    ),
-                    class_name="flex items-center gap-2",
-                ),
-                rx.el.h1(
-                    "Catégorie → Culture → Espèce → Variété",
-                    class_name="ap-display text-[clamp(2.4rem,4.6vw,4.1rem)] text-[#f2efe4] mt-3",
-                ),
-                rx.el.p(
-                    "L'herbier de l'exploitation : familles cultivées, repères "
-                    "agronomiques par espèce et fiches variétales, prêts à être "
-                    "consommés par les parcelles, les campagnes, l'irrigation, "
-                    "la fertilisation, les traitements et les récoltes.",
-                    class_name="mt-4 text-[13px] leading-relaxed text-[#C9C5B4]/70 max-w-3xl",
-                ),
-                class_name="min-w-0",
-            ),
-            rx.el.div(
-                rx.el.div(
-                    rx.icon("layers", class_name="h-3.5 w-3.5 text-[#d8fa5e]"),
-                    rx.el.span(
-                        CatalogBrowserState.coverage_label,
-                        class_name="text-xs font-medium text-[#f2efe4]/80",
-                    ),
-                    class_name="ap-mono inline-flex w-fit items-center gap-2 border border-[#F2EFE4]/12 px-3 py-2 text-[9px] uppercase tracking-[0.18em] text-[#C9C5B4]",
-                ),
-                help_button("referentiel", "Guide du référentiel"),
-                rx.el.button(
-                    rx.cond(
-                        CatalogBrowserState.is_loading,
-                        rx.icon(
-                            "loader-circle",
-                            class_name="h-4 w-4 animate-spin text-[#0A0A08]",
-                        ),
-                        rx.icon(
-                            "refresh-cw", class_name="h-4 w-4 text-[#0A0A08]"
-                        ),
-                    ),
-                    rx.el.span("Actualiser", class_name="text-[#0A0A08]"),
-                    on_click=CatalogBrowserState.load_referentiel,
-                    class_name="ap-mono inline-flex w-fit items-center gap-2 bg-[#D8FA5E] px-4 py-2.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[#0A0A08] transition-colors hover:bg-[#E4FF9B]",
-                ),
-                class_name="flex flex-wrap items-center gap-2 lg:justify-end",
-            ),
-            class_name="flex flex-col lg:flex-row lg:items-end justify-between gap-6 w-full",
+def _refresh() -> rx.Component:
+    return rx.el.button(
+        rx.cond(
+            CatalogBrowserState.is_loading,
+            rx.icon("loader-circle", class_name="h-3.5 w-3.5 animate-spin"),
+            rx.icon("refresh-cw", class_name="h-3.5 w-3.5"),
         ),
-        class_name="w-full border-b border-[#F2EFE4]/12 pb-8",
+        rx.el.span("Actualiser"),
+        type="button",
+        on_click=CatalogBrowserState.load_referentiel,
+        disabled=CatalogBrowserState.is_loading,
+        class_name=(
+            "ap-mono inline-flex w-fit items-center justify-center gap-2 border "
+            "border-[#D8FA5E] bg-[#D8FA5E] px-3.5 py-2.5 text-[10px] uppercase "
+            "tracking-[0.18em] text-[#0A0A08] transition-colors "
+            "hover:border-[#E4FF9B] hover:bg-[#E4FF9B] "
+            "disabled:cursor-not-allowed disabled:opacity-45"
+        ),
+    )
+
+
+def catalog_header() -> rx.Component:
+    return page_hero(
+        "Référentiel agronomique",
+        "Catégorie → Culture → Espèce → Variété",
+        "L'herbier de l'exploitation : familles cultivées, repères agronomiques "
+        "par espèce et fiches variétales, prêts à être consommés par les parcelles, "
+        "les campagnes, l'irrigation, la fertilisation, les traitements et les "
+        "récoltes.",
+        meta=meta_ledger(
+            rx.cond(
+                CatalogBrowserState.coverage.length() > 0,
+                rx.foreach(
+                    CatalogBrowserState.coverage,
+                    lambda metric: meta_row(metric["label"], metric["value"]),
+                ),
+                meta_row("Inventaire", CatalogBrowserState.coverage_label),
+            ),
+        ),
+        actions=rx.el.div(
+            help_button("referentiel", "Guide du référentiel"),
+            _refresh(),
+            class_name="flex flex-wrap items-center gap-2",
+        ),
+        class_name="pb-8",
     )
 
 
 def _metric_tile(metric: CoverageMetric) -> rx.Component:
-    return rx.el.div(
-        rx.el.div(
-            rx.icon(metric["icon"], class_name="h-4 w-4 text-[#d8fa5e]"),
-            rx.el.span(
-                metric["label"],
-                class_name="ap-eyebrow text-[#c9c5b4]/50",
-            ),
-            class_name="flex items-center gap-2",
-        ),
-        rx.el.p(
-            metric["value"],
-            class_name="ap-serif text-4xl text-[#f2efe4] mt-2 leading-none",
-        ),
-        rx.el.p(
-            metric["unit"],
-            class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-1.5",
-        ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+    return stat(
+        metric["label"],
+        metric["value"],
+        metric["unit"],
+        icon=metric["icon"],
+        tone="paper",
     )
 
 
@@ -98,14 +82,31 @@ def catalog_coverage() -> rx.Component:
                 rx.foreach(
                     [0, 1, 2, 3, 4, 5],
                     lambda _i: rx.el.div(
-                        class_name="animate-pulse h-28 rounded-none bg-[#16190f]"
+                        rx.el.div(class_name="h-px w-full bg-[#F2EFE4]/12"),
+                        rx.el.div(
+                            class_name=(
+                                "mt-4 h-2 w-24 animate-pulse bg-[#F2EFE4]/10"
+                            )
+                        ),
+                        rx.el.div(
+                            class_name=(
+                                "mt-3 h-8 w-16 animate-pulse bg-[#F2EFE4]/10"
+                            )
+                        ),
+                        class_name="pb-1",
                     ),
                 ),
-                class_name="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 w-full",
+                class_name=(
+                    "grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 "
+                    "xl:grid-cols-6 xl:gap-x-8 w-full"
+                ),
             ),
             rx.el.div(
                 rx.foreach(CatalogBrowserState.coverage, _metric_tile),
-                class_name="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 w-full",
+                class_name=(
+                    "grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 "
+                    "xl:grid-cols-6 xl:gap-x-8 w-full"
+                ),
             ),
         ),
         class_name="w-full",

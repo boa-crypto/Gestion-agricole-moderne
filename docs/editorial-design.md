@@ -90,3 +90,40 @@ Règles de style à respecter pour toute nouvelle vue :
   `prefers-reduced-motion: reduce`.
 - Contraste : papier `#F2EFE4` sur encre `#0A0A08` (≈ 17:1), libellés atténués
   ≥ 3:1, aucun texte porté par le seul accent sur fond clair.
+
+## 6. Primitives partagées (lot 2)
+
+Le second lot remplace les compositions ad hoc des en-têtes et des indicateurs
+par cinq primitives de `app/components/design.py` :
+
+| Primitive | Rôle | Écrans déjà migrés |
+| --- | --- | --- |
+| `page_hero` | sur-titre, titre serif, chapô, registre et actions | cockpit, CRM, guide, référentiel, parcelles |
+| `meta_row` / `meta_ledger` | registre de métadonnées à filets, sans encadré | cockpit, CRM, guide, référentiel, parcelles |
+| `stat` | chiffre éditorial : filet supérieur, valeur serif, unité mono, légende | chiffres clés, CRM, guide, référentiel, filtres parcellaires |
+| `index_tab` / `index_rail` | index d'onglets mono souligné, sans pastille pleine | CRM (14 vues), guide (8 sections) |
+| `action_button` / `icon_action` | actions carrées : plein chlorophylle, filet, fantôme | coque, en-têtes |
+
+Règles issues des aperçus (`docs/apercus/`) :
+
+- Un seul registre de métadonnées par page, aligné sur la colonne de droite du
+  héros ; les actions se placent sous ce registre, jamais à côté du chapô.
+- Un seul onglet actif par bandeau, signalé par un filet chlorophylle et un
+  texte chlorophylle — pas de fond plein, pas de pastille.
+- Les montants passent par des variables dérivées (`revenue_display`,
+  `turnover_display`…) pour obtenir le séparateur de milliers fin (U+202F) ;
+  ne jamais formater un montant à la volée dans un composant.
+- Les grilles de montants utilisent trois colonnes au plus en `xl` : les
+  valeurs serif longues ne tiennent pas dans six colonnes.
+- Les squelettes de chargement reprennent la silhouette de la primitive
+  (filet + ligne + chiffre), jamais un bloc plein.
+
+### Chantiers restants
+
+- Cartographie, administration, charges, RH et configuration : panneaux,
+  barres d'outils et sélecteurs encore composés en cartes encadrées
+  (voir `06-cartographie.jpg`).
+- Menus déroulants et champs de formulaire : unifier sur le champ à filet
+  unique de `parcel_filters`.
+- Tables de données (CRM, stocks) : passer les en-têtes en mono et les
+  montants par les variables `*_display`.

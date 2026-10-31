@@ -1,27 +1,16 @@
 import reflex as rx
 
+from app.components.design import action_button, stat
 from app.states.parcels_state import Option, ParcelsState
 
 
-def _stat(label: str, value: rx.Var | str, unit: str) -> rx.Component:
-    return rx.el.div(
-        rx.el.span(
-            label,
-            class_name="ap-eyebrow text-[#c9c5b4]/45",
-        ),
-        rx.el.div(
-            rx.el.span(
-                value,
-                class_name="ap-serif text-2xl leading-none text-[#f2efe4]",
-            ),
-            rx.el.span(
-                unit,
-                class_name="text-[11px] font-medium text-[#c9c5b4]/50 mb-0.5",
-            ),
-            class_name="flex items-end gap-1.5 mt-2",
-        ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-3",
-    )
+def _stat(
+    label: str,
+    value: rx.Var | str,
+    unit: str,
+    index: str,
+) -> rx.Component:
+    return stat(label, value, unit, index=index)
 
 
 def _select(
@@ -47,7 +36,7 @@ def _select(
             default_value=default_value,
             key=f"{name}-{ParcelsState.form_key}",
             on_change=on_change,
-            class_name="w-full appearance-none cursor-pointer rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2.5 pl-9 pr-9 text-sm font-medium text-[#f2efe4] focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors",
+            class_name="w-full cursor-pointer appearance-none border border-[#F2EFE4]/14 bg-[#0F110A] py-2.5 pl-9 pr-9 text-sm text-[#F2EFE4] outline-hidden transition-colors focus:border-[#D8FA5E]",
         ),
         rx.icon(
             "chevron-down",
@@ -60,13 +49,26 @@ def _select(
 def parcel_filters() -> rx.Component:
     return rx.el.section(
         rx.el.div(
-            _stat("Parcelles listées", ParcelsState.parcel_count, "îlots"),
-            _stat("Surface filtrée", f"{ParcelsState.filtered_area:.1f}", "ha"),
+            _stat("Parcelles listées", ParcelsState.parcel_count, "îlots", "01"),
             _stat(
-                "Dont conduite bio", f"{ParcelsState.organic_area:.1f}", "ha"
+                "Surface filtrée",
+                f"{ParcelsState.filtered_area:.1f}",
+                "ha",
+                "02",
             ),
-            _stat("Cultures affichées", ParcelsState.crops_shown, "fiches"),
-            class_name="grid grid-cols-2 lg:grid-cols-4 gap-3 w-full",
+            _stat(
+                "Dont conduite bio",
+                f"{ParcelsState.organic_area:.1f}",
+                "ha",
+                "03",
+            ),
+            _stat(
+                "Cultures affichées",
+                ParcelsState.crops_shown,
+                "fiches",
+                "04",
+            ),
+            class_name="grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4 lg:gap-x-8 w-full",
         ),
         rx.el.div(
             rx.el.div(
@@ -78,7 +80,11 @@ def parcel_filters() -> rx.Component:
                     placeholder="Rechercher une parcelle, un code, une localité ou une culture…",
                     default_value=ParcelsState.search,
                     on_change=ParcelsState.set_search.debounce(400),
-                    class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2.5 pl-9 pr-3 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/30 focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors",
+                    class_name=(
+                        "w-full border border-[#F2EFE4]/14 bg-[#0F110A] py-2.5 pl-9 "
+                        "pr-3 text-sm text-[#F2EFE4] outline-hidden transition-colors "
+                        "placeholder:text-[#C9C5B4]/35 focus:border-[#D8FA5E]"
+                    ),
                 ),
                 class_name="relative flex-1 min-w-0",
             ),
@@ -105,7 +111,7 @@ def parcel_filters() -> rx.Component:
                     default_value=ParcelsState.species_filter,
                     key=f"species-{ParcelsState.form_key}",
                     on_change=ParcelsState.set_species_filter,
-                    class_name="w-full appearance-none cursor-pointer rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2.5 pl-9 pr-9 text-sm font-medium text-[#f2efe4] focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors",
+                    class_name="w-full cursor-pointer appearance-none border border-[#F2EFE4]/14 bg-[#0F110A] py-2.5 pl-9 pr-9 text-sm text-[#F2EFE4] outline-hidden transition-colors focus:border-[#D8FA5E]",
                 ),
                 rx.icon(
                     "chevron-down",
@@ -113,19 +119,19 @@ def parcel_filters() -> rx.Component:
                 ),
                 class_name="relative w-full sm:w-56",
             ),
-            rx.el.button(
-                rx.icon("rotate-ccw", class_name="h-4 w-4"),
-                rx.el.span("Réinitialiser"),
+            action_button(
+                "Réinitialiser",
+                icon="rotate-ccw",
+                tone="ghost",
                 on_click=ParcelsState.reset_filters,
-                class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
             ),
-            rx.el.button(
-                rx.icon("plus", class_name="h-4 w-4 text-[#0A0A08]"),
-                rx.el.span("Nouvelle parcelle", class_name="text-[#0A0A08]"),
+            action_button(
+                "Nouvelle parcelle",
+                icon="plus",
+                tone="solid",
                 on_click=ParcelsState.open_parcel_create,
-                class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
             ),
             class_name="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 w-full mt-4",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
     )

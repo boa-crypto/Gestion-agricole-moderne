@@ -243,6 +243,11 @@ def _month_keys(today: datetime.date, count: int = 12) -> list[str]:
     return list(reversed(keys))
 
 
+def _amount(value: float) -> str:
+    """Montant lisible : séparateur de milliers fin, sans décimale."""
+    return f"{value:,.0f}".replace(",", "\u202f")
+
+
 class CrmState(rx.State):
     """Cockpit commercial CRM : KPIs, graphiques, alertes, recherche."""
 
@@ -323,6 +328,62 @@ class CrmState(rx.State):
         if net < 0:
             return "Position nette à surveiller"
         return "Position nette équilibrée"
+
+    @rx.var
+    def turnover_display(self) -> str:
+        return _amount(self.kpis.get("turnover", 0.0))
+
+    @rx.var
+    def receivable_display(self) -> str:
+        return _amount(self.kpis.get("receivable", 0.0))
+
+    @rx.var
+    def received_display(self) -> str:
+        return _amount(self.kpis.get("received", 0.0))
+
+    @rx.var
+    def purchases_display(self) -> str:
+        return _amount(self.kpis.get("purchases", 0.0))
+
+    @rx.var
+    def payable_display(self) -> str:
+        return _amount(self.kpis.get("payable", 0.0))
+
+    @rx.var
+    def paid_out_display(self) -> str:
+        return _amount(self.kpis.get("paid_out", 0.0))
+
+    @rx.var
+    def turnover_month_display(self) -> str:
+        return _amount(self.kpis.get("turnover_month", 0.0))
+
+    @rx.var
+    def purchases_month_display(self) -> str:
+        return _amount(self.kpis.get("purchases_month", 0.0))
+
+    @rx.var
+    def margin_display(self) -> str:
+        return _amount(self.kpis.get("margin", 0.0))
+
+    @rx.var
+    def net_cash_display(self) -> str:
+        return _amount(self.kpis.get("net_cash", 0.0))
+
+    @rx.var
+    def receivable_overdue_display(self) -> str:
+        return _amount(self.kpis.get("receivable_overdue", 0.0))
+
+    @rx.var
+    def payable_overdue_display(self) -> str:
+        return _amount(self.kpis.get("payable_overdue", 0.0))
+
+    @rx.var
+    def turnover_season_display(self) -> str:
+        return _amount(self.kpis.get("turnover_season", 0.0))
+
+    @rx.var
+    def purchases_season_display(self) -> str:
+        return _amount(self.kpis.get("purchases_season", 0.0))
 
     @rx.var
     def margin_label(self) -> str:

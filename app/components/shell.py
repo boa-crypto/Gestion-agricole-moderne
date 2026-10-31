@@ -24,7 +24,9 @@ def _brand() -> rx.Component:
         ),
         rx.el.span(
             "AgriPro",
-            class_name="ap-serif text-[27px] leading-none text-[#F2EFE4]",
+            class_name=(
+                "ap-serif text-[22px] leading-none text-[#F2EFE4] sm:text-[27px]"
+            ),
         ),
         rx.el.span(
             "Édition agronomique",
@@ -37,8 +39,9 @@ def _brand() -> rx.Component:
         href="/",
         aria_label="AgriPro — retour au cockpit global",
         class_name=(
-            "flex h-full shrink-0 items-center gap-3 border-r border-[#F2EFE4]/12 "
-            "px-4 sm:px-6 transition-colors hover:bg-[#14160F]"
+            "flex h-full shrink-0 items-center gap-2.5 border-r "
+            "border-[#F2EFE4]/12 px-3 transition-colors hover:bg-[#14160F] "
+            "sm:gap-3 sm:px-6"
         ),
     )
 
@@ -126,27 +129,41 @@ def _masthead(active: str) -> rx.Component:
             ),
             rx.el.div(
                 _cockpit_selector(),
-                rx.el.button(
-                    rx.icon("layout-grid", class_name="h-4 w-4"),
-                    rx.el.span(
-                        "Domaines",
-                        class_name="ap-mono hidden text-[9px] uppercase tracking-[0.18em] xl:inline",
+                rx.el.div(
+                    rx.el.button(
+                        rx.icon("layout-grid", class_name="h-4 w-4"),
+                        rx.el.span(
+                            "Domaines",
+                            class_name=(
+                                "ap-mono hidden text-[9px] uppercase "
+                                "tracking-[0.18em] xl:inline"
+                            ),
+                        ),
+                        type="button",
+                        on_click=NavigationState.toggle_panel,
+                        aria_expanded=NavigationState.panel_open,
+                        aria_controls="nav-context",
+                        title="Index des domaines du cockpit",
+                        class_name=(
+                            "inline-flex h-9 items-center gap-2 border "
+                            "border-[#F2EFE4]/16 px-3 text-[#C9C5B4] "
+                            "transition-colors hover:border-[#D8FA5E] "
+                            "hover:text-[#D8FA5E]"
+                        ),
                     ),
-                    type="button",
-                    on_click=NavigationState.toggle_panel,
-                    aria_expanded=NavigationState.panel_open,
-                    aria_controls="nav-context",
-                    title="Index des domaines du cockpit",
-                    class_name=(
-                        "inline-flex h-9 items-center gap-2 border border-[#F2EFE4]/16 "
-                        "px-3 text-[#C9C5B4] transition-colors hover:border-[#D8FA5E] "
-                        "hover:text-[#D8FA5E]"
-                    ),
+                    class_name="hidden lg:block",
                 ),
-                rx.cond(
-                    NavigationState.search_visible,
-                    icon_action("search", "Recherche globale", href="/recherche"),
-                    rx.fragment(),
+                rx.el.div(
+                    rx.cond(
+                        NavigationState.search_visible,
+                        icon_action(
+                            "search",
+                            "Recherche globale",
+                            href="/recherche",
+                        ),
+                        rx.fragment(),
+                    ),
+                    class_name="hidden lg:block",
                 ),
                 rx.el.button(
                     rx.icon("life-buoy", class_name="h-4 w-4"),

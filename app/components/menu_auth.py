@@ -23,15 +23,21 @@ def account_controls() -> rx.Component:
                     class_name="hidden flex-col gap-0.5 xl:flex",
                 ),
                 rx.el.button(
-                    "Déconnexion",
+                    rx.icon("log-out", class_name="h-4 w-4 sm:hidden"),
+                    rx.el.span(
+                        "Déconnexion", class_name="hidden sm:inline"
+                    ),
                     type="button",
                     on_click=MenuAuthState.logout,
                     disabled=MenuAuthState.busy,
+                    aria_label="Déconnexion",
+                    title="Déconnexion",
                     class_name=(
-                        "ap-mono inline-flex h-9 items-center border border-[#F2EFE4]/16 "
-                        "px-3 text-[9px] uppercase tracking-[0.18em] text-[#C9C5B4] "
-                        "transition-colors hover:border-[#FF5A2B]/60 hover:text-[#FF8A5B] "
-                        "disabled:opacity-40"
+                        "ap-mono inline-flex h-9 w-9 items-center justify-center "
+                        "border border-[#F2EFE4]/16 text-[9px] uppercase "
+                        "tracking-[0.18em] text-[#C9C5B4] transition-colors "
+                        "hover:border-[#FF5A2B]/60 hover:text-[#FF8A5B] "
+                        "disabled:opacity-40 sm:w-auto sm:px-3"
                     ),
                 ),
                 class_name="flex items-center gap-3",
