@@ -8,22 +8,22 @@ def _tone_border(tone: rx.Var) -> rx.Var:
         tone,
         (
             "bad",
-            "w-full rounded-2xl border border-red-400/30 bg-red-400/[0.06] p-4",
+            "w-full rounded-none border border-[#ff6b5a]/30 bg-[#ff6b5a]/[0.06] p-4",
         ),
         (
             "warn",
-            "w-full rounded-2xl border border-amber-300/30 bg-amber-300/[0.06] p-4",
+            "w-full rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/[0.06] p-4",
         ),
-        "w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4",
+        "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
     )
 
 
 def _tone_icon(tone: rx.Var) -> rx.Var:
     return rx.match(
         tone,
-        ("bad", "h-4 w-4 text-red-300"),
-        ("warn", "h-4 w-4 text-amber-300"),
-        "h-4 w-4 text-lime-300",
+        ("bad", "h-4 w-4 text-[#ff9b8c]"),
+        ("warn", "h-4 w-4 text-[#ff8a5b]"),
+        "h-4 w-4 text-[#d8fa5e]",
     )
 
 
@@ -32,13 +32,13 @@ def _tone_badge(tone: rx.Var) -> rx.Var:
         tone,
         (
             "bad",
-            "rounded-full border border-red-400/30 bg-red-400/10 px-2.5 py-0.5 text-[10px] font-semibold text-red-200 w-fit",
+            "rounded-none border border-[#ff6b5a]/30 bg-[#ff6b5a]/10 px-2.5 py-0.5 text-[10px] font-semibold text-[#ffbcb0] w-fit",
         ),
         (
             "warn",
-            "rounded-full border border-amber-300/30 bg-amber-300/10 px-2.5 py-0.5 text-[10px] font-semibold text-amber-200 w-fit",
+            "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2.5 py-0.5 text-[10px] font-semibold text-[#ffb894] w-fit",
         ),
-        "rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-100/70 w-fit",
+        "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2.5 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/70 w-fit",
     )
 
 
@@ -49,11 +49,11 @@ def _alert_card(item: AlertRow) -> rx.Component:
             rx.el.div(
                 rx.el.p(
                     item["title"],
-                    class_name="text-sm font-semibold text-emerald-50",
+                    class_name="text-sm font-semibold text-[#f2efe4]",
                 ),
                 rx.el.p(
                     item["partner"],
-                    class_name="text-[11px] font-semibold text-lime-200/80",
+                    class_name="text-[11px] font-semibold text-[#e4ff9b]/80",
                 ),
                 class_name="min-w-0 flex-1",
             ),
@@ -62,11 +62,11 @@ def _alert_card(item: AlertRow) -> rx.Component:
         ),
         rx.el.p(
             item["detail"],
-            class_name="text-[11px] font-medium text-emerald-100/50 mt-2",
+            class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-2",
         ),
         rx.el.p(
             f"{item['amount']:.0f} DA concernés",
-            class_name="text-xs font-bold text-emerald-50 mt-2",
+            class_name="text-xs font-bold text-[#f2efe4] mt-2",
         ),
         key=item["key"],
         class_name=_tone_border(item["tone"]),
@@ -76,14 +76,14 @@ def _alert_card(item: AlertRow) -> rx.Component:
 def crm_alerts() -> rx.Component:
     return rx.el.section(
         rx.el.div(
-            rx.icon("bell-ring", class_name="h-4 w-4 text-amber-300"),
+            rx.icon("bell-ring", class_name="h-4 w-4 text-[#ff8a5b]"),
             rx.el.span(
                 "Centre de décision financier",
-                class_name="text-[10px] font-semibold uppercase tracking-[0.24em] text-amber-300/80",
+                class_name="ap-eyebrow text-[#ff8a5b]/80",
             ),
             rx.el.span(
                 f"{CrmState.critical_alerts} critique(s) sur {CrmState.alert_count}",
-                class_name="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-emerald-100/60 w-fit ml-auto",
+                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-semibold text-[#c9c5b4]/60 w-fit ml-auto",
             ),
             class_name="flex flex-wrap items-center gap-2 w-full",
         ),
@@ -95,8 +95,8 @@ def crm_alerts() -> rx.Component:
             ),
             rx.el.p(
                 "Aucune échéance proche, aucun retard et aucune limite de crédit dépassée.",
-                class_name="text-sm font-medium text-emerald-100/50 mt-5",
+                class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
             ),
         ),
-        class_name="w-full rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
     )

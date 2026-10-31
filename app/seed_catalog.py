@@ -126,8 +126,8 @@ CATALOG: list[dict] = [
             "matière première de la meunerie comme de l'alimentation animale."
         ),
         "icon": "wheat",
-        "color_hex": "#f59e0b",
-        "accent_hex": "#a3e635",
+        "color_hex": "#FF6A38",
+        "accent_hex": "#D8FA5E",
         "cultures": [
             {
                 "key": "ble",
@@ -137,7 +137,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "wheat",
-                "color_hex": "#f59e0b",
+                "color_hex": "#FF6A38",
                 "usage": "Meunerie, semoulerie, alimentation animale",
                 "description": (
                     "Culture pivot de l'exploitation : conduite d'hiver le plus "
@@ -172,7 +172,7 @@ CATALOG: list[dict] = [
                                 "days": 250,
                                 "yield": 8.4,
                                 "quality": "Panifiable supérieur",
-                                "color": "#f59e0b",
+                                "color": "#FF6A38",
                                 "sow": "Octobre - Novembre",
                                 "harv": "Juillet",
                                 "drought": TOLERANCE_MOYENNE,
@@ -185,7 +185,7 @@ CATALOG: list[dict] = [
                                 "days": 240,
                                 "yield": 8.0,
                                 "quality": "Panifiable",
-                                "color": "#fbbf24",
+                                "color": "#FF8A5B",
                                 "drought": TOLERANCE_BONNE,
                                 "notes": "Valeur sûre, souplesse de date de semis.",
                             },
@@ -195,7 +195,7 @@ CATALOG: list[dict] = [
                                 "days": 258,
                                 "yield": 9.0,
                                 "quality": "Panifiable supérieur",
-                                "color": "#eab308",
+                                "color": "#F0A84A",
                                 "drought": TOLERANCE_MOYENNE,
                                 "notes": "Fort potentiel en sols profonds.",
                             },
@@ -229,7 +229,7 @@ CATALOG: list[dict] = [
                                 "days": 215,
                                 "yield": 5.5,
                                 "quality": "Semoulerie, bon vitreux",
-                                "color": "#f59e0b",
+                                "color": "#FF6A38",
                                 "drought": TOLERANCE_BONNE,
                                 "notes": "Variété de référence en zone semi-aride.",
                             },
@@ -239,7 +239,7 @@ CATALOG: list[dict] = [
                                 "days": 225,
                                 "yield": 6.0,
                                 "quality": "Semoulerie supérieure",
-                                "color": "#fbbf24",
+                                "color": "#FF8A5B",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -248,7 +248,7 @@ CATALOG: list[dict] = [
                                 "days": 238,
                                 "yield": 6.8,
                                 "quality": "Semoulerie, indice de jaune élevé",
-                                "color": "#eab308",
+                                "color": "#F0A84A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -263,7 +263,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "sprout",
-                "color_hex": "#a3e635",
+                "color_hex": "#D8FA5E",
                 "usage": "Brasserie, alimentation animale, pâturage",
                 "description": "Culture souple, précoce et économe en eau.",
                 "species": [
@@ -292,7 +292,7 @@ CATALOG: list[dict] = [
                                 "days": 232,
                                 "yield": 8.0,
                                 "quality": "Fourragère",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -301,7 +301,7 @@ CATALOG: list[dict] = [
                                 "days": 220,
                                 "yield": 4.5,
                                 "quality": "Fourragère, double usage",
-                                "color": "#84cc16",
+                                "color": "#C2E847",
                                 "drought": TOLERANCE_EXCELLENTE,
                                 "notes": "Adaptée aux zones sèches, pâturage possible.",
                             },
@@ -335,7 +335,7 @@ CATALOG: list[dict] = [
                                 "days": 130,
                                 "yield": 7.2,
                                 "quality": "Brassicole",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "sow": "Février - Mars",
                                 "harv": "Juillet",
                                 "drought": TOLERANCE_MOYENNE,
@@ -348,7 +348,7 @@ CATALOG: list[dict] = [
                                 "days": 132,
                                 "yield": 5.8,
                                 "quality": "Brassicole conduite bio",
-                                "color": "#4ade80",
+                                "color": "#A9C98B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -363,7 +363,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "corn",
-                "color_hex": "#84cc16",
+                "color_hex": "#C2E847",
                 "usage": "Grain, ensilage, semence",
                 "description": "Culture d'été très exigeante en eau à la floraison.",
                 "species": [
@@ -395,7 +395,7 @@ CATALOG: list[dict] = [
                                 "days": 165,
                                 "yield": 12.6,
                                 "quality": "Grain, bon stay-green",
-                                "color": "#84cc16",
+                                "color": "#C2E847",
                                 "sow": "Avril - Mai",
                                 "harv": "Octobre",
                                 "drought": TOLERANCE_MOYENNE,
@@ -407,7 +407,7 @@ CATALOG: list[dict] = [
                                 "days": 172,
                                 "yield": 13.5,
                                 "quality": "Grain, dessiccation rapide",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -437,7 +437,7 @@ CATALOG: list[dict] = [
                                 "days": 158,
                                 "yield": 18.0,
                                 "quality": "Ensilage, forte digestibilité",
-                                "color": "#4ade80",
+                                "color": "#A9C98B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -452,7 +452,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "sprout",
-                "color_hex": "#facc15",
+                "color_hex": "#FFC46B",
                 "usage": "Alimentation animale, flocons, couvert",
                 "description": "Nettoyante, peu exigeante, bonne étouffante.",
                 "species": [
@@ -480,7 +480,7 @@ CATALOG: list[dict] = [
                                 "days": 215,
                                 "yield": 6.0,
                                 "quality": "Fourragère",
-                                "color": "#facc15",
+                                "color": "#FFC46B",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -489,7 +489,7 @@ CATALOG: list[dict] = [
                                 "days": 228,
                                 "yield": 6.5,
                                 "quality": "Flocons",
-                                "color": "#fbbf24",
+                                "color": "#FF8A5B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -504,7 +504,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "sprout",
-                "color_hex": "#bef264",
+                "color_hex": "#E4FF9B",
                 "usage": "Alimentation animale, méteil",
                 "description": "Hybride blé × seigle, rustique en sols pauvres.",
                 "species": [
@@ -532,7 +532,7 @@ CATALOG: list[dict] = [
                                 "days": 245,
                                 "yield": 7.5,
                                 "quality": "Fourragère",
-                                "color": "#bef264",
+                                "color": "#E4FF9B",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -541,7 +541,7 @@ CATALOG: list[dict] = [
                                 "days": 258,
                                 "yield": 8.0,
                                 "quality": "Fourragère, méteil",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -556,7 +556,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "sprout",
-                "color_hex": "#f97316",
+                "color_hex": "#FF5A2B",
                 "usage": "Grain, fourrage, biomasse",
                 "description": "Alternative au maïs en conditions sèches.",
                 "species": [
@@ -585,7 +585,7 @@ CATALOG: list[dict] = [
                                 "days": 125,
                                 "yield": 7.0,
                                 "quality": "Grain",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                             {
@@ -594,7 +594,7 @@ CATALOG: list[dict] = [
                                 "days": 145,
                                 "yield": 8.5,
                                 "quality": "Grain, double usage",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -609,7 +609,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_TRES_ELEVEE,
                 "icon": "droplets",
-                "color_hex": "#38bdf8",
+                "color_hex": "#9CC3FF",
                 "usage": "Rizerie",
                 "description": "Conduite submergée, forte consommation d'eau.",
                 "species": [
@@ -638,7 +638,7 @@ CATALOG: list[dict] = [
                                 "days": 150,
                                 "yield": 7.0,
                                 "quality": "Long grain",
-                                "color": "#38bdf8",
+                                "color": "#9CC3FF",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -729,8 +729,8 @@ CATALOG: list[dict] = [
             "fumure de la culture suivante et diversifient la rotation."
         ),
         "icon": "leaf",
-        "color_hex": "#22c55e",
-        "accent_hex": "#a3e635",
+        "color_hex": "#8FB37A",
+        "accent_hex": "#D8FA5E",
         "cultures": [
             {
                 "key": "pois",
@@ -740,7 +740,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "leaf",
-                "color_hex": "#22c55e",
+                "color_hex": "#8FB37A",
                 "usage": "Protéines animales, alimentation humaine",
                 "species": [
                     {
@@ -771,7 +771,7 @@ CATALOG: list[dict] = [
                                 "days": 120,
                                 "yield": 4.5,
                                 "quality": "Protéines élevées",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -780,7 +780,7 @@ CATALOG: list[dict] = [
                                 "days": 112,
                                 "yield": 4.2,
                                 "quality": "Bonne tenue de tige",
-                                "color": "#4ade80",
+                                "color": "#A9C98B",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -795,7 +795,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "leaf",
-                "color_hex": "#16a34a",
+                "color_hex": "#6E9159",
                 "usage": "Alimentation animale, export",
                 "species": [
                     {
@@ -822,7 +822,7 @@ CATALOG: list[dict] = [
                                 "days": 235,
                                 "yield": 5.0,
                                 "quality": "Grain coloré",
-                                "color": "#16a34a",
+                                "color": "#6E9159",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -831,7 +831,7 @@ CATALOG: list[dict] = [
                                 "days": 248,
                                 "yield": 5.4,
                                 "quality": "Bonne résistance au froid",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -846,7 +846,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "leaf",
-                "color_hex": "#65a30d",
+                "color_hex": "#B6D93F",
                 "usage": "Alimentation humaine",
                 "species": [
                     {
@@ -874,7 +874,7 @@ CATALOG: list[dict] = [
                                 "days": 110,
                                 "yield": 1.6,
                                 "quality": "Verte, calibre régulier",
-                                "color": "#65a30d",
+                                "color": "#B6D93F",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -883,7 +883,7 @@ CATALOG: list[dict] = [
                                 "days": 104,
                                 "yield": 1.5,
                                 "quality": "Blonde",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -898,7 +898,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "leaf",
-                "color_hex": "#ca8a04",
+                "color_hex": "#C4923C",
                 "usage": "Alimentation humaine",
                 "species": [
                     {
@@ -926,7 +926,7 @@ CATALOG: list[dict] = [
                                 "days": 135,
                                 "yield": 2.2,
                                 "quality": "Gros calibre",
-                                "color": "#ca8a04",
+                                "color": "#C4923C",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                             {
@@ -935,7 +935,7 @@ CATALOG: list[dict] = [
                                 "days": 125,
                                 "yield": 2.0,
                                 "quality": "Résistant à l'anthracnose",
-                                "color": "#eab308",
+                                "color": "#F0A84A",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                         ],
@@ -950,7 +950,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "leaf",
-                "color_hex": "#15803d",
+                "color_hex": "#557644",
                 "usage": "Alimentation humaine",
                 "species": [
                     {
@@ -977,7 +977,7 @@ CATALOG: list[dict] = [
                                 "days": 105,
                                 "yield": 2.8,
                                 "quality": "Grain blanc allongé",
-                                "color": "#15803d",
+                                "color": "#557644",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -986,7 +986,7 @@ CATALOG: list[dict] = [
                                 "days": 112,
                                 "yield": 2.6,
                                 "quality": "Grain rond",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -1001,7 +1001,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "leaf",
-                "color_hex": "#4d7c0f",
+                "color_hex": "#93AE45",
                 "usage": "Trituration, alimentation animale et humaine",
                 "species": [
                     {
@@ -1029,7 +1029,7 @@ CATALOG: list[dict] = [
                                 "days": 142,
                                 "yield": 3.6,
                                 "quality": "Trituration",
-                                "color": "#4d7c0f",
+                                "color": "#93AE45",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -1038,7 +1038,7 @@ CATALOG: list[dict] = [
                                 "days": 133,
                                 "yield": 3.2,
                                 "quality": "Protéines élevées",
-                                "color": "#65a30d",
+                                "color": "#B6D93F",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -1053,7 +1053,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "bean",
-                "color_hex": "#16a34a",
+                "color_hex": "#6E9159",
                 "usage": "Alimentation humaine (frais et sec), fourrage",
                 "description": (
                     "Grosse graine consommée en frais ou en sec : la fève est "
@@ -1088,7 +1088,7 @@ CATALOG: list[dict] = [
                                 "days": 165,
                                 "yield": 12.0,
                                 "quality": "Frais, très longue gousse",
-                                "color": "#16a34a",
+                                "color": "#6E9159",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -1097,7 +1097,7 @@ CATALOG: list[dict] = [
                                 "days": 190,
                                 "yield": 4.0,
                                 "quality": "Grain sec, gros calibre",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -1177,8 +1177,8 @@ CATALOG: list[dict] = [
             "soufre et cassent les cycles de maladies des céréales."
         ),
         "icon": "sun",
-        "color_hex": "#eab308",
-        "accent_hex": "#fb923c",
+        "color_hex": "#F0A84A",
+        "accent_hex": "#FF9E7A",
         "cultures": [
             {
                 "key": "colza",
@@ -1188,7 +1188,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "flower-2",
-                "color_hex": "#eab308",
+                "color_hex": "#F0A84A",
                 "usage": "Huile, tourteau, biocarburant",
                 "species": [
                     {
@@ -1219,7 +1219,7 @@ CATALOG: list[dict] = [
                                 "days": 300,
                                 "yield": 4.1,
                                 "quality": "Huile, tolérance TuYV",
-                                "color": "#eab308",
+                                "color": "#F0A84A",
                                 "sow": "Août",
                                 "harv": "Juillet",
                                 "drought": TOLERANCE_MOYENNE,
@@ -1231,7 +1231,7 @@ CATALOG: list[dict] = [
                                 "days": 312,
                                 "yield": 4.4,
                                 "quality": "Huile, bonne tenue de tige",
-                                "color": "#facc15",
+                                "color": "#FFC46B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -1246,7 +1246,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "sun",
-                "color_hex": "#fb923c",
+                "color_hex": "#FF9E7A",
                 "usage": "Huile, oisellerie",
                 "species": [
                     {
@@ -1274,7 +1274,7 @@ CATALOG: list[dict] = [
                                 "days": 145,
                                 "yield": 3.3,
                                 "quality": "Oléique",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "sow": "Avril",
                                 "harv": "Septembre",
                                 "drought": TOLERANCE_EXCELLENTE,
@@ -1286,7 +1286,7 @@ CATALOG: list[dict] = [
                                 "days": 138,
                                 "yield": 3.5,
                                 "quality": "Oléique, résistance mildiou",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -1352,7 +1352,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "sprout",
-                "color_hex": "#d97706",
+                "color_hex": "#DE7233",
                 "usage": "Huile, bouche",
                 "species": [
                     {
@@ -1380,7 +1380,7 @@ CATALOG: list[dict] = [
                                 "days": 132,
                                 "yield": 2.5,
                                 "quality": "Huilerie",
-                                "color": "#d97706",
+                                "color": "#DE7233",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -1389,7 +1389,7 @@ CATALOG: list[dict] = [
                                 "days": 148,
                                 "yield": 3.0,
                                 "quality": "Bouche, gros calibre",
-                                "color": "#f59e0b",
+                                "color": "#FF6A38",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -1404,7 +1404,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "sun",
-                "color_hex": "#eab308",
+                "color_hex": "#F0A84A",
                 "usage": "Huile, graine de bouche, tahini",
                 "description": (
                     "Oléagineux d'été très économe en eau, adapté aux climats "
@@ -1439,7 +1439,7 @@ CATALOG: list[dict] = [
                                 "days": 100,
                                 "yield": 1.1,
                                 "quality": "Graine blanche, huilerie",
-                                "color": "#fde047",
+                                "color": "#FFDF9B",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                             {
@@ -1448,7 +1448,7 @@ CATALOG: list[dict] = [
                                 "days": 122,
                                 "yield": 1.4,
                                 "quality": "Graine blanche export",
-                                "color": "#facc15",
+                                "color": "#FFC46B",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -1463,7 +1463,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "flame",
-                "color_hex": "#f97316",
+                "color_hex": "#FF5A2B",
                 "usage": "Huile linoléique, oisellerie, colorant",
                 "description": (
                     "Oléagineux de zone sèche à racine pivotante profonde, "
@@ -1498,7 +1498,7 @@ CATALOG: list[dict] = [
                                 "days": 145,
                                 "yield": 2.0,
                                 "quality": "Huile linoléique",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                             {
@@ -1507,7 +1507,7 @@ CATALOG: list[dict] = [
                                 "days": 162,
                                 "yield": 2.3,
                                 "quality": "Huile oléique",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -1522,7 +1522,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "leaf",
-                "color_hex": "#4d7c0f",
+                "color_hex": "#93AE45",
                 "usage": "Trituration : huile et tourteau protéique",
                 "description": (
                     "Doublon assumé avec les légumineuses : la lecture "
@@ -1559,7 +1559,7 @@ CATALOG: list[dict] = [
                                 "days": 155,
                                 "yield": 3.8,
                                 "quality": "Trituration, teneur en huile élevée",
-                                "color": "#4d7c0f",
+                                "color": "#93AE45",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -1568,7 +1568,7 @@ CATALOG: list[dict] = [
                                 "days": 138,
                                 "yield": 3.4,
                                 "quality": "Trituration, régularité",
-                                "color": "#65a30d",
+                                "color": "#B6D93F",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -1583,7 +1583,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_FAIBLE,
                 "icon": "trees",
-                "color_hex": "#65a30d",
+                "color_hex": "#B6D93F",
                 "usage": "Huile d'olive vierge extra",
                 "description": (
                     "Doublon assumé avec l'arboriculture : la lecture "
@@ -1620,7 +1620,7 @@ CATALOG: list[dict] = [
                                 "days": 190,
                                 "yield": 7.0,
                                 "quality": "Huile riche en polyphénols",
-                                "color": "#84cc16",
+                                "color": "#C2E847",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                             {
@@ -1629,7 +1629,7 @@ CATALOG: list[dict] = [
                                 "days": 210,
                                 "yield": 5.5,
                                 "quality": "Huile douce, rendement élevé",
-                                "color": "#65a30d",
+                                "color": "#B6D93F",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                         ],
@@ -1650,8 +1650,8 @@ CATALOG: list[dict] = [
             "à l'autonomie du troupeau et au taux de matière organique."
         ),
         "icon": "leaf",
-        "color_hex": "#22c55e",
-        "accent_hex": "#a3e635",
+        "color_hex": "#8FB37A",
+        "accent_hex": "#D8FA5E",
         "cultures": [
             {
                 "key": "luzerne",
@@ -1661,7 +1661,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "leaf",
-                "color_hex": "#22c55e",
+                "color_hex": "#8FB37A",
                 "usage": "Foin, enrubannage, déshydratation",
                 "description": "Pérenne de 3 à 4 ans, 3 à 5 coupes par an.",
                 "species": [
@@ -1693,7 +1693,7 @@ CATALOG: list[dict] = [
                                 "days": 1095,
                                 "yield": 13.5,
                                 "quality": "Foin riche en protéines",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "sow": "Mars - Avril",
                                 "harv": "Mai à Septembre",
                                 "drought": TOLERANCE_BONNE,
@@ -1706,7 +1706,7 @@ CATALOG: list[dict] = [
                                 "days": 1095,
                                 "yield": 14.0,
                                 "quality": "Déshydratation",
-                                "color": "#4ade80",
+                                "color": "#A9C98B",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -1721,7 +1721,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "leaf",
-                "color_hex": "#16a34a",
+                "color_hex": "#6E9159",
                 "usage": "Pâturage, association prairiale",
                 "species": [
                     {
@@ -1748,7 +1748,7 @@ CATALOG: list[dict] = [
                                 "days": 730,
                                 "yield": 11.0,
                                 "quality": "Ensilage, foin",
-                                "color": "#16a34a",
+                                "color": "#6E9159",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -1778,7 +1778,7 @@ CATALOG: list[dict] = [
                                 "days": 1095,
                                 "yield": 8.0,
                                 "quality": "Pâturage intensif",
-                                "color": "#4ade80",
+                                "color": "#A9C98B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -1793,7 +1793,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "sprout",
-                "color_hex": "#84cc16",
+                "color_hex": "#C2E847",
                 "usage": "Pâturage, ensilage, dérobée",
                 "species": [
                     {
@@ -1820,7 +1820,7 @@ CATALOG: list[dict] = [
                                 "days": 210,
                                 "yield": 12.0,
                                 "quality": "Dérobée d'hiver",
-                                "color": "#84cc16",
+                                "color": "#C2E847",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -1849,7 +1849,7 @@ CATALOG: list[dict] = [
                                 "days": 1095,
                                 "yield": 10.5,
                                 "quality": "Pâturage, gazon dense",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -1864,7 +1864,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "leaf",
-                "color_hex": "#65a30d",
+                "color_hex": "#B6D93F",
                 "usage": "Fourrage, couvert, méteil",
                 "species": [
                     {
@@ -1891,7 +1891,7 @@ CATALOG: list[dict] = [
                                 "days": 165,
                                 "yield": 7.0,
                                 "quality": "Fourrage vert",
-                                "color": "#65a30d",
+                                "color": "#B6D93F",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -1900,7 +1900,7 @@ CATALOG: list[dict] = [
                                 "days": 180,
                                 "yield": 7.5,
                                 "quality": "Méteil grain",
-                                "color": "#84cc16",
+                                "color": "#C2E847",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -1915,7 +1915,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_FAIBLE,
                 "icon": "leaf",
-                "color_hex": "#f472b6",
+                "color_hex": "#FF9EC9",
                 "usage": "Foin, pâturage, mellifère",
                 "description": (
                     "Légumineuse pérenne des sols calcaires secs, non "
@@ -1950,7 +1950,7 @@ CATALOG: list[dict] = [
                                 "days": 730,
                                 "yield": 8.0,
                                 "quality": "Foin non météorisant",
-                                "color": "#f472b6",
+                                "color": "#FF9EC9",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                         ],
@@ -1965,7 +1965,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "sprout",
-                "color_hex": "#65a30d",
+                "color_hex": "#B6D93F",
                 "usage": "Foin, ensilage, pâturage d'été",
                 "description": (
                     "Graminée pérenne à forte repousse estivale, base des "
@@ -2000,7 +2000,7 @@ CATALOG: list[dict] = [
                                 "days": 1095,
                                 "yield": 11.0,
                                 "quality": "Souplesse d'exploitation",
-                                "color": "#65a30d",
+                                "color": "#B6D93F",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -2015,7 +2015,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "sprout",
-                "color_hex": "#4d7c0f",
+                "color_hex": "#93AE45",
                 "usage": "Pâturage, foin, couvert de longue durée",
                 "description": (
                     "Graminée robuste, tolérante aux excès d'eau comme aux "
@@ -2050,7 +2050,7 @@ CATALOG: list[dict] = [
                                 "days": 1095,
                                 "yield": 12.0,
                                 "quality": "Feuilles souples, pâturage",
-                                "color": "#4d7c0f",
+                                "color": "#93AE45",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -2065,7 +2065,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "corn",
-                "color_hex": "#4ade80",
+                "color_hex": "#A9C98B",
                 "usage": "Ensilage plante entière, ration hivernale",
                 "description": (
                     "Doublon assumé avec la catégorie céréales : la même "
@@ -2101,7 +2101,7 @@ CATALOG: list[dict] = [
                                 "days": 145,
                                 "yield": 16.5,
                                 "quality": "Ensilage, valeur énergétique élevée",
-                                "color": "#4ade80",
+                                "color": "#A9C98B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -2110,7 +2110,7 @@ CATALOG: list[dict] = [
                                 "days": 160,
                                 "yield": 18.5,
                                 "quality": "Ensilage, digestibilité des fibres",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -2132,7 +2132,7 @@ CATALOG: list[dict] = [
         ),
         "icon": "carrot",
         "color_hex": "#ef4444",
-        "accent_hex": "#a3e635",
+        "accent_hex": "#D8FA5E",
         "cultures": [
             {
                 "key": "tomate",
@@ -2182,7 +2182,7 @@ CATALOG: list[dict] = [
                                 "days": 120,
                                 "yield": 55.0,
                                 "quality": "Frais, côtelée",
-                                "color": "#dc2626",
+                                "color": "#E0452C",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -2206,7 +2206,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_BISANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "circle",
-                "color_hex": "#a855f7",
+                "color_hex": "#B9A8FF",
                 "usage": "Frais, conservation",
                 "species": [
                     {
@@ -2234,7 +2234,7 @@ CATALOG: list[dict] = [
                                 "days": 155,
                                 "yield": 45.0,
                                 "quality": "Doux, consommation rapide",
-                                "color": "#facc15",
+                                "color": "#FFC46B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -2243,7 +2243,7 @@ CATALOG: list[dict] = [
                                 "days": 175,
                                 "yield": 40.0,
                                 "quality": "Rouge, bonne conservation",
-                                "color": "#a855f7",
+                                "color": "#B9A8FF",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -2309,7 +2309,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "flame",
-                "color_hex": "#f97316",
+                "color_hex": "#FF5A2B",
                 "usage": "Frais, transformation",
                 "species": [
                     {
@@ -2336,7 +2336,7 @@ CATALOG: list[dict] = [
                                 "days": 135,
                                 "yield": 35.0,
                                 "quality": "Carré, épais",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -2345,7 +2345,7 @@ CATALOG: list[dict] = [
                                 "days": 125,
                                 "yield": 30.0,
                                 "quality": "Corne, doux",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -2378,7 +2378,7 @@ CATALOG: list[dict] = [
                                 "days": 130,
                                 "yield": 12.0,
                                 "quality": "Très piquant, séchage et poudre",
-                                "color": "#dc2626",
+                                "color": "#E0452C",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -2387,7 +2387,7 @@ CATALOG: list[dict] = [
                                 "days": 115,
                                 "yield": 20.0,
                                 "quality": "Piquant moyen, frais et conserve",
-                                "color": "#16a34a",
+                                "color": "#6E9159",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -2411,7 +2411,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "leaf",
-                "color_hex": "#22c55e",
+                "color_hex": "#8FB37A",
                 "usage": "Frais",
                 "species": [
                     {
@@ -2439,7 +2439,7 @@ CATALOG: list[dict] = [
                                 "days": 65,
                                 "yield": 60.0,
                                 "quality": "Vert brillant, calibre régulier",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -2448,7 +2448,7 @@ CATALOG: list[dict] = [
                                 "days": 72,
                                 "yield": 55.0,
                                 "quality": "Vert foncé",
-                                "color": "#15803d",
+                                "color": "#557644",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -2463,7 +2463,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "circle",
-                "color_hex": "#fbbf24",
+                "color_hex": "#FF8A5B",
                 "usage": "Frais",
                 "species": [
                     {
@@ -2491,7 +2491,7 @@ CATALOG: list[dict] = [
                                 "days": 100,
                                 "yield": 25.0,
                                 "quality": "Brodé, très sucré",
-                                "color": "#fbbf24",
+                                "color": "#FF8A5B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -2500,7 +2500,7 @@ CATALOG: list[dict] = [
                                 "days": 112,
                                 "yield": 28.0,
                                 "quality": "Chair blanche parfumée",
-                                "color": "#facc15",
+                                "color": "#FFC46B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -2515,7 +2515,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "circle",
-                "color_hex": "#16a34a",
+                "color_hex": "#6E9159",
                 "usage": "Frais",
                 "species": [
                     {
@@ -2542,7 +2542,7 @@ CATALOG: list[dict] = [
                                 "days": 105,
                                 "yield": 45.0,
                                 "quality": "Gros calibre, sucré",
-                                "color": "#16a34a",
+                                "color": "#6E9159",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -2551,7 +2551,7 @@ CATALOG: list[dict] = [
                                 "days": 92,
                                 "yield": 35.0,
                                 "quality": "Petit calibre, écorce sombre",
-                                "color": "#166534",
+                                "color": "#3E5A31",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -2566,7 +2566,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "leaf",
-                "color_hex": "#4ade80",
+                "color_hex": "#A9C98B",
                 "usage": "Frais, 4e gamme",
                 "species": [
                     {
@@ -2594,7 +2594,7 @@ CATALOG: list[dict] = [
                                 "days": 55,
                                 "yield": 30.0,
                                 "quality": "Croquante",
-                                "color": "#4ade80",
+                                "color": "#A9C98B",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -2603,7 +2603,7 @@ CATALOG: list[dict] = [
                                 "days": 70,
                                 "yield": 32.0,
                                 "quality": "Cœur dense",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -2618,7 +2618,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "salad",
-                "color_hex": "#7c3aed",
+                "color_hex": "#8E7BFF",
                 "usage": "Frais, transformation",
                 "species": [
                     {
@@ -2646,7 +2646,7 @@ CATALOG: list[dict] = [
                                 "days": 135,
                                 "yield": 45.0,
                                 "quality": "Ovale noire, chair ferme",
-                                "color": "#7c3aed",
+                                "color": "#8E7BFF",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -2655,7 +2655,7 @@ CATALOG: list[dict] = [
                                 "days": 125,
                                 "yield": 40.0,
                                 "quality": "Longue violette brillante",
-                                "color": "#a855f7",
+                                "color": "#B9A8FF",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -2670,7 +2670,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_TRES_ELEVEE,
                 "icon": "salad",
-                "color_hex": "#22c55e",
+                "color_hex": "#8FB37A",
                 "usage": "Frais, cornichon",
                 "species": [
                     {
@@ -2701,7 +2701,7 @@ CATALOG: list[dict] = [
                                 "days": 65,
                                 "yield": 60.0,
                                 "quality": "Long vert foncé, sans amertume",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -2710,7 +2710,7 @@ CATALOG: list[dict] = [
                                 "days": 58,
                                 "yield": 55.0,
                                 "quality": "Court lisse, type libanais",
-                                "color": "#4ade80",
+                                "color": "#A9C98B",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -2725,7 +2725,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "circle",
-                "color_hex": "#d97706",
+                "color_hex": "#DE7233",
                 "usage": "Frais, conservation longue, soupe",
                 "species": [
                     {
@@ -2756,7 +2756,7 @@ CATALOG: list[dict] = [
                                 "days": 110,
                                 "yield": 35.0,
                                 "quality": "Chair dense, très sucrée",
-                                "color": "#d97706",
+                                "color": "#DE7233",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -2765,7 +2765,7 @@ CATALOG: list[dict] = [
                                 "days": 128,
                                 "yield": 45.0,
                                 "quality": "Gros calibre, marché de détail",
-                                "color": "#f59e0b",
+                                "color": "#FF6A38",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -2780,7 +2780,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "circle",
-                "color_hex": "#f97316",
+                "color_hex": "#FF5A2B",
                 "usage": "Frais, industrie, décoration saisonnière",
                 "species": [
                     {
@@ -2808,7 +2808,7 @@ CATALOG: list[dict] = [
                                 "days": 118,
                                 "yield": 50.0,
                                 "quality": "Très gros calibre, aplati",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -2817,7 +2817,7 @@ CATALOG: list[dict] = [
                                 "days": 124,
                                 "yield": 55.0,
                                 "quality": "Industrie, purée",
-                                "color": "#fbbf24",
+                                "color": "#FF8A5B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -2832,7 +2832,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_BISANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "salad",
-                "color_hex": "#4ade80",
+                "color_hex": "#A9C98B",
                 "usage": "Frais, choucroute, conservation",
                 "species": [
                     {
@@ -2863,7 +2863,7 @@ CATALOG: list[dict] = [
                                 "days": 145,
                                 "yield": 70.0,
                                 "quality": "Choucroute, très gros calibre",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -2872,7 +2872,7 @@ CATALOG: list[dict] = [
                                 "days": 105,
                                 "yield": 45.0,
                                 "quality": "Pointu, marché frais",
-                                "color": "#4ade80",
+                                "color": "#A9C98B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -2887,7 +2887,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "salad",
-                "color_hex": "#e2e8f0",
+                "color_hex": "#E8E6DC",
                 "usage": "Frais, surgelé",
                 "species": [
                     {
@@ -2918,7 +2918,7 @@ CATALOG: list[dict] = [
                                 "days": 95,
                                 "yield": 30.0,
                                 "quality": "Pomme blanche, très serrée",
-                                "color": "#e2e8f0",
+                                "color": "#E8E6DC",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -2942,7 +2942,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "salad",
-                "color_hex": "#166534",
+                "color_hex": "#3E5A31",
                 "usage": "Frais, surgelé",
                 "species": [
                     {
@@ -2973,7 +2973,7 @@ CATALOG: list[dict] = [
                                 "days": 80,
                                 "yield": 15.0,
                                 "quality": "Tête compacte, rejets abondants",
-                                "color": "#166534",
+                                "color": "#3E5A31",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -2982,7 +2982,7 @@ CATALOG: list[dict] = [
                                 "days": 115,
                                 "yield": 18.0,
                                 "quality": "Grain fin, industrie",
-                                "color": "#15803d",
+                                "color": "#557644",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -2997,7 +2997,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "leaf",
-                "color_hex": "#15803d",
+                "color_hex": "#557644",
                 "usage": "Frais, 4e gamme, surgelé",
                 "species": [
                     {
@@ -3028,7 +3028,7 @@ CATALOG: list[dict] = [
                                 "days": 80,
                                 "yield": 25.0,
                                 "quality": "Feuille épaisse, rustique",
-                                "color": "#15803d",
+                                "color": "#557644",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -3037,7 +3037,7 @@ CATALOG: list[dict] = [
                                 "days": 45,
                                 "yield": 22.0,
                                 "quality": "Jeune pousse, montaison lente",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -3052,7 +3052,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "flower-2",
-                "color_hex": "#84cc16",
+                "color_hex": "#C2E847",
                 "usage": "Frais, conserve, transformation",
                 "species": [
                     {
@@ -3083,7 +3083,7 @@ CATALOG: list[dict] = [
                                 "days": 365,
                                 "yield": 12.0,
                                 "quality": "Petit capitule, bouquet",
-                                "color": "#a855f7",
+                                "color": "#B9A8FF",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -3092,7 +3092,7 @@ CATALOG: list[dict] = [
                                 "days": 400,
                                 "yield": 14.0,
                                 "quality": "Gros capitule vert",
-                                "color": "#84cc16",
+                                "color": "#C2E847",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -3107,7 +3107,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "bean",
-                "color_hex": "#22c55e",
+                "color_hex": "#8FB37A",
                 "usage": "Frais, conserve, surgelé",
                 "species": [
                     {
@@ -3138,7 +3138,7 @@ CATALOG: list[dict] = [
                                 "days": 58,
                                 "yield": 14.0,
                                 "quality": "Gousse charnue, rustique",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -3147,7 +3147,7 @@ CATALOG: list[dict] = [
                                 "days": 70,
                                 "yield": 12.0,
                                 "quality": "Filet fin, industrie",
-                                "color": "#16a34a",
+                                "color": "#6E9159",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -3162,7 +3162,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "bean",
-                "color_hex": "#4ade80",
+                "color_hex": "#A9C98B",
                 "usage": "Frais, conserve, surgelé",
                 "species": [
                     {
@@ -3193,7 +3193,7 @@ CATALOG: list[dict] = [
                                 "days": 85,
                                 "yield": 8.0,
                                 "quality": "Grain sucré, conserve",
-                                "color": "#4ade80",
+                                "color": "#A9C98B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -3202,7 +3202,7 @@ CATALOG: list[dict] = [
                                 "days": 80,
                                 "yield": 7.5,
                                 "quality": "Rustique au froid, frais",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -3217,7 +3217,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_BISANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "carrot",
-                "color_hex": "#c084fc",
+                "color_hex": "#D3C6FF",
                 "usage": "Frais, fourrage, conservation",
                 "species": [
                     {
@@ -3248,7 +3248,7 @@ CATALOG: list[dict] = [
                                 "days": 65,
                                 "yield": 35.0,
                                 "quality": "Plat, collet violet, primeur",
-                                "color": "#c084fc",
+                                "color": "#D3C6FF",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -3257,7 +3257,7 @@ CATALOG: list[dict] = [
                                 "days": 95,
                                 "yield": 40.0,
                                 "quality": "Chair jaune, conservation",
-                                "color": "#fbbf24",
+                                "color": "#FF8A5B",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -3272,7 +3272,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_BISANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "carrot",
-                "color_hex": "#be123c",
+                "color_hex": "#C33A46",
                 "usage": "Frais, cuite sous vide, conserve",
                 "species": [
                     {
@@ -3303,7 +3303,7 @@ CATALOG: list[dict] = [
                                 "days": 105,
                                 "yield": 45.0,
                                 "quality": "Ronde lisse, chair sombre",
-                                "color": "#be123c",
+                                "color": "#C33A46",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -3382,7 +3382,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_BISANNUELLE,
                 "water": WATER_TRES_ELEVEE,
                 "icon": "leaf",
-                "color_hex": "#84cc16",
+                "color_hex": "#C2E847",
                 "usage": "Frais, soupe, transformation",
                 "species": [
                     {
@@ -3413,7 +3413,7 @@ CATALOG: list[dict] = [
                                 "days": 180,
                                 "yield": 45.0,
                                 "quality": "Céleri-rave, chair blanche",
-                                "color": "#e2e8f0",
+                                "color": "#E8E6DC",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -3422,7 +3422,7 @@ CATALOG: list[dict] = [
                                 "days": 150,
                                 "yield": 55.0,
                                 "quality": "Céleri branche, côtes charnues",
-                                "color": "#84cc16",
+                                "color": "#C2E847",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -3437,7 +3437,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "leaf",
-                "color_hex": "#bef264",
+                "color_hex": "#E4FF9B",
                 "usage": "Frais",
                 "species": [
                     {
@@ -3468,7 +3468,7 @@ CATALOG: list[dict] = [
                                 "days": 105,
                                 "yield": 35.0,
                                 "quality": "Bulbe rond, résistant à la montaison",
-                                "color": "#bef264",
+                                "color": "#E4FF9B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -3477,7 +3477,7 @@ CATALOG: list[dict] = [
                                 "days": 125,
                                 "yield": 40.0,
                                 "quality": "Gros bulbe d'automne",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -3492,7 +3492,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_BISANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "leaf",
-                "color_hex": "#34d399",
+                "color_hex": "#8FD0B4",
                 "usage": "Frais, soupe, surgelé",
                 "species": [
                     {
@@ -3523,7 +3523,7 @@ CATALOG: list[dict] = [
                                 "days": 190,
                                 "yield": 45.0,
                                 "quality": "Gros fût, automne",
-                                "color": "#34d399",
+                                "color": "#8FD0B4",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -3532,7 +3532,7 @@ CATALOG: list[dict] = [
                                 "days": 215,
                                 "yield": 40.0,
                                 "quality": "Très rustique au gel, hiver",
-                                "color": "#38bdf8",
+                                "color": "#9CC3FF",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -3547,7 +3547,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "carrot",
-                "color_hex": "#14b8a6",
+                "color_hex": "#7FD3B9",
                 "usage": "Primeur et marché de détail, vente directe",
                 "description": (
                     "Doublon assumé avec les tubercules : la lecture "
@@ -3593,7 +3593,7 @@ CATALOG: list[dict] = [
                                 "days": 95,
                                 "yield": 32.0,
                                 "quality": "Chair ferme, marché de détail",
-                                "color": "#14b8a6",
+                                "color": "#7FD3B9",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -3608,7 +3608,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_BISANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "carrot",
-                "color_hex": "#f97316",
+                "color_hex": "#FF5A2B",
                 "usage": "Carotte botte, vente directe, 4e gamme",
                 "description": (
                     "Doublon assumé avec les racines : la conduite "
@@ -3645,7 +3645,7 @@ CATALOG: list[dict] = [
                                 "days": 85,
                                 "yield": 40.0,
                                 "quality": "Botte, fane solide",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -3654,7 +3654,7 @@ CATALOG: list[dict] = [
                                 "days": 80,
                                 "yield": 38.0,
                                 "quality": "Primeur, très sucrée",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -3675,8 +3675,8 @@ CATALOG: list[dict] = [
             "une fumure potassique conséquente et un arrachage bien conduit."
         ),
         "icon": "carrot",
-        "color_hex": "#14b8a6",
-        "accent_hex": "#fbbf24",
+        "color_hex": "#7FD3B9",
+        "accent_hex": "#FF8A5B",
         "cultures": [
             {
                 "key": "pomme-de-terre",
@@ -3686,7 +3686,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "carrot",
-                "color_hex": "#14b8a6",
+                "color_hex": "#7FD3B9",
                 "usage": "Frais, transformation, plant",
                 "species": [
                     {
@@ -3717,7 +3717,7 @@ CATALOG: list[dict] = [
                                 "days": 110,
                                 "yield": 38.0,
                                 "quality": "Chair ferme, primeur",
-                                "color": "#14b8a6",
+                                "color": "#7FD3B9",
                                 "sow": "Mars - Avril",
                                 "harv": "Juillet - Août",
                                 "drought": TOLERANCE_FAIBLE,
@@ -3754,7 +3754,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_BISANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "carrot",
-                "color_hex": "#f97316",
+                "color_hex": "#FF5A2B",
                 "usage": "Frais, industrie",
                 "species": [
                     {
@@ -3782,7 +3782,7 @@ CATALOG: list[dict] = [
                                 "days": 115,
                                 "yield": 55.0,
                                 "quality": "Cylindrique, lisse",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -3791,7 +3791,7 @@ CATALOG: list[dict] = [
                                 "days": 105,
                                 "yield": 50.0,
                                 "quality": "Sucrée, primeur",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -3806,7 +3806,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "carrot",
-                "color_hex": "#fb923c",
+                "color_hex": "#FF9E7A",
                 "usage": "Frais",
                 "species": [
                     {
@@ -3833,7 +3833,7 @@ CATALOG: list[dict] = [
                                 "days": 135,
                                 "yield": 30.0,
                                 "quality": "Chair orange, sucrée",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -3857,8 +3857,8 @@ CATALOG: list[dict] = [
             "(molle, demi-molle, sèche) et détermine séchage et conservation."
         ),
         "icon": "palmtree",
-        "color_hex": "#d97706",
-        "accent_hex": "#a3e635",
+        "color_hex": "#DE7233",
+        "accent_hex": "#D8FA5E",
         "cultures": [
             {
                 "key": "palmier-dattier",
@@ -3868,7 +3868,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_TRES_ELEVEE,
                 "icon": "palmtree",
-                "color_hex": "#d97706",
+                "color_hex": "#DE7233",
                 "usage": "Dattes de bouche, pâte de datte, sous-produits",
                 "description": (
                     "Arbre pérenne de plusieurs décennies : entrée en "
@@ -3913,7 +3913,7 @@ CATALOG: list[dict] = [
                                 "days": 235,
                                 "yield": 8.0,
                                 "quality": "Demi-molle, translucide, haut de gamme export",
-                                "color": "#f59e0b",
+                                "color": "#FF6A38",
                                 "sow": "Plantation Février - Avril",
                                 "harv": "Octobre - Novembre",
                                 "drought": TOLERANCE_BONNE,
@@ -3933,7 +3933,7 @@ CATALOG: list[dict] = [
                                 "days": 240,
                                 "yield": 9.0,
                                 "quality": "Sèche, longue conservation",
-                                "color": "#ca8a04",
+                                "color": "#C4923C",
                                 "harv": "Novembre",
                                 "drought": TOLERANCE_EXCELLENTE,
                                 "reference": True,
@@ -3967,7 +3967,7 @@ CATALOG: list[dict] = [
                                 "days": 228,
                                 "yield": 8.5,
                                 "quality": "Demi-molle claire, transformation",
-                                "color": "#fbbf24",
+                                "color": "#FF8A5B",
                                 "harv": "Octobre",
                                 "drought": TOLERANCE_BONNE,
                                 "reference": True,
@@ -3984,7 +3984,7 @@ CATALOG: list[dict] = [
                                 "days": 220,
                                 "yield": 7.5,
                                 "quality": "Demi-molle, variété locale rustique",
-                                "color": "#a16207",
+                                "color": "#A9762F",
                                 "harv": "Septembre - Octobre",
                                 "drought": TOLERANCE_EXCELLENTE,
                                 "reference": True,
@@ -4013,8 +4013,8 @@ CATALOG: list[dict] = [
             "protection sanitaire au fil des stades."
         ),
         "icon": "trees",
-        "color_hex": "#16a34a",
-        "accent_hex": "#fbbf24",
+        "color_hex": "#6E9159",
+        "accent_hex": "#FF8A5B",
         "cultures": [
             {
                 "key": "olivier",
@@ -4024,7 +4024,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_FAIBLE,
                 "icon": "trees",
-                "color_hex": "#65a30d",
+                "color_hex": "#B6D93F",
                 "usage": "Huile d'olive, olive de table",
                 "description": "Pérenne rustique, alternance de production marquée.",
                 "species": [
@@ -4056,7 +4056,7 @@ CATALOG: list[dict] = [
                                 "days": 210,
                                 "yield": 4.0,
                                 "quality": "Huile fruitée, faible teneur en eau",
-                                "color": "#65a30d",
+                                "color": "#B6D93F",
                                 "harv": "Novembre - Janvier",
                                 "drought": TOLERANCE_EXCELLENTE,
                                 "notes": "Variété de montagne, autostérile.",
@@ -4067,7 +4067,7 @@ CATALOG: list[dict] = [
                                 "days": 205,
                                 "yield": 5.0,
                                 "quality": "Double aptitude table et huile",
-                                "color": "#84cc16",
+                                "color": "#C2E847",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                             {
@@ -4076,7 +4076,7 @@ CATALOG: list[dict] = [
                                 "days": 195,
                                 "yield": 4.5,
                                 "quality": "Olive de table verte",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -4085,7 +4085,7 @@ CATALOG: list[dict] = [
                                 "days": 185,
                                 "yield": 6.0,
                                 "quality": "Huile douce, conduite intensive",
-                                "color": "#4ade80",
+                                "color": "#A9C98B",
                                 "drought": TOLERANCE_BONNE,
                                 "notes": "Adaptée aux vergers en haie irrigués.",
                             },
@@ -4101,7 +4101,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "trees",
-                "color_hex": "#f472b6",
+                "color_hex": "#FF9EC9",
                 "usage": "Amande de bouche, transformation",
                 "species": [
                     {
@@ -4129,7 +4129,7 @@ CATALOG: list[dict] = [
                                 "days": 220,
                                 "yield": 2.0,
                                 "quality": "Amande allongée, bon rendement au cassage",
-                                "color": "#f472b6",
+                                "color": "#FF9EC9",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -4138,7 +4138,7 @@ CATALOG: list[dict] = [
                                 "days": 228,
                                 "yield": 2.2,
                                 "quality": "Autofertile",
-                                "color": "#fb7185",
+                                "color": "#FF93A1",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -4153,7 +4153,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "trees",
-                "color_hex": "#fb923c",
+                "color_hex": "#FF9E7A",
                 "usage": "Frais, transformation",
                 "species": [
                     {
@@ -4180,7 +4180,7 @@ CATALOG: list[dict] = [
                                 "days": 140,
                                 "yield": 20.0,
                                 "quality": "Gros fruit, transformation",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -4189,7 +4189,7 @@ CATALOG: list[dict] = [
                                 "days": 125,
                                 "yield": 18.0,
                                 "quality": "Frais, ferme",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -4204,7 +4204,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "apple",
-                "color_hex": "#dc2626",
+                "color_hex": "#E0452C",
                 "usage": "Frais, jus",
                 "species": [
                     {
@@ -4232,7 +4232,7 @@ CATALOG: list[dict] = [
                                 "days": 180,
                                 "yield": 45.0,
                                 "quality": "Jaune, polyvalente",
-                                "color": "#facc15",
+                                "color": "#FFC46B",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -4241,7 +4241,7 @@ CATALOG: list[dict] = [
                                 "days": 160,
                                 "yield": 42.0,
                                 "quality": "Bicolore, sucrée",
-                                "color": "#dc2626",
+                                "color": "#E0452C",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -4256,7 +4256,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_FAIBLE,
                 "icon": "trees",
-                "color_hex": "#7c3aed",
+                "color_hex": "#8E7BFF",
                 "usage": "Frais, séché",
                 "species": [
                     {
@@ -4283,7 +4283,7 @@ CATALOG: list[dict] = [
                                 "days": 135,
                                 "yield": 12.0,
                                 "quality": "Figue noire, frais et séché",
-                                "color": "#7c3aed",
+                                "color": "#8E7BFF",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                             {
@@ -4292,7 +4292,7 @@ CATALOG: list[dict] = [
                                 "days": 155,
                                 "yield": 10.0,
                                 "quality": "Figue verte sucrée",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                         ],
@@ -4307,7 +4307,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "apple",
-                "color_hex": "#bef264",
+                "color_hex": "#E4FF9B",
                 "usage": "Frais, transformation",
                 "species": [
                     {
@@ -4338,7 +4338,7 @@ CATALOG: list[dict] = [
                                 "days": 160,
                                 "yield": 35.0,
                                 "quality": "Frais et conserve, très parfumée",
-                                "color": "#bef264",
+                                "color": "#E4FF9B",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -4347,7 +4347,7 @@ CATALOG: list[dict] = [
                                 "days": 185,
                                 "yield": 40.0,
                                 "quality": "Allongée, bonne conservation",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -4362,7 +4362,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "cherry",
-                "color_hex": "#fb7185",
+                "color_hex": "#FF93A1",
                 "usage": "Frais, conserve",
                 "species": [
                     {
@@ -4393,7 +4393,7 @@ CATALOG: list[dict] = [
                                 "days": 130,
                                 "yield": 28.0,
                                 "quality": "Chair jaune, non adhérente",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -4417,7 +4417,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "cherry",
-                "color_hex": "#dc2626",
+                "color_hex": "#E0452C",
                 "usage": "Frais, conserve, distillation",
                 "species": [
                     {
@@ -4448,7 +4448,7 @@ CATALOG: list[dict] = [
                                 "days": 95,
                                 "yield": 15.0,
                                 "quality": "Bigarreau précoce, marché frais",
-                                "color": "#dc2626",
+                                "color": "#E0452C",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -4472,7 +4472,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "cherry",
-                "color_hex": "#7c3aed",
+                "color_hex": "#8E7BFF",
                 "usage": "Frais, pruneau, distillation",
                 "species": [
                     {
@@ -4503,7 +4503,7 @@ CATALOG: list[dict] = [
                                 "days": 135,
                                 "yield": 20.0,
                                 "quality": "Très sucrée, marché frais",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -4512,7 +4512,7 @@ CATALOG: list[dict] = [
                                 "days": 160,
                                 "yield": 25.0,
                                 "quality": "Séchage, pruneau",
-                                "color": "#7c3aed",
+                                "color": "#8E7BFF",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -4527,7 +4527,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "apple",
-                "color_hex": "#be123c",
+                "color_hex": "#C33A46",
                 "usage": "Frais, jus, transformation",
                 "species": [
                     {
@@ -4558,7 +4558,7 @@ CATALOG: list[dict] = [
                                 "days": 205,
                                 "yield": 25.0,
                                 "quality": "Jus, arille rouge foncé",
-                                "color": "#be123c",
+                                "color": "#C33A46",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                             {
@@ -4582,7 +4582,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "nut",
-                "color_hex": "#78350f",
+                "color_hex": "#3F2415",
                 "usage": "Noix de bouche, huile, bois",
                 "species": [
                     {
@@ -4613,7 +4613,7 @@ CATALOG: list[dict] = [
                                 "days": 215,
                                 "yield": 3.0,
                                 "quality": "Noix de bouche, débourrement tardif",
-                                "color": "#78350f",
+                                "color": "#3F2415",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -4622,7 +4622,7 @@ CATALOG: list[dict] = [
                                 "days": 190,
                                 "yield": 4.0,
                                 "quality": "Productive, cerneau clair",
-                                "color": "#a16207",
+                                "color": "#A9762F",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -4637,7 +4637,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_FAIBLE,
                 "icon": "nut",
-                "color_hex": "#84cc16",
+                "color_hex": "#C2E847",
                 "usage": "Pistache de bouche, pâtisserie",
                 "species": [
                     {
@@ -4668,7 +4668,7 @@ CATALOG: list[dict] = [
                                 "days": 215,
                                 "yield": 2.5,
                                 "quality": "Gros calibre, référence mondiale",
-                                "color": "#84cc16",
+                                "color": "#C2E847",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                             {
@@ -4677,7 +4677,7 @@ CATALOG: list[dict] = [
                                 "days": 195,
                                 "yield": 2.0,
                                 "quality": "Variété locale rustique",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                         ],
@@ -4692,7 +4692,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "apple",
-                "color_hex": "#facc15",
+                "color_hex": "#FFC46B",
                 "usage": "Pâte de fruit, gelée, porte-greffe",
                 "species": [
                     {
@@ -4723,7 +4723,7 @@ CATALOG: list[dict] = [
                                 "days": 190,
                                 "yield": 20.0,
                                 "quality": "Gros fruit, très parfumé",
-                                "color": "#facc15",
+                                "color": "#FFC46B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -4732,7 +4732,7 @@ CATALOG: list[dict] = [
                                 "days": 208,
                                 "yield": 18.0,
                                 "quality": "Chair tendre, transformation",
-                                "color": "#fbbf24",
+                                "color": "#FF8A5B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -4753,8 +4753,8 @@ CATALOG: list[dict] = [
             "fertigation étalée et suivi rapproché des oligo-éléments."
         ),
         "icon": "citrus",
-        "color_hex": "#f97316",
-        "accent_hex": "#a3e635",
+        "color_hex": "#FF5A2B",
+        "accent_hex": "#D8FA5E",
         "cultures": [
             {
                 "key": "oranger",
@@ -4764,7 +4764,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "citrus",
-                "color_hex": "#f97316",
+                "color_hex": "#FF5A2B",
                 "usage": "Frais, jus",
                 "species": [
                     {
@@ -4792,7 +4792,7 @@ CATALOG: list[dict] = [
                                 "days": 250,
                                 "yield": 30.0,
                                 "quality": "Navel de bouche",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "harv": "Novembre - Janvier",
                                 "drought": TOLERANCE_MOYENNE,
                             },
@@ -4802,7 +4802,7 @@ CATALOG: list[dict] = [
                                 "days": 270,
                                 "yield": 32.0,
                                 "quality": "Navel, gros calibre",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -4811,7 +4811,7 @@ CATALOG: list[dict] = [
                                 "days": 320,
                                 "yield": 35.0,
                                 "quality": "Jus, tardive",
-                                "color": "#fbbf24",
+                                "color": "#FF8A5B",
                                 "harv": "Mars - Mai",
                                 "drought": TOLERANCE_MOYENNE,
                             },
@@ -4827,7 +4827,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "citrus",
-                "color_hex": "#fb923c",
+                "color_hex": "#FF9E7A",
                 "usage": "Frais",
                 "species": [
                     {
@@ -4854,7 +4854,7 @@ CATALOG: list[dict] = [
                                 "days": 230,
                                 "yield": 25.0,
                                 "quality": "Sans pépin, marché frais",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -4863,7 +4863,7 @@ CATALOG: list[dict] = [
                                 "days": 215,
                                 "yield": 27.0,
                                 "quality": "Facile à peler",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -4878,7 +4878,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "citrus",
-                "color_hex": "#facc15",
+                "color_hex": "#FFC46B",
                 "usage": "Frais, industrie",
                 "species": [
                     {
@@ -4905,7 +4905,7 @@ CATALOG: list[dict] = [
                                 "days": 260,
                                 "yield": 30.0,
                                 "quality": "Peu de pépins, très acide",
-                                "color": "#facc15",
+                                "color": "#FFC46B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -4914,7 +4914,7 @@ CATALOG: list[dict] = [
                                 "days": 275,
                                 "yield": 32.0,
                                 "quality": "Vigoureuse, rustique",
-                                "color": "#fde047",
+                                "color": "#FFDF9B",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -4969,7 +4969,7 @@ CATALOG: list[dict] = [
                                 "days": 275,
                                 "yield": 30.0,
                                 "quality": "Tardive, très colorée",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -4984,7 +4984,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "citrus",
-                "color_hex": "#fb7185",
+                "color_hex": "#FF93A1",
                 "usage": "Frais, jus",
                 "species": [
                     {
@@ -5015,7 +5015,7 @@ CATALOG: list[dict] = [
                                 "days": 300,
                                 "yield": 35.0,
                                 "quality": "Chair rouge, sans pépin",
-                                "color": "#fb7185",
+                                "color": "#FF93A1",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -5024,7 +5024,7 @@ CATALOG: list[dict] = [
                                 "days": 325,
                                 "yield": 38.0,
                                 "quality": "Chair blanche, jus",
-                                "color": "#fef08a",
+                                "color": "#FFE9B8",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -5046,8 +5046,8 @@ CATALOG: list[dict] = [
             "des contrôles de maturité."
         ),
         "icon": "grape",
-        "color_hex": "#7c3aed",
-        "accent_hex": "#a3e635",
+        "color_hex": "#8E7BFF",
+        "accent_hex": "#D8FA5E",
         "cultures": [
             {
                 "key": "raisin-de-table",
@@ -5057,7 +5057,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "grape",
-                "color_hex": "#7c3aed",
+                "color_hex": "#8E7BFF",
                 "usage": "Frais, séché",
                 "species": [
                     {
@@ -5085,7 +5085,7 @@ CATALOG: list[dict] = [
                                 "days": 178,
                                 "yield": 22.0,
                                 "quality": "Muscaté, gros grain",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -5094,7 +5094,7 @@ CATALOG: list[dict] = [
                                 "days": 155,
                                 "yield": 20.0,
                                 "quality": "Rouge, précoce",
-                                "color": "#dc2626",
+                                "color": "#E0452C",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -5103,7 +5103,7 @@ CATALOG: list[dict] = [
                                 "days": 168,
                                 "yield": 18.0,
                                 "quality": "Apyrène, séchage (raisin sec)",
-                                "color": "#facc15",
+                                "color": "#FFC46B",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -5155,7 +5155,7 @@ CATALOG: list[dict] = [
                                 "days": 182,
                                 "yield": 13.0,
                                 "quality": "Rosé, souple",
-                                "color": "#a855f7",
+                                "color": "#B9A8FF",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -5178,7 +5178,7 @@ CATALOG: list[dict] = [
         ),
         "icon": "factory",
         "color_hex": "#0ea5e9",
-        "accent_hex": "#fbbf24",
+        "accent_hex": "#FF8A5B",
         "cultures": [
             {
                 "key": "betterave-sucriere",
@@ -5225,7 +5225,7 @@ CATALOG: list[dict] = [
                                 "days": 212,
                                 "yield": 90.0,
                                 "quality": "Rendement racine",
-                                "color": "#38bdf8",
+                                "color": "#9CC3FF",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -5240,7 +5240,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_TRES_ELEVEE,
                 "icon": "sprout",
-                "color_hex": "#65a30d",
+                "color_hex": "#B6D93F",
                 "usage": "Sucrerie, rhumerie",
                 "species": [
                     {
@@ -5268,7 +5268,7 @@ CATALOG: list[dict] = [
                                 "days": 400,
                                 "yield": 95.0,
                                 "quality": "Riche en sucre",
-                                "color": "#65a30d",
+                                "color": "#B6D93F",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -5277,7 +5277,7 @@ CATALOG: list[dict] = [
                                 "days": 365,
                                 "yield": 88.0,
                                 "quality": "Bonne repousse",
-                                "color": "#84cc16",
+                                "color": "#C2E847",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -5292,7 +5292,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "cloud",
-                "color_hex": "#e2e8f0",
+                "color_hex": "#E8E6DC",
                 "usage": "Fibre, huile de graine",
                 "species": [
                     {
@@ -5320,7 +5320,7 @@ CATALOG: list[dict] = [
                                 "days": 185,
                                 "yield": 3.5,
                                 "quality": "Fibre longue",
-                                "color": "#e2e8f0",
+                                "color": "#E8E6DC",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -5344,7 +5344,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "leaf",
-                "color_hex": "#a16207",
+                "color_hex": "#A9762F",
                 "usage": "Industrie du tabac",
                 "species": [
                     {
@@ -5372,7 +5372,7 @@ CATALOG: list[dict] = [
                                 "days": 140,
                                 "yield": 2.8,
                                 "quality": "Séchage à l'air chaud",
-                                "color": "#a16207",
+                                "color": "#A9762F",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -5381,7 +5381,7 @@ CATALOG: list[dict] = [
                                 "days": 152,
                                 "yield": 2.6,
                                 "quality": "Séchage à l'air naturel",
-                                "color": "#ca8a04",
+                                "color": "#C4923C",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -5452,7 +5452,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "leaf",
-                "color_hex": "#4d7c0f",
+                "color_hex": "#93AE45",
                 "usage": "Fibre, chènevotte, graine (chènevis)",
                 "species": [
                     {
@@ -5484,7 +5484,7 @@ CATALOG: list[dict] = [
                                 "days": 118,
                                 "yield": 8.0,
                                 "quality": "Double fin : fibre et chènevis",
-                                "color": "#4d7c0f",
+                                "color": "#93AE45",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -5493,7 +5493,7 @@ CATALOG: list[dict] = [
                                 "days": 142,
                                 "yield": 10.0,
                                 "quality": "Fibre, THC quasi nul",
-                                "color": "#65a30d",
+                                "color": "#B6D93F",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -5514,8 +5514,8 @@ CATALOG: list[dict] = [
             "rester légère pour ne pas diluer les huiles essentielles."
         ),
         "icon": "flower-2",
-        "color_hex": "#34d399",
-        "accent_hex": "#a3e635",
+        "color_hex": "#8FD0B4",
+        "accent_hex": "#D8FA5E",
         "cultures": [
             {
                 "key": "menthe",
@@ -5525,7 +5525,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "leaf",
-                "color_hex": "#34d399",
+                "color_hex": "#8FD0B4",
                 "usage": "Frais, séché, huile essentielle",
                 "species": [
                     {
@@ -5553,7 +5553,7 @@ CATALOG: list[dict] = [
                                 "days": 365,
                                 "yield": 18.0,
                                 "quality": "Feuille aromatique, thé",
-                                "color": "#34d399",
+                                "color": "#8FD0B4",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -5568,7 +5568,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "leaf",
-                "color_hex": "#4ade80",
+                "color_hex": "#A9C98B",
                 "usage": "Feuille fraîche, graine",
                 "species": [
                     {
@@ -5595,7 +5595,7 @@ CATALOG: list[dict] = [
                                 "days": 80,
                                 "yield": 1.5,
                                 "quality": "Graine aromatique",
-                                "color": "#4ade80",
+                                "color": "#A9C98B",
                                 "drought": TOLERANCE_BONNE,
                             },
                             {
@@ -5604,7 +5604,7 @@ CATALOG: list[dict] = [
                                 "days": 95,
                                 "yield": 12.0,
                                 "quality": "Feuillage abondant, montaison lente",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -5619,7 +5619,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "leaf",
-                "color_hex": "#a16207",
+                "color_hex": "#A9762F",
                 "usage": "Épice",
                 "species": [
                     {
@@ -5647,7 +5647,7 @@ CATALOG: list[dict] = [
                                 "days": 115,
                                 "yield": 0.9,
                                 "quality": "Épice, huile essentielle",
-                                "color": "#a16207",
+                                "color": "#A9762F",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                         ],
@@ -5662,7 +5662,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "leaf",
-                "color_hex": "#22c55e",
+                "color_hex": "#8FB37A",
                 "usage": "Frais, transformation",
                 "species": [
                     {
@@ -5690,7 +5690,7 @@ CATALOG: list[dict] = [
                                 "days": 70,
                                 "yield": 20.0,
                                 "quality": "Feuille large, très parfumée",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -5705,7 +5705,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_FAIBLE,
                 "icon": "leaf",
-                "color_hex": "#22c55e",
+                "color_hex": "#8FB37A",
                 "usage": "Feuille séchée, huile essentielle, mellifère",
                 "description": "Sous-arbrisseau méditerranéen très peu exigeant.",
                 "species": [
@@ -5737,7 +5737,7 @@ CATALOG: list[dict] = [
                                 "days": 365,
                                 "yield": 8.0,
                                 "quality": "Feuille séchée, huile camphrée",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                         ],
@@ -5752,7 +5752,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_FAIBLE,
                 "icon": "leaf",
-                "color_hex": "#65a30d",
+                "color_hex": "#B6D93F",
                 "usage": "Feuille séchée, huile essentielle, tisane",
                 "species": [
                     {
@@ -5783,7 +5783,7 @@ CATALOG: list[dict] = [
                                 "days": 365,
                                 "yield": 6.0,
                                 "quality": "Rustique, riche en thymol",
-                                "color": "#65a30d",
+                                "color": "#B6D93F",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                         ],
@@ -5798,7 +5798,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_FAIBLE,
                 "icon": "flower-2",
-                "color_hex": "#a855f7",
+                "color_hex": "#B9A8FF",
                 "usage": "Huile essentielle, bouquets, mellifère",
                 "species": [
                     {
@@ -5829,7 +5829,7 @@ CATALOG: list[dict] = [
                                 "days": 365,
                                 "yield": 4.0,
                                 "quality": "Huile essentielle fine",
-                                "color": "#a855f7",
+                                "color": "#B9A8FF",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                             {
@@ -5838,7 +5838,7 @@ CATALOG: list[dict] = [
                                 "days": 365,
                                 "yield": 12.0,
                                 "quality": "Lavandin, fort rendement en huile",
-                                "color": "#c084fc",
+                                "color": "#D3C6FF",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                         ],
@@ -5853,7 +5853,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_FAIBLE,
                 "icon": "leaf",
-                "color_hex": "#94a3b8",
+                "color_hex": "#A8A79C",
                 "usage": "Feuille séchée, tisane, usage médicinal",
                 "species": [
                     {
@@ -5881,7 +5881,7 @@ CATALOG: list[dict] = [
                                 "days": 365,
                                 "yield": 7.0,
                                 "quality": "Feuille séchée, herboristerie",
-                                "color": "#94a3b8",
+                                "color": "#A8A79C",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                         ],
@@ -5896,7 +5896,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_FAIBLE,
                 "icon": "leaf",
-                "color_hex": "#84cc16",
+                "color_hex": "#C2E847",
                 "usage": "Feuille séchée, huile essentielle",
                 "species": [
                     {
@@ -5927,7 +5927,7 @@ CATALOG: list[dict] = [
                                 "days": 365,
                                 "yield": 9.0,
                                 "quality": "Feuille dense, séchage",
-                                "color": "#84cc16",
+                                "color": "#C2E847",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -5942,7 +5942,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "flower-2",
-                "color_hex": "#fef08a",
+                "color_hex": "#FFE9B8",
                 "usage": "Tisane, huile essentielle, médicinal",
                 "species": [
                     {
@@ -5973,7 +5973,7 @@ CATALOG: list[dict] = [
                                 "days": 110,
                                 "yield": 1.2,
                                 "quality": "Capitules riches en bisabolol",
-                                "color": "#fef08a",
+                                "color": "#FFE9B8",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -5988,7 +5988,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_BISANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "leaf",
-                "color_hex": "#16a34a",
+                "color_hex": "#6E9159",
                 "usage": "Frais, séché, surgelé",
                 "species": [
                     {
@@ -6019,7 +6019,7 @@ CATALOG: list[dict] = [
                                 "days": 90,
                                 "yield": 20.0,
                                 "quality": "Feuille plate, très aromatique",
-                                "color": "#16a34a",
+                                "color": "#6E9159",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -6028,7 +6028,7 @@ CATALOG: list[dict] = [
                                 "days": 120,
                                 "yield": 18.0,
                                 "quality": "Frisé, tenue après récolte",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -6043,7 +6043,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_FAIBLE,
                 "icon": "leaf",
-                "color_hex": "#a3e635",
+                "color_hex": "#D8FA5E",
                 "usage": "Graine, huile essentielle, tisane",
                 "description": (
                     "Doublon assumé avec le maraîchage : conduit ici pour la "
@@ -6078,7 +6078,7 @@ CATALOG: list[dict] = [
                                 "days": 165,
                                 "yield": 1.6,
                                 "quality": "Graine riche en anéthol",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -6102,7 +6102,7 @@ CATALOG: list[dict] = [
         ),
         "icon": "flame",
         "color_hex": "#b45309",
-        "accent_hex": "#fbbf24",
+        "accent_hex": "#FF8A5B",
         "cultures": [
             {
                 "key": "safran",
@@ -6112,7 +6112,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_FAIBLE,
                 "icon": "flower-2",
-                "color_hex": "#a855f7",
+                "color_hex": "#B9A8FF",
                 "usage": "Stigmates séchés (épice la plus chère du monde)",
                 "description": (
                     "Bulbeuse à floraison automnale : récolte manuelle des "
@@ -6148,7 +6148,7 @@ CATALOG: list[dict] = [
                                 "days": 75,
                                 "yield": 0.01,
                                 "quality": "Stigmates catégorie I (crocine élevée)",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "drought": TOLERANCE_BONNE,
                                 "notes": "Rendement exprimé en tonnes : ~10 kg/ha.",
                             },
@@ -6164,7 +6164,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "leaf",
-                "color_hex": "#a3e635",
+                "color_hex": "#D8FA5E",
                 "usage": "Graine, distillation, liquoristerie",
                 "species": [
                     {
@@ -6192,7 +6192,7 @@ CATALOG: list[dict] = [
                                 "days": 125,
                                 "yield": 1.0,
                                 "quality": "Graine riche en anéthol",
-                                "color": "#a3e635",
+                                "color": "#D8FA5E",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -6207,7 +6207,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "bean",
-                "color_hex": "#ca8a04",
+                "color_hex": "#C4923C",
                 "usage": "Épice, fourrage, engrais vert",
                 "species": [
                     {
@@ -6238,7 +6238,7 @@ CATALOG: list[dict] = [
                                 "days": 120,
                                 "yield": 1.5,
                                 "quality": "Graine ambérée, épice et fourrage",
-                                "color": "#ca8a04",
+                                "color": "#C4923C",
                                 "drought": TOLERANCE_EXCELLENTE,
                             },
                         ],
@@ -6253,7 +6253,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_BISANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "leaf",
-                "color_hex": "#a16207",
+                "color_hex": "#A9762F",
                 "usage": "Graine, distillation, fromagerie",
                 "species": [
                     {
@@ -6284,7 +6284,7 @@ CATALOG: list[dict] = [
                                 "days": 400,
                                 "yield": 1.8,
                                 "quality": "Graine riche en carvone",
-                                "color": "#a16207",
+                                "color": "#A9762F",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -6342,7 +6342,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_ELEVEE,
                 "icon": "carrot",
-                "color_hex": "#f59e0b",
+                "color_hex": "#FF6A38",
                 "usage": "Rhizome frais ou séché, colorant, médicinal",
                 "species": [
                     {
@@ -6373,7 +6373,7 @@ CATALOG: list[dict] = [
                                 "days": 285,
                                 "yield": 25.0,
                                 "quality": "Forte teneur en curcumine",
-                                "color": "#f59e0b",
+                                "color": "#FF6A38",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -6388,7 +6388,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_TRES_ELEVEE,
                 "icon": "carrot",
-                "color_hex": "#fbbf24",
+                "color_hex": "#FF8A5B",
                 "usage": "Rhizome frais, séché, confit",
                 "species": [
                     {
@@ -6419,7 +6419,7 @@ CATALOG: list[dict] = [
                                 "days": 280,
                                 "yield": 20.0,
                                 "quality": "Rhizome fibreux, très piquant",
-                                "color": "#fbbf24",
+                                "color": "#FF8A5B",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -6434,7 +6434,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_FAIBLE,
                 "icon": "leaf",
-                "color_hex": "#84cc16",
+                "color_hex": "#C2E847",
                 "usage": "Graine entière, poudre, distillation",
                 "description": (
                     "Doublon assumé avec les aromatiques : la conduite "
@@ -6470,7 +6470,7 @@ CATALOG: list[dict] = [
                                 "days": 125,
                                 "yield": 1.8,
                                 "quality": "Grosse graine, huile essentielle",
-                                "color": "#84cc16",
+                                "color": "#C2E847",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -6485,7 +6485,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_ANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "flame",
-                "color_hex": "#dc2626",
+                "color_hex": "#E0452C",
                 "usage": "Séchage, poudre de paprika, colorant naturel",
                 "description": (
                     "Doublon assumé avec le maraîchage : le piment est ici "
@@ -6522,7 +6522,7 @@ CATALOG: list[dict] = [
                                 "days": 145,
                                 "yield": 4.5,
                                 "quality": "Paprika doux, couleur intense",
-                                "color": "#dc2626",
+                                "color": "#E0452C",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -6555,7 +6555,7 @@ CATALOG: list[dict] = [
         ),
         "icon": "palmtree",
         "color_hex": "#0d9488",
-        "accent_hex": "#fbbf24",
+        "accent_hex": "#FF8A5B",
         "cultures": [
             {
                 "key": "bananier",
@@ -6565,7 +6565,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_TRES_ELEVEE,
                 "icon": "banana",
-                "color_hex": "#facc15",
+                "color_hex": "#FFC46B",
                 "usage": "Frais, plantain",
                 "species": [
                     {
@@ -6596,7 +6596,7 @@ CATALOG: list[dict] = [
                                 "days": 360,
                                 "yield": 45.0,
                                 "quality": "Cavendish export",
-                                "color": "#facc15",
+                                "color": "#FFC46B",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -6605,7 +6605,7 @@ CATALOG: list[dict] = [
                                 "days": 330,
                                 "yield": 35.0,
                                 "quality": "Port bas, résistant au vent",
-                                "color": "#fde047",
+                                "color": "#FFDF9B",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -6620,7 +6620,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "trees",
-                "color_hex": "#166534",
+                "color_hex": "#3E5A31",
                 "usage": "Frais, huile",
                 "species": [
                     {
@@ -6651,7 +6651,7 @@ CATALOG: list[dict] = [
                                 "days": 390,
                                 "yield": 12.0,
                                 "quality": "Peau rugueuse, conservation export",
-                                "color": "#166534",
+                                "color": "#3E5A31",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -6660,7 +6660,7 @@ CATALOG: list[dict] = [
                                 "days": 300,
                                 "yield": 14.0,
                                 "quality": "Peau lisse, marché local",
-                                "color": "#22c55e",
+                                "color": "#8FB37A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -6675,7 +6675,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "trees",
-                "color_hex": "#f97316",
+                "color_hex": "#FF5A2B",
                 "usage": "Frais, jus, séché",
                 "species": [
                     {
@@ -6706,7 +6706,7 @@ CATALOG: list[dict] = [
                                 "days": 160,
                                 "yield": 18.0,
                                 "quality": "Peu fibreuse, export",
-                                "color": "#f97316",
+                                "color": "#FF5A2B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -6715,7 +6715,7 @@ CATALOG: list[dict] = [
                                 "days": 178,
                                 "yield": 20.0,
                                 "quality": "Gros fruit, très tardif",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -6730,7 +6730,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "trees",
-                "color_hex": "#fb923c",
+                "color_hex": "#FF9E7A",
                 "usage": "Frais, jus, papaïne",
                 "species": [
                     {
@@ -6761,7 +6761,7 @@ CATALOG: list[dict] = [
                                 "days": 300,
                                 "yield": 50.0,
                                 "quality": "Chair rouge, petit calibre",
-                                "color": "#fb923c",
+                                "color": "#FF9E7A",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -6776,7 +6776,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_MODEREE,
                 "icon": "trees",
-                "color_hex": "#4ade80",
+                "color_hex": "#A9C98B",
                 "usage": "Frais, nectar, gelée",
                 "species": [
                     {
@@ -6807,7 +6807,7 @@ CATALOG: list[dict] = [
                                 "days": 190,
                                 "yield": 30.0,
                                 "quality": "Chair rose, nectar",
-                                "color": "#fb7185",
+                                "color": "#FF93A1",
                                 "drought": TOLERANCE_BONNE,
                             },
                         ],
@@ -6822,7 +6822,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_BISANNUELLE,
                 "water": WATER_MODEREE,
                 "icon": "circle",
-                "color_hex": "#fbbf24",
+                "color_hex": "#FF8A5B",
                 "usage": "Frais, conserve, jus",
                 "species": [
                     {
@@ -6853,7 +6853,7 @@ CATALOG: list[dict] = [
                                 "days": 500,
                                 "yield": 60.0,
                                 "quality": "Conserve et frais",
-                                "color": "#fbbf24",
+                                "color": "#FF8A5B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                             {
@@ -6862,7 +6862,7 @@ CATALOG: list[dict] = [
                                 "days": 450,
                                 "yield": 70.0,
                                 "quality": "Très sucré, export",
-                                "color": "#facc15",
+                                "color": "#FFC46B",
                                 "drought": TOLERANCE_MOYENNE,
                             },
                         ],
@@ -6877,7 +6877,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "grape",
-                "color_hex": "#7c3aed",
+                "color_hex": "#8E7BFF",
                 "usage": "Frais, jus, pâtisserie",
                 "species": [
                     {
@@ -6908,7 +6908,7 @@ CATALOG: list[dict] = [
                                 "days": 300,
                                 "yield": 20.0,
                                 "quality": "Gros fruit pourpre, très juteux",
-                                "color": "#7c3aed",
+                                "color": "#8E7BFF",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -6923,7 +6923,7 @@ CATALOG: list[dict] = [
                 "cycle": CYCLE_PERENNE,
                 "water": WATER_ELEVEE,
                 "icon": "trees",
-                "color_hex": "#78350f",
+                "color_hex": "#3F2415",
                 "usage": "Café vert, torréfaction",
                 "species": [
                     {
@@ -6954,7 +6954,7 @@ CATALOG: list[dict] = [
                                 "days": 320,
                                 "yield": 1.5,
                                 "quality": "Tasse fine, aromatique",
-                                "color": "#78350f",
+                                "color": "#3F2415",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                             {
@@ -6963,7 +6963,7 @@ CATALOG: list[dict] = [
                                 "days": 300,
                                 "yield": 2.0,
                                 "quality": "Sucrosité élevée",
-                                "color": "#a16207",
+                                "color": "#A9762F",
                                 "drought": TOLERANCE_FAIBLE,
                             },
                         ],
@@ -7031,8 +7031,8 @@ async def seed_catalog_data() -> None:
                         "tagline": category.get("tagline", ""),
                         "description": category.get("description", ""),
                         "icon": category.get("icon", "sprout"),
-                        "color_hex": category.get("color_hex", "#a3e635"),
-                        "accent_hex": category.get("accent_hex", "#fbbf24"),
+                        "color_hex": category.get("color_hex", "#D8FA5E"),
+                        "accent_hex": category.get("accent_hex", "#FF8A5B"),
                         "position": cat_index,
                     },
                 )
@@ -7079,7 +7079,7 @@ async def seed_catalog_data() -> None:
                             "cycle": culture.get("cycle", CYCLE_ANNUELLE),
                             "water": culture.get("water", WATER_MODEREE),
                             "icon": culture.get("icon", "sprout"),
-                            "color_hex": culture.get("color_hex", "#4ade80"),
+                            "color_hex": culture.get("color_hex", "#A9C98B"),
                             "usage": culture.get("usage", ""),
                             "description": culture.get("description", ""),
                             "position": cult_index,
@@ -7220,7 +7220,7 @@ async def seed_catalog_data() -> None:
                                     "quality": variety.get("quality", ""),
                                     "color": variety.get(
                                         "color",
-                                        culture.get("color_hex", "#a3e635"),
+                                        culture.get("color_hex", "#D8FA5E"),
                                     ),
                                     "sow": variety.get(
                                         "sow", spec.get("sow", "")

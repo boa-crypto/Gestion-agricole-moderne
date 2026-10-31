@@ -15,7 +15,7 @@ def _tile(
         rx.el.div(
             rx.el.span(
                 label,
-                class_name="text-[10px] font-semibold uppercase tracking-[0.22em] text-emerald-100/50",
+                class_name="ap-eyebrow text-[#c9c5b4]/50",
             ),
             rx.icon(icon, class_name=icon_class),
             class_name="flex items-start justify-between gap-3",
@@ -23,19 +23,19 @@ def _tile(
         rx.el.div(
             rx.el.span(
                 value,
-                class_name="font-['Instrument_Serif'] text-3xl leading-none text-emerald-50",
+                class_name="ap-serif text-3xl leading-none text-[#f2efe4]",
             ),
             rx.el.span(
                 unit,
-                class_name="text-xs font-medium text-emerald-100/50 mb-0.5",
+                class_name="text-xs font-medium text-[#c9c5b4]/50 mb-0.5",
             ),
             class_name="flex items-end gap-1.5 mt-4",
         ),
         rx.el.p(
             caption,
-            class_name="text-[11px] font-medium text-emerald-100/45 mt-2",
+            class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-2",
         ),
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl hover:border-lime-300/30 transition-colors",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] p-5  hover:border-[#d8fa5e]/30 transition-colors",
     )
 
 
@@ -47,7 +47,7 @@ def workforce_kpis() -> rx.Component:
             "personnes",
             f"{EmployeesState.kpis['active']:.0f} en poste aujourd'hui",
             "users-round",
-            "h-4 w-4 text-lime-300",
+            "h-4 w-4 text-[#d8fa5e]",
         ),
         _tile(
             "Absences",
@@ -55,7 +55,7 @@ def workforce_kpis() -> rx.Component:
             "en cours",
             "Congés et arrêts déclarés",
             "user-minus",
-            "h-4 w-4 text-amber-300",
+            "h-4 w-4 text-[#ff8a5b]",
         ),
         _tile(
             "Capacité hebdo",
@@ -63,7 +63,7 @@ def workforce_kpis() -> rx.Component:
             "h / semaine",
             "Volume contractuel cumulé",
             "clock",
-            "h-4 w-4 text-emerald-300",
+            "h-4 w-4 text-[#a9c98b]",
         ),
         _tile(
             "Masse salariale",
@@ -71,7 +71,7 @@ def workforce_kpis() -> rx.Component:
             "€ / semaine",
             "Coût direct au taux horaire",
             "coins",
-            "h-4 w-4 text-lime-300",
+            "h-4 w-4 text-[#d8fa5e]",
         ),
         _tile(
             "Certiphyto",
@@ -79,7 +79,7 @@ def workforce_kpis() -> rx.Component:
             "titulaires",
             f"{EmployeesState.kpis['skills']:.0f} compétences référencées",
             "badge-check",
-            "h-4 w-4 text-amber-300",
+            "h-4 w-4 text-[#ff8a5b]",
         ),
         _tile(
             "Affectations 7 j",
@@ -87,7 +87,7 @@ def workforce_kpis() -> rx.Component:
             "chantiers",
             "Missions proposées ou confirmées",
             "calendar-clock",
-            "h-4 w-4 text-lime-300",
+            "h-4 w-4 text-[#d8fa5e]",
         ),
         class_name="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 w-full",
     )

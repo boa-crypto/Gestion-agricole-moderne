@@ -15,7 +15,7 @@ def _tile(
         rx.el.div(
             rx.el.span(
                 label,
-                class_name="text-[10px] font-semibold uppercase tracking-[0.22em] text-emerald-100/50",
+                class_name="ap-eyebrow text-[#c9c5b4]/50",
             ),
             rx.icon(icon, class_name=icon_class),
             class_name="flex items-start justify-between gap-3",
@@ -23,19 +23,19 @@ def _tile(
         rx.el.div(
             rx.el.span(
                 value,
-                class_name="font-['Instrument_Serif'] text-3xl leading-none text-emerald-50",
+                class_name="ap-serif text-3xl leading-none text-[#f2efe4]",
             ),
             rx.el.span(
                 unit,
-                class_name="text-xs font-medium text-emerald-100/50 mb-0.5",
+                class_name="text-xs font-medium text-[#c9c5b4]/50 mb-0.5",
             ),
             class_name="flex items-end gap-1.5 mt-4",
         ),
         rx.el.p(
             caption,
-            class_name="text-[11px] font-medium text-emerald-100/45 mt-2",
+            class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-2",
         ),
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl hover:border-lime-300/30 transition-colors",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] p-5  hover:border-[#d8fa5e]/30 transition-colors",
     )
 
 
@@ -47,7 +47,7 @@ def admin_kpis() -> rx.Component:
             "utilisateurs",
             AdministrationState.coverage_label,
             "users-round",
-            "h-4 w-4 text-lime-300",
+            "h-4 w-4 text-[#d8fa5e]",
         ),
         _tile(
             "À arbitrer",
@@ -56,7 +56,7 @@ def admin_kpis() -> rx.Component:
             "comptes",
             "Suspendus ou en attente de validation",
             "user-cog",
-            "h-4 w-4 text-amber-300",
+            "h-4 w-4 text-[#ff8a5b]",
         ),
         _tile(
             "Équipes agricoles",
@@ -65,7 +65,7 @@ def admin_kpis() -> rx.Component:
             AdministrationState.kpis["parcels"].to_string()
             + " parcelle(s) couverte(s) par affectation",
             "users",
-            "h-4 w-4 text-emerald-300",
+            "h-4 w-4 text-[#a9c98b]",
         ),
         _tile(
             "Fonctions & rôles",
@@ -74,7 +74,7 @@ def admin_kpis() -> rx.Component:
             AdministrationState.kpis["roles"].to_string()
             + " rôles applicatifs déclarés",
             "briefcase",
-            "h-4 w-4 text-lime-300",
+            "h-4 w-4 text-[#d8fa5e]",
         ),
         _tile(
             "Permissions",
@@ -83,7 +83,7 @@ def admin_kpis() -> rx.Component:
             AdministrationState.kpis["grants"].to_string()
             + " liaisons RBAC accordées",
             "key-round",
-            "h-4 w-4 text-amber-300",
+            "h-4 w-4 text-[#ff8a5b]",
         ),
         _tile(
             "Sécurité",
@@ -91,7 +91,7 @@ def admin_kpis() -> rx.Component:
             "actions sensibles",
             AdministrationState.mfa_label,
             "shield-check",
-            "h-4 w-4 text-lime-300",
+            "h-4 w-4 text-[#d8fa5e]",
         ),
         class_name="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 w-full",
     )
@@ -103,23 +103,23 @@ def _section_button(key: str, label: str, icon: str) -> rx.Component:
             icon,
             class_name=rx.cond(
                 AdministrationState.section == key,
-                "h-4 w-4 text-[#04140d]",
-                "h-4 w-4 text-emerald-100/60",
+                "h-4 w-4 text-[#0A0A08]",
+                "h-4 w-4 text-[#c9c5b4]/60",
             ),
         ),
         rx.el.span(
             label,
             class_name=rx.cond(
                 AdministrationState.section == key,
-                "text-sm font-semibold text-[#04140d]",
-                "text-sm font-semibold text-emerald-100/70",
+                "text-sm font-semibold text-[#0A0A08]",
+                "text-sm font-semibold text-[#c9c5b4]/70",
             ),
         ),
         on_click=AdministrationState.set_section(key),
         class_name=rx.cond(
             AdministrationState.section == key,
-            "flex items-center gap-2 rounded-xl bg-lime-300 px-4 py-2.5 transition-colors w-fit",
-            "flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 hover:border-lime-300/30 transition-colors w-fit",
+            "flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2.5 transition-colors w-fit",
+            "flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 hover:border-[#d8fa5e]/30 transition-colors w-fit",
         ),
     )
 
@@ -127,5 +127,5 @@ def _section_button(key: str, label: str, icon: str) -> rx.Component:
 def admin_section_nav() -> rx.Component:
     return rx.el.nav(
         *[_section_button(key, label, icon) for key, label, icon in SECTIONS],
-        class_name="flex flex-wrap items-center gap-2 w-full rounded-3xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-xl",
+        class_name="flex flex-wrap items-center gap-2 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-3 ",
     )

@@ -9,12 +9,13 @@ from app.states.menu_configuration_state import MenuConfigurationState
 from app.components.alerts_panel import alerts_panel
 from app.components.calendar_panel import calendar_panel
 from app.components.cockpit_header import cockpit_header
+from app.components.design import GOOGLE_FONTS_HREF, editorial_styles
+from app.components.shell import app_shell
 from app.components.cockpit_pulse import cockpit_pulse
 from app.components.crops_panel import crops_panel
 from app.components.kpi_strip import kpi_strip
 from app.components.parcel_map import parcel_map
 from app.components.remediation_panels import alert_triage_panel
-from app.components.side_rail import side_rail
 from app.components.weather_panel import weather_panel
 from app.pages.administration import administration_page
 from app.pages.audit import audit_page
@@ -59,23 +60,19 @@ from app.states.navigation_state import NavigationState
 
 
 def cockpit_content() -> rx.Component:
-    return rx.el.main(
+    return app_shell(
         rx.el.div(
-            class_name="pointer-events-none fixed inset-0 z-0 bg-gradient-to-b from-[#04120c]/35 via-[#04120c]/45 to-[#020a07]/60",
-        ),
-        rx.el.div(
-            side_rail("cockpit"),
             cockpit_header(),
             rx.el.div(
                 kpi_strip(),
                 parcel_map(),
                 rx.el.div(
-                    rx.el.div(weather_panel(), class_name="flex-1 min-w-0"),
+                    rx.el.div(weather_panel(), class_name="min-w-0 flex-1"),
                     rx.el.div(
                         alerts_panel(),
-                        class_name="w-full xl:w-[26rem] shrink-0",
+                        class_name="w-full shrink-0 xl:w-[26rem]",
                     ),
-                    class_name="flex flex-col xl:flex-row gap-4 w-full",
+                    class_name="flex w-full flex-col gap-4 xl:flex-row",
                 ),
                 cockpit_pulse(),
                 alert_triage_panel(),
@@ -85,11 +82,11 @@ def cockpit_content() -> rx.Component:
                     class_name="w-full scroll-mt-6",
                 ),
                 crops_panel(),
-                class_name="flex flex-col gap-4 w-full mt-8",
+                class_name="mt-10 flex w-full flex-col gap-6",
             ),
-            class_name="relative z-10 w-full max-w-[110rem] mx-auto px-4 sm:px-8 md:pl-24 lg:pl-28 xl:pl-72 py-10 pb-28 md:pb-10 flex flex-col gap-6",
+            class_name="flex w-full flex-col",
         ),
-        class_name="relative min-h-screen w-full font-['Inter'] bg-[#04120c] bg-[url('/wide_cinematic_background.png')] bg-cover bg-center bg-fixed text-emerald-50 antialiased",
+        "cockpit",
     )
 
 
@@ -198,8 +195,9 @@ install_event_gate()
 
 app = rxe.App(
     head_components=[
+        editorial_styles(),
         rx.el.style(
-            "html, body { background-color: #04120c !important; } main { background-attachment: scroll !important; }"
+            "html, body { background-color: #0A0A08 !important; } main { background-attachment: scroll !important; }"
         ),
         rx.el.link(
             rel="stylesheet",
@@ -211,12 +209,9 @@ app = rxe.App(
             href="https://fonts.gstatic.com",
             cross_origin="",
         ),
-        rx.el.link(
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap",
-            rel="stylesheet",
-        ),
+        rx.el.link(href=GOOGLE_FONTS_HREF, rel="stylesheet"),
     ],
-    theme=rx.theme(appearance="light"),
+    theme=rx.theme(appearance="dark", accent_color="lime", radius="none"),
 )
 app.register_lifespan_task(menu_database_lifespan)
 app.add_page(

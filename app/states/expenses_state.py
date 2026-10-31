@@ -198,7 +198,7 @@ EMPTY_TYPE_FORM: dict[str, str] = {
     "code": "",
     "category": "",
     "description": "",
-    "color_hex": "#a3e635",
+    "color_hex": "#D8FA5E",
     "icon": "receipt-text",
     "default_payment_method": "VIREMENT",
     "default_vat_rate": "20",
@@ -510,7 +510,7 @@ class ExpensesState(rx.State):
                         SELECT x.id, x.label, COALESCE(x.reference, ''),
                                COALESCE(x.supplier, ''),
                                COALESCE(x.invoice_reference, ''),
-                               t.name, COALESCE(t.color_hex, '#a3e635'),
+                               t.name, COALESCE(t.color_hex, '#D8FA5E'),
                                COALESCE(t.icon, 'receipt-text'),
                                x.status, x.payment_method,
                                COALESCE(x.quantity, 0), COALESCE(x.unit, ''),
@@ -600,7 +600,7 @@ class ExpensesState(rx.State):
                         SELECT t.id, t.name, COALESCE(t.code, ''),
                                COALESCE(t.category, ''),
                                COALESCE(t.description, ''),
-                               COALESCE(t.color_hex, '#a3e635'),
+                               COALESCE(t.color_hex, '#D8FA5E'),
                                COALESCE(t.icon, 'receipt-text'),
                                t.is_active, t.is_archived,
                                t.default_payment_method,
@@ -1237,7 +1237,7 @@ class ExpensesState(rx.State):
         if vat < 0 or vat > 100:
             return "Le taux de TVA par défaut doit être entre 0 et 100 %."
         if color and not color.startswith("#"):
-            return "La couleur doit être au format hexadécimal (#a3e635)."
+            return "La couleur doit être au format hexadécimal (#D8FA5E)."
         return ""
 
     @rx.event
@@ -1251,8 +1251,8 @@ class ExpensesState(rx.State):
             "code": str(form_data.get("code", "")).strip().upper(),
             "category": str(form_data.get("category", "")).strip(),
             "description": str(form_data.get("description", "")).strip(),
-            "color_hex": str(form_data.get("color_hex", "#a3e635")).strip()
-            or "#a3e635",
+            "color_hex": str(form_data.get("color_hex", "#D8FA5E")).strip()
+            or "#D8FA5E",
             "icon": str(form_data.get("icon", "receipt-text")).strip()
             or "receipt-text",
             "default_payment_method": str(

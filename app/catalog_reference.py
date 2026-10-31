@@ -24,47 +24,47 @@ from typing import TypedDict
 # ---------------------------------------------------------------------------
 
 PALETTE: dict[str, str] = {
-    "night": "#04120c",
-    "surface": "#04140d",
-    "chlorophyll": "#a3e635",
-    "leaf": "#4ade80",
-    "amber": "#fbbf24",
-    "ember": "#f97316",
-    "sky": "#38bdf8",
+    "night": "#0A0A08",
+    "surface": "#0A0A08",
+    "chlorophyll": "#D8FA5E",
+    "leaf": "#A9C98B",
+    "amber": "#FF8A5B",
+    "ember": "#FF5A2B",
+    "sky": "#9CC3FF",
     "ink": "#ecfdf5",
 }
 
 # Surfaces vitrées et typographie éditoriale réutilisées telles quelles.
 GLASS_SURFACE: str = (
-    "rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl"
+    "rounded-none border border-[#f2efe4]/12 bg-[#101208] "
 )
-GLASS_CARD: str = "rounded-2xl border border-white/10 bg-white/[0.03]"
-EDITORIAL_TITLE: str = "font-['Instrument_Serif'] text-3xl text-emerald-50"
+GLASS_CARD: str = "rounded-none border border-[#f2efe4]/12 bg-[#101208]"
+EDITORIAL_TITLE: str = "ap-serif text-3xl text-[#f2efe4]"
 EYEBROW: str = (
-    "text-[10px] font-semibold uppercase tracking-[0.28em] text-lime-300/80"
+    "ap-eyebrow text-[#d8fa5e]/80"
 )
 
 # Tonalités de statut agricole « lumineuses », alignées sur le reste de l'app.
 TONE_CLASSES: dict[str, str] = {
     "good": (
-        "rounded-full border border-lime-300/30 bg-lime-300/10 px-2 py-0.5 "
-        "text-[10px] font-bold text-lime-200 w-fit"
+        "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 "
+        "text-[10px] font-bold text-[#e4ff9b] w-fit"
     ),
     "warn": (
-        "rounded-full border border-amber-300/30 bg-amber-300/10 px-2 py-0.5 "
-        "text-[10px] font-bold text-amber-200 w-fit"
+        "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 "
+        "text-[10px] font-bold text-[#ffb894] w-fit"
     ),
     "bad": (
-        "rounded-full border border-red-400/30 bg-red-500/10 px-2 py-0.5 "
-        "text-[10px] font-bold text-red-300 w-fit"
+        "rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2 py-0.5 "
+        "text-[10px] font-bold text-[#ff9b8c] w-fit"
     ),
     "info": (
-        "rounded-full border border-sky-300/30 bg-sky-300/10 px-2 py-0.5 "
-        "text-[10px] font-bold text-sky-200 w-fit"
+        "rounded-none border border-[#9cc3ff]/30 bg-[#9cc3ff]/10 px-2 py-0.5 "
+        "text-[10px] font-bold text-[#c3daff] w-fit"
     ),
     "muted": (
-        "rounded-full border border-white/10 bg-white/5 px-2 py-0.5 "
-        "text-[10px] font-semibold text-emerald-100/50 w-fit"
+        "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 "
+        "text-[10px] font-semibold text-[#c9c5b4]/50 w-fit"
     ),
 }
 

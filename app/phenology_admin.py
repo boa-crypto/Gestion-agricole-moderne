@@ -216,7 +216,7 @@ _STAGES_ADMIN_SQL: str = """
            COALESCE(st.recognition, ''), COALESCE(st.watchpoints, ''),
            COALESCE(st.common_errors, ''), COALESCE(st.duration_days_min, 0),
            COALESCE(st.duration_days_max, 0), st.is_critical, st.is_active,
-           COALESCE(st.icon, 'sprout'), COALESCE(st.color_hex, '#a3e635'),
+           COALESCE(st.icon, 'sprout'), COALESCE(st.color_hex, '#D8FA5E'),
            COALESCE(st.guide_article_slug, ''),
            COALESCE(st.guide_term_slug, ''),
            (SELECT COUNT(*) FROM crop_stage_recommendation r
@@ -540,7 +540,7 @@ def _validate_stage(data: dict[str, str]) -> list[str]:
         errors.append("La durée maximale d'un stade paraît irréaliste.")
     color = str(data.get("color_hex", "")).strip()
     if color and not re.fullmatch(r"#[0-9a-fA-F]{3,8}", color):
-        errors.append("La couleur doit être un code hexadécimal (ex. #a3e635).")
+        errors.append("La couleur doit être un code hexadécimal (ex. #D8FA5E).")
     return errors
 
 
@@ -561,7 +561,7 @@ def _stage_params(profile_id: int, data: dict[str, str]) -> dict[str, object]:
         "is_critical": _flag(data.get("is_critical")),
         "is_active": _flag(data.get("is_active", "1")),
         "icon": str(data.get("icon", "")).strip() or "sprout",
-        "color": str(data.get("color_hex", "")).strip() or "#a3e635",
+        "color": str(data.get("color_hex", "")).strip() or "#D8FA5E",
         "guide_article_slug": str(data.get("guide_article_slug", "")).strip(),
         "guide_term_slug": str(data.get("guide_term_slug", "")).strip(),
     }

@@ -11,16 +11,12 @@ from app.components.catalog_hero import (
     catalog_radar,
 )
 from app.components.catalog_list import catalog_list
-from app.components.side_rail import side_rail
+from app.components.shell import app_shell
 
 
 def catalog_page() -> rx.Component:
-    return rx.el.main(
+    return app_shell(
         rx.el.div(
-            class_name="pointer-events-none fixed inset-0 z-0 bg-gradient-to-b from-[#04120c]/35 via-[#04120c]/45 to-[#020a07]/60",
-        ),
-        rx.el.div(
-            side_rail("referentiel"),
             catalog_header(),
             rx.el.div(
                 catalog_coverage(),
@@ -34,7 +30,7 @@ def catalog_page() -> rx.Component:
                 catalog_dates(),
                 class_name="flex flex-col gap-4 w-full mt-8",
             ),
-            class_name="relative z-10 w-full max-w-[110rem] mx-auto px-4 sm:px-8 md:pl-24 lg:pl-28 xl:pl-72 py-10 pb-28 md:pb-10",
+            class_name="flex w-full flex-col gap-6",
         ),
-        class_name="relative min-h-screen w-full font-['Inter'] bg-[#04120c] bg-[url('/wide_cinematic_background.png')] bg-cover bg-center bg-fixed text-emerald-50 antialiased",
+        "referentiel",
     )

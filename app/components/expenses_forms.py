@@ -3,10 +3,10 @@ import reflex as rx
 from app.components.guide_help import guide_error, help_icon_button
 from app.states.expenses_state import ExpensesState, Option
 
-_INPUT = "w-full rounded-xl border border-white/10 bg-[#04140d] px-3 py-2.5 text-sm font-medium text-emerald-50 placeholder:text-emerald-100/30 focus:border-lime-300/50 outline-hidden transition-colors"
+_INPUT = "w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] px-3 py-2.5 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/30 focus:border-[#d8fa5e]/50 outline-hidden transition-colors"
 _SELECT = f"{_INPUT} appearance-none cursor-pointer pr-9"
 _LABEL = (
-    "text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/45"
+    "ap-eyebrow text-[#c9c5b4]/45"
 )
 
 
@@ -58,7 +58,7 @@ def _select_input(
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-100/40 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/40 pointer-events-none",
         ),
         class_name="relative w-full",
     )
@@ -83,17 +83,17 @@ def _shell(
                 rx.el.div(
                     rx.el.div(
                         rx.el.div(
-                            rx.icon(icon, class_name="h-5 w-5 text-[#04140d]"),
-                            class_name="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-lime-300",
+                            rx.icon(icon, class_name="h-5 w-5 text-[#0A0A08]"),
+                            class_name="flex h-11 w-11 shrink-0 items-center justify-center rounded-none bg-[#d8fa5e]",
                         ),
                         rx.el.div(
                             rx.el.h3(
                                 title,
-                                class_name="font-['Instrument_Serif'] text-2xl text-emerald-50",
+                                class_name="ap-serif text-2xl text-[#f2efe4]",
                             ),
                             rx.el.p(
                                 subtitle,
-                                class_name="text-[11px] font-medium text-emerald-100/50 mt-1",
+                                class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-1",
                             ),
                             class_name="min-w-0",
                         ),
@@ -105,14 +105,14 @@ def _shell(
                             rx.icon("x", class_name="h-4 w-4"),
                             on_click=on_close,
                             type="button",
-                            class_name="flex h-8 w-8 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-emerald-100/60 hover:text-emerald-50 transition-colors",
+                            class_name="flex h-8 w-8 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/60 hover:text-[#f2efe4] transition-colors",
                         ),
                         class_name="flex items-center gap-2 ml-auto shrink-0",
                     ),
-                    class_name="flex items-center gap-3 w-full pb-5 border-b border-white/10",
+                    class_name="flex items-center gap-3 w-full pb-5 border-b border-[#f2efe4]/12",
                 ),
                 body,
-                class_name="w-full max-w-4xl max-h-[88vh] overflow-y-auto rounded-3xl border border-white/10 bg-[#04140d]/95 p-6 backdrop-blur-2xl",
+                class_name="w-full max-w-4xl max-h-[88vh] overflow-y-auto rounded-none border border-[#f2efe4]/12 bg-[#0A0A08]/95 p-6 ",
             ),
             class_name="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4",
         ),
@@ -252,7 +252,7 @@ def expense_form_dialog() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Rattachement métier (facultatif)",
-                    class_name="text-[10px] font-semibold uppercase tracking-[0.24em] text-lime-300/80",
+                    class_name="ap-eyebrow text-[#d8fa5e]/80",
                 ),
                 rx.el.div(
                     _field(
@@ -311,7 +311,7 @@ def expense_form_dialog() -> rx.Component:
                     ),
                     class_name="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3",
                 ),
-                class_name="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 mt-5",
+                class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-5",
             ),
             _field(
                 "Commentaire",
@@ -330,15 +330,15 @@ def expense_form_dialog() -> rx.Component:
                     rx.el.span("Annuler"),
                     type="button",
                     on_click=ExpensesState.close_expense_form,
-                    class_name="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-emerald-100/70 hover:text-emerald-50 transition-colors w-fit",
+                    class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:text-[#f2efe4] transition-colors w-fit",
                 ),
                 rx.el.button(
-                    rx.icon("check", class_name="h-4 w-4 text-[#04140d]"),
+                    rx.icon("check", class_name="h-4 w-4 text-[#0A0A08]"),
                     rx.el.span(
-                        "Enregistrer la dépense", class_name="text-[#04140d]"
+                        "Enregistrer la dépense", class_name="text-[#0A0A08]"
                     ),
                     type="submit",
-                    class_name="flex items-center gap-2 rounded-xl bg-lime-300 px-4 py-2.5 text-sm font-semibold hover:bg-lime-200 transition-colors w-fit",
+                    class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
                 ),
                 class_name="flex flex-wrap items-center justify-end gap-2 mt-5",
             ),
@@ -418,7 +418,7 @@ def type_form_dialog() -> rx.Component:
                     "Couleur du registre",
                     _text_input(
                         "color_hex",
-                        "#a3e635",
+                        "#D8FA5E",
                         ExpensesState.type_form["color_hex"],
                     ),
                 ),
@@ -434,7 +434,7 @@ def type_form_dialog() -> rx.Component:
                         ),
                         rx.icon(
                             "chevron-down",
-                            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-100/40 pointer-events-none",
+                            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/40 pointer-events-none",
                         ),
                         class_name="relative w-full",
                     ),
@@ -458,15 +458,15 @@ def type_form_dialog() -> rx.Component:
                     rx.el.span("Annuler"),
                     type="button",
                     on_click=ExpensesState.close_type_form,
-                    class_name="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-emerald-100/70 hover:text-emerald-50 transition-colors w-fit",
+                    class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:text-[#f2efe4] transition-colors w-fit",
                 ),
                 rx.el.button(
-                    rx.icon("check", class_name="h-4 w-4 text-[#04140d]"),
+                    rx.icon("check", class_name="h-4 w-4 text-[#0A0A08]"),
                     rx.el.span(
-                        "Enregistrer le type", class_name="text-[#04140d]"
+                        "Enregistrer le type", class_name="text-[#0A0A08]"
                     ),
                     type="submit",
-                    class_name="flex items-center gap-2 rounded-xl bg-lime-300 px-4 py-2.5 text-sm font-semibold hover:bg-lime-200 transition-colors w-fit",
+                    class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
                 ),
                 class_name="flex flex-wrap items-center justify-end gap-2 mt-5",
             ),

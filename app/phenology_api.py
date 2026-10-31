@@ -133,7 +133,7 @@ EMPTY_STAGE_DETAIL: StageDetail = {
     "is_critical": False,
     "is_active": False,
     "icon": "sprout",
-    "color_hex": "#a3e635",
+    "color_hex": "#D8FA5E",
     "profile_id": 0,
     "profile_name": "",
     "culture_name": "",
@@ -502,7 +502,7 @@ _STAGE_DETAIL_SQL: str = """
            COALESCE(st.recognition, ''), COALESCE(st.watchpoints, ''),
            COALESCE(st.common_errors, ''), COALESCE(st.duration_days_min, 0),
            COALESCE(st.duration_days_max, 0), st.is_critical, st.is_active,
-           COALESCE(st.icon, 'sprout'), COALESCE(st.color_hex, '#a3e635'),
+           COALESCE(st.icon, 'sprout'), COALESCE(st.color_hex, '#D8FA5E'),
            COALESCE(st.guide_article_slug, ''), COALESCE(st.guide_term_slug, ''),
            p.id, p.name, COALESCE(cu.name, ''),
            (SELECT COUNT(*) FROM crop_phenology_stage s2

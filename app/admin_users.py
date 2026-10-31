@@ -291,9 +291,9 @@ def empty_detail() -> UserDetail:
         "seed": "agripro",
         "function_label": "—",
         "family_label": "—",
-        "family_color": "#a3e635",
+        "family_color": "#D8FA5E",
         "role_label": "—",
-        "role_color": "#a3e635",
+        "role_color": "#D8FA5E",
         "role_icon": "shield",
         "team_label": "—",
         "status": "INACTIF",
@@ -418,7 +418,7 @@ async def load_overview() -> AdminOverview:
 _USER_COLUMNS: str = """
     u.id, u.matricule, u.full_name,
     COALESCE(f.label, ''), COALESCE(f.family, ''),
-    COALESCE(r.label, ''), COALESCE(r.color_hex, '#a3e635'),
+    COALESCE(r.label, ''), COALESCE(r.color_hex, '#D8FA5E'),
     COALESCE(r.icon, 'shield'), COALESCE(t.name, ''),
     u.status, COALESCE(u.sector, ''), COALESCE(u.email, ''),
     COALESCE(u.phone, ''), u.mfa_enabled, COALESCE(u.mfa_method, 'AUCUNE'),
@@ -447,9 +447,9 @@ def _user_row(row) -> UserRow:
         "seed": _text(row[16], row[1] or "agripro"),
         "function_label": _text(row[3]),
         "family_label": FAMILY_LABELS.get(family, "Transverse"),
-        "family_color": FAMILY_COLORS.get(family, "#a3e635"),
+        "family_color": FAMILY_COLORS.get(family, "#D8FA5E"),
         "role_label": _text(row[5]),
-        "role_color": str(row[6] or "#a3e635"),
+        "role_color": str(row[6] or "#D8FA5E"),
         "role_icon": str(row[7] or "shield"),
         "team_label": _text(row[8], "Sans équipe"),
         "status": status,
@@ -602,7 +602,7 @@ async def load_user_detail(
                 text(
                     """
                     SELECT r.label, COALESCE(r.icon, 'shield'),
-                           COALESCE(r.color_hex, '#a3e635'), ur.is_primary,
+                           COALESCE(r.color_hex, '#D8FA5E'), ur.is_primary,
                            COALESCE(ur.granted_by, ''), ur.granted_on
                     FROM agripro_user_role ur
                     JOIN agripro_role r ON r.id = ur.role_id
@@ -695,7 +695,7 @@ async def load_user_detail(
         {
             "label": _text(item[0]),
             "icon": str(item[1] or "shield"),
-            "color": str(item[2] or "#a3e635"),
+            "color": str(item[2] or "#D8FA5E"),
             "is_primary": bool(item[3]),
             "granted_by": _text(item[4], "Amorçage AgriPro"),
             "granted_on": _fmt_day(item[5]),
@@ -783,7 +783,7 @@ async def load_functions(family: str = "TOUTES") -> list[FunctionRow]:
                            COALESCE(f.responsibilities, ''),
                            COALESCE(f.default_role_key, ''),
                            COALESCE(f.icon, 'user'),
-                           COALESCE(f.color_hex, '#a3e635'),
+                           COALESCE(f.color_hex, '#D8FA5E'),
                            (SELECT COUNT(*) FROM agripro_user u
                              WHERE u.function_id = f.id)
                     FROM agripro_function f
@@ -804,7 +804,7 @@ async def load_functions(family: str = "TOUTES") -> list[FunctionRow]:
                 "label": _text(row[2]),
                 "family": fam,
                 "family_label": FAMILY_LABELS.get(fam, "Transverse"),
-                "color": str(row[8] or FAMILY_COLORS.get(fam, "#a3e635")),
+                "color": str(row[8] or FAMILY_COLORS.get(fam, "#D8FA5E")),
                 "icon": str(row[7] or "user"),
                 "mission": _text(row[4], ""),
                 "responsibilities": _text(row[5], ""),
@@ -826,7 +826,7 @@ async def load_teams() -> list[TeamRow]:
                            COALESCE(l.full_name, ''), COALESCE(t.activity, ''),
                            COALESCE(t.schedule, ''), COALESCE(t.sector, ''),
                            t.status, COALESCE(t.icon, 'users'),
-                           COALESCE(t.color_hex, '#a3e635'),
+                           COALESCE(t.color_hex, '#D8FA5E'),
                            (SELECT COUNT(*) FROM agripro_team_member m
                              WHERE m.team_id = t.id),
                            (SELECT COUNT(DISTINCT a.parcel_id)
@@ -851,7 +851,7 @@ async def load_teams() -> list[TeamRow]:
             "sector": _text(row[7], "Tous secteurs"),
             "status": str(row[8] or "ACTIVE"),
             "icon": str(row[9] or "users"),
-            "color": str(row[10] or "#a3e635"),
+            "color": str(row[10] or "#D8FA5E"),
             "members": int(row[11] or 0),
             "parcels": int(row[12] or 0),
         }

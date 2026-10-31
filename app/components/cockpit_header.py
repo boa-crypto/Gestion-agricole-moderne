@@ -1,65 +1,82 @@
+"""En-tête éditorial du cockpit agronomique."""
+
+from __future__ import annotations
+
 import reflex as rx
 
+from app.components.design import action_button, eyebrow, hairline
 from app.components.guide_help import help_button
 from app.states.dashboard_state import DashboardState
 
 
-def _pill(icon: str, label: rx.Var | str) -> rx.Component:
+def _meta_row(label: str, value: rx.Var | str, *, tone: str = "paper") -> rx.Component:
     return rx.el.div(
-        rx.icon(icon, class_name="h-3.5 w-3.5 text-lime-300"),
-        rx.el.span(label, class_name="text-xs font-medium text-emerald-50/80"),
-        class_name="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-xl w-fit",
+        rx.el.span(
+            label,
+            class_name="ap-mono text-[9px] uppercase tracking-[0.22em] text-[#C9C5B4]/40",
+        ),
+        rx.el.span(
+            value,
+            class_name=(
+                "ap-mono text-[10px] uppercase tracking-[0.14em] "
+                + (
+                    "text-[#FF8A5B]"
+                    if tone == "flame"
+                    else "text-[#F2EFE4]"
+                )
+            ),
+        ),
+        class_name="flex items-center justify-between gap-6 py-2",
     )
 
 
 def cockpit_header() -> rx.Component:
     return rx.el.header(
         rx.el.div(
+            eyebrow("Pilotage végétal — relevé du jour", tone="accent"),
+            rx.el.h1(
+                rx.el.span("Cockpit "),
+                rx.el.span(
+                    "agronomique",
+                    class_name="ap-italic text-[#D8FA5E]",
+                ),
+                class_name=(
+                    "ap-display mt-6 text-[clamp(2.9rem,6.4vw,5.6rem)] "
+                    "text-[#F2EFE4]"
+                ),
+            ),
+            rx.el.p(
+                "Vision instantanée des parcelles, des cultures et des chantiers "
+                "de l'exploitation — une lecture d'ensemble, sans détour.",
+                class_name="mt-6 max-w-xl text-[13px] leading-relaxed text-[#C9C5B4]/70",
+            ),
+            class_name="min-w-0 max-w-3xl",
+        ),
+        rx.el.div(
             rx.el.div(
-                rx.el.div(
-                    rx.icon("leaf", class_name="h-4 w-4 text-lime-300"),
-                    rx.el.span(
-                        "Pilotage végétal",
-                        class_name="text-[11px] font-semibold uppercase tracking-[0.32em] text-lime-300/90",
-                    ),
-                    class_name="flex items-center gap-2",
+                _meta_row("Jour", DashboardState.today_label),
+                _meta_row("Saison", DashboardState.season_label),
+                _meta_row(
+                    "Alertes critiques",
+                    DashboardState.critical_alerts.to_string(),
+                    tone="flame",
                 ),
-                rx.el.h1(
-                    "Cockpit agronomique",
-                    class_name="font-['Instrument_Serif'] text-4xl md:text-5xl leading-[1.05] text-emerald-50 mt-3",
-                ),
-                rx.el.p(
-                    "Vision instantanée des parcelles, des cultures et des chantiers de l'exploitation.",
-                    class_name="text-sm font-medium text-emerald-100/60 mt-3 max-w-xl",
-                ),
-                class_name="min-w-0",
+                class_name="divide-y divide-[#F2EFE4]/10 border-y border-[#F2EFE4]/12",
             ),
             rx.el.div(
-                _pill("calendar-days", DashboardState.today_label),
-                _pill("sprout", DashboardState.season_label),
-                _pill(
-                    "triangle-alert",
-                    f"{DashboardState.critical_alerts} alerte(s) critique(s)",
+                action_button(
+                    "Actualiser",
+                    icon="refresh-cw",
+                    on_click=DashboardState.load_dashboard,
+                    disabled=DashboardState.is_loading,
                 ),
                 help_button("cockpit", "Guide du cockpit"),
-                rx.el.button(
-                    rx.cond(
-                        DashboardState.is_loading,
-                        rx.icon(
-                            "loader-circle",
-                            class_name="h-4 w-4 animate-spin text-[#04140d]",
-                        ),
-                        rx.icon(
-                            "refresh-cw", class_name="h-4 w-4 text-[#04140d]"
-                        ),
-                    ),
-                    rx.el.span("Actualiser", class_name="text-[#04140d]"),
-                    on_click=DashboardState.load_dashboard,
-                    class_name="flex items-center gap-2 rounded-full bg-lime-300 px-4 py-2 text-sm font-semibold hover:bg-lime-200 transition-colors w-fit",
-                ),
-                class_name="flex flex-wrap items-center gap-2 md:justify-end",
+                class_name="flex flex-wrap items-center gap-2",
             ),
-            class_name="flex flex-col lg:flex-row lg:items-end justify-between gap-6 w-full",
+            class_name="flex w-full max-w-xs shrink-0 flex-col gap-5 self-end lg:items-stretch",
         ),
-        class_name="w-full border-b border-white/10 pb-8",
+        class_name=(
+            "flex flex-col gap-10 pb-8 lg:flex-row lg:items-end "
+            "lg:justify-between lg:gap-16"
+        ),
     )

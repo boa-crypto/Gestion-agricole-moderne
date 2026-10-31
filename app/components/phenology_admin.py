@@ -23,11 +23,11 @@ from app.states.phenology_admin_state import (
 
 def _badge(tone: str, label: rx.Var | str) -> rx.Component:
     tones: dict[str, str] = {
-        "good": "rounded-full border border-lime-300/30 bg-lime-300/10 px-2 py-0.5 text-[10px] font-bold text-lime-200 w-fit",
-        "warn": "rounded-full border border-amber-300/30 bg-amber-300/10 px-2 py-0.5 text-[10px] font-bold text-amber-200 w-fit",
-        "bad": "rounded-full border border-red-400/30 bg-red-500/10 px-2 py-0.5 text-[10px] font-bold text-red-300 w-fit",
-        "info": "rounded-full border border-sky-300/30 bg-sky-300/10 px-2 py-0.5 text-[10px] font-bold text-sky-200 w-fit",
-        "muted": "rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-emerald-100/55 w-fit",
+        "good": "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit",
+        "warn": "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 text-[10px] font-bold text-[#ffb894] w-fit",
+        "bad": "rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2 py-0.5 text-[10px] font-bold text-[#ff9b8c] w-fit",
+        "info": "rounded-none border border-[#9cc3ff]/30 bg-[#9cc3ff]/10 px-2 py-0.5 text-[10px] font-bold text-[#c3daff] w-fit",
+        "muted": "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/55 w-fit",
     }
     return rx.el.span(label, class_name=tones.get(tone, tones["muted"]))
 
@@ -36,20 +36,20 @@ def _stat(label: str, value: rx.Var | int, caption: str) -> rx.Component:
     return rx.el.div(
         rx.el.span(
             label,
-            class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/45",
+            class_name="ap-eyebrow text-[#c9c5b4]/45",
         ),
         rx.el.div(
             rx.el.span(
                 value,
-                class_name="font-['Instrument_Serif'] text-2xl leading-none text-emerald-50",
+                class_name="ap-serif text-2xl leading-none text-[#f2efe4]",
             ),
             rx.el.span(
                 caption,
-                class_name="text-[11px] font-medium text-emerald-100/50 mb-0.5",
+                class_name="text-[11px] font-medium text-[#c9c5b4]/50 mb-0.5",
             ),
             class_name="flex items-end gap-1.5 mt-2",
         ),
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-3",
     )
 
 
@@ -58,23 +58,23 @@ def _header() -> rx.Component:
         rx.el.div(
             rx.el.div(
                 rx.el.div(
-                    rx.icon("git-branch", class_name="h-4 w-4 text-lime-300"),
+                    rx.icon("git-branch", class_name="h-4 w-4 text-[#d8fa5e]"),
                     rx.el.span(
                         "Administration · Référentiels · Phénologie",
-                        class_name="text-[11px] font-semibold uppercase tracking-[0.32em] text-lime-300/90",
+                        class_name="ap-eyebrow text-[#D8FA5E]",
                     ),
                     class_name="flex items-center gap-2",
                 ),
                 rx.el.h1(
                     "Cycles culturaux et stades phénologiques",
-                    class_name="font-['Instrument_Serif'] text-3xl md:text-4xl text-emerald-50 mt-2",
+                    class_name="ap-serif text-3xl md:text-4xl text-[#f2efe4] mt-2",
                 ),
                 rx.el.p(
                     "Chaque culture porte son propre cycle : créer, décrire, "
                     "réordonner, désactiver — sans jamais supprimer une donnée "
                     "existante ni transformer une information générale en "
                     "prescription agronomique.",
-                    class_name="text-sm font-medium text-emerald-100/60 mt-2 max-w-3xl",
+                    class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 max-w-3xl",
                 ),
                 class_name="min-w-0 flex-1",
             ),
@@ -84,22 +84,22 @@ def _header() -> rx.Component:
                         PhenologyAdminState.is_loading,
                         rx.icon(
                             "loader-circle",
-                            class_name="h-4 w-4 animate-spin stroke-emerald-100/70",
+                            class_name="h-4 w-4 animate-spin stroke-[#c9c5b4]/70",
                         ),
                         rx.icon(
                             "refresh-cw",
-                            class_name="h-4 w-4 stroke-emerald-100/70",
+                            class_name="h-4 w-4 stroke-[#c9c5b4]/70",
                         ),
                     ),
                     rx.el.span("Recharger"),
                     on_click=PhenologyAdminState.load_admin,
-                    class_name="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-emerald-100/70 hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit",
+                    class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2 text-xs font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
                 ),
                 rx.el.button(
-                    rx.icon("plus", class_name="h-4 w-4 stroke-[#04140d]"),
-                    rx.el.span("Nouveau profil", class_name="text-[#04140d]"),
+                    rx.icon("plus", class_name="h-4 w-4 stroke-[#0A0A08]"),
+                    rx.el.span("Nouveau profil", class_name="text-[#0A0A08]"),
                     on_click=PhenologyAdminState.open_profile_create,
-                    class_name="flex items-center gap-2 rounded-full bg-lime-300 px-4 py-2 text-sm font-semibold hover:bg-lime-200 transition-colors w-fit",
+                    class_name="ap-mono inline-flex w-fit items-center gap-2 bg-[#D8FA5E] px-4 py-2.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[#0A0A08] transition-colors hover:bg-[#E4FF9B]",
                 ),
                 class_name="flex flex-wrap items-start gap-2 lg:justify-end",
             ),
@@ -143,17 +143,17 @@ def _header() -> rx.Component:
             rx.el.div(
                 rx.icon(
                     "circle-check",
-                    class_name="h-4 w-4 shrink-0 stroke-lime-300",
+                    class_name="h-4 w-4 shrink-0 stroke-[#d8fa5e]",
                 ),
                 rx.el.p(
                     PhenologyAdminState.notice,
-                    class_name="text-[12px] font-semibold text-lime-100/90",
+                    class_name="text-[12px] font-semibold text-[#efffc4]/90",
                 ),
-                class_name="flex items-center gap-2 w-full rounded-2xl border border-lime-300/25 bg-lime-300/[0.07] px-4 py-2.5 mt-4",
+                class_name="flex items-center gap-2 w-full rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/[0.07] px-4 py-2.5 mt-4",
             ),
             rx.fragment(),
         ),
-        class_name="w-full rounded-3xl border border-white/10 bg-white/[0.03] p-6 md:p-8 backdrop-blur-xl",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 md:p-8 ",
     )
 
 
@@ -163,7 +163,7 @@ def _profile_card(profile: ProfileAdminRow, key: str = "") -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     profile["culture_name"],
-                    class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-lime-300/80 truncate",
+                    class_name="ap-eyebrow text-[#d8fa5e]/80 truncate",
                 ),
                 rx.cond(
                     profile["is_default"],
@@ -179,11 +179,11 @@ def _profile_card(profile: ProfileAdminRow, key: str = "") -> rx.Component:
             ),
             rx.el.p(
                 profile["name"],
-                class_name="text-sm font-semibold text-emerald-50 mt-2 text-left",
+                class_name="text-sm font-semibold text-[#f2efe4] mt-2 text-left",
             ),
             rx.el.p(
                 profile["scope_label"],
-                class_name="text-[10px] font-medium text-emerald-100/45 mt-1 text-left",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/45 mt-1 text-left",
             ),
             rx.el.div(
                 _badge("muted", profile["system_label"]),
@@ -200,8 +200,8 @@ def _profile_card(profile: ProfileAdminRow, key: str = "") -> rx.Component:
             on_click=PhenologyAdminState.select_profile(profile["id"]),
             class_name=rx.cond(
                 PhenologyAdminState.selected_profile_id == profile["id"],
-                "w-full rounded-2xl border border-lime-300/45 bg-lime-300/[0.09] p-4 text-left transition-colors",
-                "w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left hover:border-lime-300/25 hover:bg-white/[0.06] transition-colors",
+                "w-full rounded-none border border-[#d8fa5e]/45 bg-[#d8fa5e]/[0.09] p-4 text-left transition-colors",
+                "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 text-left hover:border-[#d8fa5e]/25 hover:bg-[#191c13] transition-colors",
             ),
         ),
         rx.el.div(
@@ -210,11 +210,11 @@ def _profile_card(profile: ProfileAdminRow, key: str = "") -> rx.Component:
                     profile["is_active"],
                     rx.icon(
                         "toggle-right",
-                        class_name="h-3.5 w-3.5 stroke-lime-300",
+                        class_name="h-3.5 w-3.5 stroke-[#d8fa5e]",
                     ),
                     rx.icon(
                         "toggle-left",
-                        class_name="h-3.5 w-3.5 stroke-emerald-100/50",
+                        class_name="h-3.5 w-3.5 stroke-[#c9c5b4]/50",
                     ),
                 ),
                 rx.el.span(
@@ -224,11 +224,11 @@ def _profile_card(profile: ProfileAdminRow, key: str = "") -> rx.Component:
                 on_click=PhenologyAdminState.toggle_profile_active(
                     profile["id"], ~profile["is_active"].to(bool)
                 ),
-                class_name="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-semibold text-emerald-100/60 hover:text-emerald-50 hover:border-lime-300/30 transition-colors w-fit",
+                class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2.5 py-1 font-semibold text-[#c9c5b4]/60 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit",
             ),
             rx.el.span(
                 profile["source"],
-                class_name="text-[10px] font-medium text-emerald-100/35 truncate",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/35 truncate",
             ),
             class_name="flex items-center gap-2 w-full px-1 mt-1.5",
         ),
@@ -242,18 +242,18 @@ def _profiles_panel() -> rx.Component:
         rx.el.div(
             rx.el.span(
                 "Cycles par culture",
-                class_name="text-[10px] font-semibold uppercase tracking-[0.28em] text-lime-300/80",
+                class_name="ap-eyebrow text-[#d8fa5e]/80",
             ),
             rx.el.span(
                 f"{PhenologyAdminState.profile_count} profil(s)",
-                class_name="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold text-emerald-100/70 w-fit ml-auto",
+                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-bold text-[#c9c5b4]/70 w-fit ml-auto",
             ),
             class_name="flex flex-wrap items-center gap-2 w-full",
         ),
         rx.el.p(
             "Aucune liste globale de stades : chaque profil ne concerne que sa "
             "culture.",
-            class_name="text-[11px] font-medium text-emerald-100/45 mt-2",
+            class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-2",
         ),
         rx.el.div(
             rx.foreach(
@@ -264,7 +264,7 @@ def _profiles_panel() -> rx.Component:
             ),
             class_name="flex flex-col gap-3 w-full mt-4 max-h-[46rem] overflow-y-auto pr-1",
         ),
-        class_name="w-full xl:w-[24rem] shrink-0 rounded-3xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl",
+        class_name="w-full xl:w-[24rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
     )
 
 
@@ -272,18 +272,18 @@ def _stage_row(stage: StageAdminRow, key: str = "") -> rx.Component:
     return rx.el.div(
         rx.el.div(
             rx.el.div(
-                class_name="h-9 w-1 rounded-full shrink-0",
+                class_name="h-9 w-1 rounded-none shrink-0",
                 style={"backgroundColor": stage["color_hex"]},
             ),
             rx.el.div(
                 rx.el.div(
                     rx.el.span(
                         f"#{stage['position']}",
-                        class_name="text-[10px] font-bold text-lime-300/80",
+                        class_name="text-[10px] font-bold text-[#d8fa5e]/80",
                     ),
                     rx.el.span(
                         stage["name"],
-                        class_name="text-sm font-semibold text-emerald-50 truncate",
+                        class_name="text-sm font-semibold text-[#f2efe4] truncate",
                     ),
                     rx.cond(
                         stage["bbch_code"] != "",
@@ -304,7 +304,7 @@ def _stage_row(stage: StageAdminRow, key: str = "") -> rx.Component:
                 ),
                 rx.el.p(
                     stage["description"],
-                    class_name="text-[11px] font-medium text-emerald-100/50 mt-1.5 leading-relaxed line-clamp-2",
+                    class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-1.5 leading-relaxed line-clamp-2",
                 ),
                 rx.el.div(
                     _badge("muted", stage["duration_label"]),
@@ -330,13 +330,13 @@ def _stage_row(stage: StageAdminRow, key: str = "") -> rx.Component:
                 rx.icon("arrow-up", class_name="h-3.5 w-3.5"),
                 on_click=PhenologyAdminState.shift_stage(stage["id"], -1),
                 title="Monter dans le cycle",
-                class_name="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-emerald-100/60 hover:text-emerald-50 hover:border-lime-300/30 transition-colors",
+                class_name="flex h-8 w-8 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/60 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors",
             ),
             rx.el.button(
                 rx.icon("arrow-down", class_name="h-3.5 w-3.5"),
                 on_click=PhenologyAdminState.shift_stage(stage["id"], 1),
                 title="Descendre dans le cycle",
-                class_name="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-emerald-100/60 hover:text-emerald-50 hover:border-lime-300/30 transition-colors",
+                class_name="flex h-8 w-8 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/60 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors",
             ),
             rx.el.button(
                 rx.icon("triangle-alert", class_name="h-3.5 w-3.5"),
@@ -346,8 +346,8 @@ def _stage_row(stage: StageAdminRow, key: str = "") -> rx.Component:
                 title="Marquer comme stade sensible",
                 class_name=rx.cond(
                     stage["is_critical"],
-                    "flex h-8 w-8 items-center justify-center rounded-full border border-amber-300/40 bg-amber-300/15 text-amber-200 transition-colors",
-                    "flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-emerald-100/50 hover:text-amber-200 hover:border-amber-300/30 transition-colors",
+                    "flex h-8 w-8 items-center justify-center rounded-none border border-[#ff8a5b]/40 bg-[#ff8a5b]/15 text-[#ffb894] transition-colors",
+                    "flex h-8 w-8 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/50 hover:text-[#ffb894] hover:border-[#ff8a5b]/30 transition-colors",
                 ),
             ),
             rx.el.button(
@@ -360,27 +360,27 @@ def _stage_row(stage: StageAdminRow, key: str = "") -> rx.Component:
                     stage["id"], ~stage["is_active"].to(bool)
                 ),
                 title="Activer ou désactiver (jamais de suppression)",
-                class_name="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-emerald-100/60 hover:text-emerald-50 hover:border-lime-300/30 transition-colors",
+                class_name="flex h-8 w-8 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/60 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors",
             ),
             rx.el.button(
                 rx.icon("pencil", class_name="h-3.5 w-3.5"),
                 rx.el.span("Éditer", class_name="text-[11px]"),
                 on_click=PhenologyAdminState.open_stage_edit(stage["id"]),
-                class_name="flex items-center gap-1.5 rounded-full border border-lime-300/25 bg-lime-300/10 px-3 py-1.5 font-semibold text-lime-200 hover:bg-lime-300/20 transition-colors w-fit",
+                class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1.5 font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit",
             ),
             rx.el.button(
                 rx.icon("list-checks", class_name="h-3.5 w-3.5"),
                 rx.el.span("Détail", class_name="text-[11px]"),
                 on_click=PhenologyAdminState.select_stage(stage["id"]),
-                class_name="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 font-semibold text-emerald-100/65 hover:text-emerald-50 hover:border-lime-300/30 transition-colors w-fit",
+                class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1.5 font-semibold text-[#c9c5b4]/65 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit",
             ),
             class_name="flex flex-wrap items-center gap-2 shrink-0",
         ),
         key=key,
         class_name=rx.cond(
             PhenologyAdminState.selected_stage_id == stage["id"],
-            "flex flex-col lg:flex-row lg:items-center gap-3 w-full rounded-2xl border border-lime-300/40 bg-lime-300/[0.07] p-4",
-            "flex flex-col lg:flex-row lg:items-center gap-3 w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 hover:border-lime-300/20 transition-colors",
+            "flex flex-col lg:flex-row lg:items-center gap-3 w-full rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/[0.07] p-4",
+            "flex flex-col lg:flex-row lg:items-center gap-3 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/20 transition-colors",
         ),
     )
 
@@ -391,15 +391,15 @@ def _stages_panel() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Stades du cycle",
-                    class_name="text-[10px] font-semibold uppercase tracking-[0.28em] text-lime-300/80",
+                    class_name="ap-eyebrow text-[#d8fa5e]/80",
                 ),
                 rx.el.h2(
                     PhenologyAdminState.selected_profile["name"],
-                    class_name="font-['Instrument_Serif'] text-3xl text-emerald-50 mt-1",
+                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
                 ),
                 rx.el.p(
                     PhenologyAdminState.selected_profile["summary"],
-                    class_name="text-[11px] font-medium text-emerald-100/50 mt-1.5 max-w-2xl",
+                    class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-1.5 max-w-2xl",
                 ),
                 class_name="min-w-0",
             ),
@@ -408,13 +408,13 @@ def _stages_panel() -> rx.Component:
                     rx.icon("pencil", class_name="h-3.5 w-3.5"),
                     rx.el.span("Modifier le profil"),
                     on_click=PhenologyAdminState.open_profile_edit,
-                    class_name="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-emerald-100/70 hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit",
+                    class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2 text-xs font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
                 ),
                 rx.el.button(
-                    rx.icon("plus", class_name="h-3.5 w-3.5 stroke-[#04140d]"),
-                    rx.el.span("Ajouter un stade", class_name="text-[#04140d]"),
+                    rx.icon("plus", class_name="h-3.5 w-3.5 stroke-[#0A0A08]"),
+                    rx.el.span("Ajouter un stade", class_name="text-[#0A0A08]"),
                     on_click=PhenologyAdminState.open_stage_create,
-                    class_name="flex items-center gap-2 rounded-full bg-lime-300 px-4 py-2 text-xs font-semibold hover:bg-lime-200 transition-colors w-fit",
+                    class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2 text-xs font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
                 ),
                 class_name="flex flex-wrap items-center gap-2",
             ),
@@ -432,26 +432,26 @@ def _stages_panel() -> rx.Component:
                 class_name="flex flex-col gap-3 w-full mt-5",
             ),
             rx.el.div(
-                rx.icon("sprout", class_name="h-6 w-6 stroke-lime-300"),
+                rx.icon("sprout", class_name="h-6 w-6 stroke-[#d8fa5e]"),
                 rx.el.p(
                     "Ce profil n'a pas encore de stade : ajoutez-les un par un "
                     "ou importez un CSV / JSON.",
-                    class_name="text-sm font-medium text-emerald-100/55 mt-2 text-center max-w-md",
+                    class_name="text-sm font-medium text-[#c9c5b4]/55 mt-2 text-center max-w-md",
                 ),
-                class_name="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] py-14 w-full mt-5",
+                class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-14 w-full mt-5",
             ),
         ),
-        class_name="flex-1 min-w-0 w-full rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl",
+        class_name="flex-1 min-w-0 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
     )
 
 
 def _reco_card(reco: RecoAdminRow) -> rx.Component:
     return rx.el.div(
         rx.el.div(
-            rx.icon(reco["icon"], class_name="h-3.5 w-3.5 stroke-lime-300"),
+            rx.icon(reco["icon"], class_name="h-3.5 w-3.5 stroke-[#d8fa5e]"),
             rx.el.span(
                 reco["domain_label"],
-                class_name="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/45",
+                class_name="ap-eyebrow text-[#c9c5b4]/45",
             ),
             rx.cond(
                 reco["is_advisory"],
@@ -462,27 +462,27 @@ def _reco_card(reco: RecoAdminRow) -> rx.Component:
                 rx.icon("pencil", class_name="h-3 w-3"),
                 rx.el.span("Éditer", class_name="text-[10px]"),
                 on_click=PhenologyAdminState.open_reco_edit(reco["id"]),
-                class_name="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-semibold text-emerald-100/60 hover:text-emerald-50 hover:border-lime-300/30 transition-colors w-fit ml-auto",
+                class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2.5 py-1 font-semibold text-[#c9c5b4]/60 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit ml-auto",
             ),
             class_name="flex flex-wrap items-center gap-2",
         ),
         rx.el.p(
             reco["title"],
-            class_name="text-sm font-semibold text-emerald-50 mt-1.5",
+            class_name="text-sm font-semibold text-[#f2efe4] mt-1.5",
         ),
         rx.el.p(
             reco["statement"],
-            class_name="text-[11px] font-medium text-emerald-100/55 mt-1.5 leading-relaxed",
+            class_name="text-[11px] font-medium text-[#c9c5b4]/55 mt-1.5 leading-relaxed",
         ),
         rx.el.div(
             _badge("muted", reco["confidence_label"]),
             rx.el.span(
                 reco["source"],
-                class_name="text-[10px] font-medium text-emerald-100/40 truncate",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/40 truncate",
             ),
-            class_name="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-white/5",
+            class_name="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-[#f2efe4]/8",
         ),
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.02] p-4",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-4",
     )
 
 
@@ -492,11 +492,11 @@ def _stage_detail_panel() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Détail du stade",
-                    class_name="text-[10px] font-semibold uppercase tracking-[0.28em] text-lime-300/80",
+                    class_name="ap-eyebrow text-[#d8fa5e]/80",
                 ),
                 rx.el.h2(
                     PhenologyAdminState.selected_stage["name"],
-                    class_name="font-['Instrument_Serif'] text-3xl text-emerald-50 mt-1",
+                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
                 ),
                 class_name="min-w-0",
             ),
@@ -504,7 +504,7 @@ def _stage_detail_panel() -> rx.Component:
                 rx.icon("plus", class_name="h-3.5 w-3.5"),
                 rx.el.span("Ajouter une information associée"),
                 on_click=PhenologyAdminState.open_reco_create,
-                class_name="flex items-center gap-2 rounded-full border border-lime-300/30 bg-lime-300/10 px-4 py-2 text-xs font-semibold text-lime-200 hover:bg-lime-300/20 transition-colors w-fit",
+                class_name="flex items-center gap-2 rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-4 py-2 text-xs font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit",
             ),
             class_name="flex flex-col lg:flex-row lg:items-end justify-between gap-3 w-full",
         ),
@@ -515,46 +515,46 @@ def _stage_detail_panel() -> rx.Component:
                     rx.el.div(
                         rx.el.span(
                             "Définition",
-                            class_name="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/40",
+                            class_name="ap-eyebrow text-[#c9c5b4]/40",
                         ),
                         rx.el.p(
                             PhenologyAdminState.stage_preview["description"],
-                            class_name="text-[12px] font-medium text-emerald-100/70 mt-1.5 leading-relaxed whitespace-pre-line",
+                            class_name="text-[12px] font-medium text-[#c9c5b4]/70 mt-1.5 leading-relaxed whitespace-pre-line",
                         ),
-                        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4",
+                        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
                     ),
                     rx.el.div(
                         rx.el.span(
                             "Comment le reconnaître",
-                            class_name="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/40",
+                            class_name="ap-eyebrow text-[#c9c5b4]/40",
                         ),
                         rx.el.p(
                             PhenologyAdminState.stage_preview["recognition"],
-                            class_name="text-[12px] font-medium text-emerald-100/70 mt-1.5 leading-relaxed whitespace-pre-line",
+                            class_name="text-[12px] font-medium text-[#c9c5b4]/70 mt-1.5 leading-relaxed whitespace-pre-line",
                         ),
-                        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4",
+                        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
                     ),
                     rx.el.div(
                         rx.el.span(
                             "Points de surveillance",
-                            class_name="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/40",
+                            class_name="ap-eyebrow text-[#c9c5b4]/40",
                         ),
                         rx.el.p(
                             PhenologyAdminState.stage_preview["watchpoints"],
-                            class_name="text-[12px] font-medium text-amber-100/70 mt-1.5 leading-relaxed whitespace-pre-line",
+                            class_name="text-[12px] font-medium text-[#ffdccb]/70 mt-1.5 leading-relaxed whitespace-pre-line",
                         ),
-                        class_name="w-full rounded-2xl border border-amber-300/20 bg-amber-300/[0.05] p-4",
+                        class_name="w-full rounded-none border border-[#ff8a5b]/20 bg-[#ff8a5b]/[0.05] p-4",
                     ),
                     rx.el.div(
                         rx.el.span(
                             "Erreurs fréquentes",
-                            class_name="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/40",
+                            class_name="ap-eyebrow text-[#c9c5b4]/40",
                         ),
                         rx.el.p(
                             PhenologyAdminState.stage_preview["common_errors"],
-                            class_name="text-[12px] font-medium text-red-100/65 mt-1.5 leading-relaxed whitespace-pre-line",
+                            class_name="text-[12px] font-medium text-[#ffe0da]/65 mt-1.5 leading-relaxed whitespace-pre-line",
                         ),
-                        class_name="w-full rounded-2xl border border-red-400/20 bg-red-500/[0.05] p-4",
+                        class_name="w-full rounded-none border border-[#ff6b5a]/20 bg-[#f2452c]/[0.05] p-4",
                     ),
                     class_name="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mt-5",
                 ),
@@ -585,7 +585,7 @@ def _stage_detail_panel() -> rx.Component:
                     rx.el.p(
                         "Aucune opération associée à ce stade : ajoutez une "
                         "information générale sourcée si elle existe.",
-                        class_name="text-[11px] font-medium text-emerald-100/45 mt-5",
+                        class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-5",
                     ),
                 ),
                 class_name="w-full",
@@ -593,10 +593,10 @@ def _stage_detail_panel() -> rx.Component:
             rx.el.p(
                 "Sélectionnez un stade pour consulter sa définition et ses "
                 "opérations associées.",
-                class_name="text-sm font-medium text-emerald-100/50 mt-5",
+                class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
             ),
         ),
-        class_name="w-full rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
     )
 
 
@@ -607,15 +607,15 @@ def _check_card(item: CheckRow, key: str = "") -> rx.Component:
                 item["ok"],
                 rx.icon(
                     "circle-check",
-                    class_name="h-4 w-4 shrink-0 stroke-lime-300",
+                    class_name="h-4 w-4 shrink-0 stroke-[#d8fa5e]",
                 ),
                 rx.icon(
-                    "circle-x", class_name="h-4 w-4 shrink-0 stroke-red-300"
+                    "circle-x", class_name="h-4 w-4 shrink-0 stroke-[#ff9b8c]"
                 ),
             ),
             rx.el.span(
                 item["label"],
-                class_name="text-sm font-semibold text-emerald-50 truncate",
+                class_name="text-sm font-semibold text-[#f2efe4] truncate",
             ),
             rx.cond(
                 item["ok"],
@@ -626,21 +626,21 @@ def _check_card(item: CheckRow, key: str = "") -> rx.Component:
         ),
         rx.el.p(
             item["expectation"],
-            class_name="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/40 mt-2",
+            class_name="ap-eyebrow text-[#c9c5b4]/40 mt-2",
         ),
         rx.el.p(
             item["message"],
-            class_name="text-[11px] font-medium text-emerald-100/65 mt-1.5 leading-relaxed",
+            class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-1.5 leading-relaxed",
         ),
         rx.el.p(
             item["detail"],
-            class_name="text-[10px] font-medium text-emerald-100/40 mt-1.5 leading-relaxed",
+            class_name="text-[10px] font-medium text-[#c9c5b4]/40 mt-1.5 leading-relaxed",
         ),
         key=key,
         class_name=rx.cond(
             item["ok"],
-            "w-full rounded-2xl border border-lime-300/20 bg-lime-300/[0.05] p-4",
-            "w-full rounded-2xl border border-red-400/25 bg-red-500/[0.07] p-4",
+            "w-full rounded-none border border-[#d8fa5e]/20 bg-[#d8fa5e]/[0.05] p-4",
+            "w-full rounded-none border border-[#ff6b5a]/25 bg-[#f2452c]/[0.07] p-4",
         ),
     )
 
@@ -651,17 +651,17 @@ def _checks_panel() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Validations finales",
-                    class_name="text-[10px] font-semibold uppercase tracking-[0.28em] text-lime-300/80",
+                    class_name="ap-eyebrow text-[#d8fa5e]/80",
                 ),
                 rx.el.h2(
                     "Cohérence stade ↔ culture et garde-fous",
-                    class_name="font-['Instrument_Serif'] text-3xl text-emerald-50 mt-1",
+                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
                 ),
                 rx.el.p(
                     "Blé + Tallage accepté, Tomate + Nouaison accepté, "
                     "Olivier + Tallage refusé, historique conservé, "
                     "recommandations non prescriptives.",
-                    class_name="text-xs font-medium text-emerald-100/50 mt-2 max-w-2xl",
+                    class_name="text-xs font-medium text-[#c9c5b4]/50 mt-2 max-w-2xl",
                 ),
                 class_name="min-w-0",
             ),
@@ -678,7 +678,7 @@ def _checks_panel() -> rx.Component:
                     rx.icon("shield-check", class_name="h-3.5 w-3.5"),
                     rx.el.span("Relancer les contrôles"),
                     on_click=PhenologyAdminState.run_checks,
-                    class_name="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-emerald-100/70 hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit",
+                    class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2 text-xs font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
                 ),
                 class_name="flex flex-wrap items-center gap-2",
             ),
@@ -691,14 +691,14 @@ def _checks_panel() -> rx.Component:
             ),
             class_name="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 w-full mt-5",
         ),
-        class_name="w-full rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
     )
 
 
 def _skeleton() -> rx.Component:
     return rx.el.div(
-        rx.el.div(class_name="animate-pulse h-40 rounded-3xl bg-white/[0.05]"),
-        rx.el.div(class_name="animate-pulse h-72 rounded-3xl bg-white/[0.05]"),
+        rx.el.div(class_name="animate-pulse h-40 rounded-none bg-[#16190f]"),
+        rx.el.div(class_name="animate-pulse h-72 rounded-none bg-[#16190f]"),
         class_name="flex flex-col gap-4 w-full",
     )
 

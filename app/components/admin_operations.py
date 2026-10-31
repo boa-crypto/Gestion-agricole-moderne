@@ -15,8 +15,8 @@ from app.states.administration_state import (
     AdministrationState,
 )
 
-_INPUT = "w-full rounded-xl border border-white/10 bg-[#04140d] px-3 py-2.5 text-sm font-medium text-emerald-50 placeholder:text-emerald-100/30 focus:border-lime-300/50 focus:ring-2 focus:ring-lime-300/20 outline-hidden transition-colors"
-_LABEL = "block text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/45 mb-1.5"
+_INPUT = "w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] px-3 py-2.5 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/30 focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors"
+_LABEL = "block ap-eyebrow text-[#c9c5b4]/45 mb-1.5"
 
 
 # ---------------------------------------------------------------------------
@@ -26,12 +26,12 @@ _LABEL = "block text-[10px] font-semibold uppercase tracking-[0.18em] text-emera
 
 def _step_pill(label: str) -> rx.Component:
     return rx.el.div(
-        rx.icon("circle-dot", class_name="h-3.5 w-3.5 text-lime-300/80"),
+        rx.icon("circle-dot", class_name="h-3.5 w-3.5 text-[#d8fa5e]/80"),
         rx.el.span(
             label,
-            class_name="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-100/55",
+            class_name="text-[10px] font-bold uppercase tracking-[0.18em] text-[#c9c5b4]/55",
         ),
-        class_name="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 w-fit",
+        class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1.5 w-fit",
     )
 
 
@@ -47,13 +47,13 @@ def admin_workflows() -> rx.Component:
                 rx.el.span(
                     AdministrationState.pending_validations.length().to_string()
                     + " à valider",
-                    class_name="rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1.5 text-[11px] font-bold text-amber-200 w-fit",
+                    class_name="rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-3 py-1.5 text-[11px] font-bold text-[#ffb894] w-fit",
                 ),
                 rx.el.button(
                     rx.icon("refresh-cw", class_name="h-4 w-4"),
                     rx.el.span("Actualiser"),
                     on_click=AdministrationState.reload_workflows,
-                    class_name="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-emerald-100/70 hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit",
+                    class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2 text-sm font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
                 ),
                 class_name="flex flex-wrap items-center gap-2",
             ),
@@ -82,18 +82,18 @@ def admin_workflows() -> rx.Component:
                 class_name="grid grid-cols-1 xl:grid-cols-2 gap-3 mt-5",
             ),
             rx.el.div(
-                rx.icon("circle-check", class_name="h-6 w-6 text-lime-300"),
+                rx.icon("circle-check", class_name="h-6 w-6 text-[#d8fa5e]"),
                 rx.el.p(
                     "Aucune intervention n'attend de validation.",
-                    class_name="text-sm font-medium text-emerald-100/60 mt-2 text-center",
+                    class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 text-center",
                 ),
-                class_name="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] py-12 mt-5",
+                class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 mt-5",
             ),
         ),
         rx.el.div(
             rx.el.p(
                 "Chantiers en cours sur l'exploitation",
-                class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/40",
+                class_name="ap-eyebrow text-[#c9c5b4]/40",
             ),
             rx.cond(
                 AdministrationState.open_tasks.length() > 0,
@@ -106,10 +106,10 @@ def admin_workflows() -> rx.Component:
                 ),
                 rx.el.p(
                     "Aucun chantier ouvert.",
-                    class_name="text-sm font-medium text-emerald-100/50 mt-3",
+                    class_name="text-sm font-medium text-[#c9c5b4]/50 mt-3",
                 ),
             ),
-            class_name="mt-6 border-t border-white/10 pt-6",
+            class_name="mt-6 border-t border-[#f2efe4]/12 pt-6",
         ),
         class_name=f"w-full {CARD}",
     )
@@ -129,7 +129,7 @@ def _select(
     return rx.el.div(
         rx.icon(
             icon,
-            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-lime-300/80 pointer-events-none",
+            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d8fa5e]/80 pointer-events-none",
         ),
         rx.el.select(
             first,
@@ -143,7 +143,7 @@ def _select(
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-100/40 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/40 pointer-events-none",
         ),
         class_name="relative w-full",
     )
@@ -191,7 +191,7 @@ def _delegation_form() -> rx.Component:
                 rx.el.div(
                     rx.icon(
                         "map",
-                        class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-lime-300/80 pointer-events-none",
+                        class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d8fa5e]/80 pointer-events-none",
                     ),
                     rx.el.select(
                         *[
@@ -205,7 +205,7 @@ def _delegation_form() -> rx.Component:
                     ),
                     rx.icon(
                         "chevron-down",
-                        class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-100/40 pointer-events-none",
+                        class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/40 pointer-events-none",
                     ),
                     class_name="relative w-full",
                 ),
@@ -257,22 +257,22 @@ def _delegation_form() -> rx.Component:
             AdministrationState.delegation_error != "",
             rx.el.p(
                 AdministrationState.delegation_error,
-                class_name="text-xs font-semibold text-red-300 mt-3",
+                class_name="text-xs font-semibold text-[#ff9b8c] mt-3",
             ),
             rx.fragment(),
         ),
         rx.el.button(
-            rx.icon("hourglass", class_name="h-4 w-4 text-[#04140d]"),
+            rx.icon("hourglass", class_name="h-4 w-4 text-[#0A0A08]"),
             rx.el.span(
                 "Accorder la permission temporaire",
-                class_name="text-[#04140d]",
+                class_name="text-[#0A0A08]",
             ),
             type="submit",
-            class_name="flex items-center gap-2 rounded-xl bg-lime-300 px-5 py-2.5 text-sm font-semibold hover:bg-lime-200 transition-colors w-fit mt-4",
+            class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-5 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit mt-4",
         ),
         on_submit=AdministrationState.submit_delegation,
         reset_on_submit=True,
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-5 mt-5",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 mt-5",
     )
 
 
@@ -283,11 +283,11 @@ def _delegation_card(item: DelegationRow, key: str = "") -> rx.Component:
             rx.el.div(
                 rx.el.p(
                     item["delegate_label"],
-                    class_name="text-sm font-semibold text-emerald-50 truncate",
+                    class_name="text-sm font-semibold text-[#f2efe4] truncate",
                 ),
                 rx.el.p(
                     "Délégué par " + item["delegator_label"],
-                    class_name="text-[11px] font-medium text-emerald-100/50 truncate",
+                    class_name="text-[11px] font-medium text-[#c9c5b4]/50 truncate",
                 ),
                 class_name="min-w-0 flex-1",
             ),
@@ -297,31 +297,31 @@ def _delegation_card(item: DelegationRow, key: str = "") -> rx.Component:
         rx.el.div(
             rx.el.span(
                 item["role_label"],
-                class_name="rounded-full border border-lime-300/30 bg-lime-300/10 px-2 py-0.5 text-[10px] font-bold text-lime-200 w-fit",
+                class_name="rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit",
             ),
             rx.el.span(
                 rx.icon(item["scope_icon"], class_name="h-3 w-3"),
                 rx.el.span(item["scope_label"]),
-                class_name="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-emerald-100/60 w-fit",
+                class_name="flex items-center gap-1 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/60 w-fit",
             ),
             chip(item["target"]),
             class_name="flex flex-wrap items-center gap-2 mt-3",
         ),
         rx.el.p(
             item["reason"],
-            class_name="text-[11px] font-medium text-emerald-100/60 mt-3",
+            class_name="text-[11px] font-medium text-[#c9c5b4]/60 mt-3",
         ),
         rx.el.div(
-            rx.icon("calendar-days", class_name="h-3.5 w-3.5 text-lime-300/80"),
+            rx.icon("calendar-days", class_name="h-3.5 w-3.5 text-[#d8fa5e]/80"),
             rx.el.span(
                 item["start_label"] + " → " + item["end_label"],
-                class_name="text-[10px] font-semibold text-emerald-100/55",
+                class_name="text-[10px] font-semibold text-[#c9c5b4]/55",
             ),
             rx.cond(
                 item["is_open"],
                 rx.el.span(
                     item["days_left"].to_string() + " j restant(s)",
-                    class_name="text-[10px] font-bold text-amber-200",
+                    class_name="text-[10px] font-bold text-[#ffb894]",
                 ),
                 rx.fragment(),
             ),
@@ -333,14 +333,14 @@ def _delegation_card(item: DelegationRow, key: str = "") -> rx.Component:
                     on_click=AdministrationState.revoke_temporary_permission(
                         item["id"]
                     ),
-                    class_name="flex items-center gap-1.5 rounded-full border border-red-400/30 bg-red-500/10 px-2.5 py-1 font-semibold text-red-300 hover:bg-red-500/20 transition-colors w-fit ml-auto",
+                    class_name="flex items-center gap-1.5 rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2.5 py-1 font-semibold text-[#ff9b8c] hover:bg-[#f2452c]/20 transition-colors w-fit ml-auto",
                 ),
                 rx.fragment(),
             ),
-            class_name="flex flex-wrap items-center gap-2 border-t border-white/[0.06] pt-3 mt-3",
+            class_name="flex flex-wrap items-center gap-2 border-t border-[#f2efe4]/10 pt-3 mt-3",
         ),
         key=key,
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 hover:border-lime-300/25 transition-colors",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
     )
 
 
@@ -356,7 +356,7 @@ def admin_delegations() -> rx.Component:
                 rx.icon("timer-off", class_name="h-4 w-4"),
                 rx.el.span("Expirer les délégations échues"),
                 on_click=AdministrationState.expire_temporary_permissions,
-                class_name="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-emerald-100/70 hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit",
+                class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
             ),
             class_name="flex flex-col sm:flex-row sm:items-end justify-between gap-3",
         ),
@@ -372,7 +372,7 @@ def admin_delegations() -> rx.Component:
             ),
             rx.el.p(
                 "Aucune permission temporaire enregistrée.",
-                class_name="text-sm font-medium text-emerald-100/50 mt-5",
+                class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
             ),
         ),
         class_name=f"w-full {CARD}",
@@ -392,11 +392,11 @@ def _assignment_row(item: AssignmentDetailRow) -> rx.Component:
                 rx.el.div(
                     rx.el.p(
                         item["user_label"],
-                        class_name="text-sm font-semibold text-emerald-50 truncate",
+                        class_name="text-sm font-semibold text-[#f2efe4] truncate",
                     ),
                     rx.el.p(
                         item["role_label"],
-                        class_name="text-[10px] font-medium text-emerald-100/45 truncate",
+                        class_name="text-[10px] font-medium text-[#c9c5b4]/45 truncate",
                     ),
                     class_name="min-w-0",
                 ),
@@ -407,11 +407,11 @@ def _assignment_row(item: AssignmentDetailRow) -> rx.Component:
         rx.el.td(
             rx.el.p(
                 item["parcel"],
-                class_name="text-sm font-medium text-emerald-50/85",
+                class_name="text-sm font-medium text-[#f2efe4]/85",
             ),
             rx.el.p(
                 item["crop"],
-                class_name="text-[10px] font-medium text-emerald-100/45",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/45",
             ),
             class_name="px-4 py-3 align-middle",
         ),
@@ -426,11 +426,11 @@ def _assignment_row(item: AssignmentDetailRow) -> rx.Component:
         rx.el.td(
             rx.el.p(
                 item["sector"] + " · " + item["season"],
-                class_name="text-[11px] font-medium text-emerald-100/55 whitespace-nowrap",
+                class_name="text-[11px] font-medium text-[#c9c5b4]/55 whitespace-nowrap",
             ),
             rx.el.p(
                 item["period"],
-                class_name="text-[10px] font-medium text-emerald-100/35 whitespace-nowrap",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/35 whitespace-nowrap",
             ),
             class_name="px-4 py-3 align-middle",
         ),
@@ -439,16 +439,16 @@ def _assignment_row(item: AssignmentDetailRow) -> rx.Component:
                 item["responsible"],
                 rx.el.span(
                     "RESPONSABLE",
-                    class_name="rounded-full border border-lime-300/40 bg-lime-300/10 px-2 py-0.5 text-[9px] font-bold text-lime-200 w-fit",
+                    class_name="rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/10 px-2 py-0.5 text-[9px] font-bold text-[#e4ff9b] w-fit",
                 ),
                 rx.el.span(
                     "Intervenant",
-                    class_name="text-[10px] font-semibold text-emerald-100/40",
+                    class_name="text-[10px] font-semibold text-[#c9c5b4]/40",
                 ),
             ),
             class_name="px-4 py-3 align-middle text-right",
         ),
-        class_name="border-t border-white/[0.06] hover:bg-white/[0.03] transition-colors",
+        class_name="border-t border-[#f2efe4]/10 hover:bg-[#101208] transition-colors",
     )
 
 
@@ -459,7 +459,7 @@ def _head(label: str, icon: str, align: str = "left") -> rx.Component:
             rx.el.span(label),
             class_name="flex items-center",
         ),
-        class_name=f"px-4 py-3 text-{align} text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/45",
+        class_name=f"px-4 py-3 text-{align} ap-eyebrow text-[#c9c5b4]/45",
     )
 
 
@@ -475,13 +475,13 @@ def admin_assignments() -> rx.Component:
                 rx.el.span(
                     AdministrationState.assignments.length().to_string()
                     + " affectation(s)",
-                    class_name="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold text-emerald-100/70 w-fit",
+                    class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-xs font-bold text-[#c9c5b4]/70 w-fit",
                 ),
                 rx.el.button(
-                    rx.icon("download", class_name="h-4 w-4 text-[#04140d]"),
-                    rx.el.span("Exporter (CSV)", class_name="text-[#04140d]"),
+                    rx.icon("download", class_name="h-4 w-4 text-[#0A0A08]"),
+                    rx.el.span("Exporter (CSV)", class_name="text-[#0A0A08]"),
                     on_click=AdministrationState.export_assignments,
-                    class_name="flex items-center gap-2 rounded-xl bg-lime-300 px-4 py-2 text-sm font-semibold hover:bg-lime-200 transition-colors w-fit",
+                    class_name="ap-mono inline-flex w-fit items-center gap-2 bg-[#D8FA5E] px-4 py-2.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[#0A0A08] transition-colors hover:bg-[#E4FF9B]",
                 ),
                 class_name="flex flex-wrap items-center gap-2",
             ),
@@ -491,7 +491,7 @@ def admin_assignments() -> rx.Component:
             rx.el.div(
                 rx.icon(
                     "users",
-                    class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-lime-300/80 pointer-events-none",
+                    class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d8fa5e]/80 pointer-events-none",
                 ),
                 rx.el.select(
                     rx.el.option("Toutes les équipes", value="TOUTES"),
@@ -509,14 +509,14 @@ def admin_assignments() -> rx.Component:
                 ),
                 rx.icon(
                     "chevron-down",
-                    class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-100/40 pointer-events-none",
+                    class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/40 pointer-events-none",
                 ),
                 class_name="relative w-full sm:w-60",
             ),
             rx.el.div(
                 rx.icon(
                     "activity",
-                    class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-lime-300/80 pointer-events-none",
+                    class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d8fa5e]/80 pointer-events-none",
                 ),
                 rx.el.select(
                     rx.el.option("Toutes les activités", value="TOUTES"),
@@ -534,7 +534,7 @@ def admin_assignments() -> rx.Component:
                 ),
                 rx.icon(
                     "chevron-down",
-                    class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-100/40 pointer-events-none",
+                    class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/40 pointer-events-none",
                 ),
                 class_name="relative w-full sm:w-60",
             ),
@@ -542,7 +542,7 @@ def admin_assignments() -> rx.Component:
                 rx.icon("rotate-ccw", class_name="h-4 w-4"),
                 rx.el.span("Réinitialiser"),
                 on_click=AdministrationState.reset_assignment_filters,
-                class_name="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-emerald-100/70 hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit",
+                class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
             ),
             class_name="flex flex-col sm:flex-row sm:items-center gap-3 w-full mt-5",
         ),
@@ -556,9 +556,9 @@ def admin_assignments() -> rx.Component:
                         _head("Secteur & période", "calendar-days"),
                         rx.el.th(
                             "Rôle",
-                            class_name="px-4 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/45",
+                            class_name="px-4 py-3 text-right ap-eyebrow text-[#c9c5b4]/45",
                         ),
-                        class_name="bg-white/[0.04]",
+                        class_name="bg-[#14160f]",
                     ),
                 ),
                 rx.el.tbody(
@@ -566,7 +566,7 @@ def admin_assignments() -> rx.Component:
                 ),
                 class_name="table-auto w-full min-w-[52rem]",
             ),
-            class_name="mt-5 w-full overflow-x-auto overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]",
+            class_name="mt-5 w-full overflow-x-auto overflow-hidden rounded-none border border-[#f2efe4]/12 bg-[#0d0f09]",
         ),
         class_name=f"w-full {CARD}",
     )

@@ -182,7 +182,7 @@ PROFILE_STAGES_SQL: str = """
            COALESCE(st.watchpoints, ''), COALESCE(st.common_errors, ''),
            COALESCE(st.duration_days_min, 0), COALESCE(st.duration_days_max, 0),
            st.is_critical, COALESCE(st.icon, 'sprout'),
-           COALESCE(st.color_hex, '#a3e635')
+           COALESCE(st.color_hex, '#D8FA5E')
     FROM crop_phenology_stage st
     WHERE st.profile_id = :profile_id AND st.is_active = 1
     ORDER BY st.position, st.id

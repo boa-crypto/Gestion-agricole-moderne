@@ -76,7 +76,7 @@ _DEFINITIONS: dict[str, str] = {
                COALESCE(f.responsibilities, '') AS responsibilities,
                COALESCE(f.default_role_key, '') AS default_role_key,
                COALESCE(f.icon, 'user') AS icon,
-               COALESCE(f.color_hex, '#a3e635') AS color_hex,
+               COALESCE(f.color_hex, '#D8FA5E') AS color_hex,
                COALESCE(f.position, 0) AS position,
                f.is_active AS is_active,
                f.created_at AS created_at
@@ -91,7 +91,7 @@ _DEFINITIONS: dict[str, str] = {
                COALESCE(r.tagline, '') AS tagline,
                COALESCE(r.description, '') AS description,
                COALESCE(r.icon, 'shield') AS icon,
-               COALESCE(r.color_hex, '#a3e635') AS color_hex,
+               COALESCE(r.color_hex, '#D8FA5E') AS color_hex,
                r.is_system AS is_system,
                COALESCE(r.position, 0) AS position,
                r.is_active AS is_active,
@@ -125,7 +125,7 @@ _DEFINITIONS: dict[str, str] = {
                COALESCE(t.sector, '') AS sector,
                t.status AS status,
                COALESCE(t.icon, 'users') AS icon,
-               COALESCE(t.color_hex, '#a3e635') AS color_hex,
+               COALESCE(t.color_hex, '#D8FA5E') AS color_hex,
                COALESCE(t.notes, '') AS notes,
                t.created_at AS created_at
         FROM farm_team t

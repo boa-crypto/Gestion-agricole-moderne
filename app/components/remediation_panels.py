@@ -17,21 +17,21 @@ from app.states.remediation_state import (
 )
 
 _INPUT = (
-    "w-full rounded-xl border border-white/10 bg-[#04140d] px-3 py-2.5 "
-    "text-sm font-medium text-emerald-50 placeholder:text-emerald-100/30 "
-    "focus:border-lime-300/50 outline-hidden transition-colors"
+    "w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] px-3 py-2.5 "
+    "text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/30 "
+    "focus:border-[#d8fa5e]/50 outline-hidden transition-colors"
 )
 
 _PRIMARY = (
-    "flex items-center gap-1.5 rounded-full bg-lime-300 px-3 py-1.5 "
-    "text-[11px] font-semibold text-[#04140d] hover:bg-lime-200 "
+    "flex items-center gap-1.5 rounded-none bg-[#d8fa5e] px-3 py-1.5 "
+    "text-[11px] font-semibold text-[#0A0A08] hover:bg-[#e4ff9b] "
     "transition-colors w-fit"
 )
 
 _GHOST = (
-    "flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 "
-    "px-3 py-1.5 text-[11px] font-semibold text-emerald-100/70 "
-    "hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit"
+    "flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] "
+    "px-3 py-1.5 text-[11px] font-semibold text-[#c9c5b4]/70 "
+    "hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit"
 )
 
 
@@ -42,33 +42,33 @@ def _badge(tone: rx.Var, label: rx.Var | str) -> rx.Component:
             tone,
             (
                 "good",
-                "rounded-full border border-lime-300/30 bg-lime-300/10 px-2 py-0.5 text-[10px] font-bold text-lime-200 w-fit whitespace-nowrap",
+                "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit whitespace-nowrap",
             ),
             (
                 "warn",
-                "rounded-full border border-amber-300/30 bg-amber-300/10 px-2 py-0.5 text-[10px] font-bold text-amber-200 w-fit whitespace-nowrap",
+                "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 text-[10px] font-bold text-[#ffb894] w-fit whitespace-nowrap",
             ),
             (
                 "bad",
-                "rounded-full border border-red-400/30 bg-red-500/10 px-2 py-0.5 text-[10px] font-bold text-red-300 w-fit whitespace-nowrap",
+                "rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2 py-0.5 text-[10px] font-bold text-[#ff9b8c] w-fit whitespace-nowrap",
             ),
             (
                 "info",
-                "rounded-full border border-sky-300/30 bg-sky-300/10 px-2 py-0.5 text-[10px] font-bold text-sky-200 w-fit whitespace-nowrap",
+                "rounded-none border border-[#9cc3ff]/30 bg-[#9cc3ff]/10 px-2 py-0.5 text-[10px] font-bold text-[#c3daff] w-fit whitespace-nowrap",
             ),
-            "rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-emerald-100/50 w-fit whitespace-nowrap",
+            "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/50 w-fit whitespace-nowrap",
         ),
     )
 
 
 def _recommendation(text_value: rx.Var | str) -> rx.Component:
     return rx.el.div(
-        rx.icon("wrench", class_name="h-3 w-3 text-amber-300 shrink-0 mt-0.5"),
+        rx.icon("wrench", class_name="h-3 w-3 text-[#ff8a5b] shrink-0 mt-0.5"),
         rx.el.p(
             text_value,
-            class_name="text-[11px] font-medium text-amber-100/80 leading-relaxed",
+            class_name="text-[11px] font-medium text-[#ffdccb]/80 leading-relaxed",
         ),
-        class_name="flex items-start gap-2 rounded-xl border border-amber-300/20 bg-amber-300/[0.06] px-3 py-2 w-full mt-2",
+        class_name="flex items-start gap-2 rounded-none border border-[#ff8a5b]/20 bg-[#ff8a5b]/[0.06] px-3 py-2 w-full mt-2",
     )
 
 
@@ -78,12 +78,12 @@ def _trace(
     return rx.cond(
         is_documented,
         rx.el.div(
-            rx.icon("history", class_name="h-3 w-3 text-lime-300 shrink-0"),
+            rx.icon("history", class_name="h-3 w-3 text-[#d8fa5e] shrink-0"),
             rx.el.p(
                 f"{action_label} · {date} — {note}",
-                class_name="text-[10px] font-medium text-emerald-100/55 leading-relaxed",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/55 leading-relaxed",
             ),
-            class_name="flex items-start gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 w-full mt-2",
+            class_name="flex items-start gap-2 rounded-none border border-[#f2efe4]/12 bg-[#101208] px-3 py-2 w-full mt-2",
         ),
         rx.fragment(),
     )
@@ -100,15 +100,15 @@ def _section_head(
         rx.el.div(
             rx.el.span(
                 caption,
-                class_name="text-[10px] font-semibold uppercase tracking-[0.28em] text-lime-300/80",
+                class_name="ap-eyebrow text-[#d8fa5e]/80",
             ),
             rx.el.h2(
                 title,
-                class_name="font-['Instrument_Serif'] text-3xl text-emerald-50 mt-1",
+                class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
             ),
             rx.el.p(
                 intro,
-                class_name="text-sm font-medium text-emerald-100/55 mt-2 max-w-2xl",
+                class_name="text-sm font-medium text-[#c9c5b4]/55 mt-2 max-w-2xl",
             ),
             class_name="min-w-0",
         ),
@@ -125,10 +125,10 @@ def remediation_note_bar() -> rx.Component:
     """Saisie commune de traçabilité : auteur et note de décision."""
     return rx.el.div(
         rx.el.div(
-            rx.icon("pen-line", class_name="h-3.5 w-3.5 text-lime-300"),
+            rx.icon("pen-line", class_name="h-3.5 w-3.5 text-[#d8fa5e]"),
             rx.el.span(
                 "Traçabilité de la décision",
-                class_name="text-[10px] font-semibold uppercase tracking-[0.22em] text-emerald-100/50",
+                class_name="ap-eyebrow text-[#c9c5b4]/50",
             ),
             class_name="flex items-center gap-2",
         ),
@@ -149,9 +149,9 @@ def remediation_note_bar() -> rx.Component:
         ),
         rx.el.p(
             "La note est attachée à chaque décision consignée : elle rend l'arbitrage relisible six mois plus tard.",
-            class_name="text-[10px] font-medium text-emerald-100/40 mt-2",
+            class_name="text-[10px] font-medium text-[#c9c5b4]/40 mt-2",
         ),
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
     )
 
 
@@ -167,40 +167,40 @@ def _alert_card(item: AlertTriage, key: str = "") -> rx.Component:
                 item["level"],
                 (
                     "CRITIQUE",
-                    rx.icon("octagon-alert", class_name="h-4 w-4 text-red-400"),
+                    rx.icon("octagon-alert", class_name="h-4 w-4 text-[#ff6b5a]"),
                 ),
                 (
                     "ATTENTION",
                     rx.icon(
-                        "triangle-alert", class_name="h-4 w-4 text-amber-300"
+                        "triangle-alert", class_name="h-4 w-4 text-[#ff8a5b]"
                     ),
                 ),
-                rx.icon("info", class_name="h-4 w-4 text-sky-300"),
+                rx.icon("info", class_name="h-4 w-4 text-[#9cc3ff]"),
             ),
             rx.el.span(
                 item["category"],
-                class_name="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/45",
+                class_name="ap-eyebrow text-[#c9c5b4]/45",
             ),
             _badge(item["tone"], item["action_label"]),
             rx.el.span(
                 item["date_label"],
-                class_name="text-[10px] font-medium text-emerald-100/40 ml-auto",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/40 ml-auto",
             ),
             class_name="flex flex-wrap items-center gap-2 w-full",
         ),
         rx.el.p(
             item["title"],
-            class_name="text-sm font-semibold text-emerald-50 mt-2 leading-snug",
+            class_name="text-sm font-semibold text-[#f2efe4] mt-2 leading-snug",
         ),
         rx.el.p(
             item["message"],
-            class_name="text-[11px] font-medium text-emerald-100/55 mt-1 leading-relaxed",
+            class_name="text-[11px] font-medium text-[#c9c5b4]/55 mt-1 leading-relaxed",
         ),
         rx.el.div(
-            rx.icon("map-pin", class_name="h-3 w-3 text-lime-300/80"),
+            rx.icon("map-pin", class_name="h-3 w-3 text-[#d8fa5e]/80"),
             rx.el.span(
                 item["parcel"],
-                class_name="text-[11px] font-medium text-emerald-100/60",
+                class_name="text-[11px] font-medium text-[#c9c5b4]/60",
             ),
             class_name="flex items-center gap-1.5 mt-3",
         ),
@@ -228,7 +228,7 @@ def _alert_card(item: AlertTriage, key: str = "") -> rx.Component:
                 rx.el.span("Guide phytosanitaire"),
                 rx.icon("arrow-up-right", class_name="h-3 w-3"),
                 href="/guide",
-                class_name="flex items-center gap-1.5 rounded-full border border-lime-300/25 bg-lime-300/10 px-3 py-1.5 text-[10px] font-semibold text-lime-200 hover:bg-lime-300/20 transition-colors w-fit ml-auto",
+                class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1.5 text-[10px] font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit ml-auto",
             ),
             class_name="flex flex-wrap items-center gap-2 w-full mt-3",
         ),
@@ -237,13 +237,13 @@ def _alert_card(item: AlertTriage, key: str = "") -> rx.Component:
             item["level"],
             (
                 "CRITIQUE",
-                "w-full rounded-2xl border border-red-400/30 bg-red-500/[0.07] p-4",
+                "w-full rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/[0.07] p-4",
             ),
             (
                 "ATTENTION",
-                "w-full rounded-2xl border border-amber-300/25 bg-amber-300/[0.06] p-4",
+                "w-full rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/[0.06] p-4",
             ),
-            "w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4",
+            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
         ),
     )
 
@@ -257,7 +257,7 @@ def alert_triage_panel() -> rx.Component:
             "cockpit",
             rx.el.span(
                 f"{RemediationState.counters['alerts_critical']:.0f} critique(s) · {RemediationState.counters['alerts_closed']:.0f} clôturée(s)",
-                class_name="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-emerald-100/65 w-fit",
+                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-semibold text-[#c9c5b4]/65 w-fit",
             ),
         ),
         remediation_note_bar(),
@@ -271,15 +271,15 @@ def alert_triage_panel() -> rx.Component:
                 class_name="grid grid-cols-1 xl:grid-cols-2 gap-3 w-full mt-4",
             ),
             rx.el.div(
-                rx.icon("shield-check", class_name="h-6 w-6 text-lime-300"),
+                rx.icon("shield-check", class_name="h-6 w-6 text-[#d8fa5e]"),
                 rx.el.p(
                     "Aucune alerte active : la veille agronomique est à jour.",
-                    class_name="text-sm font-medium text-emerald-100/60 mt-2",
+                    class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2",
                 ),
-                class_name="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] py-12 w-full mt-4",
+                class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-4",
             ),
         ),
-        class_name="w-full rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
     )
 
 
@@ -291,10 +291,10 @@ def alert_triage_panel() -> rx.Component:
 def _stock_card(item: StockDecision, key: str = "") -> rx.Component:
     return rx.el.article(
         rx.el.div(
-            rx.icon("package", class_name="h-4 w-4 text-amber-300"),
+            rx.icon("package", class_name="h-4 w-4 text-[#ff8a5b]"),
             rx.el.span(
                 item["category_label"],
-                class_name="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/45",
+                class_name="ap-eyebrow text-[#c9c5b4]/45",
             ),
             _badge(item["severity"], item["status_label"]),
             _badge(item["tone"], item["action_label"]),
@@ -302,36 +302,36 @@ def _stock_card(item: StockDecision, key: str = "") -> rx.Component:
         ),
         rx.el.p(
             item["name"],
-            class_name="text-sm font-semibold text-emerald-50 mt-2 truncate",
+            class_name="text-sm font-semibold text-[#f2efe4] mt-2 truncate",
         ),
         rx.el.p(
             f"{item['stock']:.1f} {item['unit']} en stock · seuil {item['threshold']:.1f} {item['unit']} · {item['supplier']}",
-            class_name="text-[11px] font-medium text-emerald-100/55 mt-1",
+            class_name="text-[11px] font-medium text-[#c9c5b4]/55 mt-1",
         ),
         rx.el.div(
             rx.el.div(
                 class_name=rx.match(
                     item["severity"],
-                    ("bad", "h-full rounded-full bg-red-400"),
-                    ("warn", "h-full rounded-full bg-amber-300"),
-                    "h-full rounded-full bg-lime-300",
+                    ("bad", "h-full rounded-none bg-[#ff6b5a]"),
+                    ("warn", "h-full rounded-none bg-[#ff8a5b]"),
+                    "h-full rounded-none bg-[#d8fa5e]",
                 ),
                 style={"width": item["coverage_pct"]},
             ),
-            class_name="h-1.5 w-full rounded-full bg-white/10 mt-3",
+            class_name="h-1.5 w-full rounded-none bg-[#20241a] mt-3",
         ),
         rx.el.div(
             rx.el.span(
                 f"Manque {item['gap']:.1f} {item['unit']}",
-                class_name="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-emerald-100/60 w-fit",
+                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/60 w-fit",
             ),
             rx.el.span(
                 f"{item['planned_jobs']} chantier(s) programmé(s)",
-                class_name="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-emerald-100/60 w-fit",
+                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/60 w-fit",
             ),
             rx.el.span(
                 f"Commande conseillée {item['order_quantity']:.1f} {item['unit']} · {item['order_cost']:.0f} €",
-                class_name="rounded-full border border-lime-300/25 bg-lime-300/10 px-2 py-0.5 text-[10px] font-bold text-lime-200 w-fit",
+                class_name="rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit",
             ),
             class_name="flex flex-wrap items-center gap-1.5 w-full mt-3",
         ),
@@ -365,12 +365,12 @@ def _stock_card(item: StockDecision, key: str = "") -> rx.Component:
                 rx.el.span("Guide des stocks"),
                 rx.icon("arrow-up-right", class_name="h-3 w-3"),
                 href="/guide",
-                class_name="flex items-center gap-1.5 rounded-full border border-lime-300/25 bg-lime-300/10 px-3 py-1.5 text-[10px] font-semibold text-lime-200 hover:bg-lime-300/20 transition-colors w-fit ml-auto",
+                class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1.5 text-[10px] font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit ml-auto",
             ),
             class_name="flex flex-wrap items-center gap-2 w-full mt-3",
         ),
         key=key,
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 hover:border-lime-300/25 transition-colors",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
     )
 
 
@@ -383,7 +383,7 @@ def stock_decision_panel() -> rx.Component:
             "traitements",
             rx.el.span(
                 f"{RemediationState.counters['stocks_open']:.0f} à arbitrer · {RemediationState.counters['stock_order_cost']:.0f} € de commande estimée",
-                class_name="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-[11px] font-semibold text-amber-200 w-fit",
+                class_name="rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/10 px-3 py-1 text-[11px] font-semibold text-[#ffb894] w-fit",
             ),
         ),
         remediation_note_bar(),
@@ -397,15 +397,15 @@ def stock_decision_panel() -> rx.Component:
                 class_name="grid grid-cols-1 xl:grid-cols-2 gap-3 w-full mt-4",
             ),
             rx.el.div(
-                rx.icon("shield-check", class_name="h-6 w-6 text-lime-300"),
+                rx.icon("shield-check", class_name="h-6 w-6 text-[#d8fa5e]"),
                 rx.el.p(
                     "Aucun intrant sous le seuil de réapprovisionnement.",
-                    class_name="text-sm font-medium text-emerald-100/60 mt-2",
+                    class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2",
                 ),
-                class_name="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] py-12 w-full mt-4",
+                class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-4",
             ),
         ),
-        class_name="w-full rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
     )
 
 
@@ -417,10 +417,10 @@ def stock_decision_panel() -> rx.Component:
 def _contour_card(item: ContourCheck, key: str = "") -> rx.Component:
     return rx.el.article(
         rx.el.div(
-            rx.icon("shapes", class_name="h-4 w-4 text-lime-300"),
+            rx.icon("shapes", class_name="h-4 w-4 text-[#d8fa5e]"),
             rx.el.span(
                 item["code"],
-                class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/50",
+                class_name="ap-eyebrow text-[#c9c5b4]/50",
             ),
             _badge(item["severity"], item["source_label"]),
             _badge(item["tone"], item["action_label"]),
@@ -428,20 +428,20 @@ def _contour_card(item: ContourCheck, key: str = "") -> rx.Component:
         ),
         rx.el.p(
             item["name"],
-            class_name="text-sm font-semibold text-emerald-50 mt-2 truncate",
+            class_name="text-sm font-semibold text-[#f2efe4] mt-2 truncate",
         ),
         rx.el.p(
             item["locality"],
-            class_name="text-[11px] font-medium text-emerald-100/45 mt-0.5",
+            class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-0.5",
         ),
         rx.el.div(
             rx.el.span(
                 f"Déclarée {item['declared_area']:.1f} ha",
-                class_name="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-emerald-100/60 w-fit",
+                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/60 w-fit",
             ),
             rx.el.span(
                 f"Contour {item['computed_area']:.1f} ha",
-                class_name="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-emerald-100/60 w-fit",
+                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/60 w-fit",
             ),
             _badge(
                 rx.cond(item["gap_pct"] > 5.0, "bad", "good"),
@@ -449,14 +449,14 @@ def _contour_card(item: ContourCheck, key: str = "") -> rx.Component:
             ),
             rx.el.span(
                 f"{item['vertex_count']} sommets",
-                class_name="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-emerald-100/55 w-fit",
+                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/55 w-fit",
             ),
             class_name="flex flex-wrap items-center gap-1.5 w-full mt-3",
         ),
         _recommendation(item["recommendation"]),
         rx.el.p(
             "Un contour vérifié à l'écran reste une validation visuelle : il ne vaut pas relevé cadastral ni mesure GPS.",
-            class_name="text-[10px] font-medium text-emerald-100/40 leading-relaxed mt-2",
+            class_name="text-[10px] font-medium text-[#c9c5b4]/40 leading-relaxed mt-2",
         ),
         _trace(
             item["is_documented"],
@@ -483,12 +483,12 @@ def _contour_card(item: ContourCheck, key: str = "") -> rx.Component:
                 rx.el.span("Ouvrir la cartographie"),
                 rx.icon("arrow-up-right", class_name="h-3 w-3"),
                 href="/cartographie",
-                class_name="flex items-center gap-1.5 rounded-full border border-lime-300/25 bg-lime-300/10 px-3 py-1.5 text-[10px] font-semibold text-lime-200 hover:bg-lime-300/20 transition-colors w-fit ml-auto",
+                class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1.5 text-[10px] font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit ml-auto",
             ),
             class_name="flex flex-wrap items-center gap-2 w-full mt-3",
         ),
         key=key,
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 hover:border-lime-300/25 transition-colors",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
     )
 
 
@@ -501,7 +501,7 @@ def contour_validation_panel() -> rx.Component:
             "cartographie",
             rx.el.span(
                 f"{RemediationState.counters['contours_open']:.0f} à valider · {RemediationState.counters['contours_gap']:.0f} écart(s) > 5 %",
-                class_name="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-emerald-100/65 w-fit",
+                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-semibold text-[#c9c5b4]/65 w-fit",
             ),
         ),
         remediation_note_bar(),
@@ -511,13 +511,13 @@ def contour_validation_panel() -> rx.Component:
             rx.el.div(
                 rx.icon(
                     "triangle-alert",
-                    class_name="h-4 w-4 text-amber-300 shrink-0",
+                    class_name="h-4 w-4 text-[#ff8a5b] shrink-0",
                 ),
                 rx.el.p(
                     "Les colonnes de géométrie sont indisponibles : la validation des contours est suspendue.",
-                    class_name="text-xs font-medium text-amber-100/80",
+                    class_name="text-xs font-medium text-[#ffdccb]/80",
                 ),
-                class_name="flex items-center gap-2 rounded-2xl border border-amber-300/25 bg-amber-300/[0.07] px-4 py-3 w-full mt-4",
+                class_name="flex items-center gap-2 rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/[0.07] px-4 py-3 w-full mt-4",
             ),
         ),
         rx.cond(
@@ -532,15 +532,15 @@ def contour_validation_panel() -> rx.Component:
                 class_name="grid grid-cols-1 xl:grid-cols-2 gap-3 w-full mt-4",
             ),
             rx.el.div(
-                rx.icon("circle-check", class_name="h-6 w-6 text-lime-300"),
+                rx.icon("circle-check", class_name="h-6 w-6 text-[#d8fa5e]"),
                 rx.el.p(
                     "Tous les îlots affichent un contour cohérent avec leur surface déclarée.",
-                    class_name="text-sm font-medium text-emerald-100/60 mt-2",
+                    class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2",
                 ),
-                class_name="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] py-12 w-full mt-4",
+                class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-4",
             ),
         ),
-        class_name="w-full rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
     )
 
 
@@ -552,35 +552,35 @@ def contour_validation_panel() -> rx.Component:
 def _history_row(item: RemediationEntry, key: str = "") -> rx.Component:
     return rx.el.li(
         rx.el.div(
-            rx.icon(item["icon"], class_name="h-3.5 w-3.5 text-lime-300"),
-            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-lime-300/25 bg-lime-300/10",
+            rx.icon(item["icon"], class_name="h-3.5 w-3.5 text-[#d8fa5e]"),
+            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10",
         ),
         rx.el.div(
             rx.el.div(
                 rx.el.p(
                     item["target_label"],
-                    class_name="text-[12px] font-semibold text-emerald-50 truncate",
+                    class_name="text-[12px] font-semibold text-[#f2efe4] truncate",
                 ),
                 _badge(item["tone"], item["action_label"]),
                 rx.el.span(
                     item["date_label"],
-                    class_name="text-[10px] font-medium text-emerald-100/40 ml-auto shrink-0",
+                    class_name="text-[10px] font-medium text-[#c9c5b4]/40 ml-auto shrink-0",
                 ),
                 class_name="flex flex-wrap items-center gap-2 w-full min-w-0",
             ),
             rx.el.p(
                 f"{item['domain_label']} · {item['author']} — {item['note']}",
-                class_name="text-[11px] font-medium text-emerald-100/50 mt-1 leading-relaxed",
+                class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-1 leading-relaxed",
             ),
             class_name="min-w-0 flex-1",
         ),
         rx.el.a(
             rx.icon("arrow-up-right", class_name="h-3.5 w-3.5"),
             href=item["module_route"],
-            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-emerald-100/60 hover:text-emerald-50 hover:border-lime-300/30 transition-colors",
+            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/60 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors",
         ),
         key=key,
-        class_name="flex items-start gap-3 w-full rounded-2xl border border-white/10 bg-white/[0.02] p-3",
+        class_name="flex items-start gap-3 w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-3",
     )
 
 
@@ -588,20 +588,20 @@ def _tile(label: str, value: rx.Var | str, unit: str) -> rx.Component:
     return rx.el.div(
         rx.el.span(
             label,
-            class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/45",
+            class_name="ap-eyebrow text-[#c9c5b4]/45",
         ),
         rx.el.div(
             rx.el.span(
                 value,
-                class_name="font-['Instrument_Serif'] text-2xl leading-none text-emerald-50",
+                class_name="ap-serif text-2xl leading-none text-[#f2efe4]",
             ),
             rx.el.span(
                 unit,
-                class_name="text-[11px] font-medium text-emerald-100/50 mb-0.5",
+                class_name="text-[11px] font-medium text-[#c9c5b4]/50 mb-0.5",
             ),
             class_name="flex items-end gap-1.5 mt-2",
         ),
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-3",
     )
 
 
@@ -615,7 +615,7 @@ def remediation_summary() -> rx.Component:
             "guide",
             rx.el.span(
                 f"{RemediationState.open_total} état(s) ouvert(s) · {RemediationState.counters['decisions']:.0f} décision(s)",
-                class_name="rounded-full border border-lime-300/25 bg-lime-300/10 px-3 py-1 text-[11px] font-bold text-lime-200 w-fit",
+                class_name="rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1 text-[11px] font-bold text-[#e4ff9b] w-fit",
             ),
         ),
         rx.el.div(
@@ -659,19 +659,19 @@ def remediation_summary() -> rx.Component:
                 rx.el.span("Cockpit · alertes"),
                 rx.icon("arrow-up-right", class_name="h-3 w-3"),
                 href="/",
-                class_name="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-semibold text-emerald-100/70 hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit",
+                class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1.5 text-[10px] font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
             ),
             rx.el.a(
                 rx.el.span("Traitements · stocks"),
                 rx.icon("arrow-up-right", class_name="h-3 w-3"),
                 href="/traitements",
-                class_name="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-semibold text-emerald-100/70 hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit",
+                class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1.5 text-[10px] font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
             ),
             rx.el.a(
                 rx.el.span("Cartographie · contours"),
                 rx.icon("arrow-up-right", class_name="h-3 w-3"),
                 href="/cartographie",
-                class_name="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-semibold text-emerald-100/70 hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit",
+                class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1.5 text-[10px] font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
             ),
             class_name="flex flex-wrap items-center gap-2 w-full mt-4",
         ),
@@ -680,7 +680,7 @@ def remediation_summary() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Journal des décisions",
-                    class_name="text-[10px] font-semibold uppercase tracking-[0.24em] text-lime-300/80",
+                    class_name="ap-eyebrow text-[#d8fa5e]/80",
                 ),
                 rx.el.ul(
                     rx.foreach(
@@ -691,12 +691,12 @@ def remediation_summary() -> rx.Component:
                     ),
                     class_name="flex flex-col gap-2 w-full mt-3",
                 ),
-                class_name="w-full mt-6 border-t border-white/10 pt-5",
+                class_name="w-full mt-6 border-t border-[#f2efe4]/12 pt-5",
             ),
             rx.el.p(
                 "Aucune décision de remédiation consignée pour le moment.",
-                class_name="text-sm font-medium text-emerald-100/50 mt-6",
+                class_name="text-sm font-medium text-[#c9c5b4]/50 mt-6",
             ),
         ),
-        class_name="w-full rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
     )

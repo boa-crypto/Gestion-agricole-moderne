@@ -5,12 +5,12 @@ import reflex as rx
 from app.states.guide_admin_state import GuideAdminState
 
 _LABEL = (
-    "text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/45"
+    "ap-eyebrow text-[#c9c5b4]/45"
 )
 _INPUT = (
-    "w-full rounded-xl border border-white/10 bg-[#04140d] px-3 py-2.5 text-sm "
-    "font-medium text-emerald-50 placeholder:text-emerald-100/25 "
-    "focus:border-lime-300/50 focus:ring-2 focus:ring-lime-300/20 "
+    "w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] px-3 py-2.5 text-sm "
+    "font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/25 "
+    "focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 "
     "outline-hidden transition-colors"
 )
 
@@ -30,7 +30,7 @@ def text_field(
                 required,
                 rx.el.span(
                     "obligatoire",
-                    class_name="rounded-full border border-amber-300/30 bg-amber-300/10 px-1.5 py-0.5 text-[9px] font-bold text-amber-200 w-fit",
+                    class_name="rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#ffb894] w-fit",
                 ),
                 rx.fragment(),
             ),
@@ -47,7 +47,7 @@ def text_field(
             hint != "",
             rx.el.span(
                 hint,
-                class_name="text-[10px] font-medium text-emerald-100/35 mt-1",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/35 mt-1",
             ),
             rx.fragment(),
         ),
@@ -76,7 +76,7 @@ def number_field(
             hint != "",
             rx.el.span(
                 hint,
-                class_name="text-[10px] font-medium text-emerald-100/35 mt-1",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/35 mt-1",
             ),
             rx.fragment(),
         ),
@@ -106,7 +106,7 @@ def area_field(
             hint != "",
             rx.el.span(
                 hint,
-                class_name="text-[10px] font-medium text-emerald-100/35 mt-1",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/35 mt-1",
             ),
             rx.fragment(),
         ),
@@ -138,7 +138,7 @@ def select_field(
             ),
             rx.icon(
                 "chevron-down",
-                class_name="absolute right-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-emerald-100/45 pointer-events-none",
+                class_name="absolute right-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#c9c5b4]/45 pointer-events-none",
             ),
             class_name="relative w-full mt-1.5",
         ),
@@ -166,7 +166,7 @@ def category_field(value: rx.Var) -> rx.Component:
             ),
             rx.icon(
                 "chevron-down",
-                class_name="absolute right-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-emerald-100/45 pointer-events-none",
+                class_name="absolute right-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#c9c5b4]/45 pointer-events-none",
             ),
             class_name="relative w-full mt-1.5",
         ),
@@ -183,19 +183,19 @@ def check_field(
             type="checkbox",
             default_checked=value == "1",
             key=f"{GuideAdminState.editor_key}-{name}",
-            class_name="h-4 w-4 shrink-0 rounded border-white/20 bg-[#04140d] accent-lime-300 cursor-pointer mt-0.5",
+            class_name="h-4 w-4 shrink-0 rounded border-[#f2efe4]/22 bg-[#0A0A08] accent-[#d8fa5e] cursor-pointer mt-0.5",
             default_value="1",
         ),
         rx.el.div(
             rx.el.span(
                 label,
-                class_name="text-[12px] font-semibold text-emerald-50",
+                class_name="text-[12px] font-semibold text-[#f2efe4]",
             ),
             rx.el.p(
                 hint,
-                class_name="text-[10px] font-medium text-emerald-100/40 mt-0.5",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/40 mt-0.5",
             ),
             class_name="min-w-0",
         ),
-        class_name="flex items-start gap-2.5 w-full rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 cursor-pointer",
+        class_name="flex items-start gap-2.5 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] px-3 py-2.5 cursor-pointer",
     )

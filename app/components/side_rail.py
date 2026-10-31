@@ -1,358 +1,257 @@
+"""Index latéral éditorial et navigation mobile d'AgriPro."""
+
+from __future__ import annotations
+
 import reflex as rx
 
-from app.states.navigation_state import NavigationState
+from app.components.design import hairline
 from app.components.guide_help import guide_help_panel
-from app.states.help_state import HelpState
 from app.components.menu_auth import account_controls
+from app.states.help_state import HelpState
+from app.states.navigation_state import NavigationState
 
 
-def _cockpit_item(item, compact: bool = False) -> rx.Component:
+def _number(index) -> rx.Var | str:
+    return rx.cond(index < 9, "0", "") + (index + 1).to_string()
+
+
+def _rail_item(item, index) -> rx.Component:
+    active = NavigationState.selected_cockpit == item["key"]
     return rx.el.button(
+        rx.el.span(
+            _number(index),
+            class_name=rx.cond(
+                active,
+                "ap-mono hidden w-5 shrink-0 text-[9px] tracking-[0.1em] text-[#D8FA5E] xl:block",
+                "ap-mono hidden w-5 shrink-0 text-[9px] tracking-[0.1em] text-[#C9C5B4]/30 xl:block",
+            ),
+        ),
         rx.icon(item["icon"], class_name="h-4 w-4 shrink-0"),
         rx.el.span(
             item["label"],
-            class_name=rx.cond(
-                compact, "hidden xl:block flex-1 text-left", "flex-1 text-left"
-            ),
+            class_name="hidden flex-1 truncate text-left text-[11px] leading-tight xl:block",
         ),
         rx.cond(
             item["available"],
-            rx.icon(
-                "chevron-right",
-                class_name=rx.cond(
-                    compact,
-                    "hidden xl:block h-3 w-3 shrink-0",
-                    "h-3 w-3 shrink-0",
-                ),
-            ),
+            rx.fragment(),
             rx.el.span(
-                "À venir",
-                class_name=rx.cond(
-                    compact,
-                    "hidden xl:block text-[9px] text-amber-300 w-fit",
-                    "text-[9px] text-amber-300 w-fit",
-                ),
+                "—",
+                class_name="ap-mono hidden text-[10px] text-[#FF8A5B] xl:block",
+                title=item["note"],
             ),
         ),
         type="button",
         disabled=~item["available"],
-        title=rx.cond(item["available"], item["label"], item["note"]),
+        title=rx.cond(item["available"], item["label"], f"{item['label']} — à venir"),
         aria_label=rx.cond(
-            item["available"], item["label"], f"{item['label']} — À venir"
+            item["available"], item["label"], f"{item['label']} — à venir"
         ),
-        aria_pressed=NavigationState.selected_cockpit == item["key"],
+        aria_pressed=active,
         on_click=NavigationState.select_cockpit(item["key"]),
         class_name=rx.cond(
-            NavigationState.selected_cockpit == item["key"],
-            "flex w-full items-center gap-2 rounded-xl border border-lime-300/30 bg-lime-300/10 p-3 text-xs font-semibold text-lime-200 focus-visible:outline-2 focus-visible:outline-lime-300 focus-visible:outline-offset-2 disabled:opacity-45",
-            "flex w-full items-center gap-2 rounded-xl border border-transparent bg-transparent p-3 text-xs font-medium text-emerald-100/70 hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-lime-300 focus-visible:outline-offset-2 disabled:opacity-45 disabled:cursor-not-allowed",
+            active,
+            "flex w-full items-center gap-2.5 border-l-2 border-[#D8FA5E] bg-[#D8FA5E]/8 px-2.5 py-2.5 text-[#D8FA5E] transition-colors xl:gap-3 xl:px-3",
+            "flex w-full items-center gap-2.5 border-l-2 border-transparent px-2.5 py-2.5 text-[#C9C5B4]/70 transition-colors hover:border-[#F2EFE4]/25 hover:bg-[#14160F] hover:text-[#F2EFE4] xl:gap-3 xl:px-3 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-transparent",
         ),
     )
 
 
-def _context_link(entry) -> rx.Component:
+def _rail_link(label: str, href: str, icon: str) -> rx.Component:
     return rx.el.a(
-        rx.icon(entry["icon"], class_name="h-4 w-4 shrink-0 text-lime-300"),
-        rx.el.span(entry["label"]),
-        href=entry["href"],
-        on_click=NavigationState.close_mobile,
-        aria_current=rx.cond(
-            NavigationState.current_entry["key"] == entry["key"],
-            "page",
-            "false",
+        rx.icon(icon, class_name="h-4 w-4 shrink-0"),
+        rx.el.span(
+            label,
+            class_name="ap-mono hidden text-[9px] uppercase tracking-[0.16em] xl:block",
         ),
-        class_name=rx.cond(
-            NavigationState.current_entry["key"] == entry["key"],
-            "flex items-center gap-2 rounded-xl border border-lime-300/30 bg-lime-300/10 p-3 text-xs font-semibold text-lime-200 focus-visible:outline-2 focus-visible:outline-lime-300",
-            "flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-xs font-medium text-emerald-50 hover:border-lime-300/40 focus-visible:outline-2 focus-visible:outline-lime-300",
+        href=href,
+        title=label,
+        aria_label=label,
+        class_name=(
+            "ap-mono flex w-full items-center gap-2.5 border-l-2 border-transparent "
+            "px-2.5 py-2.5 text-[#C9C5B4]/60 transition-colors hover:border-[#F2EFE4]/25 "
+            "hover:bg-[#14160F] hover:text-[#F2EFE4] xl:gap-3 xl:px-3"
         ),
     )
 
 
-def _domain(domain) -> rx.Component:
-    return rx.el.section(
-        rx.el.h3(
-            domain,
-            class_name="text-[10px] uppercase tracking-[0.16em] font-semibold text-amber-300 mb-2",
-        ),
-        rx.el.div(
-            rx.foreach(
-                NavigationState.entries,
-                lambda entry: rx.cond(
-                    entry["domain"] == domain,
-                    _context_link(entry),
-                    rx.fragment(),
-                ),
-            ),
-            class_name="flex flex-col gap-2",
-        ),
-        class_name="min-w-0 w-full",
-    )
-
-
-def _context() -> rx.Component:
-    return rx.el.nav(
-        rx.el.p(
-            NavigationState.selected_note,
-            class_name="text-xs text-emerald-100/60 mb-4",
-        ),
-        rx.el.div(
-            rx.foreach(NavigationState.domains, _domain),
-            class_name="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4 w-full",
-        ),
-        aria_label=f"Domaines du cockpit {NavigationState.selected_label}",
-        class_name="w-full",
-    )
-
-
-def _selector() -> rx.Component:
-    return rx.el.div(
-        rx.el.select(
-            rx.foreach(
-                NavigationState.cockpits,
-                lambda item: rx.el.option(
-                    rx.cond(
-                        item["available"],
-                        item["label"],
-                        f"{item['label']} — À venir",
+def side_rail(active: str) -> rx.Component:
+    """Index vertical numéroté des cockpits (desktop)."""
+    return rx.fragment(
+        guide_help_panel(),
+        rx.el.aside(
+            rx.el.div(
+                rx.el.span(
+                    "Sommaire",
+                    class_name=(
+                        "ap-eyebrow block px-3 pb-3 pt-6 text-[#C9C5B4]/35 "
+                        "xl:px-3"
                     ),
-                    value=item["key"],
-                    disabled=~item["available"],
                 ),
+                rx.el.nav(
+                    rx.foreach(
+                        NavigationState.cockpits,
+                        lambda item, index: _rail_item(item, index),
+                    ),
+                    aria_label="Cockpits métier",
+                    class_name="flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto pb-4",
+                ),
+                hairline(),
+                rx.el.div(
+                    rx.cond(
+                        NavigationState.global_visible,
+                        _rail_link("Cockpit global", "/", "house"),
+                        rx.fragment(),
+                    ),
+                    rx.cond(
+                        NavigationState.search_visible,
+                        _rail_link("Recherche", "/recherche", "search"),
+                        rx.fragment(),
+                    ),
+                    rx.el.button(
+                        rx.icon("life-buoy", class_name="h-4 w-4 shrink-0"),
+                        rx.el.span(
+                            "Aide",
+                            class_name="ap-mono hidden text-[9px] uppercase tracking-[0.16em] xl:block",
+                        ),
+                        type="button",
+                        on_click=HelpState.toggle_context(active),
+                        aria_label="Ouvrir l'aide contextuelle",
+                        class_name=(
+                            "ap-mono flex w-full items-center gap-2.5 border-l-2 "
+                            "border-transparent px-2.5 py-2.5 text-[#C9C5B4]/60 transition-colors "
+                            "hover:border-[#F2EFE4]/25 hover:bg-[#14160F] hover:text-[#F2EFE4] "
+                            "xl:gap-3 xl:px-3"
+                        ),
+                    ),
+                    rx.el.p(
+                        "MMXXVI",
+                        class_name=(
+                            "ap-mono hidden px-3 pb-4 pt-3 text-[9px] tracking-[0.3em] "
+                            "text-[#C9C5B4]/25 xl:block"
+                        ),
+                    ),
+                    class_name="mt-2 flex flex-col",
+                ),
+                class_name="flex min-h-0 flex-1 flex-col px-2 pt-0",
             ),
-            value=NavigationState.selected_cockpit,
-            on_change=NavigationState.select_cockpit,
-            id="nav-selector",
-            aria_label="Sélectionner un cockpit",
-            class_name="appearance-none w-full rounded-xl border border-lime-300/25 bg-[#04120c] py-2.5 pl-3 pr-9 text-xs font-semibold text-lime-200 focus-visible:outline-2 focus-visible:outline-lime-300",
+            class_name=(
+                "fixed bottom-0 left-0 top-14 z-30 hidden w-16 flex-col border-r "
+                "border-[#F2EFE4]/12 bg-[#0A0A08] md:flex xl:w-60"
+            ),
         ),
-        rx.icon(
-            "chevron-down",
-            class_name="pointer-events-none absolute right-3 top-3 h-4 w-4 text-lime-300",
-        ),
-        class_name="relative min-w-0 flex-1 sm:flex-none sm:w-60",
     )
 
 
-def _mobile_navigation(active: str) -> rx.Component:
+def _mobile_item(item, index) -> rx.Component:
+    active = NavigationState.selected_cockpit == item["key"]
+    return rx.el.button(
+        rx.el.span(
+            _number(index),
+            class_name=rx.cond(
+                active,
+                "ap-mono w-6 shrink-0 text-[9px] text-[#D8FA5E]",
+                "ap-mono w-6 shrink-0 text-[9px] text-[#C9C5B4]/30",
+            ),
+        ),
+        rx.icon(item["icon"], class_name="h-4 w-4 shrink-0"),
+        rx.el.span(item["label"], class_name="flex-1 truncate text-left"),
+        rx.cond(
+            item["available"],
+            rx.icon("arrow-up-right", class_name="h-3.5 w-3.5 opacity-40"),
+            rx.el.span("À venir", class_name="ap-mono text-[8px] text-[#FF8A5B]"),
+        ),
+        type="button",
+        disabled=~item["available"],
+        aria_pressed=active,
+        on_click=NavigationState.select_cockpit(item["key"]),
+        class_name=rx.cond(
+            active,
+            "flex w-full items-center gap-3 border border-[#D8FA5E]/40 bg-[#D8FA5E]/8 px-3 py-3 text-[12px] font-medium text-[#D8FA5E]",
+            "flex w-full items-center gap-3 border border-[#F2EFE4]/10 px-3 py-3 text-[12px] text-[#C9C5B4] disabled:opacity-35",
+        ),
+    )
+
+
+def mobile_navigation(active: str) -> rx.Component:
+    """Tiroir de navigation mobile (masthead)."""
     return rx.radix.primitives.dialog.root(
         rx.radix.primitives.dialog.trigger(
             rx.el.button(
-                rx.icon("menu", class_name="h-5 w-5"),
+                rx.icon("menu", class_name="h-4 w-4"),
                 type="button",
-                aria_label="Ouvrir les cockpits",
-                class_name="md:hidden rounded-xl border border-white/10 bg-white/5 p-2.5 text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
+                aria_label="Ouvrir l'index des cockpits",
+                class_name=(
+                    "ap-mono inline-flex h-9 w-9 items-center justify-center border "
+                    "border-[#F2EFE4]/16 text-[#C9C5B4] transition-colors "
+                    "hover:border-[#D8FA5E] hover:text-[#D8FA5E] md:hidden"
+                ),
             ),
             as_child=True,
         ),
         rx.radix.primitives.dialog.portal(
             rx.radix.primitives.dialog.overlay(
-                class_name="fixed inset-0 z-[70] bg-black/60"
+                class_name="fixed inset-0 z-[70] bg-[#060604]/85"
             ),
             rx.radix.primitives.dialog.content(
                 rx.el.div(
+                    rx.el.div(
+                        rx.el.span(class_name="h-2 w-2 bg-[#D8FA5E]"),
+                        rx.el.span(
+                            "AgriPro",
+                            class_name="ap-serif text-2xl text-[#F2EFE4]",
+                        ),
+                        class_name="flex items-center gap-3",
+                    ),
                     rx.radix.primitives.dialog.title(
-                        "Cockpits AgriPro",
-                        class_name="font-['Instrument_Serif'] text-2xl text-emerald-50",
+                        "Index des cockpits",
+                        class_name="ap-eyebrow mt-6 text-[#C9C5B4]/45",
+                    ),
+                    rx.radix.primitives.dialog.description(
+                        "Choisissez un cockpit, puis un domaine. Échap ferme ce panneau.",
+                        class_name="mt-2 text-[12px] leading-relaxed text-[#C9C5B4]/60",
                     ),
                     rx.radix.primitives.dialog.close(
                         rx.el.button(
-                            rx.icon("x", class_name="h-5 w-5"),
+                            rx.icon("x", class_name="h-4 w-4"),
                             type="button",
                             aria_label="Fermer la navigation",
-                            class_name="rounded-lg p-2 text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
+                            class_name=(
+                                "inline-flex h-9 w-9 items-center justify-center border "
+                                "border-[#F2EFE4]/16 text-[#C9C5B4]"
+                            ),
                         ),
                         as_child=True,
                     ),
-                    class_name="flex items-center justify-between gap-3",
-                ),
-                rx.radix.primitives.dialog.description(
-                    "Choisissez un cockpit puis un domaine existant. Échap ferme ce panneau.",
-                    class_name="text-xs text-emerald-100/60 mt-2",
+                    class_name="flex items-start justify-between gap-3",
                 ),
                 rx.el.div(
                     rx.foreach(
                         NavigationState.cockpits,
-                        lambda item: _cockpit_item(item),
+                        lambda item, index: _mobile_item(item, index),
                     ),
-                    class_name="flex flex-col gap-1 mt-4",
+                    class_name="mt-6 flex max-h-[52vh] flex-col gap-1.5 overflow-y-auto pr-1",
                 ),
                 rx.el.div(
-                    _context(), class_name="mt-5 border-t border-white/10 pt-4"
+                    account_controls(),
+                    rx.el.button(
+                        "Aide contextuelle",
+                        type="button",
+                        on_click=HelpState.toggle_context(active),
+                        class_name=(
+                            "ap-mono inline-flex items-center gap-2 border "
+                            "border-[#F2EFE4]/16 px-3 py-2.5 text-[9px] uppercase "
+                            "tracking-[0.18em] text-[#C9C5B4]"
+                        ),
+                    ),
+                    class_name="mt-6 flex items-center justify-between gap-3 border-t border-[#F2EFE4]/12 pt-5",
                 ),
-                rx.el.button(
-                    "Aide contextuelle",
-                    on_click=HelpState.toggle_context(active),
-                    class_name="mt-4 rounded-xl border border-lime-300/25 bg-lime-300/10 p-3 text-xs text-lime-200 focus-visible:outline-2 focus-visible:outline-lime-300",
+                class_name=(
+                    "fixed inset-x-3 bottom-3 top-3 z-[80] overflow-y-auto border "
+                    "border-[#F2EFE4]/16 bg-[#0A0A08] p-5 sm:inset-x-auto sm:left-3 "
+                    "sm:w-[24rem]"
                 ),
-                class_name="fixed inset-y-3 left-3 right-3 z-[80] overflow-y-auto rounded-3xl border border-lime-300/20 bg-[#04120c] p-5 font-['Inter'] text-emerald-50 focus:outline-hidden",
             ),
         ),
         open=NavigationState.mobile_open,
         on_open_change=NavigationState.set_mobile_open,
-    )
-
-
-def _persistent_link(label: str, href: str, icon: str) -> rx.Component:
-    return rx.el.a(
-        rx.icon(icon, class_name="h-4 w-4 shrink-0"),
-        rx.el.span(label, class_name="hidden xl:inline"),
-        href=href,
-        title=label,
-        aria_label=label,
-        class_name="flex items-center gap-2 rounded-xl border border-lime-300/20 bg-lime-300/5 p-3 text-xs font-semibold text-lime-200 focus-visible:outline-2 focus-visible:outline-lime-300",
-    )
-
-
-def side_rail(active: str) -> rx.Component:
-    return rx.fragment(
-        guide_help_panel(),
-        rx.el.aside(
-            rx.el.a(
-                rx.icon("leaf", class_name="h-5 w-5 text-lime-300 shrink-0"),
-                rx.el.span(
-                    "AgriPro",
-                    class_name="hidden xl:block font-['Instrument_Serif'] text-2xl text-emerald-50",
-                ),
-                href="/",
-                aria_label="AgriPro — cockpit global",
-                class_name="flex items-center gap-3 p-3 mb-3 focus-visible:outline-2 focus-visible:outline-lime-300",
-            ),
-            rx.cond(
-                NavigationState.global_visible,
-                _persistent_link("Cockpit global", "/", "house"),
-                rx.fragment(),
-            ),
-            rx.cond(
-                NavigationState.search_visible,
-                _persistent_link("Recherche globale", "/recherche", "search"),
-                rx.fragment(),
-            ),
-            rx.el.nav(
-                rx.foreach(
-                    NavigationState.cockpits,
-                    lambda item: _cockpit_item(item, True),
-                ),
-                aria_label="Cockpits métier",
-                class_name="flex flex-col gap-1 flex-1 min-h-0 overflow-y-auto my-3 pr-1",
-            ),
-            rx.el.button(
-                rx.icon("life-buoy", class_name="h-4 w-4"),
-                rx.el.span("Aide contextuelle", class_name="hidden xl:block"),
-                on_click=HelpState.toggle_context(active),
-                aria_label="Ouvrir l'aide contextuelle",
-                class_name="flex items-center gap-2 rounded-xl border border-lime-300/25 bg-lime-300/5 p-3 text-xs text-lime-200 shrink-0 focus-visible:outline-2 focus-visible:outline-lime-300",
-            ),
-            class_name="hidden md:flex fixed inset-y-3 left-3 z-40 w-16 xl:w-64 flex-col rounded-3xl border border-white/10 bg-[#04120c]/90 p-2 xl:p-3 backdrop-blur-xl",
-        ),
-        rx.el.header(
-            rx.el.div(
-                _mobile_navigation(active),
-                _selector(),
-                rx.el.button(
-                    rx.icon("panel-top", class_name="h-4 w-4"),
-                    rx.el.span("Domaines", class_name="hidden sm:inline"),
-                    on_click=NavigationState.toggle_panel,
-                    aria_expanded=NavigationState.panel_open,
-                    aria_controls="nav-context",
-                    title="Ouvrir ou fermer les domaines du cockpit",
-                    class_name="rounded-xl border border-white/10 bg-white/5 p-2.5 text-xs text-emerald-50 flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-lime-300",
-                ),
-                rx.cond(
-                    NavigationState.global_visible,
-                    rx.el.a(
-                        rx.icon("house", class_name="h-4 w-4"),
-                        href="/",
-                        title="Cockpit global",
-                        aria_label="Cockpit global",
-                        class_name="ml-auto rounded-xl border border-white/10 bg-white/5 p-2.5 text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
-                    ),
-                    rx.fragment(),
-                ),
-                rx.cond(
-                    NavigationState.search_visible,
-                    rx.el.a(
-                        rx.icon("search", class_name="h-4 w-4"),
-                        href="/recherche",
-                        title="Recherche globale",
-                        aria_label="Recherche globale",
-                        class_name="rounded-xl border border-white/10 bg-white/5 p-2.5 text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
-                    ),
-                    rx.fragment(),
-                ),
-                account_controls(),
-                class_name="flex items-center gap-2 w-full",
-            ),
-            rx.cond(
-                NavigationState.navigation_error != "",
-                rx.el.p(
-                    NavigationState.navigation_error,
-                    role="alert",
-                    class_name="mt-3 text-xs text-amber-200",
-                ),
-                rx.fragment(),
-            ),
-            rx.el.nav(
-                rx.cond(
-                    NavigationState.global_visible,
-                    rx.el.a(
-                        "AgriPro",
-                        href="/",
-                        class_name="text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
-                    ),
-                    rx.el.span("AgriPro", class_name="text-lime-300"),
-                ),
-                rx.icon(
-                    "chevron-right", class_name="h-3 w-3 text-emerald-100/40"
-                ),
-                rx.el.button(
-                    NavigationState.current_cockpit_label,
-                    on_click=NavigationState.select_cockpit(
-                        NavigationState.current_entry["cockpit"]
-                    ),
-                    class_name="text-emerald-100/70 focus-visible:outline-2 focus-visible:outline-lime-300",
-                ),
-                rx.icon(
-                    "chevron-right", class_name="h-3 w-3 text-emerald-100/40"
-                ),
-                rx.el.a(
-                    NavigationState.current_entry["domain"],
-                    href=NavigationState.current_entry["href"],
-                    class_name="text-emerald-100/60 focus-visible:outline-2 focus-visible:outline-lime-300",
-                ),
-                rx.icon(
-                    "chevron-right", class_name="h-3 w-3 text-emerald-100/40"
-                ),
-                rx.el.span(
-                    NavigationState.current_entry["label"],
-                    aria_current="page",
-                    class_name="text-emerald-50",
-                ),
-                aria_label="Fil d'Ariane",
-                class_name="flex flex-wrap items-center gap-2 text-[11px] mt-3",
-            ),
-            rx.cond(
-                NavigationState.panel_open,
-                rx.el.div(
-                    rx.el.div(
-                        rx.el.h2(
-                            NavigationState.selected_label,
-                            class_name="font-['Instrument_Serif'] text-2xl text-emerald-50",
-                        ),
-                        rx.el.button(
-                            rx.icon("x", class_name="h-4 w-4"),
-                            "Fermer",
-                            on_click=NavigationState.close_panel,
-                            class_name="flex items-center gap-2 rounded-lg p-2 text-xs text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
-                        ),
-                        class_name="flex items-center justify-between mb-3",
-                    ),
-                    _context(),
-                    id="nav-context",
-                    class_name="mt-4 rounded-2xl border border-lime-300/20 bg-[#04120c]/70 p-4",
-                ),
-                rx.fragment(),
-            ),
-            class_name="w-full mb-6 rounded-2xl border border-white/10 bg-[#04120c]/65 p-3 sm:p-4 backdrop-blur-xl",
-        ),
     )

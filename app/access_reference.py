@@ -350,11 +350,11 @@ FAMILY_LABELS: dict[str, str] = {
 }
 
 FAMILY_COLORS: dict[str, str] = {
-    FAMILY_DIRECTION: "#fbbf24",
-    FAMILY_PRODUCTION: "#a3e635",
-    FAMILY_TERRAIN: "#4ade80",
-    FAMILY_LOGISTIQUE: "#38bdf8",
-    FAMILY_ADMINISTRATION: "#c084fc",
+    FAMILY_DIRECTION: "#FF8A5B",
+    FAMILY_PRODUCTION: "#D8FA5E",
+    FAMILY_TERRAIN: "#A9C98B",
+    FAMILY_LOGISTIQUE: "#9CC3FF",
+    FAMILY_ADMINISTRATION: "#D3C6FF",
 }
 
 
@@ -637,7 +637,7 @@ ROLES: list[RoleSpec] = [
         "level": 100,
         "tagline": "Accès complet, y compris la gouvernance des accès.",
         "icon": "crown",
-        "color_hex": "#fbbf24",
+        "color_hex": "#FF8A5B",
         "is_system": True,
     },
     {
@@ -646,7 +646,7 @@ ROLES: list[RoleSpec] = [
         "level": 80,
         "tagline": "Pilote toute la production et valide les chantiers.",
         "icon": "clipboard-check",
-        "color_hex": "#a3e635",
+        "color_hex": "#D8FA5E",
         "is_system": True,
     },
     {
@@ -655,7 +655,7 @@ ROLES: list[RoleSpec] = [
         "level": 70,
         "tagline": "Conduit cultures, interventions et récoltes.",
         "icon": "sprout",
-        "color_hex": "#4ade80",
+        "color_hex": "#A9C98B",
         "is_system": False,
     },
     {
@@ -664,7 +664,7 @@ ROLES: list[RoleSpec] = [
         "level": 60,
         "tagline": "Planifie, exécute et valide les tours d'eau.",
         "icon": "droplets",
-        "color_hex": "#38bdf8",
+        "color_hex": "#9CC3FF",
         "is_system": False,
     },
     {
@@ -673,7 +673,7 @@ ROLES: list[RoleSpec] = [
         "level": 60,
         "tagline": "Magasin d'intrants, seuils et mouvements.",
         "icon": "package",
-        "color_hex": "#c084fc",
+        "color_hex": "#D3C6FF",
         "is_system": False,
     },
     {
@@ -682,7 +682,7 @@ ROLES: list[RoleSpec] = [
         "level": 60,
         "tagline": "Flotte, maintenance et carburant.",
         "icon": "wrench",
-        "color_hex": "#f97316",
+        "color_hex": "#FF5A2B",
         "is_system": False,
     },
     {
@@ -691,7 +691,7 @@ ROLES: list[RoleSpec] = [
         "level": 45,
         "tagline": "Équipe, missions et parcelles affectées.",
         "icon": "users",
-        "color_hex": "#22c55e",
+        "color_hex": "#8FB37A",
         "is_system": False,
     },
     {
@@ -700,7 +700,7 @@ ROLES: list[RoleSpec] = [
         "level": 20,
         "tagline": "Tâches et parcelles personnellement affectées.",
         "icon": "shovel",
-        "color_hex": "#84cc16",
+        "color_hex": "#C2E847",
         "is_system": False,
     },
     {
@@ -709,7 +709,7 @@ ROLES: list[RoleSpec] = [
         "level": 50,
         "tagline": "Achats, ventes, charges et rapports financiers.",
         "icon": "calculator",
-        "color_hex": "#facc15",
+        "color_hex": "#FFC46B",
         "is_system": False,
     },
     {
@@ -718,7 +718,7 @@ ROLES: list[RoleSpec] = [
         "level": 10,
         "tagline": "Lecture seule sur l'exploitation.",
         "icon": "eye",
-        "color_hex": "#94a3b8",
+        "color_hex": "#A8A79C",
         "is_system": True,
     },
 ]

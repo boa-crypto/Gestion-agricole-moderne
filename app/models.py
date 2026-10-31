@@ -330,7 +330,7 @@ class CropVariety(Base):
     )
     sowing_window: Mapped[str] = mapped_column(String(80), default="")
     harvest_window: Mapped[str] = mapped_column(String(80), default="")
-    color_hex: Mapped[str] = mapped_column(String(9), default="#4ade80")
+    color_hex: Mapped[str] = mapped_column(String(9), default="#A9C98B")
     icon: Mapped[str] = mapped_column(String(40), default="sprout")
     notes: Mapped[str] = mapped_column(Text, default="")
     created_at: Mapped[datetime.datetime] = mapped_column(
@@ -469,7 +469,7 @@ class Parcel(Base):
         nullable=True, server_default="4326", default=4326
     )
     geometry_color_hex: Mapped[str | None] = mapped_column(
-        String(9), nullable=True, server_default="#a3e635", default="#a3e635"
+        String(9), nullable=True, server_default="#D8FA5E", default="#D8FA5E"
     )
     geometry_updated_at: Mapped[datetime.datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True, default=None
@@ -1241,7 +1241,7 @@ class ExpenseType(Base):
     code: Mapped[str] = mapped_column(String(40), default="")
     category: Mapped[str] = mapped_column(String(80), default="")
     description: Mapped[str] = mapped_column(Text, default="")
-    color_hex: Mapped[str] = mapped_column(String(9), default="#a3e635")
+    color_hex: Mapped[str] = mapped_column(String(9), default="#D8FA5E")
     icon: Mapped[str] = mapped_column(String(40), default="receipt-text")
     default_payment_method: Mapped[PaymentMethod] = mapped_column(
         Enum(PaymentMethod, native_enum=False, length=32),
@@ -1401,8 +1401,8 @@ class GuideCategory(Base):
     tagline: Mapped[str] = mapped_column(String(220), default="")
     description: Mapped[str] = mapped_column(Text, default="")
     icon: Mapped[str] = mapped_column(String(40), default="book-open")
-    color_hex: Mapped[str] = mapped_column(String(9), default="#a3e635")
-    accent_hex: Mapped[str] = mapped_column(String(9), default="#fbbf24")
+    color_hex: Mapped[str] = mapped_column(String(9), default="#D8FA5E")
+    accent_hex: Mapped[str] = mapped_column(String(9), default="#FF8A5B")
     module_route: Mapped[str] = mapped_column(String(160), default="/")
     position: Mapped[int] = mapped_column(default=0)
     is_active: Mapped[bool] = mapped_column(default=True)
@@ -1694,7 +1694,7 @@ class GuideLearningPath(Base):
     )
     estimated_minutes: Mapped[int] = mapped_column(default=30)
     icon: Mapped[str] = mapped_column(String(40), default="graduation-cap")
-    color_hex: Mapped[str] = mapped_column(String(9), default="#a3e635")
+    color_hex: Mapped[str] = mapped_column(String(9), default="#D8FA5E")
     version_label: Mapped[str] = mapped_column(String(40), default="1.0.0")
     position: Mapped[int] = mapped_column(default=0)
     created_at: Mapped[datetime.datetime] = mapped_column(
@@ -1862,8 +1862,8 @@ class CropCategory(Base):
     tagline: Mapped[str] = mapped_column(String(240), default="")
     description: Mapped[str] = mapped_column(Text, default="")
     icon: Mapped[str] = mapped_column(String(40), default="sprout")
-    color_hex: Mapped[str] = mapped_column(String(9), default="#a3e635")
-    accent_hex: Mapped[str] = mapped_column(String(9), default="#fbbf24")
+    color_hex: Mapped[str] = mapped_column(String(9), default="#D8FA5E")
+    accent_hex: Mapped[str] = mapped_column(String(9), default="#FF8A5B")
     position: Mapped[int] = mapped_column(default=0)
     is_active: Mapped[bool] = mapped_column(default=True)
     created_at: Mapped[datetime.datetime] = mapped_column(
@@ -1898,7 +1898,7 @@ class CropCulture(Base):
         default=WaterNeed.MODEREE,
     )
     icon: Mapped[str] = mapped_column(String(40), default="sprout")
-    color_hex: Mapped[str] = mapped_column(String(9), default="#4ade80")
+    color_hex: Mapped[str] = mapped_column(String(9), default="#A9C98B")
     usage: Mapped[str] = mapped_column(String(240), default="")
     description: Mapped[str] = mapped_column(Text, default="")
     position: Mapped[int] = mapped_column(default=0)
@@ -1993,7 +1993,7 @@ class CropCatalogVariety(Base):
         Numeric(10, 2), default=0
     )
     quality_grade: Mapped[str] = mapped_column(String(160), default="")
-    color_hex: Mapped[str] = mapped_column(String(9), default="#a3e635")
+    color_hex: Mapped[str] = mapped_column(String(9), default="#D8FA5E")
     sowing_window: Mapped[str] = mapped_column(String(120), default="")
     harvest_window: Mapped[str] = mapped_column(String(120), default="")
     drought_tolerance: Mapped[ToleranceLevel] = mapped_column(
@@ -2142,7 +2142,7 @@ class CropPhenologyStage(Base):
     is_critical: Mapped[bool] = mapped_column(default=False)
     is_active: Mapped[bool] = mapped_column(default=True)
     icon: Mapped[str] = mapped_column(String(40), default="sprout")
-    color_hex: Mapped[str] = mapped_column(String(9), default="#a3e635")
+    color_hex: Mapped[str] = mapped_column(String(9), default="#D8FA5E")
     guide_article_slug: Mapped[str] = mapped_column(String(120), default="")
     guide_term_slug: Mapped[str] = mapped_column(String(120), default="")
     created_at: Mapped[datetime.datetime] = mapped_column(
@@ -2428,7 +2428,7 @@ class AppFunction(Base):
     responsibilities: Mapped[str] = mapped_column(Text, default="")
     default_role_key: Mapped[str] = mapped_column(String(60), default="")
     icon: Mapped[str] = mapped_column(String(40), default="user")
-    color_hex: Mapped[str] = mapped_column(String(9), default="#a3e635")
+    color_hex: Mapped[str] = mapped_column(String(9), default="#D8FA5E")
     position: Mapped[int] = mapped_column(default=0)
     is_active: Mapped[bool] = mapped_column(default=True)
     created_at: Mapped[datetime.datetime] = mapped_column(
@@ -2449,7 +2449,7 @@ class AppRole(Base):
     tagline: Mapped[str] = mapped_column(String(240), default="")
     description: Mapped[str] = mapped_column(Text, default="")
     icon: Mapped[str] = mapped_column(String(40), default="shield")
-    color_hex: Mapped[str] = mapped_column(String(9), default="#a3e635")
+    color_hex: Mapped[str] = mapped_column(String(9), default="#D8FA5E")
     is_system: Mapped[bool] = mapped_column(default=False)
     position: Mapped[int] = mapped_column(default=0)
     is_active: Mapped[bool] = mapped_column(default=True)
@@ -2529,7 +2529,7 @@ class FarmTeam(Base):
         default=TeamStatus.ACTIVE,
     )
     icon: Mapped[str] = mapped_column(String(40), default="users")
-    color_hex: Mapped[str] = mapped_column(String(9), default="#a3e635")
+    color_hex: Mapped[str] = mapped_column(String(9), default="#D8FA5E")
     notes: Mapped[str] = mapped_column(Text, default="")
     created_at: Mapped[datetime.datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), init=False

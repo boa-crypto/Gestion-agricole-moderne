@@ -4,8 +4,8 @@ import reflex as rx
 
 from app.states.phenology_state import Option, PhenologyState
 
-_INPUT = "w-full rounded-xl border border-white/10 bg-[#04140d] px-3 py-2.5 text-sm font-medium text-emerald-50 placeholder:text-emerald-100/30 focus:border-lime-300/50 outline-hidden transition-colors"
-_LABEL = "block text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/45 mb-1.5"
+_INPUT = "w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] px-3 py-2.5 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/30 focus:border-[#d8fa5e]/50 outline-hidden transition-colors"
+_LABEL = "block ap-eyebrow text-[#c9c5b4]/45 mb-1.5"
 
 
 def _field(label: str, control: rx.Component) -> rx.Component:
@@ -40,7 +40,7 @@ def _select(
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-100/40 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/40 pointer-events-none",
         ),
         class_name="relative w-full",
     )
@@ -53,9 +53,9 @@ def _checkbox(name: str, label: str) -> rx.Component:
             name=name,
             default_value="1",
             key=f"{name}-{PhenologyState.form_key}",
-            class_name="h-4 w-4 accent-lime-300 cursor-pointer",
+            class_name="h-4 w-4 accent-[#d8fa5e] cursor-pointer",
         ),
-        rx.el.span(label, class_name="text-sm font-medium text-emerald-100/75"),
+        rx.el.span(label, class_name="text-sm font-medium text-[#c9c5b4]/75"),
         class_name="flex items-center gap-2.5 cursor-pointer w-fit",
     )
 
@@ -67,11 +67,11 @@ def _errors() -> rx.Component:
             rx.el.div(
                 rx.icon(
                     "octagon-alert",
-                    class_name="h-4 w-4 shrink-0 text-red-300",
+                    class_name="h-4 w-4 shrink-0 text-[#ff9b8c]",
                 ),
                 rx.el.span(
                     "Observation refusée : le stade doit appartenir au profil de la culture.",
-                    class_name="text-[11px] font-semibold text-red-200",
+                    class_name="text-[11px] font-semibold text-[#ffbcb0]",
                 ),
                 class_name="flex items-start gap-2",
             ),
@@ -79,10 +79,10 @@ def _errors() -> rx.Component:
                 PhenologyState.form_errors,
                 lambda message: rx.el.p(
                     message,
-                    class_name="text-[11px] font-medium text-red-100/75 mt-1.5 leading-relaxed",
+                    class_name="text-[11px] font-medium text-[#ffe0da]/75 mt-1.5 leading-relaxed",
                 ),
             ),
-            class_name="w-full rounded-xl border border-red-400/30 bg-red-500/10 p-3 mt-3",
+            class_name="w-full rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 p-3 mt-3",
         ),
         rx.fragment(),
     )
@@ -92,17 +92,17 @@ def phenology_form() -> rx.Component:
     return rx.el.form(
         rx.el.div(
             rx.el.div(
-                rx.icon("clipboard-pen", class_name="h-4 w-4 text-lime-300"),
+                rx.icon("clipboard-pen", class_name="h-4 w-4 text-[#d8fa5e]"),
                 rx.el.span(
                     "Observation rapide",
-                    class_name="text-[10px] font-semibold uppercase tracking-[0.24em] text-lime-300/80",
+                    class_name="ap-eyebrow text-[#d8fa5e]/80",
                 ),
                 class_name="flex items-center gap-2",
             ),
             rx.el.p(
                 "Le stade proposé est contrôlé face au profil de la culture : "
                 "un stade étranger au cycle est refusé et rien n'est écrasé.",
-                class_name="text-[11px] font-medium text-emerald-100/50 mt-1.5",
+                class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-1.5",
             ),
             class_name="min-w-0",
         ),
@@ -216,12 +216,12 @@ def phenology_form() -> rx.Component:
         ),
         _errors(),
         rx.el.button(
-            rx.icon("check", class_name="h-4 w-4 text-[#04140d]"),
-            rx.el.span("Consigner l'observation", class_name="text-[#04140d]"),
+            rx.icon("check", class_name="h-4 w-4 text-[#0A0A08]"),
+            rx.el.span("Consigner l'observation", class_name="text-[#0A0A08]"),
             type="submit",
-            class_name="flex items-center gap-2 rounded-xl bg-lime-300 px-4 py-2.5 text-sm font-semibold hover:bg-lime-200 transition-colors w-fit mt-4",
+            class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit mt-4",
         ),
         on_submit=PhenologyState.submit_observation,
         reset_on_submit=True,
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-5 mt-4",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 mt-4",
     )

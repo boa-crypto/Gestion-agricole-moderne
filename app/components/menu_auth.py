@@ -1,95 +1,142 @@
 import reflex as rx
 
+from app.components.design import eyebrow, hairline
 from app.states.menu_auth_state import MenuAuthState
 from app.states.navigation_state import NavigationState
 
 
 def account_controls() -> rx.Component:
+    """Contrôles de session du masthead, en registre mono éditorial."""
     return rx.el.div(
         rx.cond(
             MenuAuthState.authenticated,
             rx.el.div(
-                rx.el.span(
-                    MenuAuthState.email,
-                    class_name="hidden lg:inline max-w-48 truncate text-xs text-emerald-100",
+                rx.el.div(
+                    rx.el.span(
+                        "Session",
+                        class_name="ap-mono text-[8px] uppercase tracking-[0.24em] text-[#C9C5B4]/35",
+                    ),
+                    rx.el.span(
+                        MenuAuthState.email,
+                        class_name="ap-mono max-w-[12rem] truncate text-[9px] tracking-[0.04em] text-[#C9C5B4]/80",
+                    ),
+                    class_name="hidden flex-col gap-0.5 xl:flex",
                 ),
                 rx.el.button(
                     "Déconnexion",
+                    type="button",
                     on_click=MenuAuthState.logout,
                     disabled=MenuAuthState.busy,
-                    class_name="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300 disabled:opacity-50",
+                    class_name=(
+                        "ap-mono inline-flex h-9 items-center border border-[#F2EFE4]/16 "
+                        "px-3 text-[9px] uppercase tracking-[0.18em] text-[#C9C5B4] "
+                        "transition-colors hover:border-[#FF5A2B]/60 hover:text-[#FF8A5B] "
+                        "disabled:opacity-40"
+                    ),
                 ),
-                class_name="flex items-center gap-2",
+                class_name="flex items-center gap-3",
             ),
             rx.el.a(
                 "Connexion",
                 href="/",
-                class_name="rounded-xl border border-lime-300/25 bg-lime-300/10 px-3 py-2 text-xs text-lime-200 focus-visible:outline-2 focus-visible:outline-lime-300",
+                class_name=(
+                    "ap-mono inline-flex h-9 items-center border border-[#D8FA5E]/40 "
+                    "bg-[#D8FA5E]/10 px-3 text-[9px] uppercase tracking-[0.18em] "
+                    "text-[#D8FA5E] transition-colors hover:bg-[#D8FA5E]/20"
+                ),
             ),
         ),
         class_name="shrink-0",
     )
 
 
+def _field(label: str, control: rx.Component, html_for: str) -> rx.Component:
+    return rx.el.div(
+        rx.el.label(
+            label,
+            html_for=html_for,
+            class_name="ap-mono mb-2 block text-[9px] uppercase tracking-[0.24em] text-[#C9C5B4]/50",
+        ),
+        control,
+        class_name="w-full",
+    )
+
+
 def login_panel() -> rx.Component:
+    input_class = (
+        "w-full border border-[#F2EFE4]/18 bg-[#101208] px-4 py-3.5 "
+        "text-[15px] text-[#F2EFE4] placeholder:text-[#C9C5B4]/25 "
+        "transition-colors hover:border-[#F2EFE4]/30 focus:border-[#D8FA5E] "
+        "focus:outline-none"
+    )
     return rx.el.section(
+        eyebrow("Accès sécurisé", tone="accent"),
         rx.el.h2(
             rx.cond(
                 MenuAuthState.signup,
-                "Créer votre compte",
-                "Connexion à AgriPro",
+                rx.fragment(
+                    "Créer votre ",
+                    rx.el.span("compte", class_name="ap-italic text-[#D8FA5E]"),
+                ),
+                rx.fragment(
+                    "Entrer dans ",
+                    rx.el.span("l'édition", class_name="ap-italic text-[#D8FA5E]"),
+                ),
             ),
-            class_name="font-['Instrument_Serif'] text-3xl text-emerald-50",
+            class_name="ap-display mt-5 text-[clamp(2.2rem,4vw,3.4rem)] text-[#F2EFE4]",
         ),
         rx.el.p(
-            "Connectez-vous pour accéder à votre exploitation. La session est vérifiée avant tout chargement métier.",
-            class_name="mt-3 text-sm text-emerald-100/80",
+            "Votre exploitation, vos registres et vos campagnes dans une seule "
+            "lecture. La session et les droits sont vérifiés avant tout "
+            "chargement métier.",
+            class_name="mt-4 max-w-sm text-[13px] leading-relaxed text-[#C9C5B4]/70",
         ),
         rx.el.form(
-            rx.el.label(
+            _field(
                 "Adresse e-mail",
-                html_for="auth-email",
-                class_name="block text-sm text-emerald-100",
-            ),
-            rx.el.input(
-                id="auth-email",
-                name="email",
-                type="email",
-                required=True,
-                max_length=320,
-                auto_complete="email",
-                placeholder="vous@exemple.fr",
-                class_name="mt-2 w-full rounded-xl border border-white/20 bg-[#04120c] px-4 py-3 text-emerald-50 focus-visible:outline-2 focus-visible:outline-lime-300",
-            ),
-            rx.el.label(
-                "Mot de passe",
-                html_for="auth-password",
-                class_name="mt-5 block text-sm text-emerald-100",
-            ),
-            rx.el.input(
-                id="auth-password",
-                name="password",
-                type="password",
-                required=True,
-                min_length=12,
-                max_length=256,
-                auto_complete=rx.cond(
-                    MenuAuthState.signup, "new-password", "current-password"
+                rx.el.input(
+                    id="auth-email",
+                    name="email",
+                    type="email",
+                    required=True,
+                    max_length=320,
+                    auto_complete="email",
+                    placeholder="vous@exemple.fr",
+                    class_name=input_class,
                 ),
-                aria_describedby="auth-password-help",
-                class_name="mt-2 w-full rounded-xl border border-white/20 bg-[#04120c] px-4 py-3 text-emerald-50 focus-visible:outline-2 focus-visible:outline-lime-300",
+                "auth-email",
+            ),
+            _field(
+                "Mot de passe",
+                rx.el.input(
+                    id="auth-password",
+                    name="password",
+                    type="password",
+                    required=True,
+                    min_length=12,
+                    max_length=256,
+                    auto_complete=rx.cond(
+                        MenuAuthState.signup, "new-password", "current-password"
+                    ),
+                    aria_describedby="auth-password-help",
+                    class_name=input_class,
+                ),
+                "auth-password",
             ),
             rx.el.p(
                 "12 à 256 caractères. Utilisez un mot de passe unique.",
                 id="auth-password-help",
-                class_name="mt-2 text-xs text-emerald-100/70",
+                class_name="ap-mono mt-2 text-[9px] uppercase tracking-[0.14em] text-[#C9C5B4]/35",
             ),
             rx.cond(
                 MenuAuthState.error != "",
                 rx.el.p(
                     MenuAuthState.error,
                     role="alert",
-                    class_name="mt-4 text-sm text-red-300",
+                    class_name=(
+                        "mt-5 border-l-2 border-[#FF5A2B] bg-[#FF5A2B]/8 px-3 py-2 "
+                        "text-[12px] leading-relaxed text-[#FFB894]"
+                    ),
                 ),
                 rx.fragment(),
             ),
@@ -98,16 +145,25 @@ def login_panel() -> rx.Component:
                     MenuAuthState.busy,
                     "Veuillez patienter…",
                     rx.cond(
-                        MenuAuthState.signup, "Créer un compte", "Se connecter"
+                        MenuAuthState.signup, "Créer mon compte", "Se connecter"
                     ),
+                ),
+                rx.icon(
+                    "arrow-right",
+                    class_name="h-4 w-4 transition-transform group-hover:translate-x-1",
                 ),
                 type="submit",
                 disabled=MenuAuthState.busy,
-                class_name="mt-5 w-full rounded-xl bg-[#a3e635] px-4 py-3 font-semibold text-[#04120c] hover:bg-lime-300 focus-visible:outline-2 focus-visible:outline-amber-300 disabled:opacity-50",
+                class_name=(
+                    "group mt-7 flex w-full items-center justify-between border "
+                    "border-[#D8FA5E] bg-[#D8FA5E] px-5 py-3.5 ap-mono text-[10px] "
+                    "uppercase tracking-[0.22em] text-[#0A0A08] transition-colors "
+                    "hover:bg-[#E4FF9B] disabled:opacity-50"
+                ),
             ),
             on_submit=MenuAuthState.submit,
             reset_on_submit=True,
-            class_name="mt-6",
+            class_name="mt-9 flex w-full flex-col gap-5",
         ),
         rx.cond(
             MenuAuthState.signup,
@@ -116,105 +172,207 @@ def login_panel() -> rx.Component:
                 type="button",
                 on_click=MenuAuthState.change_mode,
                 disabled=MenuAuthState.busy,
-                class_name="mt-5 rounded-lg px-2 py-3 text-sm text-lime-300 hover:text-lime-200 focus-visible:outline-2 focus-visible:outline-lime-300 disabled:opacity-50",
+                class_name=(
+                    "ap-mono mt-6 text-[9px] uppercase tracking-[0.18em] "
+                    "text-[#D8FA5E] underline decoration-[#D8FA5E]/30 underline-offset-4 "
+                    "hover:decoration-[#D8FA5E] disabled:opacity-50"
+                ),
             ),
             rx.el.div(
                 rx.el.p(
-                    "Première visite ? Créez votre compte pour accéder à AgriPro.",
+                    "Première visite ? Ouvrez votre compte d'exploitation.",
                     id="auth-first-visit",
-                    class_name="text-sm leading-relaxed text-emerald-100",
+                    class_name="text-[12px] leading-relaxed text-[#C9C5B4]/55",
                 ),
                 rx.el.button(
-                    rx.icon(
-                        "user-plus", class_name="h-5 w-5", aria_hidden=True
-                    ),
-                    "Créer mon compte",
+                    rx.icon("user-plus", class_name="h-3.5 w-3.5", aria_hidden=True),
+                    rx.el.span("Créer mon compte"),
                     type="button",
                     on_click=MenuAuthState.change_mode,
                     disabled=MenuAuthState.busy,
                     aria_describedby="auth-first-visit",
-                    class_name="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-[#a3e635] bg-[#a3e635]/10 px-4 py-3 font-semibold text-[#a3e635] hover:bg-[#a3e635]/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 disabled:opacity-50",
+                    class_name=(
+                        "ap-mono mt-3 inline-flex w-full items-center justify-center "
+                        "gap-2 border border-[#F2EFE4]/18 px-4 py-3 text-[9px] "
+                        "uppercase tracking-[0.18em] text-[#F2EFE4] transition-colors "
+                        "hover:border-[#D8FA5E] hover:text-[#D8FA5E]"
+                    ),
                 ),
-                class_name="mt-6 border-t border-lime-300/20 pt-5",
+                class_name="mt-8 border-t border-[#F2EFE4]/12 pt-6",
             ),
         ),
-        class_name="w-full max-w-xl rounded-3xl border border-lime-300/20 bg-[#071c13] p-6 sm:p-8",
+        class_name="w-full max-w-md",
+    )
+
+
+def _cover() -> rx.Component:
+    """Planche de couverture : manifeste typographique de la maison AgriPro."""
+    return rx.el.aside(
+        rx.el.div(
+            rx.el.span(class_name="h-2 w-2 bg-[#D8FA5E]"),
+            rx.el.span(
+                "AgriPro",
+                class_name="ap-serif text-2xl text-[#F2EFE4]",
+            ),
+            rx.el.span(
+                "Édition agronomique",
+                class_name=(
+                    "ap-mono ml-4 border-l border-[#F2EFE4]/16 pl-4 text-[9px] "
+                    "uppercase tracking-[0.26em] text-[#C9C5B4]/40"
+                ),
+            ),
+            class_name="flex items-center",
+        ),
+        rx.el.div(
+            eyebrow("Numéro MMXXVI — Pilotage végétal", tone="accent"),
+            rx.el.p(
+                rx.el.span("La terre,\n"),
+                rx.el.span("tenue comme "),
+                rx.el.span("un livre.", class_name="ap-italic text-[#D8FA5E]"),
+                class_name=(
+                    "ap-display mt-8 whitespace-pre-line text-[clamp(2.6rem,4.4vw,4.4rem)] "
+                    "text-[#F2EFE4]"
+                ),
+            ),
+            rx.el.p(
+                "Parcelles, cultures, chantiers, troupeaux et comptes : chaque "
+                "donnée trouve sa page, sa cote et sa lecture.",
+                class_name="mt-8 max-w-sm text-[13px] leading-relaxed text-[#C9C5B4]/60",
+            ),
+            class_name="mt-16",
+        ),
+        rx.el.div(
+            hairline(),
+            rx.el.div(
+                rx.el.span(
+                    "Pilotage végétal",
+                    class_name="ap-mono text-[9px] uppercase tracking-[0.24em] text-[#C9C5B4]/45",
+                ),
+                rx.el.span(
+                    "Session vérifiée",
+                    class_name="ap-mono text-[9px] uppercase tracking-[0.24em] text-[#C9C5B4]/45",
+                ),
+                rx.el.span(
+                    "MMXXVI",
+                    class_name="ap-mono text-[9px] uppercase tracking-[0.24em] text-[#C9C5B4]/45",
+                ),
+                class_name="flex items-center justify-between gap-4 pt-5",
+            ),
+            class_name="mt-auto",
+        ),
+        class_name=(
+            "relative hidden w-[46%] shrink-0 flex-col justify-between border-r "
+            "border-[#F2EFE4]/12 bg-[#0D0F09] p-10 lg:flex xl:p-14"
+        ),
+    )
+
+
+def _session_check() -> rx.Component:
+    return rx.el.section(
+        rx.el.p(
+            "Vérification de votre session…",
+            role="status",
+            class_name="ap-mono text-[10px] uppercase tracking-[0.22em] text-[#C9C5B4]/60",
+        ),
+        rx.el.div(
+            class_name="mt-5 h-px w-full overflow-hidden bg-[#F2EFE4]/12",
+        ),
+        rx.el.div(
+            class_name="mt-5 h-px w-1/3 animate-pulse bg-[#D8FA5E]",
+        ),
+        class_name="w-full max-w-md",
     )
 
 
 def authentication_shell() -> rx.Component:
     return rx.el.main(
+        _cover(),
         rx.el.div(
             rx.el.div(
-                rx.icon("leaf", class_name="h-8 w-8 text-[#a3e635]"),
-                rx.el.h1(
-                    "AgriPro",
-                    class_name="font-['Instrument_Serif'] text-5xl text-emerald-50",
-                ),
-                class_name="mb-8 flex items-center justify-center gap-3",
-            ),
-            rx.cond(
-                ~MenuAuthState.ready,
-                rx.el.section(
-                    rx.el.p(
-                        "Vérification de votre session…",
-                        role="status",
-                        class_name="text-emerald-100 text-base",
+                rx.el.div(
+                    rx.el.span(class_name="h-2 w-2 bg-[#D8FA5E]"),
+                    rx.el.span(
+                        "AgriPro",
+                        class_name="ap-serif text-2xl text-[#F2EFE4]",
                     ),
-                    rx.el.div(
-                        class_name="mt-5 h-2 w-full animate-pulse rounded-full bg-[#a3e635]/30"
-                    ),
-                    class_name="w-full max-w-xl rounded-3xl border border-lime-300/20 bg-[#071c13] p-8",
+                    class_name="mb-12 flex items-center gap-3 lg:hidden",
                 ),
                 rx.cond(
-                    (MenuAuthState.error != "") & (MenuAuthState.token != ""),
-                    rx.el.section(
-                        rx.el.h2(
-                            "Vérification indisponible",
-                            class_name="font-['Instrument_Serif'] text-3xl text-emerald-50",
+                    ~MenuAuthState.ready,
+                    _session_check(),
+                    rx.cond(
+                        (MenuAuthState.error != "") & (MenuAuthState.token != ""),
+                        rx.el.section(
+                            eyebrow("Session interrompue", tone="flame"),
+                            rx.el.h2(
+                                "Vérification indisponible",
+                                class_name="ap-display mt-5 text-4xl text-[#F2EFE4]",
+                            ),
+                            rx.el.p(
+                                MenuAuthState.error,
+                                role="alert",
+                                class_name="mt-4 text-[13px] leading-relaxed text-[#FFB894]",
+                            ),
+                            rx.el.div(
+                                rx.el.button(
+                                    "Réessayer",
+                                    type="button",
+                                    on_click=MenuAuthState.retry_page,
+                                    class_name=(
+                                        "ap-mono border border-[#D8FA5E] bg-[#D8FA5E] px-4 py-3 "
+                                        "text-[9px] uppercase tracking-[0.18em] text-[#0A0A08]"
+                                    ),
+                                ),
+                                rx.el.button(
+                                    "Déconnexion",
+                                    type="button",
+                                    on_click=MenuAuthState.logout,
+                                    disabled=MenuAuthState.busy,
+                                    class_name=(
+                                        "ap-mono border border-[#F2EFE4]/18 px-4 py-3 "
+                                        "text-[9px] uppercase tracking-[0.18em] text-[#F2EFE4] "
+                                        "disabled:opacity-50"
+                                    ),
+                                ),
+                                class_name="mt-7 flex flex-wrap items-center gap-3",
+                            ),
+                            class_name="w-full max-w-md",
                         ),
-                        rx.el.p(
-                            MenuAuthState.error,
-                            role="alert",
-                            class_name="mt-4 text-sm text-amber-200",
-                        ),
-                        rx.el.button(
-                            "Réessayer",
-                            on_click=MenuAuthState.retry_page,
-                            class_name="mt-6 rounded-xl bg-[#a3e635] px-4 py-3 font-semibold text-[#04120c] focus-visible:outline-2 focus-visible:outline-amber-300",
-                        ),
-                        rx.el.button(
-                            "Déconnexion",
-                            on_click=MenuAuthState.logout,
-                            disabled=MenuAuthState.busy,
-                            class_name="ml-3 mt-6 rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-emerald-50 focus-visible:outline-2 focus-visible:outline-lime-300 disabled:opacity-50",
-                        ),
-                        class_name="w-full max-w-xl rounded-3xl border border-amber-300/25 bg-[#071c13] p-8",
+                        login_panel(),
                     ),
-                    login_panel(),
                 ),
+                class_name="flex w-full flex-col items-start",
             ),
-            class_name="mx-auto flex w-full max-w-2xl flex-col items-center px-4 py-12 sm:py-20",
+            class_name=(
+                "flex min-h-dvh w-full items-center justify-center px-6 py-14 "
+                "sm:px-10 lg:w-[54%]"
+            ),
         ),
-        class_name="min-h-dvh w-full bg-[#04120c] font-['Inter'] text-emerald-50 antialiased",
+        class_name=(
+            "flex min-h-dvh w-full bg-[#0A0A08] font-['Inter_Tight'] text-[#F2EFE4] antialiased"
+        ),
     )
 
 
 def no_module_panel() -> rx.Component:
     return rx.el.main(
         rx.el.section(
-            rx.icon("leaf", class_name="h-9 w-9 text-[#a3e635]"),
-            rx.el.h1(
-                "AgriPro",
-                class_name="mt-4 font-['Instrument_Serif'] text-4xl text-emerald-50",
+            rx.el.div(
+                rx.el.span(class_name="h-2 w-2 bg-[#FF5A2B]"),
+                rx.el.span(
+                    "AgriPro",
+                    class_name="ap-serif text-2xl text-[#F2EFE4]",
+                ),
+                class_name="flex items-center gap-3",
             ),
+            eyebrow("Droits effectifs", tone="flame", class_name="mt-12"),
             rx.el.h2(
                 rx.cond(
                     MenuAuthState.has_modules,
                     "Destination non accessible",
                     "Aucun module accessible",
                 ),
-                class_name="mt-6 text-xl font-semibold text-emerald-50",
+                class_name="ap-display mt-5 text-4xl text-[#F2EFE4]",
             ),
             rx.el.p(
                 rx.cond(
@@ -223,32 +381,50 @@ def no_module_panel() -> rx.Component:
                     "Votre compte est connecté, mais aucun module n’est activé pour vous. Contactez le responsable des accès de votre exploitation.",
                 ),
                 role="status",
-                class_name="mt-3 text-sm text-emerald-100/80",
+                class_name="mt-4 max-w-lg text-[13px] leading-relaxed text-[#C9C5B4]/70",
             ),
             rx.el.nav(
                 rx.foreach(
                     NavigationState.visible_navigation,
                     lambda entry: rx.el.a(
                         rx.icon(
-                            entry["icon"], class_name="h-4 w-4 text-lime-300"
+                            entry["icon"], class_name="h-4 w-4 shrink-0 text-[#D8FA5E]"
                         ),
-                        entry["label"],
+                        rx.el.span(entry["label"], class_name="flex-1 text-[12px]"),
+                        rx.icon("arrow-up-right", class_name="h-3.5 w-3.5 opacity-40"),
                         href=entry["href"],
-                        class_name="flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-emerald-50 focus-visible:outline-2 focus-visible:outline-lime-300 hover:border-lime-300/40",
+                        class_name=(
+                            "ap-mono flex items-center gap-3 border border-[#F2EFE4]/12 "
+                            "px-4 py-3 uppercase tracking-[0.12em] text-[#F2EFE4] "
+                            "transition-colors hover:border-[#D8FA5E]/50 hover:text-[#D8FA5E]"
+                        ),
                     ),
                 ),
                 aria_label="Destinations autorisées",
-                class_name="mt-6 flex flex-col gap-2",
+                class_name="mt-8 grid grid-cols-1 gap-2 sm:grid-cols-2",
             ),
-            rx.el.button(
-                "Vérifier à nouveau mes accès",
-                on_click=MenuAuthState.retry_page,
-                class_name="mt-6 rounded-xl bg-[#a3e635] px-4 py-3 font-semibold text-[#04120c] focus-visible:outline-2 focus-visible:outline-amber-300",
+            rx.el.div(
+                rx.el.button(
+                    "Vérifier mes accès",
+                    type="button",
+                    on_click=MenuAuthState.retry_page,
+                    class_name=(
+                        "ap-mono border border-[#D8FA5E] bg-[#D8FA5E] px-4 py-3 "
+                        "text-[9px] uppercase tracking-[0.18em] text-[#0A0A08]"
+                    ),
+                ),
+                account_controls(),
+                class_name="mt-8 flex flex-wrap items-center gap-3",
             ),
-            rx.el.div(account_controls(), class_name="mt-5"),
-            class_name="mx-auto w-full max-w-2xl rounded-3xl border border-lime-300/20 bg-[#071c13] p-6 sm:p-10",
+            class_name=(
+                "mx-auto w-full max-w-3xl border border-[#F2EFE4]/12 bg-[#101208] "
+                "p-6 sm:p-10"
+            ),
         ),
-        class_name="min-h-dvh w-full bg-[#04120c] px-4 py-12 font-['Inter'] text-emerald-50",
+        class_name=(
+            "flex min-h-dvh w-full items-center justify-center bg-[#0A0A08] px-4 "
+            "py-12 font-['Inter_Tight'] text-[#F2EFE4]"
+        ),
     )
 
 

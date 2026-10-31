@@ -8,7 +8,7 @@ def _legend(color: str, label: str) -> rx.Component:
         rx.el.span(class_name=color),
         rx.el.span(
             label,
-            class_name="text-[11px] font-semibold text-emerald-100/60",
+            class_name="text-[11px] font-semibold text-[#c9c5b4]/60",
         ),
         class_name="flex items-center gap-2 w-fit",
     )
@@ -19,33 +19,33 @@ def _month_row(point: MonthPoint, key: str = "") -> rx.Component:
         rx.el.div(
             rx.el.span(
                 point["label"],
-                class_name="text-[11px] font-semibold text-emerald-100/70 w-20 shrink-0",
+                class_name="text-[11px] font-semibold text-[#c9c5b4]/70 w-20 shrink-0",
             ),
             rx.el.div(
                 rx.el.div(
                     rx.el.div(
-                        class_name="h-2.5 rounded-full bg-gradient-to-r from-emerald-400 via-lime-300 to-lime-200",
+                        class_name="h-2.5 rounded-none bg-gradient-to-r from-[#8fb37a] via-[#d8fa5e] to-[#e4ff9b]",
                         style={"width": point["sales_width"]},
                     ),
-                    class_name="h-2.5 w-full rounded-full bg-white/[0.06]",
+                    class_name="h-2.5 w-full rounded-none bg-[#191c13]",
                 ),
                 rx.el.div(
                     rx.el.div(
-                        class_name="h-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-orange-200",
+                        class_name="h-2.5 rounded-none bg-gradient-to-r from-[#ff6a38] via-[#ff8a5b] to-[#ffc9a8]",
                         style={"width": point["purchases_width"]},
                     ),
-                    class_name="h-2.5 w-full rounded-full bg-white/[0.06] mt-1.5",
+                    class_name="h-2.5 w-full rounded-none bg-[#191c13] mt-1.5",
                 ),
                 class_name="flex-1 min-w-0",
             ),
             rx.el.div(
                 rx.el.span(
                     f"{point['sales']:.0f} DA",
-                    class_name="text-[11px] font-bold text-lime-200 text-right",
+                    class_name="text-[11px] font-bold text-[#e4ff9b] text-right",
                 ),
                 rx.el.span(
                     f"{point['purchases']:.0f} DA",
-                    class_name="text-[11px] font-bold text-amber-200 text-right",
+                    class_name="text-[11px] font-bold text-[#ffb894] text-right",
                 ),
                 class_name="flex flex-col w-28 shrink-0",
             ),
@@ -61,15 +61,15 @@ def crm_flow_chart() -> rx.Component:
         rx.el.div(
             rx.el.span(
                 "Chiffre d'affaires & achats par mois",
-                class_name="text-[10px] font-semibold uppercase tracking-[0.24em] text-lime-300/80",
+                class_name="ap-eyebrow text-[#d8fa5e]/80",
             ),
             rx.el.div(
                 _legend(
-                    "h-2 w-6 rounded-full bg-gradient-to-r from-emerald-400 to-lime-300",
+                    "h-2 w-6 rounded-none bg-gradient-to-r from-[#8fb37a] to-[#d8fa5e]",
                     "Ventes",
                 ),
                 _legend(
-                    "h-2 w-6 rounded-full bg-gradient-to-r from-amber-400 to-orange-200",
+                    "h-2 w-6 rounded-none bg-gradient-to-r from-[#ff6a38] to-[#ffc9a8]",
                     "Achats",
                 ),
                 class_name="flex items-center gap-4 ml-auto",
@@ -87,10 +87,10 @@ def crm_flow_chart() -> rx.Component:
             ),
             rx.el.p(
                 "Aucun flux commercial daté sur les douze derniers mois.",
-                class_name="text-sm font-medium text-emerald-100/50 mt-5",
+                class_name="text-sm font-medium text-[#c9c5b4]/50 mt-5",
             ),
         ),
-        class_name="flex-1 min-w-0 rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl",
+        class_name="flex-1 min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
     )
 
 
@@ -99,24 +99,24 @@ def _aging_row(point: AgingPoint, bar: str, key: str = "") -> rx.Component:
         rx.el.div(
             rx.el.span(
                 point["label"],
-                class_name="text-[11px] font-semibold text-emerald-100/70",
+                class_name="text-[11px] font-semibold text-[#c9c5b4]/70",
             ),
             rx.el.span(
                 f"{point['amount']:.0f} DA",
-                class_name="text-[11px] font-bold text-emerald-50 ml-auto",
+                class_name="text-[11px] font-bold text-[#f2efe4] ml-auto",
             ),
             class_name="flex items-center gap-2 w-full",
         ),
         rx.el.div(
             rx.el.div(class_name=bar, style={"width": point["width"]}),
-            class_name="h-1.5 w-full rounded-full bg-white/[0.06] mt-2",
+            class_name="h-1.5 w-full rounded-none bg-[#191c13] mt-2",
         ),
         rx.el.span(
             f"{point['count']} pièce(s) comptable(s)",
-            class_name="text-[10px] font-medium text-emerald-100/35 mt-1.5",
+            class_name="text-[10px] font-medium text-[#c9c5b4]/35 mt-1.5",
         ),
         key=key,
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 flex flex-col",
+        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-3.5 flex flex-col",
     )
 
 
@@ -125,24 +125,24 @@ def crm_aging_panel() -> rx.Component:
         rx.el.div(
             rx.el.span(
                 "Balance âgée",
-                class_name="text-[10px] font-semibold uppercase tracking-[0.24em] text-amber-300/80",
+                class_name="ap-eyebrow text-[#ff8a5b]/80",
             ),
             rx.el.span(
                 f"Net {CrmState.kpis['net_cash']:.0f} DA",
-                class_name="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-emerald-100/60 w-fit ml-auto",
+                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-semibold text-[#c9c5b4]/60 w-fit ml-auto",
             ),
             class_name="flex flex-wrap items-center gap-3",
         ),
         rx.el.p(
             "Créances clients",
-            class_name="text-xs font-semibold text-lime-200 mt-5",
+            class_name="text-xs font-semibold text-[#e4ff9b] mt-5",
         ),
         rx.el.div(
             rx.foreach(
                 CrmState.receivable_aging,
                 lambda point: _aging_row(
                     point,
-                    "h-1.5 rounded-full bg-gradient-to-r from-emerald-400 to-lime-300",
+                    "h-1.5 rounded-none bg-gradient-to-r from-[#8fb37a] to-[#d8fa5e]",
                     key=f"rec-{point['bucket']}",
                 ),
             ),
@@ -150,20 +150,20 @@ def crm_aging_panel() -> rx.Component:
         ),
         rx.el.p(
             "Dettes fournisseurs",
-            class_name="text-xs font-semibold text-amber-200 mt-5",
+            class_name="text-xs font-semibold text-[#ffb894] mt-5",
         ),
         rx.el.div(
             rx.foreach(
                 CrmState.payable_aging,
                 lambda point: _aging_row(
                     point,
-                    "h-1.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-200",
+                    "h-1.5 rounded-none bg-gradient-to-r from-[#ff6a38] to-[#ffc9a8]",
                     key=f"pay-{point['bucket']}",
                 ),
             ),
             class_name="flex flex-col gap-2.5 mt-2.5",
         ),
-        class_name="w-full xl:w-[26rem] shrink-0 rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl",
+        class_name="w-full xl:w-[26rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
     )
 
 

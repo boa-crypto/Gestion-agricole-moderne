@@ -210,7 +210,7 @@ async def seed_phenology_data() -> None:
                                     stage.get("is_critical", False)
                                 ),
                                 "icon": str(stage.get("icon", "sprout")),
-                                "color": str(stage.get("color_hex", "#a3e635")),
+                                "color": str(stage.get("color_hex", "#D8FA5E")),
                                 # Colonnes NOT NULL sans valeur par défaut en
                                 # base : chaîne vide si aucun lien Guide.
                                 "guide_article_slug": str(

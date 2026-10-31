@@ -13,7 +13,7 @@ def _text_field(
     return rx.el.label(
         rx.el.span(
             label,
-            class_name="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/45",
+            class_name="ap-eyebrow text-[#c9c5b4]/45",
         ),
         rx.el.input(
             name=name,
@@ -21,7 +21,7 @@ def _text_field(
             placeholder=placeholder,
             default_value=value,
             key=f"{name}-{value}",
-            class_name="w-full rounded-2xl border border-white/10 bg-white/[0.05] px-3 py-2 text-sm font-medium text-emerald-50 placeholder:text-emerald-100/30 focus:border-lime-300/40 focus:outline-hidden mt-1.5",
+            class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#16190f] px-3 py-2 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/30 focus:border-[#d8fa5e]/40 focus:outline-hidden mt-1.5",
         ),
         class_name="flex flex-col w-full min-w-0",
     )
@@ -33,7 +33,7 @@ def _select_field(
     return rx.el.label(
         rx.el.span(
             label,
-            class_name="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/45",
+            class_name="ap-eyebrow text-[#c9c5b4]/45",
         ),
         rx.el.div(
             rx.el.select(
@@ -46,11 +46,11 @@ def _select_field(
                 name=name,
                 default_value=value,
                 key=f"{name}-{value}",
-                class_name="w-full appearance-none rounded-2xl border border-white/10 bg-white/[0.05] px-3 py-2 pr-9 text-sm font-medium capitalize text-emerald-50 focus:border-lime-300/40 focus:outline-hidden",
+                class_name="w-full appearance-none rounded-none border border-[#f2efe4]/12 bg-[#16190f] px-3 py-2 pr-9 text-sm font-medium capitalize text-[#f2efe4] focus:border-[#d8fa5e]/40 focus:outline-hidden",
             ),
             rx.icon(
                 "chevron-down",
-                class_name="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-emerald-100/50",
+                class_name="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[#c9c5b4]/50",
             ),
             class_name="relative w-full mt-1.5",
         ),
@@ -62,14 +62,14 @@ def _textarea_field(label: str, name: str, value: rx.Var) -> rx.Component:
     return rx.el.label(
         rx.el.span(
             label,
-            class_name="text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/45",
+            class_name="ap-eyebrow text-[#c9c5b4]/45",
         ),
         rx.el.textarea(
             name=name,
             default_value=value,
             key=f"{name}-{value}",
             rows="3",
-            class_name="w-full rounded-2xl border border-white/10 bg-white/[0.05] px-3 py-2 text-sm font-medium text-emerald-50 placeholder:text-emerald-100/30 focus:border-lime-300/40 focus:outline-hidden mt-1.5",
+            class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#16190f] px-3 py-2 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/30 focus:border-[#d8fa5e]/40 focus:outline-hidden mt-1.5",
         ),
         class_name="flex flex-col w-full min-w-0 sm:col-span-2 xl:col-span-3",
     )
@@ -87,24 +87,24 @@ def _modal(
                 rx.el.div(
                     rx.el.h3(
                         title,
-                        class_name="font-['Instrument_Serif'] text-2xl text-emerald-50",
+                        class_name="ap-serif text-2xl text-[#f2efe4]",
                     ),
                     rx.el.p(
                         subtitle,
-                        class_name="text-[11px] font-medium text-emerald-100/50 mt-1",
+                        class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-1",
                     ),
                     class_name="min-w-0",
                 ),
                 rx.el.button(
-                    rx.icon("x", class_name="h-4 w-4 text-emerald-100/70"),
+                    rx.icon("x", class_name="h-4 w-4 text-[#c9c5b4]/70"),
                     type="button",
                     on_click=on_close,
-                    class_name="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] hover:border-lime-300/35 transition-colors shrink-0",
+                    class_name="flex h-9 w-9 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#16190f] hover:border-[#d8fa5e]/35 transition-colors shrink-0",
                 ),
                 class_name="flex items-start justify-between gap-4 w-full",
             ),
             body,
-            class_name="w-full max-w-4xl max-h-[88vh] overflow-y-auto rounded-3xl border border-white/12 bg-[#06170f]/95 p-6 backdrop-blur-2xl",
+            class_name="w-full max-w-4xl max-h-[88vh] overflow-y-auto rounded-none border border-[#f2efe4]/14 bg-[#06170f]/95 p-6 ",
         ),
         class_name="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/60 p-4 sm:p-8",
     )
@@ -121,7 +121,7 @@ def crm_partner_form() -> rx.Component:
                     CrmPartnersState.form_error != "",
                     rx.el.p(
                         CrmPartnersState.form_error,
-                        class_name="w-full rounded-2xl border border-red-400/30 bg-red-400/[0.08] px-4 py-2.5 text-xs font-semibold text-red-200 mt-4",
+                        class_name="w-full rounded-none border border-[#ff6b5a]/30 bg-[#ff6b5a]/[0.08] px-4 py-2.5 text-xs font-semibold text-[#ffbcb0] mt-4",
                     ),
                     rx.fragment(),
                 ),
@@ -293,7 +293,7 @@ def crm_partner_form() -> rx.Component:
                         "Annuler",
                         type="button",
                         on_click=CrmPartnersState.close_form,
-                        class_name="rounded-full border border-white/10 bg-white/[0.05] px-5 py-2 text-xs font-semibold text-emerald-100/70 hover:border-lime-300/35 transition-colors w-fit",
+                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#16190f] px-5 py-2 text-xs font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/35 transition-colors w-fit",
                     ),
                     rx.el.button(
                         rx.cond(
@@ -308,7 +308,7 @@ def crm_partner_form() -> rx.Component:
                             "Enregistrer", class_name="text-xs font-semibold"
                         ),
                         type="submit",
-                        class_name="flex items-center gap-2 rounded-full bg-lime-300 px-5 py-2 text-[#04140d] hover:bg-lime-200 transition-colors w-fit",
+                        class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-5 py-2 text-[#0A0A08] hover:bg-[#e4ff9b] transition-colors w-fit",
                     ),
                     class_name="flex flex-wrap items-center justify-end gap-2 w-full mt-6",
                 ),
@@ -382,11 +382,11 @@ def crm_contact_form() -> rx.Component:
                             "is_primary"
                         ]
                         != "",
-                        class_name="h-4 w-4 rounded border-white/20 bg-white/10 accent-lime-300",
+                        class_name="h-4 w-4 rounded border-[#f2efe4]/22 bg-[#20241a] accent-[#d8fa5e]",
                     ),
                     rx.el.span(
                         "Définir comme contact principal",
-                        class_name="text-xs font-semibold text-emerald-100/70",
+                        class_name="text-xs font-semibold text-[#c9c5b4]/70",
                     ),
                     class_name="flex items-center gap-2 w-fit mt-4",
                 ),
@@ -395,7 +395,7 @@ def crm_contact_form() -> rx.Component:
                         "Annuler",
                         type="button",
                         on_click=CrmPartnersState.close_contact_form,
-                        class_name="rounded-full border border-white/10 bg-white/[0.05] px-5 py-2 text-xs font-semibold text-emerald-100/70 hover:border-lime-300/35 transition-colors w-fit",
+                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#16190f] px-5 py-2 text-xs font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/35 transition-colors w-fit",
                     ),
                     rx.el.button(
                         rx.icon("check", class_name="h-4 w-4"),
@@ -403,7 +403,7 @@ def crm_contact_form() -> rx.Component:
                             "Enregistrer", class_name="text-xs font-semibold"
                         ),
                         type="submit",
-                        class_name="flex items-center gap-2 rounded-full bg-lime-300 px-5 py-2 text-[#04140d] hover:bg-lime-200 transition-colors w-fit",
+                        class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-5 py-2 text-[#0A0A08] hover:bg-[#e4ff9b] transition-colors w-fit",
                     ),
                     class_name="flex flex-wrap items-center justify-end gap-2 w-full mt-6",
                 ),
@@ -457,7 +457,7 @@ def crm_document_form() -> rx.Component:
                         "Annuler",
                         type="button",
                         on_click=CrmPartnersState.close_document_form,
-                        class_name="rounded-full border border-white/10 bg-white/[0.05] px-5 py-2 text-xs font-semibold text-emerald-100/70 hover:border-lime-300/35 transition-colors w-fit",
+                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#16190f] px-5 py-2 text-xs font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/35 transition-colors w-fit",
                     ),
                     rx.el.button(
                         rx.icon("check", class_name="h-4 w-4"),
@@ -465,7 +465,7 @@ def crm_document_form() -> rx.Component:
                             "Enregistrer", class_name="text-xs font-semibold"
                         ),
                         type="submit",
-                        class_name="flex items-center gap-2 rounded-full bg-lime-300 px-5 py-2 text-[#04140d] hover:bg-lime-200 transition-colors w-fit",
+                        class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-5 py-2 text-[#0A0A08] hover:bg-[#e4ff9b] transition-colors w-fit",
                     ),
                     class_name="flex flex-wrap items-center justify-end gap-2 w-full mt-6",
                 ),

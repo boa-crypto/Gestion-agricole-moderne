@@ -27,16 +27,16 @@ def _tab(key: str, label: str, icon: str) -> rx.Component:
             icon,
             class_name=rx.cond(
                 AdministrationState.tab == key,
-                "h-3.5 w-3.5 text-lime-300",
-                "h-3.5 w-3.5 text-emerald-100/45",
+                "h-3.5 w-3.5 text-[#d8fa5e]",
+                "h-3.5 w-3.5 text-[#c9c5b4]/45",
             ),
         ),
         rx.el.span(label),
         on_click=AdministrationState.set_tab(key),
         class_name=rx.cond(
             AdministrationState.tab == key,
-            "flex items-center gap-1.5 rounded-xl border border-lime-300/40 bg-lime-300/10 px-3 py-2 text-xs font-semibold text-emerald-50 transition-colors w-fit",
-            "flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-emerald-100/60 hover:border-lime-300/25 transition-colors w-fit",
+            "flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/10 px-3 py-2 text-xs font-semibold text-[#f2efe4] transition-colors w-fit",
+            "flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-2 text-xs font-semibold text-[#c9c5b4]/60 hover:border-[#d8fa5e]/25 transition-colors w-fit",
         ),
     )
 
@@ -47,7 +47,7 @@ def _status_button(action: str, label: str, icon: str) -> rx.Component:
         rx.el.span(label),
         on_click=AdministrationState.apply_status(action),
         disabled=~AdministrationState.has_selection,
-        class_name="flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-emerald-100/70 hover:border-lime-300/40 hover:text-emerald-50 disabled:opacity-40 transition-colors w-fit",
+        class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-2 text-xs font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/40 hover:text-[#f2efe4] disabled:opacity-40 transition-colors w-fit",
     )
 
 
@@ -62,7 +62,7 @@ def _header() -> rx.Component:
                 rx.el.div(
                     rx.el.span(
                         AdministrationState.detail["matricule"],
-                        class_name="text-[10px] font-semibold uppercase tracking-[0.28em] text-lime-300/80",
+                        class_name="ap-eyebrow text-[#d8fa5e]/80",
                     ),
                     tone_badge(
                         AdministrationState.detail["status_label"],
@@ -72,13 +72,13 @@ def _header() -> rx.Component:
                 ),
                 rx.el.h2(
                     AdministrationState.detail["name"],
-                    class_name="font-['Instrument_Serif'] text-3xl text-emerald-50 mt-1",
+                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
                 ),
                 rx.el.p(
                     AdministrationState.detail["function_label"]
                     + " · "
                     + AdministrationState.detail["role_label"],
-                    class_name="text-sm font-medium text-emerald-100/60 mt-1",
+                    class_name="text-sm font-medium text-[#c9c5b4]/60 mt-1",
                 ),
                 class_name="min-w-0 flex-1",
             ),
@@ -93,7 +93,7 @@ def _header() -> rx.Component:
         ),
         rx.el.div(
             *[_tab(key, label, icon) for key, label, icon in TABS],
-            class_name="flex flex-wrap items-center gap-2 mt-4 border-t border-white/10 pt-4",
+            class_name="flex flex-wrap items-center gap-2 mt-4 border-t border-[#f2efe4]/12 pt-4",
         ),
         class_name="w-full",
     )
@@ -142,13 +142,13 @@ def _profil() -> rx.Component:
         rx.el.div(
             rx.el.p(
                 "Notes RH",
-                class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/40",
+                class_name="ap-eyebrow text-[#c9c5b4]/40",
             ),
             rx.el.p(
                 AdministrationState.detail["notes"],
-                class_name="text-sm font-medium text-emerald-100/70 mt-2",
+                class_name="text-sm font-medium text-[#c9c5b4]/70 mt-2",
             ),
-            class_name="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:col-span-2",
+            class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 md:col-span-2",
         ),
         class_name="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5",
     )
@@ -177,22 +177,22 @@ def _organisation() -> rx.Component:
         ),
         rx.el.div(
             rx.el.div(
-                rx.icon("briefcase", class_name="h-4 w-4 text-lime-300"),
+                rx.icon("briefcase", class_name="h-4 w-4 text-[#d8fa5e]"),
                 rx.el.span(
                     AdministrationState.detail["family_label"],
-                    class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-lime-300/80",
+                    class_name="ap-eyebrow text-[#d8fa5e]/80",
                 ),
                 class_name="flex items-center gap-2",
             ),
             rx.el.p(
                 AdministrationState.detail["function_mission"],
-                class_name="text-sm font-medium text-emerald-100/75 mt-2",
+                class_name="text-sm font-medium text-[#c9c5b4]/75 mt-2",
             ),
             rx.el.p(
                 AdministrationState.detail["function_responsibilities"],
-                class_name="text-[11px] font-medium text-emerald-100/45 mt-2",
+                class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-2",
             ),
-            class_name="rounded-2xl border border-white/10 bg-white/[0.03] p-4",
+            class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
         ),
         class_name="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5",
     )
@@ -201,16 +201,16 @@ def _organisation() -> rx.Component:
 def _role_card(role: RoleRow) -> rx.Component:
     return rx.el.div(
         rx.el.div(
-            rx.icon(role["icon"], class_name="h-4 w-4 text-lime-300"),
+            rx.icon(role["icon"], class_name="h-4 w-4 text-[#d8fa5e]"),
             rx.el.p(
                 role["label"],
-                class_name="text-sm font-semibold text-emerald-50 truncate",
+                class_name="text-sm font-semibold text-[#f2efe4] truncate",
             ),
             rx.cond(
                 role["is_primary"],
                 rx.el.span(
                     "PRINCIPAL",
-                    class_name="rounded-full border border-lime-300/40 bg-lime-300/10 px-1.5 py-0.5 text-[9px] font-bold text-lime-200 w-fit ml-auto",
+                    class_name="rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#e4ff9b] w-fit ml-auto",
                 ),
                 rx.fragment(),
             ),
@@ -218,31 +218,31 @@ def _role_card(role: RoleRow) -> rx.Component:
         ),
         rx.el.p(
             "Attribué par " + role["granted_by"] + " · " + role["granted_on"],
-            class_name="text-[11px] font-medium text-emerald-100/45 mt-1",
+            class_name="text-[11px] font-medium text-[#c9c5b4]/45 mt-1",
         ),
-        class_name="rounded-2xl border border-white/10 bg-white/[0.03] p-4 w-full",
+        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 w-full",
     )
 
 
 def _perm_group(group: PermGroup) -> rx.Component:
     return rx.el.div(
         rx.el.div(
-            rx.icon(group["icon"], class_name="h-4 w-4 text-lime-300"),
+            rx.icon(group["icon"], class_name="h-4 w-4 text-[#d8fa5e]"),
             rx.el.p(
                 group["label"],
-                class_name="text-sm font-semibold text-emerald-50 truncate",
+                class_name="text-sm font-semibold text-[#f2efe4] truncate",
             ),
             rx.cond(
                 group["sensitive"],
                 rx.el.span(
                     "SENSIBLE",
-                    class_name="rounded-full border border-amber-300/40 bg-amber-300/10 px-1.5 py-0.5 text-[9px] font-bold text-amber-200 w-fit",
+                    class_name="rounded-none border border-[#ff8a5b]/40 bg-[#ff8a5b]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#ffb894] w-fit",
                 ),
                 rx.fragment(),
             ),
             rx.el.span(
                 group["count"].to_string() + " action(s)",
-                class_name="text-[10px] font-semibold text-emerald-100/50 ml-auto",
+                class_name="text-[10px] font-semibold text-[#c9c5b4]/50 ml-auto",
             ),
             class_name="flex items-center gap-2 w-full min-w-0",
         ),
@@ -250,7 +250,7 @@ def _perm_group(group: PermGroup) -> rx.Component:
             rx.foreach(group["actions"], chip),
             class_name="flex flex-wrap items-center gap-1.5 mt-2",
         ),
-        class_name="rounded-2xl border border-white/10 bg-white/[0.03] p-4 w-full",
+        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 w-full",
     )
 
 
@@ -259,7 +259,7 @@ def _roles_tab() -> rx.Component:
         rx.el.div(
             rx.el.p(
                 "Rôles attribués",
-                class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/40",
+                class_name="ap-eyebrow text-[#c9c5b4]/40",
             ),
             rx.foreach(AdministrationState.detail_roles, _role_card),
             class_name="flex flex-col gap-3",
@@ -267,7 +267,7 @@ def _roles_tab() -> rx.Component:
         rx.el.div(
             rx.el.p(
                 "Permissions effectives par module",
-                class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/40",
+                class_name="ap-eyebrow text-[#c9c5b4]/40",
             ),
             rx.foreach(AdministrationState.detail_permissions, _perm_group),
             class_name="flex flex-col gap-3 max-h-[32rem] overflow-y-auto pr-1",
@@ -279,16 +279,16 @@ def _roles_tab() -> rx.Component:
 def _scope_card(scope: ScopeRow) -> rx.Component:
     return rx.el.div(
         rx.el.div(
-            rx.icon(scope["icon"], class_name="h-4 w-4 text-lime-300"),
+            rx.icon(scope["icon"], class_name="h-4 w-4 text-[#d8fa5e]"),
             rx.el.p(
                 scope["label"],
-                class_name="text-sm font-semibold text-emerald-50 truncate",
+                class_name="text-sm font-semibold text-[#f2efe4] truncate",
             ),
             rx.cond(
                 scope["readonly"],
                 rx.el.span(
                     "LECTURE SEULE",
-                    class_name="rounded-full border border-sky-300/40 bg-sky-300/10 px-1.5 py-0.5 text-[9px] font-bold text-sky-200 w-fit ml-auto",
+                    class_name="rounded-none border border-[#9cc3ff]/40 bg-[#9cc3ff]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#c3daff] w-fit ml-auto",
                 ),
                 rx.fragment(),
             ),
@@ -296,25 +296,25 @@ def _scope_card(scope: ScopeRow) -> rx.Component:
         ),
         rx.el.p(
             scope["detail"],
-            class_name="text-[11px] font-medium text-emerald-100/50 mt-1",
+            class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-1",
         ),
-        class_name="rounded-2xl border border-white/10 bg-white/[0.03] p-4 w-full",
+        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 w-full",
     )
 
 
 def _assignment_card(item: AssignmentRow) -> rx.Component:
     return rx.el.div(
         rx.el.div(
-            rx.icon("map", class_name="h-4 w-4 text-lime-300"),
+            rx.icon("map", class_name="h-4 w-4 text-[#d8fa5e]"),
             rx.el.p(
                 item["parcel"],
-                class_name="text-sm font-semibold text-emerald-50 truncate",
+                class_name="text-sm font-semibold text-[#f2efe4] truncate",
             ),
             rx.cond(
                 item["responsible"],
                 rx.el.span(
                     "RESPONSABLE",
-                    class_name="rounded-full border border-lime-300/40 bg-lime-300/10 px-1.5 py-0.5 text-[9px] font-bold text-lime-200 w-fit ml-auto",
+                    class_name="rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#e4ff9b] w-fit ml-auto",
                 ),
                 rx.fragment(),
             ),
@@ -326,7 +326,7 @@ def _assignment_card(item: AssignmentRow) -> rx.Component:
             chip(item["season"]),
             class_name="flex flex-wrap items-center gap-1.5 mt-2",
         ),
-        class_name="rounded-2xl border border-white/10 bg-white/[0.03] p-4 w-full",
+        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 w-full",
     )
 
 
@@ -334,10 +334,10 @@ def _scope_tab() -> rx.Component:
     return rx.el.div(
         rx.el.div(
             rx.el.div(
-                rx.icon("shield-check", class_name="h-4 w-4 text-lime-300"),
+                rx.icon("shield-check", class_name="h-4 w-4 text-[#d8fa5e]"),
                 rx.el.p(
                     AdministrationState.detail["scope_label"],
-                    class_name="text-sm font-semibold text-emerald-50",
+                    class_name="text-sm font-semibold text-[#f2efe4]",
                 ),
                 class_name="flex items-center gap-2",
             ),
@@ -354,18 +354,18 @@ def _scope_tab() -> rx.Component:
                     AdministrationState.detail["has_full_scope"],
                     rx.el.span(
                         "PÉRIMÈTRE GLOBAL",
-                        class_name="rounded-full border border-amber-300/40 bg-amber-300/10 px-2 py-0.5 text-[9px] font-bold text-amber-200 w-fit",
+                        class_name="rounded-none border border-[#ff8a5b]/40 bg-[#ff8a5b]/10 px-2 py-0.5 text-[9px] font-bold text-[#ffb894] w-fit",
                     ),
                     rx.fragment(),
                 ),
                 class_name="flex flex-wrap items-center gap-2 mt-2",
             ),
-            class_name="rounded-2xl border border-lime-300/25 bg-lime-300/[0.05] p-4 w-full",
+            class_name="rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/[0.05] p-4 w-full",
         ),
         rx.el.div(
             rx.el.p(
                 "Périmètres déclarés",
-                class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/40",
+                class_name="ap-eyebrow text-[#c9c5b4]/40",
             ),
             rx.foreach(AdministrationState.detail_scopes, _scope_card),
             class_name="flex flex-col gap-3 mt-4",
@@ -373,7 +373,7 @@ def _scope_tab() -> rx.Component:
         rx.el.div(
             rx.el.p(
                 "Affectations opérationnelles",
-                class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/40",
+                class_name="ap-eyebrow text-[#c9c5b4]/40",
             ),
             rx.foreach(
                 AdministrationState.detail_assignments, _assignment_card
@@ -390,36 +390,36 @@ def activity_row(item: ActivityRow) -> rx.Component:
             tone_badge(item["kind_label"], item["tone"]),
             rx.el.span(
                 item["module_label"] + " · " + item["action_label"],
-                class_name="text-[11px] font-semibold text-emerald-100/55 truncate",
+                class_name="text-[11px] font-semibold text-[#c9c5b4]/55 truncate",
             ),
             rx.el.span(
                 item["when"],
-                class_name="text-[10px] font-medium text-emerald-100/40 ml-auto shrink-0",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/40 ml-auto shrink-0",
             ),
             class_name="flex items-center gap-2 w-full min-w-0",
         ),
         rx.el.p(
             item["summary"],
-            class_name="text-sm font-medium text-emerald-50/85 mt-1",
+            class_name="text-sm font-medium text-[#f2efe4]/85 mt-1",
         ),
         rx.el.div(
-            rx.icon("user", class_name="h-3 w-3 text-lime-300/70"),
+            rx.icon("user", class_name="h-3 w-3 text-[#d8fa5e]/70"),
             rx.el.span(
                 item["actor"],
-                class_name="text-[10px] font-semibold text-emerald-100/50",
+                class_name="text-[10px] font-semibold text-[#c9c5b4]/50",
             ),
             chip(item["object_ref"]),
             rx.cond(
                 item["sensitive"],
                 rx.el.span(
                     "AUDIT",
-                    class_name="rounded-full border border-red-400/30 bg-red-500/10 px-1.5 py-0.5 text-[9px] font-bold text-red-300 w-fit",
+                    class_name="rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#ff9b8c] w-fit",
                 ),
                 rx.fragment(),
             ),
             class_name="flex flex-wrap items-center gap-2 mt-2",
         ),
-        class_name="rounded-2xl border border-white/10 bg-white/[0.03] p-4 w-full",
+        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 w-full",
     )
 
 
@@ -433,7 +433,7 @@ def _history_tab() -> rx.Component:
             ),
             rx.el.p(
                 "Aucune activité consignée pour ce compte.",
-                class_name="text-sm font-medium text-emerald-100/50",
+                class_name="text-sm font-medium text-[#c9c5b4]/50",
             ),
         ),
         class_name="mt-5",
@@ -458,10 +458,10 @@ def admin_user_detail() -> rx.Component:
                 class_name="w-full",
             ),
             rx.el.div(
-                rx.icon("id-card", class_name="h-7 w-7 text-lime-300/70"),
+                rx.icon("id-card", class_name="h-7 w-7 text-[#d8fa5e]/70"),
                 rx.el.p(
                     "Sélectionnez un utilisateur pour ouvrir sa fiche.",
-                    class_name="text-sm font-medium text-emerald-100/60 mt-3",
+                    class_name="mt-4 text-[13px] leading-relaxed text-[#C9C5B4]/70",
                 ),
                 class_name="flex flex-col items-center justify-center py-24",
             ),

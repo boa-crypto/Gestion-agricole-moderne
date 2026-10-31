@@ -3,8 +3,8 @@ import reflex as rx
 from app.components.guide_help import guide_error, help_icon_button
 from app.states.parcels_state import Option, ParcelsState
 
-_INPUT = "w-full rounded-xl border border-white/10 bg-[#04140d] px-3 py-2.5 text-sm font-medium text-emerald-50 placeholder:text-emerald-100/30 focus:border-lime-300/50 focus:ring-2 focus:ring-lime-300/20 outline-hidden transition-colors"
-_LABEL = "block text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/45 mb-1.5"
+_INPUT = "w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] px-3 py-2.5 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/30 focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors"
+_LABEL = "block ap-eyebrow text-[#c9c5b4]/45 mb-1.5"
 
 
 def _field(label: str, control: rx.Component, hint: str = "") -> rx.Component:
@@ -13,7 +13,7 @@ def _field(label: str, control: rx.Component, hint: str = "") -> rx.Component:
         control,
         rx.el.p(
             hint,
-            class_name="text-[10px] font-medium text-emerald-100/35 mt-1",
+            class_name="text-[10px] font-medium text-[#c9c5b4]/35 mt-1",
         ),
         class_name="w-full min-w-0",
     )
@@ -50,7 +50,7 @@ def _select_field(
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-100/40 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/40 pointer-events-none",
         ),
         class_name="relative w-full",
     )
@@ -72,16 +72,16 @@ def _modal_shell(
                 rx.el.div(
                     rx.el.div(
                         rx.el.div(
-                            rx.icon(icon, class_name="h-4 w-4 text-lime-300"),
+                            rx.icon(icon, class_name="h-4 w-4 text-[#d8fa5e]"),
                             rx.el.span(
                                 subtitle,
-                                class_name="text-[10px] font-semibold uppercase tracking-[0.28em] text-lime-300/80",
+                                class_name="ap-eyebrow text-[#d8fa5e]/80",
                             ),
                             class_name="flex items-center gap-2",
                         ),
                         rx.el.h2(
                             title,
-                            class_name="font-['Instrument_Serif'] text-3xl text-emerald-50 mt-1",
+                            class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
                         ),
                         class_name="min-w-0 flex-1",
                     ),
@@ -95,23 +95,23 @@ def _modal_shell(
                         "Annuler",
                         type="button",
                         on_click=on_close,
-                        class_name="rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-emerald-100/70 hover:text-emerald-50 hover:border-lime-300/30 transition-colors w-fit",
+                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-5 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit",
                     ),
                     rx.el.button(
-                        rx.icon("check", class_name="h-4 w-4 text-[#04140d]"),
-                        rx.el.span(submit_label, class_name="text-[#04140d]"),
+                        rx.icon("check", class_name="h-4 w-4 text-[#0A0A08]"),
+                        rx.el.span(submit_label, class_name="text-[#0A0A08]"),
                         type="submit",
-                        class_name="flex items-center gap-2 rounded-xl bg-lime-300 px-5 py-2.5 text-sm font-semibold hover:bg-lime-200 transition-colors w-fit",
+                        class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-5 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
                     ),
-                    class_name="flex items-center justify-end gap-3 mt-6 border-t border-white/10 pt-5 flex-wrap w-full",
+                    class_name="flex items-center justify-end gap-3 mt-6 border-t border-[#f2efe4]/12 pt-5 flex-wrap w-full",
                 ),
                 on_submit=on_submit,
                 reset_on_submit=True,
                 class_name="w-full",
             ),
-            class_name="w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-3xl border border-white/10 bg-[#061a11]/95 p-7 backdrop-blur-2xl",
+            class_name="w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-none border border-[#f2efe4]/12 bg-[#101208]/95 p-7 ",
         ),
-        class_name="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm",
+        class_name="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 ",
     )
 
 
@@ -222,7 +222,7 @@ def _parcel_body() -> rx.Component:
         rx.el.div(
             rx.el.span(
                 "Position sur la carte d'assolement (%)",
-                class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/45",
+                class_name="ap-eyebrow text-[#c9c5b4]/45",
             ),
             rx.el.div(
                 _field(
@@ -263,7 +263,7 @@ def _parcel_body() -> rx.Component:
                 ),
                 class_name="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3",
             ),
-            class_name="rounded-2xl border border-white/10 bg-white/[0.03] p-4 mt-5",
+            class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-5",
         ),
         rx.el.div(
             rx.el.label(
@@ -273,12 +273,12 @@ def _parcel_body() -> rx.Component:
                     default_checked=ParcelsState.parcel_form["is_organic"]
                     == "1",
                     key=f"organic-{ParcelsState.form_key}",
-                    class_name="h-4 w-4 accent-lime-300 cursor-pointer",
+                    class_name="h-4 w-4 accent-[#d8fa5e] cursor-pointer",
                     default_value="1",
                 ),
                 rx.el.span(
                     "Parcelle conduite en agriculture biologique",
-                    class_name="text-sm font-medium text-emerald-100/75",
+                    class_name="text-sm font-medium text-[#c9c5b4]/75",
                 ),
                 class_name="flex items-center gap-2.5 cursor-pointer w-fit",
             ),
@@ -303,29 +303,29 @@ def _catalog_hint() -> rx.Component:
     """Rappel du référentiel structuré dans le formulaire de culture."""
     return rx.el.div(
         rx.el.div(
-            rx.icon("sprout", class_name="h-4 w-4 text-lime-300"),
-            class_name="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-lime-300/25 bg-lime-300/10",
+            rx.icon("sprout", class_name="h-4 w-4 text-[#d8fa5e]"),
+            class_name="flex h-9 w-9 shrink-0 items-center justify-center rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10",
         ),
         rx.el.div(
             rx.el.p(
                 f"{ParcelsState.catalog_variety_count} variétés du référentiel disponibles",
-                class_name="text-sm font-semibold text-emerald-50",
+                class_name="text-sm font-semibold text-[#f2efe4]",
             ),
             rx.el.p(
                 "Choisir la variété relie la fiche culturale à sa catégorie, "
                 "sa culture et son espèce botanique : cycle, besoin en eau, "
                 "qualité et rendement de référence en découlent.",
-                class_name="text-[11px] font-medium text-emerald-100/50 mt-0.5",
+                class_name="text-[11px] font-medium text-[#c9c5b4]/50 mt-0.5",
             ),
             class_name="min-w-0 flex-1",
         ),
         rx.el.a(
-            rx.icon("arrow-up-right", class_name="h-3.5 w-3.5 text-lime-200"),
-            rx.el.span("Référentiel", class_name="text-lime-200"),
+            rx.icon("arrow-up-right", class_name="h-3.5 w-3.5 text-[#e4ff9b]"),
+            rx.el.span("Référentiel", class_name="text-[#e4ff9b]"),
             href="/referentiel",
-            class_name="flex items-center gap-1.5 rounded-full border border-lime-300/30 bg-lime-300/10 px-3 py-1.5 text-[11px] font-semibold hover:bg-lime-300/20 transition-colors w-fit shrink-0",
+            class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-3 py-1.5 text-[11px] font-semibold hover:bg-[#d8fa5e]/20 transition-colors w-fit shrink-0",
         ),
-        class_name="flex flex-col sm:flex-row sm:items-center gap-3 w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 mt-6",
+        class_name="flex flex-col sm:flex-row sm:items-center gap-3 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-6",
     )
 
 
@@ -360,7 +360,7 @@ def _crop_body() -> rx.Component:
                     ),
                     rx.icon(
                         "chevron-down",
-                        class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-100/40 pointer-events-none",
+                        class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/40 pointer-events-none",
                     ),
                     class_name="relative w-full",
                 ),

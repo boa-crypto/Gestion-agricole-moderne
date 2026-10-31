@@ -593,7 +593,7 @@ class CartographyState(rx.State):
                                COALESCE(p.locality, ''),
                                COALESCE(p.latitude, 0), COALESCE(p.longitude, 0),
                                c.name, c.health, COALESCE(c.progress_percent, 0),
-                               COALESCE(v.color_hex, '#a3e635'),
+                               COALESCE(v.color_hex, '#D8FA5E'),
                                {geometry_select}
                         FROM parcel p
                         LEFT JOIN crop c
@@ -677,7 +677,7 @@ class CartographyState(rx.State):
                     "health_tone": HEALTH_TONES.get(health, "good"),
                     "progress": progress,
                     "progress_pct": f"{progress}%",
-                    "color": str(row[12]) or "#a3e635",
+                    "color": str(row[12]) or "#D8FA5E",
                     "positions": _positions(ring),
                     "center": {"lat": center_lat, "lng": center_lon},
                     "zoom": _zoom_for_span(span),

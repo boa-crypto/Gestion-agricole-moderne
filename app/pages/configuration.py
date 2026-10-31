@@ -1,27 +1,34 @@
 import reflex as rx
 
+from app.components.design import eyebrow
 from app.components.menu_auth import login_panel
 from app.components.menu_policy_admin import configuration_administration
-from app.components.side_rail import side_rail
+from app.components.shell import app_shell
 from app.states.menu_auth_state import MenuAuthState
 from app.states.menu_configuration_state import MenuConfigurationState
 
 
 def configuration_page() -> rx.Component:
-    return rx.el.main(
+    return app_shell(
         rx.el.div(
-            side_rail("configuration"),
-            rx.el.h1(
-                "Configuration & accès",
-                class_name="font-['Instrument_Serif'] text-4xl sm:text-5xl text-emerald-50",
-            ),
-            rx.el.p(
-                "Administrez les menus, les rôles et les comptes connectés. Consultez les droits effectifs et le journal des modifications.",
-                class_name="mt-3 text-sm text-emerald-100/80",
-            ),
-            rx.el.p(
-                "Les refus sont prioritaires. La Configuration reste activée et au moins un administrateur doit conserver son accès.",
-                class_name="mt-2 text-sm text-amber-200",
+            rx.el.header(
+                eyebrow("Administration des accès", tone="accent"),
+                rx.el.h1(
+                    rx.el.span("Configuration & "),
+                    rx.el.span("accès", class_name="ap-italic text-[#D8FA5E]"),
+                    class_name="ap-display mt-5 text-[clamp(2.4rem,4.6vw,4.1rem)] text-[#f2efe4]",
+                ),
+                rx.el.p(
+                    "Administrez les menus, les rôles et les comptes connectés. "
+                    "Consultez les droits effectifs et le journal des modifications.",
+                    class_name="mt-4 max-w-3xl text-[13px] leading-relaxed text-[#C9C5B4]/70",
+                ),
+                rx.el.p(
+                    "Les refus sont prioritaires. La Configuration reste activée et "
+                    "au moins un administrateur doit conserver son accès.",
+                    class_name="mt-3 border-l-2 border-[#FF5A2B] pl-3 text-[12px] leading-relaxed text-[#FF8A5B]",
+                ),
+                class_name="w-full border-b border-[#F2EFE4]/12 pb-8",
             ),
             rx.cond(
                 MenuConfigurationState.error != "",
@@ -29,14 +36,14 @@ def configuration_page() -> rx.Component:
                     rx.el.p(
                         MenuConfigurationState.error,
                         role="alert",
-                        class_name="text-sm text-red-300",
+                        class_name="text-sm text-[#ff9b8c]",
                     ),
                     rx.el.button(
                         "Réessayer",
                         on_click=MenuConfigurationState.load_configuration,
-                        class_name="mt-2 rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-lime-300 focus-visible:outline-2 focus-visible:outline-lime-300",
+                        class_name="mt-2 rounded-none border border-[#f2efe4]/22 bg-[#14160f] px-3 py-2 text-sm text-[#d8fa5e] focus-visible:outline-2 focus-visible:outline-[#d8fa5e]",
                     ),
-                    class_name="mt-5 rounded-2xl border border-red-300/25 bg-red-950/20 p-4",
+                    class_name="mt-5 rounded-none border border-[#ff9b8c]/25 bg-[#2a0d08]/20 p-4",
                 ),
                 rx.fragment(),
             ),
@@ -47,10 +54,10 @@ def configuration_page() -> rx.Component:
                         rx.el.p(
                             "Chargement de la session et de la configuration…",
                             role="status",
-                            class_name="text-sm text-emerald-100",
+                            class_name="text-sm text-[#c9c5b4]",
                         ),
                         rx.el.div(
-                            class_name="mt-4 h-40 w-full animate-pulse rounded-2xl bg-emerald-900/40"
+                            class_name="mt-4 h-40 w-full animate-pulse rounded-none bg-[#1a1e14]/40"
                         ),
                         class_name="w-full",
                     ),
@@ -62,17 +69,17 @@ def configuration_page() -> rx.Component:
                             rx.el.section(
                                 rx.icon(
                                     "shield",
-                                    class_name="h-8 w-8 text-amber-300",
+                                    class_name="h-8 w-8 text-[#ff8a5b]",
                                 ),
                                 rx.el.h2(
                                     "Accès réservé à l’administrateur",
-                                    class_name="mt-3 font-['Instrument_Serif'] text-3xl text-emerald-50",
+                                    class_name="mt-3 ap-serif text-3xl text-[#f2efe4]",
                                 ),
                                 rx.el.p(
                                     "Votre session est valide, mais les droits de configuration requis ne sont pas accordés à votre compte.",
-                                    class_name="mt-3 text-sm text-emerald-100/80",
+                                    class_name="mt-3 text-sm text-[#c9c5b4]/80",
                                 ),
-                                class_name="w-full rounded-2xl border border-amber-300/20 bg-[#071c13] p-6",
+                                class_name="w-full rounded-none border border-[#ff8a5b]/20 bg-[#14160F] p-6",
                             ),
                         ),
                         login_panel(),
@@ -80,7 +87,7 @@ def configuration_page() -> rx.Component:
                 ),
                 class_name="mt-8 w-full",
             ),
-            class_name="relative w-full max-w-[110rem] mx-auto px-4 sm:px-8 md:pl-24 lg:pl-28 xl:pl-72 py-10 pb-28 md:pb-10",
+            class_name="flex w-full flex-col gap-6",
         ),
-        class_name="min-h-screen w-full bg-[#04120c] font-['Inter'] text-emerald-50 antialiased",
+        "configuration",
     )
