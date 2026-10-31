@@ -74,7 +74,7 @@ async def main():
     assert (first_step) in state.done_steps
     assert state.step_progress > 0, "La progression doit augmenter"
     await run_event(state.toggle_step, first_step)
-    assert ~(first_step) in state.done_steps
+    assert first_step not in state.done_steps
     await run_event(state.close_procedure)
     assert state.open_procedure_slug == ""
 

@@ -144,7 +144,7 @@ Documents de référence :
 | Compilation | `python scripts/preflight.py --compile` | `compileall : OK` |
 | Construction des écrans | `python scripts/preflight.py` | 16/16, « Tous les écrans se construisent. » |
 | Tests exécutables | `python -m pytest` sur les 20 modules collectables | **124 réussis, 1 échec réseau** (`test_weather`, sortie internet coupée) |
-| Scripts hérités | `python scripts/run_legacy_tests.py` | **16 scripts sur 25** (détail : `docs/validation-scripts-2026.md`) |
+| Scripts hérités | `python scripts/run_legacy_tests.py` | **18 scripts sur 25** (détail : `docs/validation-scripts-2026.md`) |
 | Parcours des routes | `node scripts/tools/route_tour.js` | 16 routes sur 16 en 200, aucune erreur applicative en console |
 
 Quatre tests périmés ont été réparés (comparaisons de copie, attributs
@@ -156,7 +156,7 @@ orpheline rejetée par la clé étrangère) — détail dans
 
 1. **MCP Figma non installé** : blocage réseau et absence de Claude Code, décrit
    au point 3. La procédure exacte est prête à être exécutée côté poste Windows.
-2. **Neuf scripts hérités échouent encore** : cinq exigent une session métier
+2. **Sept scripts hérités échouent encore** : cinq exigent une session métier
    vérifiée (le garde les refuse, à raison), deux réclament un contexte
    d'événement Reflex, quatre portent sur des jeux de démonstration incomplets
    ou sur des assertions antérieures à la refonte. Détail et causes :

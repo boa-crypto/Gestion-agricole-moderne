@@ -41,7 +41,7 @@ async def main():
         )
         assert state.notice != ""
         ids = [item["id"] for item in state.alert_actions]
-        assert ~(row["id"]) in ids, "L'alerte clôturée sort de la liste"
+        assert row["id"] not in ids, "L'alerte clôturée sort de la liste"
 
     if state.stock_actions:
         row = state.stock_actions[0]

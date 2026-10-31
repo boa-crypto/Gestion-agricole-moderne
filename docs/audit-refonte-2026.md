@@ -110,7 +110,7 @@ python -m pytest tests/test_access.py tests/test_crm.py tests/test_crm_overview.
 vingt-cinq autres fichiers de `tests/` sont des scripts autonomes
 (`async def main()`) qui importaient un `tests/test_utils.py` jamais versionné.
 Ce fichier est désormais reconstitué, et `scripts/run_legacy_tests.py` les
-exécute : **16 sur 25 réussissent**, les neuf autres étant documentés dans
+exécute : **18 sur 25 réussissent**, les sept autres étant documentés dans
 `docs/validation-scripts-2026.md`. Le rétablissement du harnais a révélé deux
 bugs applicatifs réels (appels de méthodes privées sans `self` dans
 `contour_state.py` et `remediation_state.py`), corrigés depuis.
