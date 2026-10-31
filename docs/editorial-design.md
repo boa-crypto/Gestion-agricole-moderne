@@ -263,3 +263,56 @@ python scripts/preflight.py --compile
 Sortie attendue : `compileall : OK` puis `Tous les écrans se construisent.`
 C'est ce contrôle qui a révélé un import manquant dans `map_sidebar.py`, réparé
 depuis.
+
+## 10. Registres CRM : montants, chargement, erreurs (lot 5)
+
+Les registres financiers étaient le dernier écran où les nombres n'étaient pas
+mis en forme et où le chargement pouvait tourner indéfiniment.
+
+1. **Montants** — deux formats seulement, définis dans
+   `app/states/crm_registers_state.py` :
+   - `_amount(v)` pour les synthèses : `27 496 800` (entier, espace fine
+     insécable) ;
+   - `_money(v)` pour les lignes de registre : `10 936 800,00` (deux décimales,
+     virgule décimale).
+   Les cinq colonnes HT, TVA, TTC, réglé et restant dû reçoivent un champ
+   `*_display` calculé dans l'état (`_money_fields`) ; les huit tuiles de
+   synthèse passent par des variables dérivées (`total_ht_display`,
+   `total_vat_display`, `total_ttc_display`, `total_paid_display`,
+   `total_remaining_display`, `total_overdue_display`). Plus aucun gabarit
+   `:.0f` ni `::2f` côté client.
+2. **Chargement** — le bloc unique de 28 rem pulsant est remplacé par
+   `_register_skeleton()` : filet supérieur, en-tête puis sept lignes
+   balayées par `skeleton()`. Le squelette n'occupe plus que la zone du
+   tableau : les huit indicateurs restent lisibles pendant le rechargement.
+3. **Erreurs** — `load_registers` est protégé par `try / finally` :
+   `is_loading` retombe toujours à `false`, un échec renseigne `load_error` et
+   affiche un bandeau vermillon (« Registre indisponible ») au lieu de laisser
+   un squelette éternel. `is_loading` part désormais à `false`, donc un montage
+   qui n'aboutit pas montre l'état vide honnête plutôt qu'une attente infinie.
+4. **Débordement** — huit conteneurs de tableau cumulaient
+   `overflow-x-auto overflow-hidden` : la seconde classe annulait le
+   défilement horizontal et rognait les colonnes de droite. La classe
+   `overflow-hidden` est retirée partout (registres CRM, matrice d'audit,
+   opérations et permissions d'administration, panneaux de phénologie, fiche
+   tiers).
+5. **Grille d'indicateurs** — huit tuiles sur une ligne écrasaient les
+   montants ; la grille passe à quatre colonnes (`xl:grid-cols-4`), les
+   valeurs en `tabular-nums` sur une seule ligne.
+
+### Tests réparés
+
+Trois tests ne correspondaient plus au code livré (et échouaient déjà sur
+`main`) :
+
+- `test_navigation` cherchait `href="/recherche"` dans le source alors que la
+  barre latérale passe par `_rail_link(href=…)` ; l'assertion vérifie
+  maintenant les destinations, et le focus clavier via la feuille globale.
+- `test_local_login` comparait une phrase marketing mot pour mot et cherchait
+  une classe `focus-visible:` locale ; il vérifie le préfixe « Première
+  visite ? » et l'anneau de focus global.
+- `test_crm_overview` appelait `_build_insights()` sans l'attendre alors que
+  la méthode est asynchrone, utilisait `list.contains()` et `.length()`, et
+  attendait huit onglets là où l'écran en déclare quatorze.
+- `test_crm` insérait une référence orpheline (`payment_id = 999999`) que la
+  clé étrangère rejette désormais : le test accepte le rejet du schéma.

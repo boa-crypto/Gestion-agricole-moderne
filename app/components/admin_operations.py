@@ -564,7 +564,7 @@ def admin_assignments() -> rx.Component:
                 ),
                 class_name="table-auto w-full min-w-[52rem]",
             ),
-            class_name="mt-5 w-full overflow-x-auto overflow-hidden rounded-none border border-[#f2efe4]/12 bg-[#0d0f09]",
+            class_name="mt-5 w-full overflow-x-auto rounded-none border border-[#f2efe4]/12 bg-[#0d0f09]",
         ),
         class_name=f"w-full {CARD}",
     )

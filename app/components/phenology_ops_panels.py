@@ -608,7 +608,7 @@ def phenology_planned_panel() -> rx.Component:
                     ),
                     class_name="table-auto w-full",
                 ),
-                class_name="w-full overflow-x-auto overflow-hidden rounded-none border border-[#f2efe4]/12 mt-5",
+                class_name="w-full overflow-x-auto rounded-none border border-[#f2efe4]/12 mt-5",
             ),
             rx.el.p(
                 "Comparaison indisponible : il manque des dates de semis ou des durées indicatives de stade.",

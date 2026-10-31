@@ -1,6 +1,7 @@
 import reflex as rx
 
 from app.components.crm_register_forms import crm_register_form
+from app.components.design import skeleton
 from app.states.crm_registers_state import (
     CrmRegistersState,
     RegisterRow,
@@ -40,7 +41,7 @@ def _kpi(label: str, value: rx.Var | str, unit: str, tone: str) -> rx.Component:
         rx.el.div(
             rx.el.span(
                 value,
-                class_name="ap-serif text-2xl leading-none",
+                class_name="ap-serif text-xl leading-none tabular-nums whitespace-nowrap",
             ),
             rx.el.span(
                 unit,
@@ -62,37 +63,37 @@ def crm_register_kpis() -> rx.Component:
         ),
         _kpi(
             CrmRegistersState.amount_header,
-            f"{CrmRegistersState.totals['amount_ht']:.0f}",
+            CrmRegistersState.total_ht_display,
             "DA",
             "text-[#c9c5b4]",
         ),
         _kpi(
             "TVA",
-            f"{CrmRegistersState.totals['vat_amount']:.0f}",
+            CrmRegistersState.total_vat_display,
             "DA",
             "text-[#c9c5b4]",
         ),
         _kpi(
             "TTC",
-            f"{CrmRegistersState.totals['amount_ttc']:.0f}",
+            CrmRegistersState.total_ttc_display,
             "DA",
             "text-[#e4ff9b]",
         ),
         _kpi(
             "Réglé",
-            f"{CrmRegistersState.totals['paid']:.0f}",
+            CrmRegistersState.total_paid_display,
             "DA",
             "text-[#e4ff9b]",
         ),
         _kpi(
             "Restant dû",
-            f"{CrmRegistersState.totals['remaining']:.0f}",
+            CrmRegistersState.total_remaining_display,
             "DA",
             "text-[#ffb894]",
         ),
         _kpi(
             "En retard",
-            f"{CrmRegistersState.totals['overdue_amount']:.0f}",
+            CrmRegistersState.total_overdue_display,
             "DA",
             "text-[#ffbcb0]",
         ),
@@ -102,7 +103,7 @@ def crm_register_kpis() -> rx.Component:
             "pièce(s)",
             "text-[#c9c5b4]/70",
         ),
-        class_name="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-3 w-full",
+        class_name="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 w-full",
     )
 
 
@@ -398,16 +399,17 @@ def _row(row: RegisterRow) -> rx.Component:
         _cell(row["title"], _TEXT),
         _cell(row["reference"], _TEXT),
         _cell(row["type_label"], _TEXT),
-        _cell(f"{row['amount_ht']:.2f}", _NUM),
-        _cell(f"{row['vat_amount']:.2f}", _NUM),
+        _cell(row["amount_ht_display"], _NUM),
+        _cell(row["vat_display"], _NUM),
         _cell(
-            f"{row['amount_ttc']:.2f}",
+            row["ttc_display"],
             "px-3 py-2.5 text-xs font-bold text-[#e4ff9b] text-right whitespace-nowrap",
         ),
-        _cell(f"{row['paid']:.2f}", _NUM),
+        _cell(row["paid_display"], _NUM),
         _cell(
-            f"{row['remaining']:.2f}",
-            "px-3 py-2.5 text-xs font-bold text-[#ffb894] text-right whitespace-nowrap",
+            row["remaining_display"],
+            "px-3 py-2.5 text-xs font-bold text-[#ffb894] text-right "
+            "whitespace-nowrap",
         ),
         _cell(row["due_date"], _TEXT),
         rx.el.td(
@@ -488,7 +490,7 @@ def crm_register_table() -> rx.Component:
             rx.el.tbody(rx.foreach(CrmRegistersState.rows, _row)),
             class_name="table-auto w-full min-w-[78rem]",
         ),
-        class_name="hidden lg:block w-full overflow-x-auto overflow-hidden rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] ",
+        class_name="hidden lg:block w-full overflow-x-auto rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] ",
     )
 
 
@@ -833,7 +835,7 @@ def crm_register_reports() -> rx.Component:
                     ),
                     class_name="table-auto w-full min-w-[52rem]",
                 ),
-                class_name="hidden lg:block w-full overflow-x-auto overflow-hidden rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] mt-4",
+                class_name="hidden lg:block w-full overflow-x-auto rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] mt-4",
             ),
             rx.el.div(
                 rx.foreach(CrmRegistersState.report_partners, _partner_card),
@@ -845,11 +847,36 @@ def crm_register_reports() -> rx.Component:
     )
 
 
+def _register_skeleton() -> rx.Component:
+    """Chargement du registre : gabarit de lignes, pas un bloc opaque."""
+    return rx.el.div(
+        rx.el.div(
+            skeleton("h-3 w-44"),
+            skeleton("h-3 w-24"),
+            class_name="flex items-center justify-between border-b border-[#F2EFE4]/8 pb-3",
+        ),
+        *[
+            rx.el.div(
+                skeleton("h-3 w-[22%]"),
+                skeleton("h-3 w-[14%]"),
+                skeleton("h-3 w-[10%]"),
+                class_name="grid grid-cols-3 gap-6 border-b border-[#F2EFE4]/8 py-4",
+            )
+            for _ in range(7)
+        ],
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-5",
+        aria_busy="true",
+    )
+
+
 def _ledger() -> rx.Component:
     return rx.el.div(
         crm_register_kpis(),
         rx.cond(
-            CrmRegistersState.row_count > 0,
+            CrmRegistersState.is_loading,
+            _register_skeleton(),
+            rx.cond(
+                CrmRegistersState.row_count > 0,
             rx.el.div(
                 crm_register_table(),
                 crm_register_cards(),
@@ -865,7 +892,8 @@ def _ledger() -> rx.Component:
                     "Élargissez la période, changez de statut ou enregistrez une nouvelle opération.",
                     class_name="text-[11px] font-medium text-[#c9c5b4]/40 mt-1 text-center max-w-md",
                 ),
-                class_name="flex flex-col items-center justify-center py-20 w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09]",
+                    class_name="flex flex-col items-center justify-center py-20 w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09]",
+                ),
             ),
         ),
         class_name="flex flex-col gap-4 w-full",
@@ -877,15 +905,23 @@ def crm_registers(register: str) -> rx.Component:
     return rx.el.div(
         crm_register_toolbar(),
         rx.cond(
-            CrmRegistersState.is_loading,
+            CrmRegistersState.load_error != "",
             rx.el.div(
-                class_name="h-[28rem] w-full animate-pulse rounded-none border border-[#f2efe4]/12 bg-[#14160f]"
+                rx.el.p(
+                    "Registre indisponible",
+                    class_name="text-[13px] font-semibold text-[#FFB894]",
+                ),
+                rx.el.p(
+                    CrmRegistersState.load_error,
+                    class_name="mt-1 text-[11px] leading-relaxed text-[#C9C5B4]/55",
+                ),
+                class_name="border-l-2 border-[#FF5A2B] bg-[#FF5A2B]/[0.06] px-4 py-4",
             ),
-            rx.cond(
-                CrmRegistersState.is_report,
-                crm_register_reports(),
-                _ledger(),
-            ),
+        ),
+        rx.cond(
+            CrmRegistersState.is_report,
+            crm_register_reports(),
+            _ledger(),
         ),
         crm_register_form(),
         on_mount=CrmRegistersState.enter_register(register),

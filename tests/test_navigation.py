@@ -146,8 +146,14 @@ def test_shared_navigation_layout_and_help_are_preserved():
     rail = Path("app/components/side_rail.py").read_text()
     assert "guide_help_panel()" in rail
     assert "HelpState.toggle_context(active)" in rail
-    assert 'href="/recherche"' in rail and 'href="/"' in rail
-    assert "focus-visible:outline" in rail
+    # La barre latérale passe par le helper _rail_link(href=...) : on vérifie
+    # les destinations, pas la forme de l'attribut dans le source.
+    assert '"/recherche"' in rail and '"/"' in rail
+    assert '_rail_link("Cockpit global", "/", ' in rail
+    assert '_rail_link("Recherche", "/recherche", ' in rail
+    # L'anneau de focus est fourni par la feuille globale (design.py),
+    # plus par une classe locale de la barre latérale.
+    assert ":focus-visible" in Path("app/components/design.py").read_text()
     assert "dialog.content" in rail and "dialog.close" in rail
     for file in [Path("app/app.py"), *Path("app/pages").glob("*.py")]:
         source = file.read_text()

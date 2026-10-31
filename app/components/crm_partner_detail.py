@@ -762,7 +762,7 @@ def _table(
                 body,
                 class_name="table-auto w-full min-w-[38rem]",
             ),
-            class_name="w-full overflow-x-auto overflow-hidden rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] mt-3",
+            class_name="w-full overflow-x-auto rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] mt-3",
         ),
         class_name="w-full",
     )

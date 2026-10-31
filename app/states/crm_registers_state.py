@@ -221,6 +221,11 @@ class RegisterRow(TypedDict):
     amount_ttc: float
     paid: float
     remaining: float
+    amount_ht_display: str
+    vat_display: str
+    ttc_display: str
+    paid_display: str
+    remaining_display: str
     due_date: str
     overdue_days: int
     is_archived: bool
@@ -391,6 +396,29 @@ def _amounts(data: dict) -> tuple[float, float, float]:
     return ht, vat_amount, round(ht + vat_amount, 2)
 
 
+def _amount(value: float) -> str:
+    """Montant de synthèse : entier, espace fine insécable."""
+    return f"{value:,.0f}".replace(",", "\u202f")
+
+
+def _money(value: float) -> str:
+    """Montant du registre : espace fine insécable, virgule décimale."""
+    return f"{value:,.2f}".replace(",", "\u202f").replace(".", ",")
+
+
+def _money_fields(
+    ht: float, vat: float, ttc: float, paid: float, remaining: float
+) -> dict:
+    """Champs d'affichage d'une ligne de registre."""
+    return {
+        "amount_ht_display": _money(ht),
+        "vat_display": _money(vat),
+        "ttc_display": _money(ttc),
+        "paid_display": _money(paid),
+        "remaining_display": _money(remaining),
+    }
+
+
 def _bucket(overdue: int) -> str:
     if overdue <= 30:
         return "0-30"
@@ -404,7 +432,8 @@ def _bucket(overdue: int) -> str:
 class CrmRegistersState(rx.State):
     """Registres Ventes / Achats / Créances / Dettes / Paiements / Rapports."""
 
-    is_loading: bool = True
+    is_loading: bool = False
+    load_error: str = ""
     is_saving: bool = False
     register: str = "ventes"
     search: str = ""
@@ -459,6 +488,30 @@ class CrmRegistersState(rx.State):
     @rx.var
     def is_settlement(self) -> bool:
         return self.register in ("creances", "dettes")
+
+    @rx.var
+    def total_ht_display(self) -> str:
+        return _amount(self.totals.get("amount_ht", 0.0))
+
+    @rx.var
+    def total_vat_display(self) -> str:
+        return _amount(self.totals.get("vat_amount", 0.0))
+
+    @rx.var
+    def total_ttc_display(self) -> str:
+        return _amount(self.totals.get("amount_ttc", 0.0))
+
+    @rx.var
+    def total_paid_display(self) -> str:
+        return _amount(self.totals.get("paid", 0.0))
+
+    @rx.var
+    def total_remaining_display(self) -> str:
+        return _amount(self.totals.get("remaining", 0.0))
+
+    @rx.var
+    def total_overdue_display(self) -> str:
+        return _amount(self.totals.get("overdue_amount", 0.0))
 
     @rx.var
     def amount_header(self) -> str:
@@ -672,6 +725,8 @@ class CrmRegistersState(rx.State):
             overdue = _i(row[15])
             status = _s(row[6]).upper()
             remaining = round(max(amount_ttc - paid, 0.0), 2)
+            amount_ht = _f(row[7])
+            vat_amount = _f(row[8])
             register_rows.append(
                 {
                     "id": _i(row[0]),
@@ -685,11 +740,14 @@ class CrmRegistersState(rx.State):
                     "status_label": _label(status),
                     "tone": _tone(status, overdue, remaining),
                     "type_label": _label(row[18]),
-                    "amount_ht": _f(row[7]),
-                    "vat_amount": _f(row[8]),
+                    "amount_ht": amount_ht,
+                    "vat_amount": vat_amount,
                     "amount_ttc": amount_ttc,
                     "paid": paid,
                     "remaining": remaining,
+                    **_money_fields(
+                        amount_ht, vat_amount, amount_ttc, paid, remaining
+                    ),
                     "due_date": _date(row[14]) or "—",
                     "overdue_days": overdue,
                     "is_archived": bool(row[11]),
@@ -767,6 +825,7 @@ class CrmRegistersState(rx.State):
                     "amount_ttc": due,
                     "paid": _f(row[7]),
                     "remaining": remaining,
+                    **_money_fields(due, 0.0, due, _f(row[7]), remaining),
                     "due_date": _date(row[9]) or "—",
                     "overdue_days": overdue,
                     "is_archived": bool(row[12]),
@@ -834,6 +893,7 @@ class CrmRegistersState(rx.State):
                     "amount_ttc": amount,
                     "paid": amount,
                     "remaining": 0.0,
+                    **_money_fields(amount, 0.0, amount, amount, 0.0),
                     "due_date": _date(row[9]) or "—",
                     "overdue_days": 0,
                     "is_archived": bool(row[12]),
@@ -1395,13 +1455,24 @@ class CrmRegistersState(rx.State):
     @rx.event
     async def load_registers(self):
         self.is_loading = True
+        self.load_error = ""
         yield
-        await ensure_local_database()
-        await ensure_crm_tables()
-        await asyncio.to_thread(seed_crm_if_empty)
-        await self._refresh_rows()
-        await self._fetch_options()
-        self.is_loading = False
+        try:
+            await ensure_local_database()
+            await ensure_crm_tables()
+            await asyncio.to_thread(seed_crm_if_empty)
+            await self._refresh_rows()
+            await self._fetch_options()
+        except Exception:  # noqa: BLE001 - l'écran doit rester lisible
+            logging.exception("Chargement du registre impossible")
+            self.load_error = (
+                "Le registre n'a pas pu être chargé. Réessayez ou vérifiez "
+                "la base de données."
+            )
+            self.rows = []
+            self.totals = EMPTY_TOTALS
+        finally:
+            self.is_loading = False
 
     @rx.event
     async def enter_register(self, register: str):

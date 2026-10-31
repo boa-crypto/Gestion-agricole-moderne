@@ -79,12 +79,14 @@ Trois lots ont été livrés (`b8b7edd`, `6c19339`, `4da760d`) :
 | --- | --- | --- |
 | Surfaces | cartes encadrées `CARD` **résolues** (filet supérieur) ; restent les panneaux de cartographie et les tuiles interactives | ~10 composants |
 | Tableaux | en-têtes non normalisés en mono, pagination hétérogène, densité variable | CRM, stocks, charges |
-| Chargements | 67 `animate-pulse` bruts : squelettes gris génériques, sans lien avec la silhouette réelle | 54 fichiers |
+| Chargements | 67 `animate-pulse` bruts : squelettes gris génériques, sans lien avec la silhouette réelle ; **registres CRM traités** (`_register_skeleton`) | 53 fichiers |
 | Mouvement | **résolu** : héros en `ap-reveal`, grilles en `ap-stagger`, clic en `ap-press`, squelettes balayés | global |
 | États vides | **résolus sur 17 blocs** via `empty_state()` ; quelques messages ponctuels subsistent | ~4 écrans |
 | Responsive | vérifié sur 390 px pour le cockpit et les RH ; non revérifié sur les écrans lourds (CRM, administration, cartographie) | 6 écrans |
 | Accessibilité | focus visible global présent ; contrastes des légendes `text-[#C9C5B4]/45` à surveiller (≈ 3:1 sur encre) | global |
 | Données de démonstration | les seeders ne couvrent ni le guide, ni les charges, ni l'administration, ni l'audit | aperçus |
+| Chargement initial CRM | dans l'aperçu, les onglets Ventes/Clients s'affichent vides au premier rendu : l'événement `on_mount` du panneau n'est pas exécuté, il faut cliquer « Actualiser ». Reproduit à l'écran le 31/10 ; les mêmes données apparaissent immédiatement après le clic | 2 panneaux |
+| Suite de tests | `tests/test_utils.py` absent du dépôt : 25 modules non collectables | 25 fichiers |
 
 ## 6. Commandes de lancement, de test et de validation
 
@@ -97,14 +99,25 @@ reflex run --env dev --frontend-port 3000 --backend-port 8000
 python -m compileall -q app
 python -c "import app.app"
 
-# Tests (baseline connue : 68 tests, 33 erreurs liées à ReflexRuntimeError)
-python -m unittest tests.test_server_guard tests.test_auth_entry `
-  tests.test_menu_policy tests.test_menu_policy_admin tests.test_navigation `
-  tests.test_menu_configuration tests.test_menu_session_errors
+# Tests exécutables (124 réussis, 1 échec réseau en bac à sable)
+$env:PYTHONPATH = "/tmp/rxe_shim;.;tests"
+python -m pytest tests/test_access.py tests/test_crm.py tests/test_crm_overview.py `
+  tests/test_crm_partners.py tests/test_crm_registers.py tests/test_navigation.py `
+  tests/test_local_login.py tests/test_menu_policy.py -q
 ```
 
-`pytest tests/` reste inopérant (`ModuleNotFoundError: test_utils`) : les tests
-sont écrits pour `unittest`.
+**État réel de la suite.** `pytest` fonctionne ; c'est `tests/test_utils.py`
+qui manque au dépôt (jamais versionné). Vingt-cinq modules l'importent
+(`from test_utils import run_event`) et ne peuvent donc pas être collectés :
+`test_stock`, `test_maintenance`, `test_expenses`, `test_guide*`,
+`test_remediation*`, `test_contour*`, `test_phenology*`, `test_search`,
+`test_admin_operations`, `test_cartography`, `test_catalog`, etc. Ils sont
+écrits comme des scripts (`async def main()`), pas comme des cas pytest.
+
+Le sous-ensemble exécutable — vingt modules — donne **124 tests réussis et un
+seul échec** : `test_weather::test_build_payload_from_api`, qui sort sur le
+réseau, impossible en bac à sable. La baseline `unittest` (68 tests, 33
+`ReflexRuntimeError`) reste mesurable mais ne couvre que sept modules.
 
 ## 7. Protection du dépôt
 

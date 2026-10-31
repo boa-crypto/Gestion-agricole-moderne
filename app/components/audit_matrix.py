@@ -418,7 +418,7 @@ def audit_issues() -> rx.Component:
                     ),
                     class_name="table-auto w-full",
                 ),
-                class_name="w-full overflow-x-auto overflow-hidden rounded-none border border-[#f2efe4]/12 bg-[#0A0A08]/60 mt-5",
+                class_name="w-full overflow-x-auto rounded-none border border-[#f2efe4]/12 bg-[#0A0A08]/60 mt-5",
             ),
             rx.el.div(
                 rx.icon("shield-check", class_name="h-6 w-6 text-[#d8fa5e]"),
@@ -518,7 +518,7 @@ def audit_categories() -> rx.Component:
                 ),
                 class_name="table-auto w-full",
             ),
-            class_name="w-full overflow-x-auto overflow-hidden rounded-none border border-[#f2efe4]/12 bg-[#0A0A08]/60 mt-5",
+            class_name="w-full overflow-x-auto rounded-none border border-[#f2efe4]/12 bg-[#0A0A08]/60 mt-5",
         ),
         class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
     )
