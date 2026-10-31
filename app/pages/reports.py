@@ -2,7 +2,7 @@
 
 import reflex as rx
 
-from app.components.design import meta_ledger, meta_row, page_hero, refresh_button
+from app.components.design import meta_ledger, meta_row, page_hero, refresh_button, skeleton_page
 from app.components.phenology_ops_panels import (
     phenology_alerts_panel,
     phenology_filters,
@@ -35,9 +35,7 @@ def _space_header() -> rx.Component:
 
 def _skeleton() -> rx.Component:
     return rx.el.div(
-        rx.el.div(class_name="animate-pulse h-28 rounded-none bg-[#16190f]"),
-        rx.el.div(class_name="animate-pulse h-64 rounded-none bg-[#16190f]"),
-        rx.el.div(class_name="animate-pulse h-64 rounded-none bg-[#16190f]"),
+        skeleton_page(3),
         class_name="flex flex-col gap-4 w-full",
     )
 

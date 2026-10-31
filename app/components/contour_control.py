@@ -567,10 +567,10 @@ def contour_control_board() -> rx.Component:
             ContourState.is_loading,
             rx.el.div(
                 rx.el.div(
-                    class_name="animate-pulse h-40 rounded-none bg-[#16190f]"
+                    class_name="ap-skeleton bg-[#191C13]/70 h-40 w-full"
                 ),
                 rx.el.div(
-                    class_name="animate-pulse h-40 rounded-none bg-[#16190f]"
+                    class_name="ap-skeleton bg-[#191C13]/70 h-40 w-full"
                 ),
                 class_name="grid grid-cols-1 xl:grid-cols-2 gap-3 w-full mt-4",
             ),

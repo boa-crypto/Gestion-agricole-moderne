@@ -2,6 +2,8 @@
 
 import reflex as rx
 
+from app.components.design import skeleton_page
+
 from app.components.phenology_form import phenology_form
 from app.components.phenology_rail import phenology_rail
 from app.states.phenology_state import (
@@ -518,9 +520,7 @@ def _journal() -> rx.Component:
 
 def _skeleton() -> rx.Component:
     return rx.el.div(
-        rx.el.div(class_name="animate-pulse h-24 rounded-none bg-[#16190f]"),
-        rx.el.div(class_name="animate-pulse h-40 rounded-none bg-[#16190f]"),
-        rx.el.div(class_name="animate-pulse h-56 rounded-none bg-[#16190f]"),
+        skeleton_page(3),
         class_name="flex flex-col gap-4 w-full mt-4",
     )
 

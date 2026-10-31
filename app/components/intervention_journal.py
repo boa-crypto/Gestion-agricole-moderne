@@ -356,16 +356,16 @@ def intervention_journal() -> rx.Component:
             OperationsState.is_loading,
             rx.el.div(
                 rx.el.div(
-                    class_name="animate-pulse h-12 rounded-none bg-[#16190f]"
+                    class_name="ap-skeleton bg-[#191C13]/70 h-12 w-full"
                 ),
                 rx.el.div(
-                    class_name="animate-pulse h-12 rounded-none bg-[#16190f]"
+                    class_name="ap-skeleton bg-[#191C13]/70 h-12 w-full"
                 ),
                 rx.el.div(
-                    class_name="animate-pulse h-12 rounded-none bg-[#16190f]"
+                    class_name="ap-skeleton bg-[#191C13]/70 h-12 w-full"
                 ),
                 rx.el.div(
-                    class_name="animate-pulse h-12 rounded-none bg-[#16190f]"
+                    class_name="ap-skeleton bg-[#191C13]/70 h-12 w-full"
                 ),
                 class_name="flex flex-col gap-2 mt-6",
             ),

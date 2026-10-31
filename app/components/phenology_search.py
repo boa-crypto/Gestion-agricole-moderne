@@ -131,7 +131,7 @@ def phenology_search_panel() -> rx.Component:
         rx.cond(
             PhenologySearchState.is_loading,
             rx.el.div(
-                class_name="animate-pulse h-40 rounded-none bg-[#16190f] mt-5"
+                class_name="ap-skeleton bg-[#191C13]/70 h-40 w-full mt-5"
             ),
             rx.cond(
                 PhenologySearchState.sections.length() > 0,

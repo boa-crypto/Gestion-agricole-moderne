@@ -6,7 +6,7 @@ filets fins et typographie serif de maison.
 
 import reflex as rx
 
-from app.components.design import stat as design_stat
+from app.components.design import skeleton_page, stat as design_stat
 from app.states.audit_state import (
     AuditState,
     CategoryRow,
@@ -599,8 +599,6 @@ def audit_entities() -> rx.Component:
 
 def audit_skeleton() -> rx.Component:
     return rx.el.div(
-        rx.el.div(class_name="animate-pulse h-24 rounded-none bg-[#16190f]"),
-        rx.el.div(class_name="animate-pulse h-64 rounded-none bg-[#16190f]"),
-        rx.el.div(class_name="animate-pulse h-48 rounded-none bg-[#16190f]"),
+        skeleton_page(3),
         class_name="flex flex-col gap-4 w-full",
     )

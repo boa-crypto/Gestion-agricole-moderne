@@ -91,7 +91,7 @@ def _skeleton() -> rx.Component:
         rx.foreach(
             [0, 1, 2, 3, 4],
             lambda _i: rx.el.div(
-                class_name="animate-pulse h-36 rounded-none bg-[#16190f]"
+                class_name="ap-skeleton bg-[#191C13]/70 h-36 w-full"
             ),
         ),
         class_name="flex flex-col gap-3",

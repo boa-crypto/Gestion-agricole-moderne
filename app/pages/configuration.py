@@ -86,7 +86,7 @@ def configuration_page() -> rx.Component:
                             class_name="text-sm text-[#c9c5b4]",
                         ),
                         rx.el.div(
-                            class_name="mt-4 h-40 w-full animate-pulse rounded-none bg-[#1a1e14]/40"
+                            class_name="ap-skeleton bg-[#191C13]/70 mt-4 h-40 w-full"
                         ),
                         class_name="w-full",
                     ),

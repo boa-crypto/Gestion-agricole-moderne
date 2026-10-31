@@ -7,6 +7,8 @@ badges lumineux, Instrument Serif pour les titres.
 
 import reflex as rx
 
+from app.components.design import skeleton_page
+
 from app.components.phenology_admin_forms import (
     phenology_admin_modals,
     phenology_export_panel,
@@ -697,8 +699,7 @@ def _checks_panel() -> rx.Component:
 
 def _skeleton() -> rx.Component:
     return rx.el.div(
-        rx.el.div(class_name="animate-pulse h-40 rounded-none bg-[#16190f]"),
-        rx.el.div(class_name="animate-pulse h-72 rounded-none bg-[#16190f]"),
+        skeleton_page(2),
         class_name="flex flex-col gap-4 w-full",
     )
 

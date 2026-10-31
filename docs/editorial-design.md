@@ -384,3 +384,30 @@ fichiers où les mêmes cartes encadrées revenaient.
 | Panneaux encadrés (`border` + `bg` + `p-4/5/6`) | ~110 | 1 |
 | Sélections en anneau `ring-2` | 6 | 0 (hors pastille de fiche parcelle) |
 | Blocs de chargement massifs `h-28` en liste | 12 | 0 |
+
+## 13. Silhouettes de page (lot 8)
+
+Le dernier reste de blocs gris était concentré dans les écrans qui n'ont pas
+d'état vide évident : guide, rapports, audit, catalogue, phénologie.
+
+1. **Nouvelle primitive `skeleton_page(sections, rows=3)`** — elle dessine la
+   silhouette d'un écran : surtitre court, titre, deux lignes de chapô, puis
+   des sections marquées par un filet supérieur et trois lignes de contenu,
+   avec `aria_busy` pour les lecteurs d'écran.
+2. **Huit écrans convertis** : `guide`, `reports`, `audit_matrix` (matrice,
+   diagnostic, sécurité), `catalog_detail`, `guide_admin`, `guide_help`,
+   `phenology_admin`, `phenology_panel`. Les empilements de blocs
+   `h-24/h-40/h-64` disparaissent au profit d'une seule silhouette.
+3. **Alignement du remplissage** — les blocs restants (`catalog_dates`,
+   `catalog_hero`, `catalog_list`, `search_results`, `configuration`,
+   `contour_control`, `guide_nav`, journaux d'intervention et d'atelier,
+   matrice de compétences, colonnes CRM) passent tous par la classe
+   `ap-skeleton` : même teinte `#191C13/70`, même balayage désynchronisé du
+   dégradé gris standard. Les deux panneaux de l'espace tiers perdent leur
+   cadre au passage.
+4. **Ce qui reste animé volontairement** — le trait chlorophylle de la coque
+   d'authentification (`menu_auth`, `h-px`) garde `animate-pulse` : c'est un
+   signal d'attente fin, pas un squelette.
+
+Décompte : `animate-pulse` passe de 58 occurrences (dont 41 blocs de
+chargement) à **1**, volontaire.

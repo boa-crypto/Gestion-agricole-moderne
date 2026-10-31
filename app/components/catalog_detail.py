@@ -2,6 +2,8 @@
 
 import reflex as rx
 
+from app.components.design import skeleton_page
+
 from app.states.catalog_browser_state import (
     CatalogBrowserState,
     ConsumerHint,
@@ -448,9 +450,7 @@ def _consumers_block() -> rx.Component:
 
 def _detail_skeleton() -> rx.Component:
     return rx.el.div(
-        rx.el.div(class_name="animate-pulse h-44 rounded-none bg-[#16190f]"),
-        rx.el.div(class_name="animate-pulse h-64 rounded-none bg-[#16190f]"),
-        rx.el.div(class_name="animate-pulse h-72 rounded-none bg-[#16190f]"),
+        skeleton_page(3),
         class_name="flex flex-col gap-4 w-full",
     )
 

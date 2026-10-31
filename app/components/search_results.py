@@ -188,7 +188,7 @@ def _section(section: SearchSection, key: str = "") -> rx.Component:
 def _skeleton() -> rx.Component:
     return rx.el.div(
         rx.el.div(
-            class_name="animate-pulse h-8 w-56 rounded-none bg-[#191c13]"
+            class_name="ap-skeleton bg-[#191C13]/70 h-8 w-56"
         ),
         rx.el.div(skeleton_rows(3), class_name="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-3 w-full mt-5"),
         class_name="border-t border-[#F2EFE4]/12 w-full pt-6",

@@ -872,6 +872,29 @@ def skeleton_rows(count: int = 4, *, avatar: bool = True) -> rx.Component:
     )
 
 
+def skeleton_page(sections: int = 2, *, rows: int = 3) -> rx.Component:
+    """Silhouette d'écran : surtitre, titre, chapô puis sections en lignes."""
+    return rx.el.div(
+        skeleton("h-2.5 w-24"),
+        skeleton("mt-4 h-9 w-2/3 max-w-xl"),
+        skeleton("mt-4 h-3 w-full max-w-2xl"),
+        skeleton("mt-2 h-3 w-4/5 max-w-xl"),
+        *[
+            rx.el.div(
+                skeleton("h-2.5 w-32"),
+                rx.el.div(
+                    *[skeleton("h-12 w-full") for _ in range(rows)],
+                    class_name="mt-4 flex flex-col gap-3",
+                ),
+                class_name="mt-8 w-full border-t border-[#F2EFE4]/12 pt-5",
+            )
+            for _ in range(sections)
+        ],
+        class_name="flex flex-col w-full",
+        aria_busy="true",
+    )
+
+
 def empty_state(
     icon: str,
     title: rx.Var | str,

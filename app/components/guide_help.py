@@ -10,6 +10,8 @@
 
 import reflex as rx
 
+from app.components.design import skeleton_page
+
 from app.guide_hints import topic_hint, topic_icon, topic_label
 from app.states.help_state import (
     HelpArticle,
@@ -398,9 +400,7 @@ def _focus_block() -> rx.Component:
 
 def _skeleton() -> rx.Component:
     return rx.el.div(
-        rx.el.div(class_name="animate-pulse h-20 rounded-none bg-[#16190f]"),
-        rx.el.div(class_name="animate-pulse h-28 rounded-none bg-[#16190f]"),
-        rx.el.div(class_name="animate-pulse h-24 rounded-none bg-[#16190f]"),
+        skeleton_page(3),
         class_name="flex flex-col gap-3 w-full",
     )
 

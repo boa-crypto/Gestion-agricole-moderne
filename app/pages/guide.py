@@ -1,5 +1,7 @@
 import reflex as rx
 
+from app.components.design import skeleton_page
+
 from app.components.guide_admin import guide_admin
 from app.components.guide_dictionary import guide_dictionary
 from app.components.guide_faq import guide_faq
@@ -15,8 +17,7 @@ from app.states.guide_state import GuideState
 
 def _skeleton() -> rx.Component:
     return rx.el.div(
-        rx.el.div(class_name="animate-pulse h-40 rounded-none bg-[#16190f]"),
-        rx.el.div(class_name="animate-pulse h-64 rounded-none bg-[#16190f]"),
+        skeleton_page(2),
         class_name="flex flex-col gap-4 w-full",
     )
 

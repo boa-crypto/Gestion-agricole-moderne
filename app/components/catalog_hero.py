@@ -85,12 +85,12 @@ def catalog_coverage() -> rx.Component:
                         rx.el.div(class_name="h-px w-full bg-[#F2EFE4]/12"),
                         rx.el.div(
                             class_name=(
-                                "mt-4 h-2 w-24 animate-pulse bg-[#F2EFE4]/10"
+                                "mt-4 h-2 w-24 ap-skeleton bg-[#F2EFE4]/10"
                             )
                         ),
                         rx.el.div(
                             class_name=(
-                                "mt-3 h-8 w-16 animate-pulse bg-[#F2EFE4]/10"
+                                "mt-3 h-8 w-16 ap-skeleton bg-[#F2EFE4]/10"
                             )
                         ),
                         class_name="pb-1",
@@ -218,7 +218,7 @@ def catalog_radar() -> rx.Component:
         rx.cond(
             CatalogBrowserState.is_loading,
             rx.el.div(
-                class_name="animate-pulse h-80 w-full rounded-none bg-[#16190f] mt-5"
+                class_name="ap-skeleton bg-[#191C13]/70 h-80 w-full mt-5"
             ),
             rx.el.div(
                 rx.el.div(
