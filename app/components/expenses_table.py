@@ -1,5 +1,6 @@
 import reflex as rx
 
+from app.components.design import action_button, empty_state
 from app.states.expenses_state import ExpenseRow, ExpensesState
 
 
@@ -259,19 +260,17 @@ def expenses_table() -> rx.Component:
                     ),
                     class_name="overflow-x-auto",
                 ),
-                class_name="mt-5 w-full rounded-none border border-[#f2efe4]/12 bg-[#0D0F09]/60 overflow-hidden",
+                class_name="mt-5 w-full border-t border-[#F2EFE4]/12 pt-4",
             ),
-            rx.el.div(
-                rx.icon("receipt-text", class_name="h-7 w-7 text-[#ff8a5b]"),
-                rx.el.p(
-                    "Aucune dépense ne correspond au périmètre sélectionné.",
-                    class_name="mt-4 text-[13px] leading-relaxed text-[#C9C5B4]/70 text-center max-w-md",
-                ),
-                rx.el.button(
-                    rx.icon("rotate-ccw", class_name="h-4 w-4"),
-                    rx.el.span("Réinitialiser les filtres"),
+            empty_state(
+                "receipt-text",
+                "Aucune dépense sur ce périmètre",
+                "Élargissez la période ou réinitialisez les filtres pour retrouver le journal complet.",
+                action=action_button(
+                    "Réinitialiser les filtres",
+                    icon="rotate-ccw",
                     on_click=ExpensesState.reset_filters,
-                    class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2 text-sm font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit mt-5",
+                    tone="outline",
                 ),
                 class_name="flex flex-col items-center justify-center py-16",
             ),

@@ -341,3 +341,11 @@ côte.
 5. **Bandeaux d'alerte** — les deux avertissements « colonnes de géométrie
    absentes » utilisent désormais le même gabarit
    (`border-l-2 border-[#FF5A2B] bg-[#FF5A2B]/[0.06]`).
+
+### Journal des charges
+
+Le tableau des charges suivait encore le gabarit « boîte dans la boîte » : il
+reçoit maintenant un simple filet supérieur, l'en-tête `ap-eyebrow` restant
+inchangé. Son état vide passe par `empty_state()` avec l'action
+« Réinitialiser les filtres » (`action_button`, ton filet), au lieu d'un bloc
+centré et d'un bouton hérité.
