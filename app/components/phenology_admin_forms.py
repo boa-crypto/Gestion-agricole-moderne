@@ -5,14 +5,14 @@ import reflex as rx
 from app.states.phenology_admin_state import PhenologyAdminState
 
 _INPUT = (
-    "w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] px-3 py-2.5 text-sm "
-    "font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/60 "
-    "focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 "
+    "w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] px-3 py-2.5 text-sm "
+    "font-medium text-[rgb(var(--ap-paper-rgb))] placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] "
+    "focus:border-[rgb(var(--ap-accent-rgb)/0.50)] focus:ring-2 focus:ring-[rgb(var(--ap-accent-rgb)/0.20)] "
     "outline-hidden transition-colors"
 )
 _LABEL = (
     "block ap-eyebrow "
-    "text-[#c9c5b4]/65 mb-1.5"
+    "text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mb-1.5"
 )
 
 
@@ -24,7 +24,7 @@ def _field(label: str, control: rx.Component, hint: str = "") -> rx.Component:
             hint != "",
             rx.el.p(
                 hint,
-                class_name="text-[10px] font-medium text-[#c9c5b4]/60 mt-1",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] mt-1",
             ),
             rx.fragment(),
         ),
@@ -72,7 +72,7 @@ def _select(name: str, value: rx.Var, options: rx.Var) -> rx.Component:
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
         ),
         class_name="relative w-full",
     )
@@ -93,7 +93,7 @@ def _culture_select(value: rx.Var) -> rx.Component:
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
         ),
         class_name="relative w-full",
     )
@@ -107,20 +107,20 @@ def _check(name: str, value: rx.Var, label: str, hint: str) -> rx.Component:
             default_value="1",
             default_checked=value == "1",
             key=f"{PhenologyAdminState.editor_key}-{name}",
-            class_name="h-4 w-4 shrink-0 accent-[#d8fa5e] cursor-pointer mt-0.5",
+            class_name="h-4 w-4 shrink-0 accent-[rgb(var(--ap-accent-rgb))] cursor-pointer mt-0.5",
         ),
         rx.el.div(
             rx.el.span(
                 label,
-                class_name="text-[12px] font-semibold text-[#f2efe4]",
+                class_name="text-[12px] font-semibold text-[rgb(var(--ap-paper-rgb))]",
             ),
             rx.el.p(
                 hint,
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65 mt-0.5",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-0.5",
             ),
             class_name="min-w-0",
         ),
-        class_name="flex items-start gap-2.5 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] px-3 py-2.5 cursor-pointer",
+        class_name="flex items-start gap-2.5 w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))] px-3 py-2.5 cursor-pointer",
     )
 
 
@@ -131,11 +131,11 @@ def _errors() -> rx.Component:
             rx.el.div(
                 rx.icon(
                     "octagon-alert",
-                    class_name="h-4 w-4 shrink-0 stroke-[#ff9b8c]",
+                    class_name="h-4 w-4 shrink-0 stroke-[rgb(var(--ap-danger-soft-rgb))]",
                 ),
                 rx.el.span(
                     "Enregistrement refusé : corrigez les points suivants.",
-                    class_name="text-[11px] font-semibold text-[#ffbcb0]",
+                    class_name="text-[11px] font-semibold text-[rgb(var(--ap-warm-150-rgb))]",
                 ),
                 class_name="flex items-start gap-2",
             ),
@@ -143,10 +143,10 @@ def _errors() -> rx.Component:
                 PhenologyAdminState.form_errors,
                 lambda message: rx.el.p(
                     message,
-                    class_name="text-[11px] font-medium text-[#ffe0da]/75 mt-1.5 leading-relaxed",
+                    class_name="text-[11px] font-medium text-[rgb(var(--ap-warm-050-rgb)/0.75)] mt-1.5 leading-relaxed",
                 ),
             ),
-            class_name="w-full rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 p-3 mt-4",
+            class_name="w-full rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] p-3 mt-4",
         ),
         rx.fragment(),
     )
@@ -166,16 +166,16 @@ def _modal(
             rx.el.form(
                 rx.el.div(
                     rx.el.div(
-                        rx.icon(icon, class_name="h-4 w-4 text-[#d8fa5e]"),
+                        rx.icon(icon, class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
                         rx.el.span(
                             subtitle,
-                            class_name="ap-eyebrow text-[#d8fa5e]/80",
+                            class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                         ),
                         class_name="flex items-center gap-2",
                     ),
                     rx.el.h2(
                         title,
-                        class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                        class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                     ),
                     class_name="w-full",
                 ),
@@ -186,20 +186,20 @@ def _modal(
                         "Annuler",
                         type="button",
                         on_click=on_close,
-                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-5 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit",
+                        class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-5 py-2.5 text-sm font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors w-fit",
                     ),
                     rx.el.button(
-                        rx.icon("check", class_name="h-4 w-4 stroke-[#0A0A08]"),
-                        rx.el.span(submit_label, class_name="text-[#0A0A08]"),
+                        rx.icon("check", class_name="h-4 w-4 stroke-[rgb(var(--ap-ink-rgb))]"),
+                        rx.el.span(submit_label, class_name="text-[rgb(var(--ap-ink-rgb))]"),
                         type="submit",
-                        class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-5 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
+                        class_name="flex items-center gap-2 rounded-none bg-[rgb(var(--ap-accent-rgb))] px-5 py-2.5 text-sm font-semibold hover:bg-[rgb(var(--ap-accent-soft-rgb))] transition-colors w-fit",
                     ),
-                    class_name="flex flex-wrap items-center justify-end gap-3 w-full border-t border-[#f2efe4]/12 pt-5 mt-6",
+                    class_name="flex flex-wrap items-center justify-end gap-3 w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-5 mt-6",
                 ),
                 on_submit=on_submit,
                 class_name="w-full",
             ),
-            class_name="w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-none border border-[#f2efe4]/12 bg-[#101208]/95 p-7 ",
+            class_name="w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb)/0.95)] p-7 ",
         ),
         class_name="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 ",
     )
@@ -420,15 +420,15 @@ def _reco_body() -> rx.Component:
     return rx.el.div(
         rx.el.div(
             rx.icon(
-                "info", class_name="h-4 w-4 shrink-0 stroke-[#d8fa5e] mt-0.5"
+                "info", class_name="h-4 w-4 shrink-0 stroke-[rgb(var(--ap-accent-rgb))] mt-0.5"
             ),
             rx.el.p(
                 "Les opérations associées restent des informations générales à "
                 "vérifier : aucune dose, aucun produit phytosanitaire non "
                 "sourcé, aucune transformation automatique en intervention.",
-                class_name="text-[11px] font-medium text-[#c9c5b4]/60 leading-relaxed",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] leading-relaxed",
             ),
-            class_name="flex items-start gap-2.5 w-full rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/[0.06] p-4 mt-6",
+            class_name="flex items-start gap-2.5 w-full rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb))]/[0.06] p-4 mt-6",
         ),
         rx.el.div(
             _field(
@@ -542,17 +542,17 @@ def phenology_import_panel() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Importation du référentiel",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Enrichir les stades depuis un CSV ou un JSON",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 rx.el.p(
                     "Import additif : un stade connu est complété, un stade "
                     "inconnu est ajouté à la fin du cycle. Aucune ligne "
                     "existante n'est supprimée.",
-                    class_name="text-xs font-medium text-[#c9c5b4]/65 mt-2 max-w-2xl",
+                    class_name="text-xs font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-2 max-w-2xl",
                 ),
                 class_name="min-w-0",
             ),
@@ -560,7 +560,7 @@ def phenology_import_panel() -> rx.Component:
                 rx.icon("file-down", class_name="h-3.5 w-3.5"),
                 rx.el.span("Charger le modèle CSV"),
                 on_click=PhenologyAdminState.load_csv_template,
-                class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2 text-xs font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
+                class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2 text-xs font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit",
             ),
             class_name="flex flex-col lg:flex-row lg:items-end justify-between gap-3",
         ),
@@ -578,7 +578,7 @@ def phenology_import_panel() -> rx.Component:
                     "Profil ciblé",
                     rx.el.p(
                         PhenologyAdminState.selected_profile["name"],
-                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#101208] px-3 py-2.5 text-sm font-semibold text-[#f2efe4] truncate",
+                        class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))] px-3 py-2.5 text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] truncate",
                     ),
                     "Les stades sont rattachés à ce profil uniquement.",
                 ),
@@ -603,12 +603,12 @@ def phenology_import_panel() -> rx.Component:
                 "guide_article_slug, guide_term_slug.",
             ),
             rx.el.button(
-                rx.icon("upload", class_name="h-4 w-4 stroke-[#0A0A08]"),
+                rx.icon("upload", class_name="h-4 w-4 stroke-[rgb(var(--ap-ink-rgb))]"),
                 rx.el.span(
-                    "Lancer l'import additif", class_name="text-[#0A0A08]"
+                    "Lancer l'import additif", class_name="text-[rgb(var(--ap-ink-rgb))]"
                 ),
                 type="submit",
-                class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit mt-4",
+                class_name="flex items-center gap-2 rounded-none bg-[rgb(var(--ap-accent-rgb))] px-4 py-2.5 text-sm font-semibold hover:bg-[rgb(var(--ap-accent-soft-rgb))] transition-colors w-fit mt-4",
             ),
             on_submit=PhenologyAdminState.run_import,
             class_name="w-full",
@@ -618,20 +618,20 @@ def phenology_import_panel() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Rapport d'import",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.foreach(
                     PhenologyAdminState.import_report,
                     lambda line: rx.el.p(
                         line,
-                        class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-1.5 leading-relaxed",
+                        class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-1.5 leading-relaxed",
                     ),
                 ),
-                class_name="border-t border-[#F2EFE4]/12 w-full pt-4 mt-5",
+                class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-4 mt-5",
             ),
             rx.fragment(),
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6",
     )
 
 
@@ -642,16 +642,16 @@ def phenology_export_panel() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Exportation du référentiel",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Profils, stades et opérations associées",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 rx.el.p(
                     "L'export conserve la mention « information indicative » "
                     "pour chaque opération associée à un stade.",
-                    class_name="text-xs font-medium text-[#c9c5b4]/65 mt-2 max-w-2xl",
+                    class_name="text-xs font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-2 max-w-2xl",
                 ),
                 class_name="min-w-0",
             ),
@@ -670,7 +670,7 @@ def phenology_export_panel() -> rx.Component:
                     ),
                     rx.icon(
                         "chevron-down",
-                        class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+                        class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
                     ),
                     class_name="relative w-full sm:w-52",
                 ),
@@ -678,13 +678,13 @@ def phenology_export_panel() -> rx.Component:
                     rx.icon("download", class_name="h-3.5 w-3.5"),
                     rx.el.span("Ce profil"),
                     on_click=PhenologyAdminState.run_export,
-                    class_name="flex items-center gap-2 rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-4 py-2 text-xs font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit",
+                    class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-4 py-2 text-xs font-semibold text-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors w-fit",
                 ),
                 rx.el.button(
                     rx.icon("database", class_name="h-3.5 w-3.5"),
                     rx.el.span("Tout le référentiel"),
                     on_click=PhenologyAdminState.export_all,
-                    class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2 text-xs font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
+                    class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2 text-xs font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit",
                 ),
                 class_name="flex flex-wrap items-center gap-2",
             ),
@@ -694,13 +694,13 @@ def phenology_export_panel() -> rx.Component:
             PhenologyAdminState.export_payload != "",
             rx.el.pre(
                 PhenologyAdminState.export_payload,
-                class_name="border-t border-[#F2EFE4]/12 w-full max-h-80 overflow-auto bg-[#0A0A08] pt-4 text-[11px] font-mono text-[#c9c5b4]/70 mt-5 whitespace-pre",
+                class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full max-h-80 overflow-auto bg-[rgb(var(--ap-ink-rgb))] pt-4 text-[11px] font-mono text-[rgb(var(--ap-paper-muted-rgb)/0.90)] mt-5 whitespace-pre",
             ),
             rx.el.p(
                 "Choisissez un format puis générez l'export : le contenu "
                 "s'affiche ici, prêt à être copié.",
-                class_name="text-sm font-medium text-[#c9c5b4]/65 mt-5",
+                class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-5",
             ),
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6",
     )

@@ -13,21 +13,21 @@ def _tone_badge(label: rx.Var | str, tone: rx.Var | str) -> rx.Component:
             tone,
             (
                 "good",
-                "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit",
+                "rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
             ),
             (
                 "warn",
-                "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 text-[10px] font-bold text-[#ffb894] w-fit",
+                "rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit",
             ),
             (
                 "bad",
-                "rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2 py-0.5 text-[10px] font-bold text-[#ff9b8c] w-fit",
+                "rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-danger-soft-rgb))] w-fit",
             ),
             (
                 "info",
-                "rounded-none border border-[#9cc3ff]/30 bg-[#9cc3ff]/10 px-2 py-0.5 text-[10px] font-bold text-[#c3daff] w-fit",
+                "rounded-none border border-[rgb(var(--ap-info-rgb)/0.30)] bg-[rgb(var(--ap-info-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-info-soft-rgb))] w-fit",
             ),
-            "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/65 w-fit",
+            "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit",
         ),
     )
 
@@ -39,55 +39,55 @@ def _tile(
         rx.el.div(
             rx.el.span(
                 label,
-                class_name="ap-eyebrow text-[#c9c5b4]/65",
+                class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
-            rx.icon(icon, class_name="h-4 w-4 text-[#d8fa5e]"),
+            rx.icon(icon, class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
             class_name="flex items-start justify-between gap-2",
         ),
         rx.el.div(
             rx.el.span(
                 value,
-                class_name="ap-serif text-2xl leading-none text-[#f2efe4]",
+                class_name="ap-serif text-2xl leading-none text-[rgb(var(--ap-paper-rgb))]",
             ),
             rx.el.span(
                 unit,
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mb-0.5",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mb-0.5",
             ),
             class_name="flex items-end gap-1.5 mt-3",
         ),
         rx.el.p(
             caption,
-            class_name="text-[10px] font-medium text-[#c9c5b4]/65 mt-2",
+            class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-2",
         ),
-        class_name="border-t border-[#F2EFE4]/8 w-full pt-4",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.12)] w-full pt-4",
     )
 
 
 def _finding(item: SecurityFinding, key: str = "") -> rx.Component:
     return rx.el.div(
         rx.el.div(
-            rx.icon(item["icon"], class_name="h-4 w-4 text-[#ff8a5b] shrink-0"),
+            rx.icon(item["icon"], class_name="h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))] shrink-0"),
             rx.el.p(
                 item["label"],
-                class_name="text-sm font-semibold text-[#f2efe4] truncate",
+                class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] truncate",
             ),
             _tone_badge(item["value"].to_string(), item["tone"]),
             class_name="flex items-center gap-2 min-w-0",
         ),
         rx.el.p(
             item["detail"],
-            class_name="text-[11px] font-medium text-[#c9c5b4]/60 mt-2 leading-relaxed",
+            class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] mt-2 leading-relaxed",
         ),
         rx.el.p(
             item["recommendation"],
-            class_name="text-[11px] font-medium text-[#ffdccb]/75 mt-2",
+            class_name="text-[11px] font-medium text-[rgb(var(--ap-warm-100-rgb)/0.75)] mt-2",
         ),
         rx.el.span(
             item["reference"],
-            class_name="inline-block rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[9px] font-mono text-[#c9c5b4]/65 w-fit mt-2",
+            class_name="inline-block rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[9px] font-mono text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit mt-2",
         ),
         key=key,
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-4 hover:border-t-[rgb(var(--ap-accent-rgb)/0.40)] transition-colors",
     )
 
 
@@ -97,32 +97,32 @@ def _event(item: SecurityEvent, key: str = "") -> rx.Component:
             _tone_badge(item["kind"], item["tone"]),
             rx.el.span(
                 item["module"] + " · " + item["action"],
-                class_name="text-[11px] font-semibold text-[#c9c5b4]/55 truncate",
+                class_name="text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.78)] truncate",
             ),
             rx.el.span(
                 item["when"],
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65 ml-auto shrink-0",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] ml-auto shrink-0",
             ),
             class_name="flex items-center gap-2 w-full min-w-0",
         ),
         rx.el.p(
             item["summary"],
-            class_name="text-sm font-medium text-[#f2efe4]/85 mt-1",
+            class_name="text-sm font-medium text-[rgb(var(--ap-paper-rgb)/0.96)] mt-1",
         ),
         rx.el.div(
-            rx.icon("user", class_name="h-3 w-3 text-[#d8fa5e]/70"),
+            rx.icon("user", class_name="h-3 w-3 text-[rgb(var(--ap-accent-rgb)/0.70)]"),
             rx.el.span(
                 item["actor"],
-                class_name="text-[10px] font-semibold text-[#c9c5b4]/65",
+                class_name="text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             rx.el.span(
                 item["object_ref"],
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/55 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.78)] w-fit",
             ),
             class_name="flex flex-wrap items-center gap-2 mt-2",
         ),
         key=key,
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-4",
     )
 
 
@@ -132,15 +132,15 @@ def audit_security_panel() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Audit sécurité",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Utilisateurs, rôles & permissions",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 rx.el.p(
                     "Couverture RBAC, second facteur, périmètres agricoles, permissions temporaires et évènements sensibles du journal.",
-                    class_name="text-sm font-medium text-[#c9c5b4]/55 mt-2 max-w-2xl",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] mt-2 max-w-2xl",
                 ),
                 class_name="min-w-0",
             ),
@@ -153,13 +153,13 @@ def audit_security_panel() -> rx.Component:
                     rx.el.span("Ouvrir l'administration"),
                     rx.icon("arrow-up-right", class_name="h-3 w-3"),
                     href="/administration",
-                    class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1 text-[11px] font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit",
+                    class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1 text-[11px] font-semibold text-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors w-fit",
                 ),
                 rx.el.button(
                     rx.icon("refresh-cw", class_name="h-4 w-4"),
                     rx.el.span("Relancer"),
                     on_click=SecurityAuditState.load_security,
-                    class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2 text-sm font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
+                    class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2 text-sm font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit",
                 ),
                 class_name="flex flex-wrap items-center gap-2",
             ),
@@ -220,7 +220,7 @@ def audit_security_panel() -> rx.Component:
             rx.el.div(
                 rx.el.p(
                     "Constats de sécurité",
-                    class_name="ap-eyebrow text-[#c9c5b4]/65",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 rx.el.div(
                     rx.foreach(
@@ -234,7 +234,7 @@ def audit_security_panel() -> rx.Component:
             rx.el.div(
                 rx.el.p(
                     "Évènements sensibles & refus",
-                    class_name="ap-eyebrow text-[#c9c5b4]/65",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 rx.cond(
                     SecurityAuditState.events.length() > 0,
@@ -249,12 +249,12 @@ def audit_security_panel() -> rx.Component:
                     ),
                     rx.el.p(
                         "Aucun évènement sensible consigné.",
-                        class_name="text-sm font-medium text-[#c9c5b4]/65 mt-3",
+                        class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-3",
                     ),
                 ),
                 class_name="w-full xl:w-[28rem] shrink-0",
             ),
-            class_name="flex flex-col xl:flex-row gap-6 w-full mt-6 border-t border-[#f2efe4]/12 pt-6",
+            class_name="flex flex-col xl:flex-row gap-6 w-full mt-6 border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-6",
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6",
     )

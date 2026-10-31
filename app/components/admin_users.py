@@ -105,11 +105,11 @@ def _user_card(user: UserRow, key: str = "") -> rx.Component:
             rx.el.div(
                 rx.el.p(
                     user["name"],
-                    class_name="text-sm font-semibold text-[#f2efe4] truncate text-left",
+                    class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] truncate text-left",
                 ),
                 rx.el.p(
                     user["matricule"] + " · " + user["function_label"],
-                    class_name="text-[11px] font-medium text-[#c9c5b4]/65 truncate text-left",
+                    class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] truncate text-left",
                 ),
                 class_name="min-w-0 flex-1",
             ),
@@ -119,7 +119,7 @@ def _user_card(user: UserRow, key: str = "") -> rx.Component:
         rx.el.div(
             rx.el.span(
                 user["role_label"],
-                class_name="rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
             ),
             chip(user["team_label"]),
             chip(user["family_label"]),
@@ -127,7 +127,7 @@ def _user_card(user: UserRow, key: str = "") -> rx.Component:
                 user["mfa_enabled"],
                 rx.el.span(
                     "MFA",
-                    class_name="rounded-none border border-[#9cc3ff]/40 bg-[#9cc3ff]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#c3daff] w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-info-rgb)/0.40)] bg-[rgb(var(--ap-info-rgb)/0.10)] px-1.5 py-0.5 text-[9px] font-bold text-[rgb(var(--ap-info-soft-rgb))] w-fit",
                 ),
                 rx.fragment(),
             ),
@@ -136,15 +136,15 @@ def _user_card(user: UserRow, key: str = "") -> rx.Component:
         rx.el.div(
             rx.el.span(
                 user["scopes"].to_string() + " périmètre(s)",
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             rx.el.span(
                 user["assignments"].to_string() + " affectation(s)",
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             rx.el.span(
                 user["last_login"],
-                class_name="text-[10px] font-semibold text-[#e4ff9b] ml-auto truncate",
+                class_name="text-[10px] font-semibold text-[rgb(var(--ap-accent-soft-rgb))] ml-auto truncate",
             ),
             class_name="flex items-center gap-2 w-full mt-2 min-w-0",
         ),
@@ -152,8 +152,8 @@ def _user_card(user: UserRow, key: str = "") -> rx.Component:
         key=key,
         class_name=rx.cond(
             AdministrationState.selected_user_id == user["id"],
-            "w-full border-t border-[#F2EFE4]/12 border-l-2 border-l-[#D8FA5E] bg-[#D8FA5E]/[0.07] pl-3 pr-2 pt-4 text-left transition-colors",
-            "border-t border-[#F2EFE4]/12 w-full pt-4 text-left hover:border-t-[#D8FA5E]/40 transition-all",
+            "w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] border-l-2 border-l-[rgb(var(--ap-accent-rgb))] bg-[rgb(var(--ap-accent-rgb))]/[0.07] pl-3 pr-2 pt-4 text-left transition-colors",
+            "border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-4 text-left hover:border-t-[rgb(var(--ap-accent-rgb)/0.40)] transition-all",
         ),
     )
 
@@ -168,7 +168,7 @@ def admin_user_list() -> rx.Component:
             ),
             rx.el.span(
                 AdministrationState.user_count,
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-xs font-bold text-[#c9c5b4]/70 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-xs font-bold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] w-fit",
             ),
             class_name="flex items-end justify-between gap-3",
         ),

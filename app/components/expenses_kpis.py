@@ -19,8 +19,8 @@ def _tile(
 
 def _section_title() -> rx.Component:
     return rx.el.div(
-        rx.icon("wallet", class_name="h-4 w-4 text-[#d8fa5e]"),
-        rx.el.span("Indicateurs de charges", class_name="ap-eyebrow text-[#c9c5b4]/55"),
+        rx.icon("wallet", class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
+        rx.el.span("Indicateurs de charges", class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.78)]"),
         class_name="flex w-full items-center gap-2",
     )
 
@@ -35,7 +35,7 @@ def expenses_kpis() -> rx.Component:
                 "€ TTC",
                 f"{ExpensesState.kpis['total_ht']:.0f} € HT sur {ExpensesState.kpis['count']:.0f} ligne(s)",
                 "receipt-text",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             _tile(
                 "Réglé",
@@ -43,7 +43,7 @@ def expenses_kpis() -> rx.Component:
                 "€ TTC",
                 "Dépenses déjà payées au fournisseur",
                 "circle-check",
-                "h-4 w-4 text-[#a9c98b]",
+                "h-4 w-4 text-[rgb(var(--ap-sage-rgb))]",
             ),
             _tile(
                 "Reste à payer",
@@ -51,7 +51,7 @@ def expenses_kpis() -> rx.Component:
                 "€ TTC",
                 f"{ExpensesState.kpis['overdue']:.0f} échéance(s) dépassée(s)",
                 "hourglass",
-                "h-4 w-4 text-[#ff8a5b]",
+                "h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]",
             ),
             _tile(
                 "Mois en cours",
@@ -59,7 +59,7 @@ def expenses_kpis() -> rx.Component:
                 "€ TTC",
                 f"{ExpensesState.kpis['year_total']:.0f} € depuis le 1er janvier",
                 "calendar-days",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             _tile(
                 "Ticket moyen",
@@ -67,7 +67,7 @@ def expenses_kpis() -> rx.Component:
                 "€ / ligne",
                 f"{ExpensesState.kpis['cancelled']:.0f} annulée(s) · {ExpensesState.kpis['archived']:.0f} archivée(s)",
                 "scale",
-                "h-4 w-4 text-[#ff8a5b]",
+                "h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]",
             ),
             _tile(
                 "Types de charges",
@@ -75,7 +75,7 @@ def expenses_kpis() -> rx.Component:
                 "actifs",
                 f"{ExpensesState.kpis['types']:.0f} référencés au plan de charges",
                 "tags",
-                "h-4 w-4 text-[#a9c98b]",
+                "h-4 w-4 text-[rgb(var(--ap-sage-rgb))]",
             ),
             class_name=(
                 "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "

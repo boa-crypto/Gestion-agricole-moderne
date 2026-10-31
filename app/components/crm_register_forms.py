@@ -6,7 +6,7 @@ from app.states.crm_registers_state import CrmRegistersState, OptionRow
 def _label(text: str) -> rx.Component:
     return rx.el.span(
         text,
-        class_name="ap-eyebrow text-[#c9c5b4]/65",
+        class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
     )
 
 
@@ -26,7 +26,7 @@ def _input(
             placeholder=placeholder,
             default_value=value,
             on_change=on_change,
-            class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#16190f] px-3 py-2 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/60 focus:border-[#d8fa5e]/40 focus:outline-hidden mt-1.5",
+            class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-muted-rgb))] px-3 py-2 text-sm font-medium text-[rgb(var(--ap-paper-rgb))] placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] focus:border-[rgb(var(--ap-accent-rgb)/0.40)] focus:outline-hidden mt-1.5",
         ),
         class_name="flex flex-col w-full min-w-0",
     )
@@ -46,11 +46,11 @@ def _enum_select(label: str, name: str, value: rx.Var, options: rx.Var):
                 name=name,
                 default_value=value,
                 key=f"{name}-{CrmRegistersState.form_kind}",
-                class_name="w-full appearance-none rounded-none border border-[#f2efe4]/12 bg-[#16190f] px-3 py-2 pr-9 text-sm font-medium capitalize text-[#f2efe4] focus:border-[#d8fa5e]/40 focus:outline-hidden",
+                class_name="w-full appearance-none rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-muted-rgb))] px-3 py-2 pr-9 text-sm font-medium capitalize text-[rgb(var(--ap-paper-rgb))] focus:border-[rgb(var(--ap-accent-rgb)/0.40)] focus:outline-hidden",
             ),
             rx.icon(
                 "chevron-down",
-                class_name="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[#c9c5b4]/65",
+                class_name="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             class_name="relative w-full mt-1.5",
         ),
@@ -73,11 +73,11 @@ def _entity_select(
                 rx.foreach(options, _option),
                 name=name,
                 key=f"{name}-{CrmRegistersState.form_kind}",
-                class_name="w-full appearance-none rounded-none border border-[#f2efe4]/12 bg-[#16190f] px-3 py-2 pr-9 text-sm font-medium text-[#f2efe4] focus:border-[#d8fa5e]/40 focus:outline-hidden",
+                class_name="w-full appearance-none rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-muted-rgb))] px-3 py-2 pr-9 text-sm font-medium text-[rgb(var(--ap-paper-rgb))] focus:border-[rgb(var(--ap-accent-rgb)/0.40)] focus:outline-hidden",
             ),
             rx.icon(
                 "chevron-down",
-                class_name="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[#c9c5b4]/65",
+                class_name="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             class_name="relative w-full mt-1.5",
         ),
@@ -93,7 +93,7 @@ def _textarea(label: str, name: str, value: rx.Var) -> rx.Component:
             default_value=value,
             key=f"{name}-{CrmRegistersState.form_kind}",
             rows="3",
-            class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#16190f] px-3 py-2 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/60 focus:border-[#d8fa5e]/40 focus:outline-hidden mt-1.5",
+            class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-muted-rgb))] px-3 py-2 text-sm font-medium text-[rgb(var(--ap-paper-rgb))] placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] focus:border-[rgb(var(--ap-accent-rgb)/0.40)] focus:outline-hidden mt-1.5",
         ),
         class_name="flex flex-col w-full min-w-0 sm:col-span-2 xl:col-span-3",
     )
@@ -247,19 +247,19 @@ def crm_register_form() -> rx.Component:
                     rx.el.div(
                         rx.el.h3(
                             CrmRegistersState.form_title,
-                            class_name="ap-serif text-2xl text-[#f2efe4]",
+                            class_name="ap-serif text-2xl text-[rgb(var(--ap-paper-rgb))]",
                         ),
                         rx.el.p(
                             "Les montants HT, TVA, TTC et le restant dû sont calculés automatiquement ; l'opération est journalisée dans l'historique du tiers.",
-                            class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-1 max-w-xl",
+                            class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-1 max-w-xl",
                         ),
                         class_name="min-w-0",
                     ),
                     rx.el.button(
-                        rx.icon("x", class_name="h-4 w-4 text-[#c9c5b4]/70"),
+                        rx.icon("x", class_name="h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.90)]"),
                         type="button",
                         on_click=CrmRegistersState.close_form,
-                        class_name="flex h-9 w-9 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#16190f] hover:border-[#d8fa5e]/35 transition-colors shrink-0",
+                        class_name="flex h-9 w-9 items-center justify-center rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-muted-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.35)] transition-colors shrink-0",
                     ),
                     class_name="flex items-start justify-between gap-4 w-full",
                 ),
@@ -268,7 +268,7 @@ def crm_register_form() -> rx.Component:
                         CrmRegistersState.form_error != "",
                         rx.el.p(
                             CrmRegistersState.form_error,
-                            class_name="w-full rounded-none border border-[#ff6b5a]/30 bg-[#ff6b5a]/[0.08] px-4 py-2.5 text-xs font-semibold text-[#ffbcb0] mt-4",
+                            class_name="w-full rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-danger-rgb))]/[0.08] px-4 py-2.5 text-xs font-semibold text-[rgb(var(--ap-warm-150-rgb))] mt-4",
                         ),
                         rx.fragment(),
                     ),
@@ -283,13 +283,13 @@ def crm_register_form() -> rx.Component:
                         rx.el.div(
                             rx.icon(
                                 "calculator",
-                                class_name="h-3.5 w-3.5 text-[#d8fa5e]",
+                                class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb))]",
                             ),
                             rx.el.span(
                                 CrmRegistersState.form_preview,
-                                class_name="text-xs font-semibold text-[#f2efe4]",
+                                class_name="text-xs font-semibold text-[rgb(var(--ap-paper-rgb))]",
                             ),
-                            class_name="flex items-center gap-2 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/[0.06] px-4 py-2.5 w-fit mt-4",
+                            class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb))]/[0.06] px-4 py-2.5 w-fit mt-4",
                         ),
                     ),
                     rx.el.div(
@@ -297,7 +297,7 @@ def crm_register_form() -> rx.Component:
                             "Annuler",
                             type="button",
                             on_click=CrmRegistersState.close_form,
-                            class_name="rounded-none border border-[#f2efe4]/12 bg-[#16190f] px-5 py-2 text-xs font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/35 transition-colors w-fit",
+                            class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-muted-rgb))] px-5 py-2 text-xs font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:border-[rgb(var(--ap-accent-rgb)/0.35)] transition-colors w-fit",
                         ),
                         rx.el.button(
                             rx.cond(
@@ -313,14 +313,14 @@ def crm_register_form() -> rx.Component:
                                 class_name="text-xs font-semibold",
                             ),
                             type="submit",
-                            class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-5 py-2 text-[#0A0A08] hover:bg-[#e4ff9b] transition-colors w-fit",
+                            class_name="flex items-center gap-2 rounded-none bg-[rgb(var(--ap-accent-rgb))] px-5 py-2 text-[rgb(var(--ap-ink-rgb))] hover:bg-[rgb(var(--ap-accent-soft-rgb))] transition-colors w-fit",
                         ),
                         class_name="flex flex-wrap items-center justify-end gap-2 w-full mt-6",
                     ),
                     on_submit=CrmRegistersState.save_operation,
                     class_name="w-full",
                 ),
-                class_name="w-full max-w-4xl max-h-[88vh] overflow-y-auto rounded-none border border-[#f2efe4]/14 bg-[#06170f]/95 p-6 ",
+                class_name="w-full max-w-4xl max-h-[88vh] overflow-y-auto rounded-none border border-[rgb(var(--ap-paper-rgb)/0.21)] bg-[rgb(var(--ap-moss-rgb)/0.95)] p-6 ",
             ),
             class_name="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/60 p-4 sm:p-8",
         ),

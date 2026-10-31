@@ -22,17 +22,17 @@ def cockpit_header() -> rx.Component:
                 rx.el.span("Cockpit "),
                 rx.el.span(
                     "agronomique",
-                    class_name="ap-italic text-[#D8FA5E]",
+                    class_name="ap-italic text-[rgb(var(--ap-accent-rgb))]",
                 ),
                 class_name=(
                     "ap-display mt-6 text-[clamp(2.9rem,6.4vw,5.6rem)] "
-                    "text-[#F2EFE4]"
+                    "text-[rgb(var(--ap-paper-rgb))]"
                 ),
             ),
             rx.el.p(
                 "Vision instantanée des parcelles, des cultures et des chantiers "
                 "de l'exploitation — une lecture d'ensemble, sans détour.",
-                class_name="mt-6 max-w-xl text-[13px] leading-relaxed text-[#C9C5B4]/70",
+                class_name="mt-6 max-w-xl text-[13px] leading-relaxed text-[rgb(var(--ap-paper-muted-rgb)/0.90)]",
             ),
             class_name="min-w-0 max-w-3xl",
         ),

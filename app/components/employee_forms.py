@@ -3,8 +3,8 @@ import reflex as rx
 from app.components.guide_help import guide_error, help_icon_button
 from app.states.employees_state import EmployeesState, Option
 
-_INPUT = "w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] px-3 py-2.5 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/60 focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors"
-_LABEL = "block ap-eyebrow text-[#c9c5b4]/65 mb-1.5"
+_INPUT = "w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] px-3 py-2.5 text-sm font-medium text-[rgb(var(--ap-paper-rgb))] placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] focus:border-[rgb(var(--ap-accent-rgb)/0.50)] focus:ring-2 focus:ring-[rgb(var(--ap-accent-rgb)/0.20)] outline-hidden transition-colors"
+_LABEL = "block ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mb-1.5"
 
 
 def _field(label: str, control: rx.Component, hint: str = "") -> rx.Component:
@@ -12,7 +12,7 @@ def _field(label: str, control: rx.Component, hint: str = "") -> rx.Component:
         rx.el.label(label, class_name=_LABEL),
         control,
         rx.el.p(
-            hint, class_name="text-[10px] font-medium text-[#c9c5b4]/60 mt-1"
+            hint, class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] mt-1"
         ),
         class_name="w-full min-w-0",
     )
@@ -47,7 +47,7 @@ def _select(
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
         ),
         class_name="relative w-full",
     )
@@ -196,11 +196,11 @@ def _body() -> rx.Component:
                     ]
                     == "1",
                     key=f"emp-licence-{EmployeesState.form_key}",
-                    class_name="h-4 w-4 accent-[#d8fa5e] cursor-pointer",
+                    class_name="h-4 w-4 accent-[rgb(var(--ap-accent-rgb))] cursor-pointer",
                 ),
                 rx.el.span(
                     "Titulaire du permis de conduire",
-                    class_name="text-sm font-medium text-[#c9c5b4]/75",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.93)]",
                 ),
                 class_name="flex items-center gap-2.5 cursor-pointer w-fit",
             ),
@@ -214,15 +214,15 @@ def _body() -> rx.Component:
                     ]
                     == "1",
                     key=f"emp-phyto-{EmployeesState.form_key}",
-                    class_name="h-4 w-4 accent-[#d8fa5e] cursor-pointer",
+                    class_name="h-4 w-4 accent-[rgb(var(--ap-accent-rgb))] cursor-pointer",
                 ),
                 rx.el.span(
                     "Certiphyto en cours de validité",
-                    class_name="text-sm font-medium text-[#c9c5b4]/75",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.93)]",
                 ),
                 class_name="flex items-center gap-2.5 cursor-pointer w-fit",
             ),
-            class_name="border-t border-[#F2EFE4]/12 flex flex-wrap items-center gap-6 pt-4 mt-5",
+            class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] flex flex-wrap items-center gap-6 pt-4 mt-5",
         ),
         _field(
             "Notes RH",
@@ -250,17 +250,17 @@ def employee_modals() -> rx.Component:
                             rx.el.div(
                                 rx.icon(
                                     "user-round",
-                                    class_name="h-4 w-4 text-[#d8fa5e]",
+                                    class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
                                 ),
                                 rx.el.span(
                                     "Fiche salarié",
-                                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                                 ),
                                 class_name="flex items-center gap-2",
                             ),
                             rx.el.h2(
                                 EmployeesState.employee_form_title,
-                                class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                                class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                             ),
                             class_name="min-w-0 flex-1",
                         ),
@@ -276,26 +276,26 @@ def employee_modals() -> rx.Component:
                             "Annuler",
                             type="button",
                             on_click=EmployeesState.close_employee_form,
-                            class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-5 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit",
+                            class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-5 py-2.5 text-sm font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors w-fit",
                         ),
                         rx.el.button(
                             rx.icon(
-                                "check", class_name="h-4 w-4 text-[#0A0A08]"
+                                "check", class_name="h-4 w-4 text-[rgb(var(--ap-ink-rgb))]"
                             ),
                             rx.el.span(
                                 "Enregistrer la fiche",
-                                class_name="text-[#0A0A08]",
+                                class_name="text-[rgb(var(--ap-ink-rgb))]",
                             ),
                             type="submit",
-                            class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-5 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
+                            class_name="flex items-center gap-2 rounded-none bg-[rgb(var(--ap-accent-rgb))] px-5 py-2.5 text-sm font-semibold hover:bg-[rgb(var(--ap-accent-soft-rgb))] transition-colors w-fit",
                         ),
-                        class_name="flex items-center justify-end gap-3 mt-6 border-t border-[#f2efe4]/12 pt-5",
+                        class_name="flex items-center justify-end gap-3 mt-6 border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-5",
                     ),
                     on_submit=EmployeesState.submit_employee,
                     reset_on_submit=True,
                     class_name="w-full",
                 ),
-                class_name="w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-none border border-[#f2efe4]/12 bg-[#101208]/95 p-7 ",
+                class_name="w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb)/0.95)] p-7 ",
             ),
             class_name="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 ",
         ),

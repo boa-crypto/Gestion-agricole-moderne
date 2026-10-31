@@ -24,7 +24,7 @@ def _select(
     return rx.el.div(
         rx.icon(
             icon,
-            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d8fa5e]/80 pointer-events-none",
+            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-accent-rgb)/0.80)] pointer-events-none",
         ),
         rx.el.select(
             first_option,
@@ -36,11 +36,11 @@ def _select(
             default_value=default_value,
             key=f"{name}-{ParcelsState.form_key}",
             on_change=on_change,
-            class_name="w-full cursor-pointer appearance-none border border-[#F2EFE4]/14 bg-[#0F110A] py-2.5 pl-9 pr-9 text-sm text-[#F2EFE4] outline-hidden transition-colors focus:border-[#D8FA5E]",
+            class_name="w-full cursor-pointer appearance-none border border-[rgb(var(--ap-paper-rgb)/0.21)] bg-[rgb(var(--ap-surface-faint-rgb))] py-2.5 pl-9 pr-9 text-sm text-[rgb(var(--ap-paper-rgb))] outline-hidden transition-colors focus:border-[rgb(var(--ap-accent-rgb))]",
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
         ),
         class_name="relative w-full sm:w-56",
     )
@@ -74,16 +74,16 @@ def parcel_filters() -> rx.Component:
             rx.el.div(
                 rx.icon(
                     "search",
-                    class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+                    class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
                 ),
                 rx.el.input(
                     placeholder="Rechercher une parcelle, un code, une localité ou une culture…",
                     default_value=ParcelsState.search,
                     on_change=ParcelsState.set_search.debounce(400),
                     class_name=(
-                        "w-full border border-[#F2EFE4]/14 bg-[#0F110A] py-2.5 pl-9 "
-                        "pr-3 text-sm text-[#F2EFE4] outline-hidden transition-colors "
-                        "placeholder:text-[#C9C5B4]/60 focus:border-[#D8FA5E]"
+                        "w-full border border-[rgb(var(--ap-paper-rgb)/0.21)] bg-[rgb(var(--ap-surface-faint-rgb))] py-2.5 pl-9 "
+                        "pr-3 text-sm text-[rgb(var(--ap-paper-rgb))] outline-hidden transition-colors "
+                        "placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] focus:border-[rgb(var(--ap-accent-rgb))]"
                     ),
                 ),
                 class_name="relative flex-1 min-w-0",
@@ -99,7 +99,7 @@ def parcel_filters() -> rx.Component:
             rx.el.div(
                 rx.icon(
                     "sprout",
-                    class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d8fa5e]/80 pointer-events-none",
+                    class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-accent-rgb)/0.80)] pointer-events-none",
                 ),
                 rx.el.select(
                     rx.el.option("Toutes les cultures", value="TOUTES"),
@@ -111,11 +111,11 @@ def parcel_filters() -> rx.Component:
                     default_value=ParcelsState.species_filter,
                     key=f"species-{ParcelsState.form_key}",
                     on_change=ParcelsState.set_species_filter,
-                    class_name="w-full cursor-pointer appearance-none border border-[#F2EFE4]/14 bg-[#0F110A] py-2.5 pl-9 pr-9 text-sm text-[#F2EFE4] outline-hidden transition-colors focus:border-[#D8FA5E]",
+                    class_name="w-full cursor-pointer appearance-none border border-[rgb(var(--ap-paper-rgb)/0.21)] bg-[rgb(var(--ap-surface-faint-rgb))] py-2.5 pl-9 pr-9 text-sm text-[rgb(var(--ap-paper-rgb))] outline-hidden transition-colors focus:border-[rgb(var(--ap-accent-rgb))]",
                 ),
                 rx.icon(
                     "chevron-down",
-                    class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+                    class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
                 ),
                 class_name="relative w-full sm:w-56",
             ),
@@ -133,5 +133,5 @@ def parcel_filters() -> rx.Component:
             ),
             class_name="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 w-full mt-4",
         ),
-        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-6",
     )

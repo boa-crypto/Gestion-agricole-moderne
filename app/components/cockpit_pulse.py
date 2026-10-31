@@ -19,14 +19,14 @@ from app.states.remediation_state import RemediationEntry, RemediationState
 from app.states.stock_state import StockState
 
 _CHIP = (
-    "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2.5 py-1 "
-    "text-[10px] font-semibold text-[#c9c5b4]/60 w-fit whitespace-nowrap"
+    "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2.5 py-1 "
+    "text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit whitespace-nowrap"
 )
 
 _LINK = (
-    "flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 "
-    "bg-[#d8fa5e]/10 px-3 py-1.5 text-[10px] font-semibold text-[#e4ff9b] "
-    "hover:bg-[#d8fa5e]/20 transition-colors w-fit"
+    "flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] "
+    "bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1.5 text-[10px] font-semibold text-[rgb(var(--ap-accent-soft-rgb))] "
+    "hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors w-fit"
 )
 
 
@@ -37,21 +37,21 @@ def _badge(tone: rx.Var | str, label: rx.Var | str) -> rx.Component:
             tone,
             (
                 "good",
-                "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "warn",
-                "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 text-[10px] font-bold text-[#ffb894] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "bad",
-                "rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2 py-0.5 text-[10px] font-bold text-[#ff9b8c] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-danger-soft-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "info",
-                "rounded-none border border-[#9cc3ff]/30 bg-[#9cc3ff]/10 px-2 py-0.5 text-[10px] font-bold text-[#c3daff] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-info-rgb)/0.30)] bg-[rgb(var(--ap-info-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-info-soft-rgb))] w-fit whitespace-nowrap",
             ),
-            "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/65 w-fit whitespace-nowrap",
+            "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit whitespace-nowrap",
         ),
     )
 
@@ -62,24 +62,24 @@ def _tile(
     return rx.el.div(
         rx.el.span(
             label,
-            class_name="ap-eyebrow text-[#c9c5b4]/65",
+            class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
         ),
         rx.el.div(
             rx.el.span(
                 value,
-                class_name="ap-serif text-2xl leading-none text-[#f2efe4]",
+                class_name="ap-serif text-2xl leading-none text-[rgb(var(--ap-paper-rgb))]",
             ),
             rx.el.span(
                 unit,
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mb-0.5",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mb-0.5",
             ),
             class_name="flex items-end gap-1.5 mt-2",
         ),
         rx.el.p(
             caption,
-            class_name="text-[10px] font-medium text-[#c9c5b4]/65 mt-2 leading-relaxed",
+            class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-2 leading-relaxed",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-3",
+        class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-3",
     )
 
 
@@ -102,17 +102,17 @@ def _priority_card(
     return rx.el.article(
         rx.el.div(
             rx.el.div(
-                rx.icon(icon, class_name="h-4 w-4 text-[#d8fa5e]"),
-                class_name="flex h-9 w-9 shrink-0 items-center justify-center rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10",
+                rx.icon(icon, class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
+                class_name="flex h-9 w-9 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)]",
             ),
             rx.el.div(
                 rx.el.span(
                     caption,
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.p(
                     title,
-                    class_name="ap-serif text-xl text-[#f2efe4] mt-0.5",
+                    class_name="ap-serif text-xl text-[rgb(var(--ap-paper-rgb))] mt-0.5",
                 ),
                 class_name="min-w-0 flex-1",
             ),
@@ -122,27 +122,27 @@ def _priority_card(
         rx.el.div(
             rx.el.span(
                 value,
-                class_name="ap-serif text-3xl leading-none text-[#f2efe4]",
+                class_name="ap-serif text-3xl leading-none text-[rgb(var(--ap-paper-rgb))]",
             ),
             rx.el.span(
                 unit,
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mb-1",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mb-1",
             ),
             class_name="flex items-end gap-1.5 w-full mt-4",
         ),
         rx.el.p(
             detail,
-            class_name="text-[11px] font-medium text-[#c9c5b4]/55 leading-relaxed mt-2",
+            class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] leading-relaxed mt-2",
         ),
         rx.el.div(
             rx.icon(
-                "wrench", class_name="h-3 w-3 text-[#ff8a5b] shrink-0 mt-0.5"
+                "wrench", class_name="h-3 w-3 text-[rgb(var(--ap-flame-soft-rgb))] shrink-0 mt-0.5"
             ),
             rx.el.p(
                 recommendation,
-                class_name="text-[11px] font-medium text-[#ffdccb]/80 leading-relaxed",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-warm-100-rgb)/0.80)] leading-relaxed",
             ),
-            class_name="flex items-start gap-2 rounded-none border border-[#ff8a5b]/20 bg-[#ff8a5b]/[0.06] px-3 py-2 w-full mt-3",
+            class_name="flex items-start gap-2 rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.20)] bg-[rgb(var(--ap-flame-soft-rgb))]/[0.06] px-3 py-2 w-full mt-3",
         ),
         rx.el.div(
             rx.el.a(
@@ -159,13 +159,13 @@ def _priority_card(
             tone,
             (
                 "bad",
-                "w-full rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/[0.06] p-4",
+                "w-full rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb))]/[0.06] p-4",
             ),
             (
                 "warn",
-                "w-full rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/[0.05] p-4",
+                "w-full rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.25)] bg-[rgb(var(--ap-flame-soft-rgb))]/[0.05] p-4",
             ),
-            "border-t border-[#F2EFE4]/12 w-full pt-4",
+            "border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-4",
         ),
     )
 
@@ -173,35 +173,35 @@ def _priority_card(
 def _decision_row(item: RemediationEntry, key: str = "") -> rx.Component:
     return rx.el.li(
         rx.el.div(
-            rx.icon(item["icon"], class_name="h-3.5 w-3.5 text-[#d8fa5e]"),
-            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10",
+            rx.icon(item["icon"], class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb))]"),
+            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)]",
         ),
         rx.el.div(
             rx.el.div(
                 rx.el.p(
                     item["target_label"],
-                    class_name="text-[12px] font-semibold text-[#f2efe4] truncate",
+                    class_name="text-[12px] font-semibold text-[rgb(var(--ap-paper-rgb))] truncate",
                 ),
                 _badge(item["tone"], item["action_label"]),
                 rx.el.span(
                     item["date_label"],
-                    class_name="text-[10px] font-medium text-[#c9c5b4]/65 ml-auto shrink-0",
+                    class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] ml-auto shrink-0",
                 ),
                 class_name="flex flex-wrap items-center gap-2 w-full min-w-0",
             ),
             rx.el.p(
                 f"{item['domain_label']} · {item['author']} — {item['note']}",
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-1 leading-relaxed",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-1 leading-relaxed",
             ),
             class_name="min-w-0 flex-1",
         ),
         rx.el.a(
             rx.icon("arrow-up-right", class_name="h-3.5 w-3.5"),
             href=item["module_route"],
-            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/60 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors",
+            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] text-[rgb(var(--ap-paper-muted-rgb)/0.82)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors",
         ),
         key=key,
-        class_name="flex items-start gap-3 w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-3",
+        class_name="flex items-start gap-3 w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-soft-rgb))] p-3",
     )
 
 
@@ -318,15 +318,15 @@ def cockpit_pulse() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Pouls opérationnel",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Décidé, documenté, restant",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 rx.el.p(
                     "Les sous-modules Contours et Stocks remontent ici leurs statuts : ce qui a été décidé et tracé, ce qui reste à arbitrer aujourd'hui.",
-                    class_name="text-sm font-medium text-[#c9c5b4]/55 mt-2 max-w-2xl",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] mt-2 max-w-2xl",
                 ),
                 class_name="min-w-0",
             ),
@@ -376,7 +376,7 @@ def cockpit_pulse() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Décisions récentes",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.a(
                     rx.el.span("Journal complet · diagnostic"),
@@ -399,10 +399,10 @@ def cockpit_pulse() -> rx.Component:
                 ),
                 rx.el.p(
                     "Aucune décision opérationnelle consignée : traiter une alerte, arbitrer un intrant ou valider un contour alimentera ce journal.",
-                    class_name="text-sm font-medium text-[#c9c5b4]/65 mt-3 leading-relaxed",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-3 leading-relaxed",
                 ),
             ),
-            class_name="w-full mt-6 border-t border-[#f2efe4]/12 pt-5",
+            class_name="w-full mt-6 border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-5",
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6",
     )

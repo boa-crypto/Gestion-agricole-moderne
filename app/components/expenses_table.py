@@ -7,7 +7,7 @@ from app.states.expenses_state import ExpenseRow, ExpensesState
 def _head(label: str, extra: str = "") -> rx.Component:
     return rx.el.th(
         label,
-        class_name=f"px-3 py-3 text-left ap-eyebrow text-[#c9c5b4]/65 whitespace-nowrap {extra}",
+        class_name=f"px-3 py-3 text-left ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)] whitespace-nowrap {extra}",
     )
 
 
@@ -18,17 +18,17 @@ def _status_badge(row: ExpenseRow) -> rx.Component:
             row["status_tone"],
             (
                 "good",
-                "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "warn",
-                "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 text-[10px] font-bold text-[#ffb894] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "bad",
-                "rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2 py-0.5 text-[10px] font-bold text-[#ff9b8c] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-danger-soft-rgb))] w-fit whitespace-nowrap",
             ),
-            "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/65 w-fit whitespace-nowrap",
+            "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit whitespace-nowrap",
         ),
     )
 
@@ -55,11 +55,11 @@ def _row(row: ExpenseRow, key: str = "") -> rx.Component:
                 rx.el.div(
                     rx.el.p(
                         row["label"],
-                        class_name="text-xs font-semibold text-[#f2efe4] truncate",
+                        class_name="text-xs font-semibold text-[rgb(var(--ap-paper-rgb))] truncate",
                     ),
                     rx.el.p(
                         f"{row['supplier']} · réf. {row['reference']}",
-                        class_name="text-[10px] font-medium text-[#c9c5b4]/65 truncate",
+                        class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] truncate",
                     ),
                     class_name="min-w-0",
                 ),
@@ -70,11 +70,11 @@ def _row(row: ExpenseRow, key: str = "") -> rx.Component:
         rx.el.td(
             rx.el.div(
                 rx.icon(
-                    row["type_icon"], class_name="h-3.5 w-3.5 text-[#d8fa5e]/80"
+                    row["type_icon"], class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb)/0.80)]"
                 ),
                 rx.el.span(
                     row["type_name"],
-                    class_name="text-[11px] font-semibold text-[#c9c5b4]/70 truncate",
+                    class_name="text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] truncate",
                 ),
                 class_name="flex items-center gap-1.5 min-w-0",
             ),
@@ -84,16 +84,16 @@ def _row(row: ExpenseRow, key: str = "") -> rx.Component:
             rx.el.div(
                 rx.icon(
                     row["link_icon"],
-                    class_name="h-3.5 w-3.5 text-[#a9c98b]/70",
+                    class_name="h-3.5 w-3.5 text-[rgb(var(--ap-sage-rgb)/0.70)]",
                 ),
                 rx.el.div(
                     rx.el.p(
                         row["link_label"],
-                        class_name="ap-eyebrow text-[#c9c5b4]/65",
+                        class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                     ),
                     rx.el.p(
                         row["link_target"],
-                        class_name="text-[11px] font-medium text-[#c9c5b4]/65 truncate",
+                        class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] truncate",
                     ),
                     class_name="min-w-0",
                 ),
@@ -104,22 +104,22 @@ def _row(row: ExpenseRow, key: str = "") -> rx.Component:
         rx.el.td(
             rx.el.p(
                 row["date_label"],
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 whitespace-nowrap",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] whitespace-nowrap",
             ),
             rx.el.p(
                 f"échéance {row['due_label']}",
-                class_name="text-[10px] font-medium text-[#c9c5b4]/60 whitespace-nowrap",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] whitespace-nowrap",
             ),
             class_name="px-3 py-2.5 align-middle",
         ),
         rx.el.td(
             rx.el.p(
                 f"{row['amount_ttc']:.2f} €",
-                class_name="text-xs font-bold text-[#e4ff9b] whitespace-nowrap",
+                class_name="text-xs font-bold text-[rgb(var(--ap-accent-soft-rgb))] whitespace-nowrap",
             ),
             rx.el.p(
                 f"{row['amount_ht']:.2f} € HT · TVA {row['vat_rate']:.1f} %",
-                class_name="text-[10px] font-medium text-[#c9c5b4]/60 whitespace-nowrap",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] whitespace-nowrap",
             ),
             class_name="px-3 py-2.5 align-middle text-right",
         ),
@@ -130,7 +130,7 @@ def _row(row: ExpenseRow, key: str = "") -> rx.Component:
                     row["is_archived"],
                     rx.el.span(
                         "Archivée",
-                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/65 w-fit whitespace-nowrap",
+                        class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit whitespace-nowrap",
                     ),
                     rx.fragment(),
                 ),
@@ -138,7 +138,7 @@ def _row(row: ExpenseRow, key: str = "") -> rx.Component:
             ),
             rx.el.p(
                 row["payment_label"],
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65 mt-1 whitespace-nowrap",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-1 whitespace-nowrap",
             ),
             class_name="px-3 py-2.5 align-middle",
         ),
@@ -148,7 +148,7 @@ def _row(row: ExpenseRow, key: str = "") -> rx.Component:
                     "pencil",
                     "Modifier la dépense",
                     ExpensesState.open_expense_edit(row["id"]),
-                    "flex h-7 w-7 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors",
+                    "flex h-7 w-7 items-center justify-center rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors",
                 ),
                 rx.cond(
                     (row["status"] == "PAYEE") | row["is_cancelled"],
@@ -157,7 +157,7 @@ def _row(row: ExpenseRow, key: str = "") -> rx.Component:
                         "banknote",
                         "Marquer comme payée",
                         ExpensesState.mark_paid(row["id"]),
-                        "flex h-7 w-7 items-center justify-center rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors",
+                        "flex h-7 w-7 items-center justify-center rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] text-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors",
                     ),
                 ),
                 rx.cond(
@@ -167,7 +167,7 @@ def _row(row: ExpenseRow, key: str = "") -> rx.Component:
                         "ban",
                         "Annuler la dépense",
                         ExpensesState.cancel_expense(row["id"]),
-                        "flex h-7 w-7 items-center justify-center rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 text-[#ff9b8c] hover:bg-[#f2452c]/20 transition-colors",
+                        "flex h-7 w-7 items-center justify-center rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] text-[rgb(var(--ap-danger-soft-rgb))] hover:bg-[rgb(var(--ap-flame-strong-rgb)/0.20)] transition-colors",
                     ),
                 ),
                 rx.cond(
@@ -176,13 +176,13 @@ def _row(row: ExpenseRow, key: str = "") -> rx.Component:
                         "archive-restore",
                         "Réintégrer au registre",
                         ExpensesState.restore_expense(row["id"]),
-                        "flex h-7 w-7 items-center justify-center rounded-none border border-[#a9c98b]/30 bg-[#a9c98b]/10 text-[#b3af9f] hover:bg-[#a9c98b]/20 transition-colors",
+                        "flex h-7 w-7 items-center justify-center rounded-none border border-[rgb(var(--ap-sage-rgb)/0.30)] bg-[rgb(var(--ap-sage-rgb)/0.10)] text-[rgb(var(--ap-paper-soft-rgb))] hover:bg-[rgb(var(--ap-sage-rgb)/0.20)] transition-colors",
                     ),
                     _icon_button(
                         "archive",
                         "Archiver la dépense",
                         ExpensesState.archive_expense(row["id"]),
-                        "flex h-7 w-7 items-center justify-center rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 text-[#ffb894] hover:bg-[#ff8a5b]/20 transition-colors",
+                        "flex h-7 w-7 items-center justify-center rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] text-[rgb(var(--ap-flame-tint-rgb))] hover:bg-[rgb(var(--ap-flame-soft-rgb)/0.20)] transition-colors",
                     ),
                 ),
                 class_name="flex items-center gap-1.5 justify-end",
@@ -192,8 +192,8 @@ def _row(row: ExpenseRow, key: str = "") -> rx.Component:
         key=key,
         class_name=rx.cond(
             row["is_cancelled"],
-            "border-b border-[#f2efe4]/8 bg-[#f2452c]/[0.05] hover:bg-[#f2452c]/[0.09] transition-colors",
-            "border-b border-[#f2efe4]/8 even:bg-[#0d0f09] hover:bg-[#d8fa5e]/[0.05] transition-colors",
+            "border-b border-[rgb(var(--ap-paper-rgb)/0.12)] bg-[rgb(var(--ap-flame-strong-rgb))]/[0.05] hover:bg-[rgb(var(--ap-flame-strong-rgb))]/[0.09] transition-colors",
+            "border-b border-[rgb(var(--ap-paper-rgb)/0.12)] even:bg-[rgb(var(--ap-surface-soft-rgb))] hover:bg-[rgb(var(--ap-accent-rgb))]/[0.05] transition-colors",
         ),
     )
 
@@ -204,32 +204,32 @@ def expenses_table() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Registre des lignes comptables",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Journal des charges",
-                    class_name="ap-serif text-2xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-2xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 class_name="min-w-0",
             ),
             rx.el.div(
                 rx.el.span(
                     f"{ExpensesState.expense_count} ligne(s) affichée(s)",
-                    class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-semibold text-[#c9c5b4]/60 w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit",
                 ),
                 rx.el.span(
                     f"{ExpensesState.shown_total:.0f} € TTC cumulés",
-                    class_name="rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-3 py-1 text-[11px] font-bold text-[#e4ff9b] w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1 text-[11px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
                 ),
                 rx.el.button(
-                    rx.icon("plus", class_name="h-4 w-4 text-[#0A0A08]"),
-                    rx.el.span("Nouvelle dépense", class_name="text-[#0A0A08]"),
+                    rx.icon("plus", class_name="h-4 w-4 text-[rgb(var(--ap-ink-rgb))]"),
+                    rx.el.span("Nouvelle dépense", class_name="text-[rgb(var(--ap-ink-rgb))]"),
                     on_click=ExpensesState.open_expense_create,
-                    class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
+                    class_name="flex items-center gap-2 rounded-none bg-[rgb(var(--ap-accent-rgb))] px-4 py-2.5 text-sm font-semibold hover:bg-[rgb(var(--ap-accent-soft-rgb))] transition-colors w-fit",
                 ),
                 class_name="flex flex-wrap items-center gap-2 ml-auto",
             ),
-            class_name="flex flex-wrap items-center gap-3 w-full pb-5 border-b border-[#f2efe4]/12",
+            class_name="flex flex-wrap items-center gap-3 w-full pb-5 border-b border-[rgb(var(--ap-paper-rgb)/0.18)]",
         ),
         rx.cond(
             ExpensesState.has_expenses,
@@ -245,7 +245,7 @@ def expenses_table() -> rx.Component:
                                 _head("Montant", "text-right"),
                                 _head("Statut"),
                                 _head(""),
-                                class_name="border-b border-[#f2efe4]/12 bg-[#101208]",
+                                class_name="border-b border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))]",
                             ),
                         ),
                         rx.el.tbody(
@@ -260,7 +260,7 @@ def expenses_table() -> rx.Component:
                     ),
                     class_name="overflow-x-auto",
                 ),
-                class_name="mt-5 w-full border-t border-[#F2EFE4]/12 pt-4",
+                class_name="mt-5 w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-4",
             ),
             empty_state(
                 "receipt-text",
@@ -275,5 +275,5 @@ def expenses_table() -> rx.Component:
                 class_name="flex flex-col items-center justify-center py-16",
             ),
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6",
     )

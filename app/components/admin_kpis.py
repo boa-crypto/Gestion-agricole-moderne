@@ -19,8 +19,8 @@ def _tile(
 
 def _section_title() -> rx.Component:
     return rx.el.div(
-        rx.icon("shield-check", class_name="h-4 w-4 text-[#a9c98b]"),
-        rx.el.span("Indicateurs de gouvernance", class_name="ap-eyebrow text-[#c9c5b4]/55"),
+        rx.icon("shield-check", class_name="h-4 w-4 text-[rgb(var(--ap-sage-rgb))]"),
+        rx.el.span("Indicateurs de gouvernance", class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.78)]"),
         class_name="flex w-full items-center gap-2",
     )
 
@@ -35,7 +35,7 @@ def admin_kpis() -> rx.Component:
                 "utilisateurs",
                 AdministrationState.coverage_label,
                 "users-round",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             _tile(
                 "À arbitrer",
@@ -44,7 +44,7 @@ def admin_kpis() -> rx.Component:
                 "comptes",
                 "Suspendus ou en attente de validation",
                 "user-cog",
-                "h-4 w-4 text-[#ff8a5b]",
+                "h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]",
             ),
             _tile(
                 "Équipes agricoles",
@@ -53,7 +53,7 @@ def admin_kpis() -> rx.Component:
                 AdministrationState.kpis["parcels"].to_string()
                 + " parcelle(s) couverte(s) par affectation",
                 "users",
-                "h-4 w-4 text-[#a9c98b]",
+                "h-4 w-4 text-[rgb(var(--ap-sage-rgb))]",
             ),
             _tile(
                 "Fonctions & rôles",
@@ -62,7 +62,7 @@ def admin_kpis() -> rx.Component:
                 AdministrationState.kpis["roles"].to_string()
                 + " rôles applicatifs déclarés",
                 "briefcase",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             _tile(
                 "Permissions",
@@ -71,7 +71,7 @@ def admin_kpis() -> rx.Component:
                 AdministrationState.kpis["grants"].to_string()
                 + " liaisons RBAC accordées",
                 "key-round",
-                "h-4 w-4 text-[#ff8a5b]",
+                "h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]",
             ),
             _tile(
                 "Sécurité",
@@ -79,7 +79,7 @@ def admin_kpis() -> rx.Component:
                 "actions sensibles",
                 AdministrationState.mfa_label,
                 "shield-check",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             class_name=(
                 "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
@@ -104,6 +104,6 @@ def admin_section_nav() -> rx.Component:
         *[_section_button(key, label, icon) for key, label, icon in SECTIONS],
         class_name=(
             "flex w-full flex-wrap items-center gap-x-6 gap-y-2 "
-            "border-b border-[#F2EFE4]/12 pb-1"
+            "border-b border-[rgb(var(--ap-paper-rgb)/0.18)] pb-1"
         ),
     )

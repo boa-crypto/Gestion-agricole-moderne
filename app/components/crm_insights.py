@@ -6,10 +6,10 @@ from app.states.crm_state import CrmState, Insight
 def _icon_class(tone: rx.Var) -> rx.Var:
     return rx.match(
         tone,
-        ("bad", "h-4 w-4 text-[#ff9b8c]"),
-        ("warn", "h-4 w-4 text-[#ff8a5b]"),
-        ("good", "h-4 w-4 text-[#d8fa5e]"),
-        "h-4 w-4 text-[#a9c98b]",
+        ("bad", "h-4 w-4 text-[rgb(var(--ap-danger-soft-rgb))]"),
+        ("warn", "h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]"),
+        ("good", "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
+        "h-4 w-4 text-[rgb(var(--ap-sage-rgb))]",
     )
 
 
@@ -18,13 +18,13 @@ def _card_class(tone: rx.Var) -> rx.Var:
         tone,
         (
             "bad",
-            "w-full rounded-none border border-[#ff6b5a]/25 bg-[#ff6b5a]/[0.05] p-4",
+            "w-full rounded-none border border-[rgb(var(--ap-danger-rgb)/0.25)] bg-[rgb(var(--ap-danger-rgb))]/[0.05] p-4",
         ),
         (
             "warn",
-            "w-full rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/[0.05] p-4",
+            "w-full rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.25)] bg-[rgb(var(--ap-flame-soft-rgb))]/[0.05] p-4",
         ),
-        "border-t border-[#F2EFE4]/12 w-full pt-4",
+        "border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-4",
     )
 
 
@@ -34,13 +34,13 @@ def _insight_card(item: Insight) -> rx.Component:
             rx.icon(item["icon"], class_name=_icon_class(item["tone"])),
             rx.el.p(
                 item["title"],
-                class_name="text-sm font-semibold text-[#f2efe4]",
+                class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))]",
             ),
             class_name="flex items-center gap-2 w-full min-w-0",
         ),
         rx.el.p(
             item["detail"],
-            class_name="text-[11px] font-medium text-[#c9c5b4]/55 mt-2 leading-relaxed",
+            class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] mt-2 leading-relaxed",
         ),
         class_name=_card_class(item["tone"]),
     )
@@ -49,14 +49,14 @@ def _insight_card(item: Insight) -> rx.Component:
 def crm_insights() -> rx.Component:
     return rx.el.section(
         rx.el.div(
-            rx.icon("sparkles", class_name="h-4 w-4 text-[#d8fa5e]"),
+            rx.icon("sparkles", class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
             rx.el.span(
                 "Synthèse intelligente AgriPro",
-                class_name="ap-eyebrow text-[#d8fa5e]/80",
+                class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
             ),
             rx.el.span(
                 "Analyse locale des données CRM",
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-semibold text-[#c9c5b4]/60 w-fit ml-auto",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit ml-auto",
             ),
             class_name="flex flex-wrap items-center gap-2 w-full",
         ),
@@ -68,8 +68,8 @@ def crm_insights() -> rx.Component:
             ),
             rx.el.p(
                 "La synthèse s'affichera dès que des transactions seront enregistrées.",
-                class_name="text-sm font-medium text-[#c9c5b4]/65 mt-5",
+                class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-5",
             ),
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6",
     )

@@ -14,11 +14,11 @@ def account_controls() -> rx.Component:
                 rx.el.div(
                     rx.el.span(
                         "Session",
-                        class_name="ap-mono text-[8px] uppercase tracking-[0.24em] text-[#C9C5B4]/60",
+                        class_name="ap-mono text-[8px] uppercase tracking-[0.24em] text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
                     ),
                     rx.el.span(
                         MenuAuthState.email,
-                        class_name="ap-mono max-w-[12rem] truncate text-[9px] tracking-[0.04em] text-[#C9C5B4]/80",
+                        class_name="ap-mono max-w-[12rem] truncate text-[9px] tracking-[0.04em] text-[rgb(var(--ap-paper-muted-rgb)/0.95)]",
                     ),
                     class_name="hidden flex-col gap-0.5 xl:flex",
                 ),
@@ -34,9 +34,9 @@ def account_controls() -> rx.Component:
                     title="Déconnexion",
                     class_name=(
                         "ap-mono inline-flex h-9 w-9 items-center justify-center "
-                        "border border-[#F2EFE4]/16 text-[9px] uppercase "
-                        "tracking-[0.18em] text-[#C9C5B4] transition-colors "
-                        "hover:border-[#FF5A2B]/60 hover:text-[#FF8A5B] "
+                        "border border-[rgb(var(--ap-paper-rgb)/0.24)] text-[9px] uppercase "
+                        "tracking-[0.18em] text-[rgb(var(--ap-paper-muted-rgb))] transition-colors "
+                        "hover:border-[rgb(var(--ap-flame-rgb)/0.60)] hover:text-[rgb(var(--ap-flame-soft-rgb))] "
                         "disabled:opacity-40 sm:w-auto sm:px-3"
                     ),
                 ),
@@ -46,9 +46,9 @@ def account_controls() -> rx.Component:
                 "Connexion",
                 href="/",
                 class_name=(
-                    "ap-mono inline-flex h-9 items-center border border-[#D8FA5E]/40 "
-                    "bg-[#D8FA5E]/10 px-3 text-[9px] uppercase tracking-[0.18em] "
-                    "text-[#D8FA5E] transition-colors hover:bg-[#D8FA5E]/20"
+                    "ap-mono inline-flex h-9 items-center border border-[rgb(var(--ap-accent-rgb)/0.40)] "
+                    "bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 text-[9px] uppercase tracking-[0.18em] "
+                    "text-[rgb(var(--ap-accent-rgb))] transition-colors hover:bg-[rgb(var(--ap-accent-rgb)/0.20)]"
                 ),
             ),
         ),
@@ -61,7 +61,7 @@ def _field(label: str, control: rx.Component, html_for: str) -> rx.Component:
         rx.el.label(
             label,
             html_for=html_for,
-            class_name="ap-mono mb-2 block text-[9px] uppercase tracking-[0.24em] text-[#C9C5B4]/65",
+            class_name="ap-mono mb-2 block text-[9px] uppercase tracking-[0.24em] text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
         ),
         control,
         class_name="w-full",
@@ -70,9 +70,9 @@ def _field(label: str, control: rx.Component, html_for: str) -> rx.Component:
 
 def login_panel() -> rx.Component:
     input_class = (
-        "w-full border border-[#F2EFE4]/18 bg-[#101208] px-4 py-3.5 "
-        "text-[15px] text-[#F2EFE4] placeholder:text-[#C9C5B4]/25 "
-        "transition-colors hover:border-[#F2EFE4]/30 focus:border-[#D8FA5E] "
+        "w-full border border-[rgb(var(--ap-paper-rgb)/0.27)] bg-[rgb(var(--ap-surface-rgb))] px-4 py-3.5 "
+        "text-[15px] text-[rgb(var(--ap-paper-rgb))] placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.25)] "
+        "transition-colors hover:border-[rgb(var(--ap-paper-rgb)/0.30)] focus:border-[rgb(var(--ap-accent-rgb))] "
         "focus:outline-none"
     )
     return rx.el.section(
@@ -82,20 +82,20 @@ def login_panel() -> rx.Component:
                 MenuAuthState.signup,
                 rx.fragment(
                     "Créer votre ",
-                    rx.el.span("compte", class_name="ap-italic text-[#D8FA5E]"),
+                    rx.el.span("compte", class_name="ap-italic text-[rgb(var(--ap-accent-rgb))]"),
                 ),
                 rx.fragment(
                     "Entrer dans ",
-                    rx.el.span("l'édition", class_name="ap-italic text-[#D8FA5E]"),
+                    rx.el.span("l'édition", class_name="ap-italic text-[rgb(var(--ap-accent-rgb))]"),
                 ),
             ),
-            class_name="ap-display mt-5 text-[clamp(2.2rem,4vw,3.4rem)] text-[#F2EFE4]",
+            class_name="ap-display mt-5 text-[clamp(2.2rem,4vw,3.4rem)] text-[rgb(var(--ap-paper-rgb))]",
         ),
         rx.el.p(
             "Votre exploitation, vos registres et vos campagnes dans une seule "
             "lecture. La session et les droits sont vérifiés avant tout "
             "chargement métier.",
-            class_name="mt-4 max-w-sm text-[13px] leading-relaxed text-[#C9C5B4]/70",
+            class_name="mt-4 max-w-sm text-[13px] leading-relaxed text-[rgb(var(--ap-paper-muted-rgb)/0.90)]",
         ),
         rx.el.form(
             _field(
@@ -132,7 +132,7 @@ def login_panel() -> rx.Component:
             rx.el.p(
                 "12 à 256 caractères. Utilisez un mot de passe unique.",
                 id="auth-password-help",
-                class_name="ap-mono mt-2 text-[9px] uppercase tracking-[0.14em] text-[#C9C5B4]/60",
+                class_name="ap-mono mt-2 text-[9px] uppercase tracking-[0.14em] text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
             ),
             rx.cond(
                 MenuAuthState.error != "",
@@ -140,8 +140,8 @@ def login_panel() -> rx.Component:
                     MenuAuthState.error,
                     role="alert",
                     class_name=(
-                        "mt-5 border-l-2 border-[#FF5A2B] bg-[#FF5A2B]/8 px-3 py-2 "
-                        "text-[12px] leading-relaxed text-[#FFB894]"
+                        "mt-5 border-l-2 border-[rgb(var(--ap-flame-rgb))] bg-[rgb(var(--ap-flame-rgb)/0.08)] px-3 py-2 "
+                        "text-[12px] leading-relaxed text-[rgb(var(--ap-flame-tint-rgb))]"
                     ),
                 ),
                 rx.fragment(),
@@ -162,9 +162,9 @@ def login_panel() -> rx.Component:
                 disabled=MenuAuthState.busy,
                 class_name=(
                     "group mt-7 flex w-full items-center justify-between border "
-                    "border-[#D8FA5E] bg-[#D8FA5E] px-5 py-3.5 ap-mono text-[10px] "
-                    "uppercase tracking-[0.22em] text-[#0A0A08] transition-colors "
-                    "hover:bg-[#E4FF9B] disabled:opacity-50"
+                    "border-[rgb(var(--ap-accent-rgb))] bg-[rgb(var(--ap-accent-rgb))] px-5 py-3.5 ap-mono text-[10px] "
+                    "uppercase tracking-[0.22em] text-[rgb(var(--ap-ink-rgb))] transition-colors "
+                    "hover:bg-[rgb(var(--ap-accent-soft-rgb))] disabled:opacity-50"
                 ),
             ),
             on_submit=MenuAuthState.submit,
@@ -180,15 +180,15 @@ def login_panel() -> rx.Component:
                 disabled=MenuAuthState.busy,
                 class_name=(
                     "ap-mono mt-6 text-[9px] uppercase tracking-[0.18em] "
-                    "text-[#D8FA5E] underline decoration-[#D8FA5E]/30 underline-offset-4 "
-                    "hover:decoration-[#D8FA5E] disabled:opacity-50"
+                    "text-[rgb(var(--ap-accent-rgb))] underline decoration-[rgb(var(--ap-accent-rgb)/0.30)] underline-offset-4 "
+                    "hover:decoration-[rgb(var(--ap-accent-rgb))] disabled:opacity-50"
                 ),
             ),
             rx.el.div(
                 rx.el.p(
                     "Première visite ? Ouvrez votre compte d'exploitation.",
                     id="auth-first-visit",
-                    class_name="text-[12px] leading-relaxed text-[#C9C5B4]/55",
+                    class_name="text-[12px] leading-relaxed text-[rgb(var(--ap-paper-muted-rgb)/0.78)]",
                 ),
                 rx.el.button(
                     rx.icon("user-plus", class_name="h-3.5 w-3.5", aria_hidden=True),
@@ -199,12 +199,12 @@ def login_panel() -> rx.Component:
                     aria_describedby="auth-first-visit",
                     class_name=(
                         "ap-mono mt-3 inline-flex w-full items-center justify-center "
-                        "gap-2 border border-[#F2EFE4]/18 px-4 py-3 text-[9px] "
-                        "uppercase tracking-[0.18em] text-[#F2EFE4] transition-colors "
-                        "hover:border-[#D8FA5E] hover:text-[#D8FA5E]"
+                        "gap-2 border border-[rgb(var(--ap-paper-rgb)/0.27)] px-4 py-3 text-[9px] "
+                        "uppercase tracking-[0.18em] text-[rgb(var(--ap-paper-rgb))] transition-colors "
+                        "hover:border-[rgb(var(--ap-accent-rgb))] hover:text-[rgb(var(--ap-accent-rgb))]"
                     ),
                 ),
-                class_name="mt-8 border-t border-[#F2EFE4]/12 pt-6",
+                class_name="mt-8 border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-6",
             ),
         ),
         class_name="w-full max-w-md",
@@ -215,16 +215,16 @@ def _cover() -> rx.Component:
     """Planche de couverture : manifeste typographique de la maison AgriPro."""
     return rx.el.aside(
         rx.el.div(
-            rx.el.span(class_name="h-2 w-2 bg-[#D8FA5E]"),
+            rx.el.span(class_name="h-2 w-2 bg-[rgb(var(--ap-accent-rgb))]"),
             rx.el.span(
                 "AgriPro",
-                class_name="ap-serif text-2xl text-[#F2EFE4]",
+                class_name="ap-serif text-2xl text-[rgb(var(--ap-paper-rgb))]",
             ),
             rx.el.span(
                 "Édition agronomique",
                 class_name=(
-                    "ap-mono ml-4 border-l border-[#F2EFE4]/16 pl-4 text-[9px] "
-                    "uppercase tracking-[0.26em] text-[#C9C5B4]/65"
+                    "ap-mono ml-4 border-l border-[rgb(var(--ap-paper-rgb)/0.24)] pl-4 text-[9px] "
+                    "uppercase tracking-[0.26em] text-[rgb(var(--ap-paper-muted-rgb)/0.86)]"
                 ),
             ),
             class_name="flex items-center",
@@ -234,16 +234,16 @@ def _cover() -> rx.Component:
             rx.el.p(
                 rx.el.span("La terre,\n"),
                 rx.el.span("tenue comme "),
-                rx.el.span("un livre.", class_name="ap-italic text-[#D8FA5E]"),
+                rx.el.span("un livre.", class_name="ap-italic text-[rgb(var(--ap-accent-rgb))]"),
                 class_name=(
                     "ap-display mt-8 whitespace-pre-line text-[clamp(2.6rem,4.4vw,4.4rem)] "
-                    "text-[#F2EFE4]"
+                    "text-[rgb(var(--ap-paper-rgb))]"
                 ),
             ),
             rx.el.p(
                 "Parcelles, cultures, chantiers, troupeaux et comptes : chaque "
                 "donnée trouve sa page, sa cote et sa lecture.",
-                class_name="mt-8 max-w-sm text-[13px] leading-relaxed text-[#C9C5B4]/60",
+                class_name="mt-8 max-w-sm text-[13px] leading-relaxed text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
             ),
             class_name="mt-16",
         ),
@@ -252,15 +252,15 @@ def _cover() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Pilotage végétal",
-                    class_name="ap-mono text-[9px] uppercase tracking-[0.24em] text-[#C9C5B4]/65",
+                    class_name="ap-mono text-[9px] uppercase tracking-[0.24em] text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 rx.el.span(
                     "Session vérifiée",
-                    class_name="ap-mono text-[9px] uppercase tracking-[0.24em] text-[#C9C5B4]/65",
+                    class_name="ap-mono text-[9px] uppercase tracking-[0.24em] text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 rx.el.span(
                     "MMXXVI",
-                    class_name="ap-mono text-[9px] uppercase tracking-[0.24em] text-[#C9C5B4]/65",
+                    class_name="ap-mono text-[9px] uppercase tracking-[0.24em] text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 class_name="flex items-center justify-between gap-4 pt-5",
             ),
@@ -268,7 +268,7 @@ def _cover() -> rx.Component:
         ),
         class_name=(
             "relative hidden w-[46%] shrink-0 flex-col justify-between border-r "
-            "border-[#F2EFE4]/12 bg-[#0D0F09] p-10 lg:flex xl:p-14"
+            "border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-soft-rgb))] p-10 lg:flex xl:p-14"
         ),
     )
 
@@ -278,13 +278,13 @@ def _session_check() -> rx.Component:
         rx.el.p(
             "Vérification de votre session…",
             role="status",
-            class_name="ap-mono text-[10px] uppercase tracking-[0.22em] text-[#C9C5B4]/60",
+            class_name="ap-mono text-[10px] uppercase tracking-[0.22em] text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
         ),
         rx.el.div(
-            class_name="mt-5 h-px w-full overflow-hidden bg-[#F2EFE4]/12",
+            class_name="mt-5 h-px w-full overflow-hidden bg-[rgb(var(--ap-paper-rgb)/0.12)]",
         ),
         rx.el.div(
-            class_name="mt-5 h-px w-1/3 animate-pulse bg-[#D8FA5E]",
+            class_name="mt-5 h-px w-1/3 animate-pulse bg-[rgb(var(--ap-accent-rgb))]",
         ),
         class_name="w-full max-w-md",
     )
@@ -296,10 +296,10 @@ def authentication_shell() -> rx.Component:
         rx.el.div(
             rx.el.div(
                 rx.el.div(
-                    rx.el.span(class_name="h-2 w-2 bg-[#D8FA5E]"),
+                    rx.el.span(class_name="h-2 w-2 bg-[rgb(var(--ap-accent-rgb))]"),
                     rx.el.span(
                         "AgriPro",
-                        class_name="ap-serif text-2xl text-[#F2EFE4]",
+                        class_name="ap-serif text-2xl text-[rgb(var(--ap-paper-rgb))]",
                     ),
                     class_name="mb-12 flex items-center gap-3 lg:hidden",
                 ),
@@ -312,12 +312,12 @@ def authentication_shell() -> rx.Component:
                             eyebrow("Session interrompue", tone="flame"),
                             rx.el.h2(
                                 "Vérification indisponible",
-                                class_name="ap-display mt-5 text-4xl text-[#F2EFE4]",
+                                class_name="ap-display mt-5 text-4xl text-[rgb(var(--ap-paper-rgb))]",
                             ),
                             rx.el.p(
                                 MenuAuthState.error,
                                 role="alert",
-                                class_name="mt-4 text-[13px] leading-relaxed text-[#FFB894]",
+                                class_name="mt-4 text-[13px] leading-relaxed text-[rgb(var(--ap-flame-tint-rgb))]",
                             ),
                             rx.el.div(
                                 rx.el.button(
@@ -325,8 +325,8 @@ def authentication_shell() -> rx.Component:
                                     type="button",
                                     on_click=MenuAuthState.retry_page,
                                     class_name=(
-                                        "ap-mono border border-[#D8FA5E] bg-[#D8FA5E] px-4 py-3 "
-                                        "text-[9px] uppercase tracking-[0.18em] text-[#0A0A08]"
+                                        "ap-mono border border-[rgb(var(--ap-accent-rgb))] bg-[rgb(var(--ap-accent-rgb))] px-4 py-3 "
+                                        "text-[9px] uppercase tracking-[0.18em] text-[rgb(var(--ap-ink-rgb))]"
                                     ),
                                 ),
                                 rx.el.button(
@@ -335,8 +335,8 @@ def authentication_shell() -> rx.Component:
                                     on_click=MenuAuthState.logout,
                                     disabled=MenuAuthState.busy,
                                     class_name=(
-                                        "ap-mono border border-[#F2EFE4]/18 px-4 py-3 "
-                                        "text-[9px] uppercase tracking-[0.18em] text-[#F2EFE4] "
+                                        "ap-mono border border-[rgb(var(--ap-paper-rgb)/0.27)] px-4 py-3 "
+                                        "text-[9px] uppercase tracking-[0.18em] text-[rgb(var(--ap-paper-rgb))] "
                                         "disabled:opacity-50"
                                     ),
                                 ),
@@ -355,7 +355,7 @@ def authentication_shell() -> rx.Component:
             ),
         ),
         class_name=(
-            "flex min-h-dvh w-full bg-[#0A0A08] font-['Inter_Tight'] text-[#F2EFE4] antialiased"
+            "flex min-h-dvh w-full bg-[rgb(var(--ap-ink-rgb))] font-['Inter_Tight'] text-[rgb(var(--ap-paper-rgb))] antialiased"
         ),
     )
 
@@ -364,10 +364,10 @@ def no_module_panel() -> rx.Component:
     return rx.el.main(
         rx.el.section(
             rx.el.div(
-                rx.el.span(class_name="h-2 w-2 bg-[#FF5A2B]"),
+                rx.el.span(class_name="h-2 w-2 bg-[rgb(var(--ap-flame-rgb))]"),
                 rx.el.span(
                     "AgriPro",
-                    class_name="ap-serif text-2xl text-[#F2EFE4]",
+                    class_name="ap-serif text-2xl text-[rgb(var(--ap-paper-rgb))]",
                 ),
                 class_name="flex items-center gap-3",
             ),
@@ -378,7 +378,7 @@ def no_module_panel() -> rx.Component:
                     "Destination non accessible",
                     "Aucun module accessible",
                 ),
-                class_name="ap-display mt-5 text-4xl text-[#F2EFE4]",
+                class_name="ap-display mt-5 text-4xl text-[rgb(var(--ap-paper-rgb))]",
             ),
             rx.el.p(
                 rx.cond(
@@ -387,22 +387,22 @@ def no_module_panel() -> rx.Component:
                     "Votre compte est connecté, mais aucun module n’est activé pour vous. Contactez le responsable des accès de votre exploitation.",
                 ),
                 role="status",
-                class_name="mt-4 max-w-lg text-[13px] leading-relaxed text-[#C9C5B4]/70",
+                class_name="mt-4 max-w-lg text-[13px] leading-relaxed text-[rgb(var(--ap-paper-muted-rgb)/0.90)]",
             ),
             rx.el.nav(
                 rx.foreach(
                     NavigationState.visible_navigation,
                     lambda entry: rx.el.a(
                         rx.icon(
-                            entry["icon"], class_name="h-4 w-4 shrink-0 text-[#D8FA5E]"
+                            entry["icon"], class_name="h-4 w-4 shrink-0 text-[rgb(var(--ap-accent-rgb))]"
                         ),
                         rx.el.span(entry["label"], class_name="flex-1 text-[12px]"),
                         rx.icon("arrow-up-right", class_name="h-3.5 w-3.5 opacity-40"),
                         href=entry["href"],
                         class_name=(
-                            "ap-mono flex items-center gap-3 border border-[#F2EFE4]/12 "
-                            "px-4 py-3 uppercase tracking-[0.12em] text-[#F2EFE4] "
-                            "transition-colors hover:border-[#D8FA5E]/50 hover:text-[#D8FA5E]"
+                            "ap-mono flex items-center gap-3 border border-[rgb(var(--ap-paper-rgb)/0.18)] "
+                            "px-4 py-3 uppercase tracking-[0.12em] text-[rgb(var(--ap-paper-rgb))] "
+                            "transition-colors hover:border-[rgb(var(--ap-accent-rgb)/0.50)] hover:text-[rgb(var(--ap-accent-rgb))]"
                         ),
                     ),
                 ),
@@ -415,21 +415,21 @@ def no_module_panel() -> rx.Component:
                     type="button",
                     on_click=MenuAuthState.retry_page,
                     class_name=(
-                        "ap-mono border border-[#D8FA5E] bg-[#D8FA5E] px-4 py-3 "
-                        "text-[9px] uppercase tracking-[0.18em] text-[#0A0A08]"
+                        "ap-mono border border-[rgb(var(--ap-accent-rgb))] bg-[rgb(var(--ap-accent-rgb))] px-4 py-3 "
+                        "text-[9px] uppercase tracking-[0.18em] text-[rgb(var(--ap-ink-rgb))]"
                     ),
                 ),
                 account_controls(),
                 class_name="mt-8 flex flex-wrap items-center gap-3",
             ),
             class_name=(
-                "mx-auto w-full max-w-3xl border border-[#F2EFE4]/12 bg-[#101208] "
+                "mx-auto w-full max-w-3xl border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))] "
                 "p-6 sm:p-10"
             ),
         ),
         class_name=(
-            "flex min-h-dvh w-full items-center justify-center bg-[#0A0A08] px-4 "
-            "py-12 font-['Inter_Tight'] text-[#F2EFE4]"
+            "flex min-h-dvh w-full items-center justify-center bg-[rgb(var(--ap-ink-rgb))] px-4 "
+            "py-12 font-['Inter_Tight'] text-[rgb(var(--ap-paper-rgb))]"
         ),
     )
 

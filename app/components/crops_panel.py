@@ -10,13 +10,13 @@ def _health_badge(tone: rx.Var, label: rx.Var) -> rx.Component:
             tone,
             (
                 "good",
-                "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit",
+                "rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
             ),
             (
                 "warn",
-                "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 text-[10px] font-bold text-[#ffb894] w-fit",
+                "rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit",
             ),
-            "rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2 py-0.5 text-[10px] font-bold text-[#ff9b8c] w-fit",
+            "rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-danger-soft-rgb))] w-fit",
         ),
     )
 
@@ -31,11 +31,11 @@ def _crop_card(crop: CropCard) -> rx.Component:
             rx.el.div(
                 rx.el.p(
                     crop["name"],
-                    class_name="text-sm font-semibold text-[#f2efe4] truncate",
+                    class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] truncate",
                 ),
                 rx.el.p(
                     f"{crop['species']} · {crop['parcel']}",
-                    class_name="text-[11px] font-medium text-[#c9c5b4]/65 truncate mt-0.5",
+                    class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] truncate mt-0.5",
                 ),
                 class_name="min-w-0 flex-1",
             ),
@@ -45,15 +45,15 @@ def _crop_card(crop: CropCard) -> rx.Component:
         rx.el.div(
             rx.el.span(
                 crop["stage_label"],
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/70 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] w-fit",
             ),
             rx.el.span(
                 crop["status_label"],
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/65 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit",
             ),
             rx.el.span(
                 f"{crop['area_ha']:.1f} ha",
-                class_name="text-[10px] font-semibold text-[#c9c5b4]/60 ml-auto",
+                class_name="text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] ml-auto",
             ),
             class_name="flex flex-wrap items-center gap-2 mt-3",
         ),
@@ -61,20 +61,20 @@ def _crop_card(crop: CropCard) -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Avancement du cycle",
-                    class_name="ap-eyebrow text-[#c9c5b4]/65",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 rx.el.span(
                     crop["progress_pct"],
-                    class_name="text-[11px] font-bold text-[#e4ff9b] ml-auto",
+                    class_name="text-[11px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] ml-auto",
                 ),
                 class_name="flex items-center gap-2",
             ),
             rx.el.div(
                 rx.el.div(
-                    class_name="h-full rounded-none bg-gradient-to-r from-[#8fb37a] to-[#d8fa5e]",
+                    class_name="h-full rounded-none bg-gradient-to-r from-[rgb(var(--ap-sage-soft-rgb))] to-[rgb(var(--ap-accent-rgb))]",
                     style={"width": crop["progress_pct"]},
                 ),
-                class_name="h-1.5 w-full rounded-none bg-[#20241a] mt-1.5",
+                class_name="h-1.5 w-full rounded-none bg-[rgb(var(--ap-surface-control-rgb))] mt-1.5",
             ),
             class_name="mt-4",
         ),
@@ -82,19 +82,19 @@ def _crop_card(crop: CropCard) -> rx.Component:
             rx.el.div(
                 rx.icon(
                     "calendar-plus",
-                    class_name="h-3.5 w-3.5 text-[#a9c98b]/80",
+                    class_name="h-3.5 w-3.5 text-[rgb(var(--ap-sage-rgb)/0.80)]",
                 ),
                 rx.el.span(
                     crop["sowing_label"],
-                    class_name="text-[11px] font-medium text-[#c9c5b4]/60",
+                    class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
                 ),
                 class_name="flex items-center gap-1.5",
             ),
             rx.el.div(
-                rx.icon("wheat", class_name="h-3.5 w-3.5 text-[#ff8a5b]/80"),
+                rx.icon("wheat", class_name="h-3.5 w-3.5 text-[rgb(var(--ap-flame-soft-rgb)/0.80)]"),
                 rx.el.span(
                     crop["harvest_label"],
-                    class_name="text-[11px] font-medium text-[#c9c5b4]/60",
+                    class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
                 ),
                 class_name="flex items-center gap-1.5",
             ),
@@ -104,11 +104,11 @@ def _crop_card(crop: CropCard) -> rx.Component:
                     f"J-{crop['days_left']}",
                     "échéance atteinte",
                 ),
-                class_name="text-[10px] font-bold text-[#ffb894] ml-auto",
+                class_name="text-[10px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] ml-auto",
             ),
-            class_name="flex items-center gap-3 border-t border-[#f2efe4]/8 pt-3 mt-4",
+            class_name="flex items-center gap-3 border-t border-[rgb(var(--ap-paper-rgb)/0.12)] pt-3 mt-4",
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-4 hover:border-t-[rgb(var(--ap-accent-rgb)/0.40)] transition-colors",
     )
 
 
@@ -118,17 +118,17 @@ def crops_panel() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Suivi cultural",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Cultures en cours",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 class_name="min-w-0",
             ),
             rx.el.span(
                 f"{DashboardState.kpis['active_crops']:.0f} cultures · {DashboardState.kpis['area_active']:.1f} ha",
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-semibold text-[#c9c5b4]/60 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit",
             ),
             class_name="flex flex-col sm:flex-row sm:items-end justify-between gap-3",
         ),
@@ -140,8 +140,8 @@ def crops_panel() -> rx.Component:
             ),
             rx.el.p(
                 "Aucune culture active pour la campagne en cours.",
-                class_name="text-sm font-medium text-[#c9c5b4]/65 mt-5",
+                class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-5",
             ),
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6",
     )

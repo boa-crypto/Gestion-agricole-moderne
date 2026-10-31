@@ -41,7 +41,7 @@ def _users_section() -> rx.Component:
     return rx.el.div(
         rx.el.div(
             admin_filters(),
-            class_name="w-full border-t border-[#F2EFE4]/10 pt-6",
+            class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.15)] pt-6",
         ),
         rx.el.div(
             admin_user_list(),

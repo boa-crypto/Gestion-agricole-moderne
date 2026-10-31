@@ -11,21 +11,21 @@ def _status_badge(tone: rx.Var, label: rx.Var) -> rx.Component:
             tone,
             (
                 "good",
-                "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit",
+                "rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
             ),
             (
                 "warn",
-                "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 text-[10px] font-bold text-[#ffb894] w-fit",
+                "rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit",
             ),
             (
                 "bad",
-                "rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2 py-0.5 text-[10px] font-bold text-[#ff9b8c] w-fit",
+                "rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-danger-soft-rgb))] w-fit",
             ),
             (
                 "info",
-                "rounded-none border border-[#9cc3ff]/30 bg-[#9cc3ff]/10 px-2 py-0.5 text-[10px] font-bold text-[#c3daff] w-fit",
+                "rounded-none border border-[rgb(var(--ap-info-rgb)/0.30)] bg-[rgb(var(--ap-info-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-info-soft-rgb))] w-fit",
             ),
-            "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/65 w-fit",
+            "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit",
         ),
     )
 
@@ -36,18 +36,18 @@ def _employee_card(employee: EmployeeRow, key: str = "") -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     employee["initials"],
-                    class_name="text-xs font-bold text-[#0A0A08]",
+                    class_name="text-xs font-bold text-[rgb(var(--ap-ink-rgb))]",
                 ),
-                class_name="flex h-9 w-9 shrink-0 items-center justify-center rounded-none bg-[#d8fa5e]",
+                class_name="flex h-9 w-9 shrink-0 items-center justify-center rounded-none bg-[rgb(var(--ap-accent-rgb))]",
             ),
             rx.el.div(
                 rx.el.p(
                     employee["name"],
-                    class_name="text-sm font-semibold text-[#f2efe4] truncate text-left",
+                    class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] truncate text-left",
                 ),
                 rx.el.p(
                     f"{employee['code']} · {employee['job_title']}",
-                    class_name="text-[11px] font-medium text-[#c9c5b4]/65 truncate text-left",
+                    class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] truncate text-left",
                 ),
                 class_name="min-w-0 flex-1",
             ),
@@ -57,42 +57,42 @@ def _employee_card(employee: EmployeeRow, key: str = "") -> rx.Component:
         rx.el.div(
             rx.el.span(
                 employee["team"],
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/60 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit",
             ),
             rx.el.span(
                 employee["contract_label"],
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/65 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit",
             ),
             rx.cond(
                 employee["phyto"],
                 rx.el.span(
                     "CERTIPHYTO",
-                    class_name="rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#e4ff9b] w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.40)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-1.5 py-0.5 text-[9px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
                 ),
                 rx.fragment(),
             ),
             class_name="flex flex-wrap items-center gap-2 mt-3",
         ),
         rx.el.div(
-            rx.icon("badge-check", class_name="h-3.5 w-3.5 text-[#d8fa5e]/80"),
+            rx.icon("badge-check", class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb)/0.80)]"),
             rx.el.span(
                 employee["top_skill"],
-                class_name="text-[11px] font-medium text-[#c9c5b4]/60 truncate",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] truncate",
             ),
             class_name="flex items-center gap-1.5 w-full mt-2 min-w-0",
         ),
         rx.el.div(
             rx.el.span(
                 f"{employee['skill_count']} compétence(s)",
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             rx.el.span(
                 f"{employee['weekly_hours']:.0f} h/sem",
-                class_name="text-[10px] font-semibold text-[#c9c5b4]/65",
+                class_name="text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             rx.el.span(
                 f"{employee['assignments']} mission(s)",
-                class_name="text-[10px] font-bold text-[#e4ff9b] ml-auto",
+                class_name="text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] ml-auto",
             ),
             class_name="flex items-center gap-2 w-full mt-2",
         ),
@@ -100,8 +100,8 @@ def _employee_card(employee: EmployeeRow, key: str = "") -> rx.Component:
         key=key,
         class_name=rx.cond(
             EmployeesState.selected_employee_id == employee["id"],
-            "w-full border-t border-[#F2EFE4]/12 border-l-2 border-l-[#D8FA5E] bg-[#D8FA5E]/[0.07] pl-3 pr-2 pt-4 text-left transition-colors",
-            "border-t border-[#F2EFE4]/12 w-full pt-4 text-left hover:border-t-[#D8FA5E]/40 transition-all",
+            "w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] border-l-2 border-l-[rgb(var(--ap-accent-rgb))] bg-[rgb(var(--ap-accent-rgb))]/[0.07] pl-3 pr-2 pt-4 text-left transition-colors",
+            "border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-4 text-left hover:border-t-[rgb(var(--ap-accent-rgb)/0.40)] transition-all",
         ),
     )
 
@@ -112,17 +112,17 @@ def employee_list() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Registre",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Équipe",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 class_name="min-w-0",
             ),
             rx.el.span(
                 EmployeesState.employee_count,
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-xs font-bold text-[#c9c5b4]/70 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-xs font-bold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] w-fit",
             ),
             class_name="flex items-end justify-between gap-3",
         ),
@@ -147,5 +147,5 @@ def employee_list() -> rx.Component:
                 ),
             ),
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full xl:w-[24rem] shrink-0 pt-5",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full xl:w-[24rem] shrink-0 pt-5",
     )

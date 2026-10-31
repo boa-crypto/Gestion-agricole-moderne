@@ -9,7 +9,11 @@ from app.states.menu_configuration_state import MenuConfigurationState
 from app.components.alerts_panel import alerts_panel
 from app.components.calendar_panel import calendar_panel
 from app.components.cockpit_header import cockpit_header
-from app.components.design import GOOGLE_FONTS_HREF, editorial_styles
+from app.components.design import (
+    GOOGLE_FONTS_HREF,
+    THEME_BOOTSTRAP,
+    editorial_styles,
+)
 from app.components.shell import app_shell
 from app.components.cockpit_pulse import cockpit_pulse
 from app.components.crops_panel import crops_panel
@@ -202,8 +206,10 @@ app = rxe.App(
     head_components=[
         editorial_styles(),
         rx.el.style(
-            "html, body { background-color: #0A0A08 !important; } main { background-attachment: scroll !important; }"
+            "html, body { background-color: rgb(var(--ap-ink-rgb)) !important; }"
+            " main { background-attachment: scroll !important; }"
         ),
+        rx.el.script(THEME_BOOTSTRAP),
         rx.el.link(
             rel="stylesheet",
             href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
@@ -216,7 +222,7 @@ app = rxe.App(
         ),
         rx.el.link(href=GOOGLE_FONTS_HREF, rel="stylesheet"),
     ],
-    theme=rx.theme(appearance="dark", accent_color="lime", radius="none"),
+    theme=rx.theme(appearance="light", accent_color="bronze", radius="none"),
 )
 app.register_lifespan_task(menu_database_lifespan)
 app.add_page(

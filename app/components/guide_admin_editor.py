@@ -22,11 +22,11 @@ def _errors_block() -> rx.Component:
             rx.el.div(
                 rx.icon(
                     "octagon-alert",
-                    class_name="h-4 w-4 stroke-[#ff9b8c] shrink-0",
+                    class_name="h-4 w-4 stroke-[rgb(var(--ap-danger-soft-rgb))] shrink-0",
                 ),
                 rx.el.span(
                     "Contrôles de cohérence éditoriale",
-                    class_name="ap-eyebrow text-[#ffbcb0]",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-warm-150-rgb))]",
                 ),
                 class_name="flex items-center gap-2",
             ),
@@ -35,12 +35,12 @@ def _errors_block() -> rx.Component:
                     GuideAdminState.form_errors,
                     lambda message: rx.el.li(
                         message,
-                        class_name="text-[12px] font-medium text-[#ffe0da]/90 leading-relaxed list-disc ml-4",
+                        class_name="text-[12px] font-medium text-[rgb(var(--ap-warm-050-rgb)/0.90)] leading-relaxed list-disc ml-4",
                     ),
                 ),
                 class_name="flex flex-col gap-1 w-full mt-2",
             ),
-            class_name="w-full rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/[0.08] p-3.5",
+            class_name="w-full rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb))]/[0.08] p-3.5",
         ),
         rx.fragment(),
     )
@@ -427,7 +427,7 @@ def guide_admin_editor() -> rx.Component:
         rx.fragment(
             rx.el.div(
                 on_click=GuideAdminState.close_editor,
-                class_name="fixed inset-0 z-[65] bg-[#060604]/70 -[2px]",
+                class_name="fixed inset-0 z-[65] bg-[rgb(var(--ap-ink-deep-rgb)/0.70)] -[2px]",
             ),
             rx.el.aside(
                 rx.el.div(
@@ -435,18 +435,18 @@ def guide_admin_editor() -> rx.Component:
                         rx.el.div(
                             rx.icon(
                                 "square-pen",
-                                class_name="h-4 w-4 stroke-[#0A0A08]",
+                                class_name="h-4 w-4 stroke-[rgb(var(--ap-ink-rgb))]",
                             ),
-                            class_name="flex h-9 w-9 shrink-0 items-center justify-center rounded-none bg-[#d8fa5e]",
+                            class_name="flex h-9 w-9 shrink-0 items-center justify-center rounded-none bg-[rgb(var(--ap-accent-rgb))]",
                         ),
                         rx.el.div(
                             rx.el.span(
                                 "Fiche de publication",
-                                class_name="ap-eyebrow text-[#d8fa5e]/80",
+                                class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                             ),
                             rx.el.h3(
                                 GuideAdminState.editor_title,
-                                class_name="ap-serif text-2xl text-[#f2efe4] mt-0.5",
+                                class_name="ap-serif text-2xl text-[rgb(var(--ap-paper-rgb))] mt-0.5",
                             ),
                             class_name="min-w-0 flex-1",
                         ),
@@ -455,26 +455,26 @@ def guide_admin_editor() -> rx.Component:
                             type="button",
                             on_click=GuideAdminState.close_editor,
                             aria_label="Fermer la fiche d'édition",
-                            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/60 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors",
+                            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] text-[rgb(var(--ap-paper-muted-rgb)/0.82)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors",
                         ),
                         class_name="flex items-start gap-3 w-full",
                     ),
                     rx.el.div(
                         rx.el.span(
                             f"Référence : {GuideAdminState.draft['ref']}",
-                            class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[10px] font-mono text-[#c9c5b4]/55 w-fit",
+                            class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-[10px] font-mono text-[rgb(var(--ap-paper-muted-rgb)/0.78)] w-fit",
                         ),
                         rx.el.span(
                             f"Version courante : {GuideAdminState.current_version['version_label']}",
-                            class_name="rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1 text-[10px] font-bold text-[#e4ff9b] w-fit",
+                            class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
                         ),
                         rx.el.span(
                             f"Publié le {GuideAdminState.draft['published_label']}",
-                            class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[10px] font-semibold text-[#c9c5b4]/55 w-fit",
+                            class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.78)] w-fit",
                         ),
                         class_name="flex flex-wrap items-center gap-2 w-full mt-3",
                     ),
-                    class_name="w-full border-b border-[#f2efe4]/12 pb-4",
+                    class_name="w-full border-b border-[rgb(var(--ap-paper-rgb)/0.18)] pb-4",
                 ),
                 rx.el.form(
                     _errors_block(),
@@ -494,26 +494,26 @@ def guide_admin_editor() -> rx.Component:
                             rx.el.span("Annuler"),
                             type="button",
                             on_click=GuideAdminState.close_editor,
-                            class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2 text-xs font-semibold text-[#c9c5b4]/65 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit",
+                            class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2 text-xs font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors w-fit",
                         ),
                         rx.el.button(
                             rx.icon(
-                                "save", class_name="h-4 w-4 stroke-[#0A0A08]"
+                                "save", class_name="h-4 w-4 stroke-[rgb(var(--ap-ink-rgb))]"
                             ),
                             rx.el.span(
                                 "Enregistrer la fiche",
-                                class_name="text-[#0A0A08]",
+                                class_name="text-[rgb(var(--ap-ink-rgb))]",
                             ),
                             type="submit",
-                            class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-5 py-2 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
+                            class_name="flex items-center gap-2 rounded-none bg-[rgb(var(--ap-accent-rgb))] px-5 py-2 text-sm font-semibold hover:bg-[rgb(var(--ap-accent-soft-rgb))] transition-colors w-fit",
                         ),
-                        class_name="flex flex-wrap items-center justify-end gap-2 w-full border-t border-[#f2efe4]/12 pt-4",
+                        class_name="flex flex-wrap items-center justify-end gap-2 w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-4",
                     ),
                     on_submit=GuideAdminState.save_content,
                     class_name="flex flex-col gap-4 w-full mt-5",
                 ),
                 aria_label="Fiche d'édition du guide",
-                class_name="fixed right-0 top-0 z-[70] h-screen w-full lg:w-[52rem] overflow-y-auto border-l border-[#d8fa5e]/20 bg-[#0D0F09]/97 px-5 sm:px-7 py-6 pb-28 ",
+                class_name="fixed right-0 top-0 z-[70] h-screen w-full lg:w-[52rem] overflow-y-auto border-l border-[rgb(var(--ap-accent-rgb)/0.20)] bg-[rgb(var(--ap-surface-soft-rgb)/0.97)] px-5 sm:px-7 py-6 pb-28 ",
             ),
         ),
         rx.fragment(),

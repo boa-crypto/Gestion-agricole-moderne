@@ -11,13 +11,13 @@ def search_field(
         rx.el.label(
             label,
             html_for=identifier,
-            class_name="mb-2 block text-sm text-[#c9c5b4]",
+            class_name="mb-2 block text-sm text-[rgb(var(--ap-paper-muted-rgb))]",
         ),
         rx.el.input(
             id=identifier,
             default_value=value,
             on_change=handler.debounce(500),
-            class_name="w-full rounded-none border border-[#f2efe4]/22 bg-[#0A0A08] px-4 py-3 text-sm text-[#f2efe4] focus-visible:outline-2 focus-visible:outline-[#d8fa5e]",
+            class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.30)] bg-[rgb(var(--ap-ink-rgb))] px-4 py-3 text-sm text-[rgb(var(--ap-paper-rgb))] focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-accent-rgb))]",
         ),
         class_name="w-full",
     )
@@ -35,8 +35,8 @@ def filter_buttons(
                 aria_pressed=value == label,
                 class_name=rx.cond(
                     value == label,
-                    "rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/10 px-3 py-2 text-xs text-[#e4ff9b] focus-visible:outline-2 focus-visible:outline-[#d8fa5e]",
-                    "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-2 text-xs text-[#c9c5b4] focus-visible:outline-2 focus-visible:outline-[#d8fa5e]",
+                    "rounded-none border border-[rgb(var(--ap-accent-rgb)/0.40)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-2 text-xs text-[rgb(var(--ap-accent-soft-rgb))] focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-accent-rgb))]",
+                    "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-2 text-xs text-[rgb(var(--ap-paper-muted-rgb))] focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-accent-rgb))]",
                 ),
             ),
         ),
@@ -62,8 +62,8 @@ def override_controls(target, explicit) -> rx.Component:
                 disabled=State.saving,
                 class_name=rx.cond(
                     explicit == option["code"],
-                    "rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/10 px-3 py-2 text-xs text-[#e4ff9b] disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
-                    "rounded-none border border-[#f2efe4]/16 bg-[#0A0A08] px-3 py-2 text-xs text-[#c9c5b4] disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
+                    "rounded-none border border-[rgb(var(--ap-accent-rgb)/0.40)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-2 text-xs text-[rgb(var(--ap-accent-soft-rgb))] disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-flame-soft-rgb))]",
+                    "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.24)] bg-[rgb(var(--ap-ink-rgb))] px-3 py-2 text-xs text-[rgb(var(--ap-paper-muted-rgb))] disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-flame-soft-rgb))]",
                 ),
             ),
         ),
@@ -78,16 +78,16 @@ def permission_row(row) -> rx.Component:
         rx.el.div(
             rx.el.h3(
                 row["key"],
-                class_name="break-all text-sm font-semibold text-[#f2efe4]",
+                class_name="break-all text-sm font-semibold text-[rgb(var(--ap-paper-rgb))]",
             ),
             rx.el.p(
                 rx.cond(
                     row["inherited"], "Hérité : accordé", "Hérité : non accordé"
                 ),
-                class_name="mt-1 text-xs text-[#c9c5b4]/80",
+                class_name="mt-1 text-xs text-[rgb(var(--ap-paper-muted-rgb)/0.95)]",
             ),
             rx.el.p(
-                row["source"], class_name="mt-1 text-xs text-[#c9c5b4]/75"
+                row["source"], class_name="mt-1 text-xs text-[rgb(var(--ap-paper-muted-rgb)/0.93)]"
             ),
             class_name="min-w-0 flex-1",
         ),
@@ -97,13 +97,13 @@ def permission_row(row) -> rx.Component:
             ),
             class_name=rx.cond(
                 row["effective"],
-                "w-fit text-xs text-[#d8fa5e]",
-                "w-fit text-xs text-[#ffb894]",
+                "w-fit text-xs text-[rgb(var(--ap-accent-rgb))]",
+                "w-fit text-xs text-[rgb(var(--ap-flame-tint-rgb))]",
             ),
         ),
         override_controls(row["target"], row["explicit"]),
         key=row["key"],
-        class_name="flex flex-wrap items-center gap-4 border-b border-[#f2efe4]/12 p-4",
+        class_name="flex flex-wrap items-center gap-4 border-b border-[rgb(var(--ap-paper-rgb)/0.18)] p-4",
     )
 
 
@@ -111,11 +111,11 @@ def permission_editor() -> rx.Component:
     return rx.el.section(
         rx.el.h2(
             "Permissions effectives",
-            class_name="ap-serif text-3xl text-[#f2efe4]",
+            class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))]",
         ),
         rx.el.p(
             "Recalculées depuis la politique actuelle à chaque chargement. Hériter supprime la surcharge ; un refus reste prioritaire sur les accords cumulés.",
-            class_name="my-3 text-sm text-[#ffb894]",
+            class_name="my-3 text-sm text-[rgb(var(--ap-flame-tint-rgb))]",
         ),
         search_field(
             "Rechercher une permission (module ou action)",
@@ -131,13 +131,13 @@ def permission_editor() -> rx.Component:
         rx.el.p(
             f"{State.filtered_permissions.length()} permission(s)",
             aria_live="polite",
-            class_name="mb-3 text-xs text-[#c9c5b4]/75",
+            class_name="mb-3 text-xs text-[rgb(var(--ap-paper-muted-rgb)/0.93)]",
         ),
         rx.cond(
             State.filtered_permissions.length() > 0,
             rx.el.div(
                 rx.foreach(State.filtered_permissions, permission_row),
-                class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160F]",
+                class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))]",
             ),
             empty_card("Aucune permission ne correspond aux filtres."),
         ),
@@ -147,29 +147,29 @@ def permission_editor() -> rx.Component:
 
 def empty_card(message: str) -> rx.Component:
     return rx.el.div(
-        rx.icon("inbox", class_name="mx-auto h-7 w-7 text-[#ff8a5b]"),
-        rx.el.p(message, class_name="mt-3 text-sm text-[#c9c5b4]"),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160F] p-8 text-center",
+        rx.icon("inbox", class_name="mx-auto h-7 w-7 text-[rgb(var(--ap-flame-soft-rgb))]"),
+        rx.el.p(message, class_name="mt-3 text-sm text-[rgb(var(--ap-paper-muted-rgb))]"),
+        class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] p-8 text-center",
     )
 
 
 def role_card(row) -> rx.Component:
     return rx.el.button(
         rx.el.h3(
-            row["label"], class_name="text-base font-semibold text-[#f2efe4]"
+            row["label"], class_name="text-base font-semibold text-[rgb(var(--ap-paper-rgb))]"
         ),
-        rx.el.p(row["note"], class_name="my-2 text-xs text-[#c9c5b4]/80"),
+        rx.el.p(row["note"], class_name="my-2 text-xs text-[rgb(var(--ap-paper-muted-rgb)/0.95)]"),
         rx.el.p(
             f"{row['key']} · {row['overrides']} surcharge(s)",
-            class_name="text-xs text-[#d8fa5e]",
+            class_name="text-xs text-[rgb(var(--ap-accent-rgb))]",
         ),
         on_click=State.select_role(row["key"]),
         aria_pressed=State.selected_role == row["key"],
         key=row["key"],
         class_name=rx.cond(
             State.selected_role == row["key"],
-            "w-full rounded-none border border-[#d8fa5e]/60 bg-[#d8fa5e]/5 p-5 text-left focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
-            "border-t border-[#F2EFE4]/12 w-full bg-[#14160F] pt-5 text-left hover:border-[#d8fa5e]/40 focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
+            "w-full rounded-none border border-[rgb(var(--ap-accent-rgb)/0.60)] bg-[rgb(var(--ap-accent-rgb)/0.05)] p-5 text-left focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-flame-soft-rgb))]",
+            "border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full bg-[rgb(var(--ap-surface-raised-rgb))] pt-5 text-left hover:border-[rgb(var(--ap-accent-rgb)/0.40)] focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-flame-soft-rgb))]",
         ),
     )
 
@@ -208,11 +208,11 @@ def account_card(row) -> rx.Component:
     return rx.el.button(
         rx.el.h3(
             row["email"],
-            class_name="break-all text-sm font-semibold text-[#f2efe4]",
+            class_name="break-all text-sm font-semibold text-[rgb(var(--ap-paper-rgb))]",
         ),
         rx.el.p(
             f"Compte #{row['id']} · {row['local_match']}",
-            class_name="mt-2 text-xs text-[#c9c5b4]/80",
+            class_name="mt-2 text-xs text-[rgb(var(--ap-paper-muted-rgb)/0.95)]",
         ),
         rx.el.p(
             rx.cond(row["active"], "Actif", "Désactivé"),
@@ -220,7 +220,7 @@ def account_card(row) -> rx.Component:
             rx.cond(
                 row["admin"], "Configuration autorisée", "Sans administration"
             ),
-            class_name="my-2 text-xs text-[#ffb894]",
+            class_name="my-2 text-xs text-[rgb(var(--ap-flame-tint-rgb))]",
         ),
         rx.el.p(
             rx.cond(
@@ -228,15 +228,15 @@ def account_card(row) -> rx.Component:
                 row["roles"].join(" · "),
                 "Aucun rôle attribué",
             ),
-            class_name="break-all text-xs text-[#d8fa5e]",
+            class_name="break-all text-xs text-[rgb(var(--ap-accent-rgb))]",
         ),
         on_click=State.select_account(row["id"]),
         aria_pressed=State.selected_account == row["id"],
         key=row["id"],
         class_name=rx.cond(
             State.selected_account == row["id"],
-            "w-full rounded-none border border-[#d8fa5e]/60 bg-[#d8fa5e]/5 p-5 text-left focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
-            "border-t border-[#F2EFE4]/12 w-full bg-[#14160F] pt-5 text-left hover:border-[#d8fa5e]/40 focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
+            "w-full rounded-none border border-[rgb(var(--ap-accent-rgb)/0.60)] bg-[rgb(var(--ap-accent-rgb)/0.05)] p-5 text-left focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-flame-soft-rgb))]",
+            "border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full bg-[rgb(var(--ap-surface-raised-rgb))] pt-5 text-left hover:border-[rgb(var(--ap-accent-rgb)/0.40)] focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-flame-soft-rgb))]",
         ),
     )
 
@@ -245,16 +245,16 @@ def assignment_row(row) -> rx.Component:
     return rx.el.div(
         rx.el.div(
             rx.el.h3(
-                row["label"], class_name="text-sm font-semibold text-[#f2efe4]"
+                row["label"], class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))]"
             ),
             rx.el.p(
                 rx.cond(row["assigned"], "Attribué", "Non attribué"),
-                class_name="mt-1 text-xs text-[#ffb894]",
+                class_name="mt-1 text-xs text-[rgb(var(--ap-flame-tint-rgb))]",
             ),
         ),
         override_controls(row["target"], row["explicit"]),
         key=row["key"],
-        class_name="border-t border-[#F2EFE4]/12 flex flex-wrap items-center justify-between gap-3 bg-[#14160F] pt-4",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] flex flex-wrap items-center justify-between gap-3 bg-[rgb(var(--ap-surface-raised-rgb))] pt-4",
     )
 
 
@@ -262,7 +262,7 @@ def account_detail() -> rx.Component:
     return rx.el.section(
         rx.el.h2(
             State.selected_email,
-            class_name="break-all ap-serif text-3xl text-[#f2efe4]",
+            class_name="break-all ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))]",
         ),
         rx.el.div(
             rx.el.p(
@@ -271,29 +271,29 @@ def account_detail() -> rx.Component:
                     "Compte actif",
                     "Compte désactivé (politique ou utilisateur local)",
                 ),
-                class_name="text-sm text-[#ffb894]",
+                class_name="text-sm text-[rgb(var(--ap-flame-tint-rgb))]",
             ),
             rx.el.p(
                 "Accorder active le compte, Refuser le désactive. Un statut local inactif reste prioritaire.",
-                class_name="text-xs text-[#c9c5b4]/80",
+                class_name="text-xs text-[rgb(var(--ap-paper-muted-rgb)/0.95)]",
             ),
             override_controls(State.active_target, State.active_explicit),
             class_name="my-4 flex flex-wrap items-center gap-4",
         ),
         rx.el.h3(
             "Rôles multiples",
-            class_name="mb-3 text-lg font-semibold text-[#f2efe4]",
+            class_name="mb-3 text-lg font-semibold text-[rgb(var(--ap-paper-rgb))]",
         ),
         rx.el.p(
             "Accorder attribue le rôle ; Refuser le retire, y compris s’il est hérité. Hériter rétablit les rôles locaux et l’amorçage existant.",
-            class_name="mb-4 text-sm text-[#c9c5b4]/80",
+            class_name="mb-4 text-sm text-[rgb(var(--ap-paper-muted-rgb)/0.95)]",
         ),
         rx.el.div(
             rx.foreach(State.assignments, assignment_row),
             class_name="grid w-full grid-cols-1 gap-3 lg:grid-cols-2",
         ),
         permission_editor(),
-        class_name="border-t border-[#F2EFE4]/12 mt-6 w-full bg-[#14160F] pt-4 sm:pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] mt-6 w-full bg-[rgb(var(--ap-surface-raised-rgb))] pt-4 sm:pt-6",
     )
 
 
@@ -312,7 +312,7 @@ def accounts_panel() -> rx.Component:
         ),
         rx.el.p(
             "Uniquement les comptes réellement enregistrés par la connexion existante. Aucun compte n’est créé ici. Les filtres utilisent les droits et statuts actuels.",
-            class_name="mb-4 text-sm text-[#c9c5b4]/80",
+            class_name="mb-4 text-sm text-[rgb(var(--ap-paper-muted-rgb)/0.95)]",
         ),
         rx.cond(
             State.accounts.length() > 0,
@@ -329,17 +329,17 @@ def accounts_panel() -> rx.Component:
                 "Précédent",
                 on_click=State.account_page(-1),
                 disabled=State.account_offset == 0,
-                class_name="rounded-none border border-[#f2efe4]/22 bg-[#14160f] px-4 py-2 text-sm text-[#d8fa5e] disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-[#d8fa5e]",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.30)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2 text-sm text-[rgb(var(--ap-accent-rgb))] disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-accent-rgb))]",
             ),
             rx.el.p(
                 f"{State.account_total} compte(s) correspondant aux filtres · début {State.account_offset}",
-                class_name="text-xs text-[#c9c5b4]/80",
+                class_name="text-xs text-[rgb(var(--ap-paper-muted-rgb)/0.95)]",
             ),
             rx.el.button(
                 "Suivant",
                 on_click=State.account_page(1),
                 disabled=State.account_offset + 25 >= State.account_total,
-                class_name="rounded-none border border-[#f2efe4]/22 bg-[#14160f] px-4 py-2 text-sm text-[#d8fa5e] disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-[#d8fa5e]",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.30)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2 text-sm text-[rgb(var(--ap-accent-rgb))] disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-accent-rgb))]",
             ),
             class_name="my-4 flex flex-wrap items-center justify-between gap-3",
         ),
@@ -358,18 +358,18 @@ def audit_card(row) -> rx.Component:
     return rx.el.article(
         rx.el.h3(
             row["target"],
-            class_name="break-all text-sm font-semibold text-[#f2efe4]",
+            class_name="break-all text-sm font-semibold text-[rgb(var(--ap-paper-rgb))]",
         ),
         rx.el.p(
             f"{row['before']} → {row['after']}",
-            class_name="my-2 text-sm text-[#d8fa5e]",
+            class_name="my-2 text-sm text-[rgb(var(--ap-accent-rgb))]",
         ),
         rx.el.p(
-            row["actor"], class_name="break-all text-xs text-[#c9c5b4]/80"
+            row["actor"], class_name="break-all text-xs text-[rgb(var(--ap-paper-muted-rgb)/0.95)]"
         ),
-        rx.el.p(row["date"], class_name="mt-1 text-xs text-[#ffb894]"),
+        rx.el.p(row["date"], class_name="mt-1 text-xs text-[rgb(var(--ap-flame-tint-rgb))]"),
         key=row["id"],
-        class_name="border-t border-[#F2EFE4]/12 bg-[#14160F] pt-5",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] pt-5",
     )
 
 
@@ -377,11 +377,11 @@ def journal_panel() -> rx.Component:
     return rx.el.section(
         rx.el.h2(
             "Journal des modifications",
-            class_name="ap-serif text-3xl text-[#f2efe4]",
+            class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))]",
         ),
         rx.el.p(
             "Historique ajouté uniquement lors d’un changement confirmé : auteur, date, valeur avant et après. Aucune édition ni suppression du journal depuis la Configuration.",
-            class_name="my-4 text-sm text-[#c9c5b4]/80",
+            class_name="my-4 text-sm text-[rgb(var(--ap-paper-muted-rgb)/0.95)]",
         ),
         rx.cond(
             State.audit.length() > 0,
@@ -396,17 +396,17 @@ def journal_panel() -> rx.Component:
                 "Précédent",
                 on_click=State.journal_page(-1),
                 disabled=State.audit_offset == 0,
-                class_name="rounded-none border border-[#f2efe4]/22 bg-[#14160f] px-4 py-2 text-sm text-[#d8fa5e] disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-[#d8fa5e]",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.30)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2 text-sm text-[rgb(var(--ap-accent-rgb))] disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-accent-rgb))]",
             ),
             rx.el.p(
                 f"{State.audit_total} entrée(s) · début {State.audit_offset}",
-                class_name="text-xs text-[#c9c5b4]/80",
+                class_name="text-xs text-[rgb(var(--ap-paper-muted-rgb)/0.95)]",
             ),
             rx.el.button(
                 "Suivant",
                 on_click=State.journal_page(1),
                 disabled=State.audit_offset + 50 >= State.audit_total,
-                class_name="rounded-none border border-[#f2efe4]/22 bg-[#14160f] px-4 py-2 text-sm text-[#d8fa5e] disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-[#d8fa5e]",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.30)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2 text-sm text-[rgb(var(--ap-accent-rgb))] disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-accent-rgb))]",
             ),
             class_name="mt-4 flex flex-wrap items-center justify-between gap-3",
         ),
@@ -426,33 +426,33 @@ def configuration_administration() -> rx.Component:
                         aria_pressed=State.tab == label,
                         class_name=rx.cond(
                             State.tab == label,
-                            "rounded-none bg-[#D8FA5E] px-4 py-3 text-sm font-semibold text-[#0A0A08] focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
-                            "rounded-none bg-[#0A0A08] px-4 py-3 text-sm font-medium text-[#c9c5b4] hover:bg-[#14160f] focus-visible:outline-2 focus-visible:outline-[#ff8a5b]",
+                            "rounded-none bg-[rgb(var(--ap-accent-rgb))] px-4 py-3 text-sm font-semibold text-[rgb(var(--ap-ink-rgb))] focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-flame-soft-rgb))]",
+                            "rounded-none bg-[rgb(var(--ap-ink-rgb))] px-4 py-3 text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb))] hover:bg-[rgb(var(--ap-surface-raised-rgb))] focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-flame-soft-rgb))]",
                         ),
                     ),
                 ),
                 role="group",
                 aria_label="Sections de la Configuration",
-                class_name="flex flex-wrap gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160F] p-2",
+                class_name="flex flex-wrap gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] p-2",
             ),
             rx.el.button(
                 rx.icon("refresh-cw", class_name="h-4 w-4"),
                 "Actualiser les droits",
                 on_click=State.load_configuration,
                 disabled=State.saving,
-                class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/22 bg-[#14160f] px-4 py-3 text-sm text-[#d8fa5e] disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-[#d8fa5e]",
+                class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.30)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-3 text-sm text-[rgb(var(--ap-accent-rgb))] disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-[rgb(var(--ap-accent-rgb))]",
             ),
             class_name="mb-6 flex flex-wrap items-center justify-between gap-3",
         ),
         rx.el.p(
-            State.notice, role="status", class_name="mb-3 text-sm text-[#e4ff9b]"
+            State.notice, role="status", class_name="mb-3 text-sm text-[rgb(var(--ap-accent-soft-rgb))]"
         ),
         rx.cond(
             State.saving,
             rx.el.p(
                 "Enregistrement sécurisé en cours…",
                 role="status",
-                class_name="mb-3 text-sm text-[#ffb894]",
+                class_name="mb-3 text-sm text-[rgb(var(--ap-flame-tint-rgb))]",
             ),
             rx.fragment(),
         ),

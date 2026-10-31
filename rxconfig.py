@@ -15,6 +15,9 @@ config = rx.Config(
     app_name="app",
     db_url=SYNC_DB_URL,
     async_db_url=ASYNC_DB_URL,
+    # L'aperçu de la plateforme sert l'application depuis un domaine *.e2b.app :
+    # sans cette autorisation, le serveur de développement Vite répond 403.
+    vite_allowed_hosts=True,
     plugins=[
         rx.plugins.SitemapPlugin(),
         rx.plugins.TailwindV4Plugin(),

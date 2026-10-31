@@ -13,61 +13,61 @@ def _parcel_card(parcel: ParcelRow, key: str = "") -> rx.Component:
         rx.el.div(
             rx.el.span(
                 parcel["code"],
-                class_name="ap-eyebrow text-[#c9c5b4]/65",
+                class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             rx.cond(
                 parcel["is_organic"],
                 rx.el.span(
                     "BIO",
-                    class_name="rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#e4ff9b] w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.40)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-1.5 py-0.5 text-[9px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
                 ),
                 rx.fragment(),
             ),
             rx.el.span(
                 parcel["status_label"],
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/60 w-fit ml-auto",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit ml-auto",
             ),
             class_name="flex items-center gap-2 w-full mt-3",
         ),
         rx.el.p(
             parcel["name"],
-            class_name="text-sm font-semibold text-[#f2efe4] text-left mt-2 truncate w-full",
+            class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] text-left mt-2 truncate w-full",
         ),
         rx.el.div(
-            rx.icon("sprout", class_name="h-3.5 w-3.5 text-[#d8fa5e]/80"),
+            rx.icon("sprout", class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb)/0.80)]"),
             rx.el.span(
                 parcel["active_crop"],
-                class_name="text-[11px] font-medium text-[#c9c5b4]/60 truncate",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] truncate",
             ),
             class_name="flex items-center gap-1.5 w-full mt-1.5 min-w-0",
         ),
         rx.el.div(
-            rx.icon("map-pin", class_name="h-3.5 w-3.5 text-[#a9c98b]/70"),
+            rx.icon("map-pin", class_name="h-3.5 w-3.5 text-[rgb(var(--ap-sage-rgb)/0.70)]"),
             rx.el.span(
                 parcel["locality"],
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 truncate",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] truncate",
             ),
             class_name="flex items-center gap-1.5 w-full mt-1 min-w-0",
         ),
         rx.el.div(
             rx.el.div(
-                class_name="h-full rounded-none bg-gradient-to-r from-[#8fb37a] to-[#d8fa5e]",
+                class_name="h-full rounded-none bg-gradient-to-r from-[rgb(var(--ap-sage-soft-rgb))] to-[rgb(var(--ap-accent-rgb))]",
                 style={"width": parcel["progress_pct"]},
             ),
-            class_name="h-1.5 w-full rounded-none bg-[#20241a] mt-3",
+            class_name="h-1.5 w-full rounded-none bg-[rgb(var(--ap-surface-control-rgb))] mt-3",
         ),
         rx.el.div(
             rx.el.span(
                 f"{parcel['area_ha']:.1f} ha",
-                class_name="text-[11px] font-semibold text-[#c9c5b4]/70",
+                class_name="text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)]",
             ),
             rx.el.span(
                 f"{parcel['crop_count']} culture(s)",
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             rx.el.span(
                 parcel["progress_pct"],
-                class_name="text-[11px] font-bold text-[#e4ff9b] ml-auto",
+                class_name="text-[11px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] ml-auto",
             ),
             class_name="flex items-center gap-2 w-full mt-2",
         ),
@@ -75,8 +75,8 @@ def _parcel_card(parcel: ParcelRow, key: str = "") -> rx.Component:
         key=key,
         class_name=rx.cond(
             ParcelsState.selected_parcel_id == parcel["id"],
-            "w-full border-t border-[#F2EFE4]/12 border-l-2 border-l-[#D8FA5E] bg-[#D8FA5E]/[0.07] pl-3 pr-2 pt-4 text-left transition-colors",
-            "border-t border-[#F2EFE4]/12 w-full pt-4 text-left hover:border-t-[#D8FA5E]/40 transition-all",
+            "w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] border-l-2 border-l-[rgb(var(--ap-accent-rgb))] bg-[rgb(var(--ap-accent-rgb))]/[0.07] pl-3 pr-2 pt-4 text-left transition-colors",
+            "border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-4 text-left hover:border-t-[rgb(var(--ap-accent-rgb)/0.40)] transition-all",
         ),
     )
 
@@ -87,17 +87,17 @@ def parcel_list() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Assolement",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Parcelles",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 class_name="min-w-0",
             ),
             rx.el.span(
                 ParcelsState.parcel_count,
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-xs font-bold text-[#c9c5b4]/70 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-xs font-bold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] w-fit",
             ),
             class_name="flex items-end justify-between gap-3",
         ),
@@ -120,5 +120,5 @@ def parcel_list() -> rx.Component:
                 ),
             ),
         ),
-        class_name="w-full xl:w-[24rem] shrink-0 border-t border-[#F2EFE4]/12 pt-6",
+        class_name="w-full xl:w-[24rem] shrink-0 border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-6",
     )

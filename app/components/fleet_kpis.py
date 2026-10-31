@@ -19,8 +19,8 @@ def _tile(
 
 def _section_title() -> rx.Component:
     return rx.el.div(
-        rx.icon("wrench", class_name="h-4 w-4 text-[#ff8a5b]"),
-        rx.el.span("Indicateurs atelier", class_name="ap-eyebrow text-[#c9c5b4]/55"),
+        rx.icon("wrench", class_name="h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]"),
+        rx.el.span("Indicateurs atelier", class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.78)]"),
         class_name="flex w-full items-center gap-2",
     )
 
@@ -35,7 +35,7 @@ def fleet_kpis() -> rx.Component:
                 "engins",
                 f"{MaintenanceState.kpis['available']:.0f} disponibles immédiatement",
                 "tractor",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             _tile(
                 "Immobilisations",
@@ -43,7 +43,7 @@ def fleet_kpis() -> rx.Component:
                 "à l'atelier",
                 f"{MaintenanceState.kpis['out_of_service']:.0f} hors service",
                 "wrench",
-                "h-4 w-4 text-[#ff8a5b]",
+                "h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]",
             ),
             _tile(
                 "Opérations ouvertes",
@@ -51,7 +51,7 @@ def fleet_kpis() -> rx.Component:
                 "chantiers",
                 f"{MaintenanceState.kpis['overdue_ops']:.0f} en retard d'exécution",
                 "clipboard-list",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             _tile(
                 "Échéances 30 j",
@@ -59,7 +59,7 @@ def fleet_kpis() -> rx.Component:
                 "engins concernés",
                 "Assurance, contrôle ou entretien",
                 "calendar-clock",
-                "h-4 w-4 text-[#ff8a5b]",
+                "h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]",
             ),
             _tile(
                 "Coût maintenance",
@@ -67,7 +67,7 @@ def fleet_kpis() -> rx.Component:
                 "€ / 12 mois",
                 f"{MaintenanceState.kpis['downtime_year']:.0f} h d'immobilisation",
                 "coins",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             _tile(
                 "Valeur du parc",
@@ -75,7 +75,7 @@ def fleet_kpis() -> rx.Component:
                 "€ à l'achat",
                 "Capital matériel de l'exploitation",
                 "warehouse",
-                "h-4 w-4 text-[#a9c98b]",
+                "h-4 w-4 text-[rgb(var(--ap-sage-rgb))]",
             ),
             class_name=(
                 "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "

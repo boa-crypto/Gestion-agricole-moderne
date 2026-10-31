@@ -14,45 +14,45 @@ from app.states.guide_state import GuideState, SearchGroup, SearchHit
 def _hit(hit: SearchHit, key: str = "") -> rx.Component:
     return rx.el.button(
         rx.el.div(
-            rx.icon(hit["icon"], class_name="h-4 w-4 text-[#d8fa5e]"),
-            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10",
+            rx.icon(hit["icon"], class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
+            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)]",
         ),
         rx.el.div(
             rx.el.p(
                 hit["title"],
-                class_name="text-sm font-semibold text-[#f2efe4] text-left truncate",
+                class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] text-left truncate",
             ),
             rx.el.p(
                 hit["subtitle"],
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 text-left truncate mt-0.5",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] text-left truncate mt-0.5",
             ),
             rx.el.p(
                 hit["excerpt"],
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 text-left leading-relaxed mt-1.5",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] text-left leading-relaxed mt-1.5",
             ),
             class_name="min-w-0 flex-1",
         ),
         rx.icon(
             "arrow-up-right",
-            class_name="h-3.5 w-3.5 text-[#c9c5b4]/65 shrink-0",
+            class_name="h-3.5 w-3.5 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] shrink-0",
         ),
         on_click=GuideState.open_hit(hit["kind"], hit["ref"]),
         key=key,
-        class_name="flex items-start gap-3 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-3 hover:border-[#d8fa5e]/30 hover:bg-[#191c13] transition-colors text-left",
+        class_name="flex items-start gap-3 w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))] p-3 hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:bg-[rgb(var(--ap-surface-high-rgb))] transition-colors text-left",
     )
 
 
 def _group(group: SearchGroup, key: str = "") -> rx.Component:
     return rx.el.section(
         rx.el.div(
-            rx.icon(group["icon"], class_name="h-3.5 w-3.5 text-[#d8fa5e]/80"),
+            rx.icon(group["icon"], class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb)/0.80)]"),
             rx.el.span(
                 group["label"],
-                class_name="ap-eyebrow text-[#c9c5b4]/65",
+                class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             rx.el.span(
                 group["count"],
-                class_name="rounded-none bg-[#d8fa5e]/15 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit",
+                class_name="rounded-none bg-[rgb(var(--ap-accent-rgb)/0.15)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
             ),
             class_name="flex items-center gap-2",
         ),
@@ -69,10 +69,10 @@ def _search_panel() -> rx.Component:
     return rx.el.div(
         rx.el.div(
             rx.el.div(
-                rx.icon("radar", class_name="h-3.5 w-3.5 text-[#d8fa5e]"),
+                rx.icon("radar", class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb))]"),
                 rx.el.span(
                     f"{GuideState.search_total} résultat(s) groupé(s) par type",
-                    class_name="text-[11px] font-semibold text-[#c9c5b4]/65",
+                    class_name="text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 class_name="flex items-center gap-2",
             ),
@@ -80,7 +80,7 @@ def _search_panel() -> rx.Component:
                 rx.icon("x", class_name="h-3.5 w-3.5"),
                 rx.el.span("Effacer"),
                 on_click=GuideState.clear_query,
-                class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-semibold text-[#c9c5b4]/65 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit ml-auto",
+                class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors w-fit ml-auto",
             ),
             class_name="flex items-center gap-2 w-full",
         ),
@@ -98,7 +98,7 @@ def _search_panel() -> rx.Component:
                 "Aucun contenu du guide ne correspond à cette recherche.",
             ),
         ),
-        class_name="w-full border-t border-[#F2EFE4]/12 pt-5 mt-6",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-5 mt-6",
     )
 
 
@@ -160,9 +160,9 @@ def _refresh() -> rx.Component:
         disabled=GuideState.is_loading,
         class_name=(
             "ap-mono inline-flex w-fit items-center justify-center gap-2 border "
-            "border-[#D8FA5E] bg-[#D8FA5E] px-3.5 py-2.5 text-[10px] uppercase "
-            "tracking-[0.18em] text-[#0A0A08] transition-colors "
-            "hover:border-[#E4FF9B] hover:bg-[#E4FF9B] "
+            "border-[rgb(var(--ap-accent-rgb))] bg-[rgb(var(--ap-accent-rgb))] px-3.5 py-2.5 text-[10px] uppercase "
+            "tracking-[0.18em] text-[rgb(var(--ap-ink-rgb))] transition-colors "
+            "hover:border-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-soft-rgb))] "
             "disabled:cursor-not-allowed disabled:opacity-45"
         ),
     )
@@ -174,7 +174,7 @@ def _search_field() -> rx.Component:
             "search",
             class_name=(
                 "pointer-events-none absolute left-0 top-1/2 h-4 w-4 "
-                "-translate-y-1/2 text-[#C9C5B4]/65"
+                "-translate-y-1/2 text-[rgb(var(--ap-paper-muted-rgb)/0.86)]"
             ),
         ),
         rx.el.input(
@@ -185,16 +185,16 @@ def _search_field() -> rx.Component:
             default_value=GuideState.query,
             on_change=GuideState.set_query.debounce(400),
             class_name=(
-                "w-full border-b border-[#F2EFE4]/16 bg-transparent py-3.5 pl-7 "
-                "pr-32 text-sm text-[#F2EFE4] outline-hidden transition-colors "
-                "placeholder:text-[#C9C5B4]/60 focus:border-[#D8FA5E]"
+                "w-full border-b border-[rgb(var(--ap-paper-rgb)/0.24)] bg-transparent py-3.5 pl-7 "
+                "pr-32 text-sm text-[rgb(var(--ap-paper-rgb))] outline-hidden transition-colors "
+                "placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] focus:border-[rgb(var(--ap-accent-rgb))]"
             ),
         ),
         rx.el.span(
             "Recherche globale",
             class_name=(
                 "ap-eyebrow pointer-events-none absolute right-0 top-1/2 "
-                "-translate-y-1/2 text-[#C9C5B4]/60"
+                "-translate-y-1/2 text-[rgb(var(--ap-paper-muted-rgb)/0.82)]"
             ),
         ),
         class_name="relative w-full",

@@ -13,13 +13,13 @@ def kpi_strip() -> rx.Component:
         rx.el.div(
             rx.el.span(
                 "Chiffres clés",
-                class_name="ap-eyebrow text-[#C9C5B4]/65",
+                class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             rx.el.span(
                 "Relevé consolidé de l'exploitation",
-                class_name="ap-mono text-[9px] uppercase tracking-[0.2em] text-[#C9C5B4]/25",
+                class_name="ap-mono text-[9px] uppercase tracking-[0.2em] text-[rgb(var(--ap-paper-muted-rgb)/0.25)]",
             ),
-            class_name="mb-5 flex flex-wrap items-baseline justify-between gap-3 border-b border-[#F2EFE4]/12 pb-3",
+            class_name="mb-5 flex flex-wrap items-baseline justify-between gap-3 border-b border-[rgb(var(--ap-paper-rgb)/0.18)] pb-3",
         ),
         rx.el.div(
             stat(

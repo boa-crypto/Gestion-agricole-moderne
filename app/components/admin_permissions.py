@@ -10,7 +10,7 @@ def _role_select() -> rx.Component:
     return rx.el.div(
         rx.icon(
             "shield-check",
-            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d8fa5e]/80 pointer-events-none",
+            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-accent-rgb)/0.80)] pointer-events-none",
         ),
         rx.el.select(
             rx.foreach(
@@ -25,7 +25,7 @@ def _role_select() -> rx.Component:
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
         ),
         class_name="relative w-full sm:w-64",
     )
@@ -35,15 +35,15 @@ def _rbac_row(row: RbacRow) -> rx.Component:
     return rx.el.tr(
         rx.el.td(
             rx.el.div(
-                rx.icon(row["icon"], class_name="h-4 w-4 text-[#d8fa5e]"),
+                rx.icon(row["icon"], class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
                 rx.el.div(
                     rx.el.p(
                         row["label"],
-                        class_name="text-sm font-semibold text-[#f2efe4] truncate",
+                        class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] truncate",
                     ),
                     rx.el.p(
                         row["route"],
-                        class_name="text-[10px] font-medium text-[#c9c5b4]/60",
+                        class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
                     ),
                     class_name="min-w-0",
                 ),
@@ -51,7 +51,7 @@ def _rbac_row(row: RbacRow) -> rx.Component:
                     row["sensitive"],
                     rx.el.span(
                         "SENSIBLE",
-                        class_name="rounded-none border border-[#ff8a5b]/40 bg-[#ff8a5b]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#ffb894] w-fit",
+                        class_name="rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.40)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-1.5 py-0.5 text-[9px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit",
                     ),
                     rx.fragment(),
                 ),
@@ -68,7 +68,7 @@ def _rbac_row(row: RbacRow) -> rx.Component:
                 ),
                 rx.el.span(
                     "Aucun accès",
-                    class_name="text-[11px] font-semibold text-[#c9c5b4]/60",
+                    class_name="text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
                 ),
             ),
             class_name="px-4 py-3 align-middle",
@@ -80,17 +80,17 @@ def _rbac_row(row: RbacRow) -> rx.Component:
                 + row["total"].to_string(),
                 class_name=rx.cond(
                     row["granted_count"] == row["total"],
-                    "text-xs font-bold text-[#e4ff9b]",
+                    "text-xs font-bold text-[rgb(var(--ap-accent-soft-rgb))]",
                     rx.cond(
                         row["granted_count"] > 0,
-                        "text-xs font-bold text-[#ffb894]",
-                        "text-xs font-semibold text-[#c9c5b4]/60",
+                        "text-xs font-bold text-[rgb(var(--ap-flame-tint-rgb))]",
+                        "text-xs font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
                     ),
                 ),
             ),
             class_name="px-4 py-3 align-middle text-right whitespace-nowrap",
         ),
-        class_name="border-t border-[#f2efe4]/10 hover:bg-[#101208] transition-colors",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.15)] hover:bg-[rgb(var(--ap-surface-rgb))] transition-colors",
     )
 
 
@@ -107,7 +107,7 @@ def admin_rbac() -> rx.Component:
                 rx.el.span(
                     AdministrationState.rbac_granted.to_string()
                     + " permission(s) accordée(s)",
-                    class_name="rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-3 py-1.5 text-[11px] font-bold text-[#e4ff9b] w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1.5 text-[11px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
                 ),
                 class_name="flex flex-col sm:flex-row items-stretch sm:items-center gap-3",
             ),
@@ -125,7 +125,7 @@ def admin_rbac() -> rx.Component:
                                 rx.el.span("Module AgriPro"),
                                 class_name="flex items-center",
                             ),
-                            class_name="px-4 py-3 text-left ap-eyebrow text-[#c9c5b4]/65",
+                            class_name="px-4 py-3 text-left ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                         ),
                         rx.el.th(
                             rx.el.div(
@@ -135,13 +135,13 @@ def admin_rbac() -> rx.Component:
                                 rx.el.span("Actions autorisées"),
                                 class_name="flex items-center",
                             ),
-                            class_name="px-4 py-3 text-left ap-eyebrow text-[#c9c5b4]/65",
+                            class_name="px-4 py-3 text-left ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                         ),
                         rx.el.th(
                             "Couverture",
-                            class_name="px-4 py-3 text-right ap-eyebrow text-[#c9c5b4]/65",
+                            class_name="px-4 py-3 text-right ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                         ),
-                        class_name="bg-[#14160f]",
+                        class_name="bg-[rgb(var(--ap-surface-raised-rgb))]",
                     ),
                 ),
                 rx.el.tbody(
@@ -149,7 +149,7 @@ def admin_rbac() -> rx.Component:
                 ),
                 class_name="table-auto w-full min-w-[42rem]",
             ),
-            class_name="mt-5 w-full overflow-x-auto rounded-none border border-[#f2efe4]/12 bg-[#0d0f09]",
+            class_name="mt-5 w-full overflow-x-auto rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-soft-rgb))]",
         ),
         class_name=f"w-full {CARD}",
     )
@@ -166,7 +166,7 @@ def _journal_select(
     return rx.el.div(
         rx.icon(
             icon,
-            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d8fa5e]/80 pointer-events-none",
+            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-accent-rgb)/0.80)] pointer-events-none",
         ),
         rx.el.select(
             rx.el.option(first_label, value="TOUS"),
@@ -182,7 +182,7 @@ def _journal_select(
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
         ),
         class_name="relative w-full sm:w-56",
     )
@@ -193,13 +193,13 @@ def _journal_filters() -> rx.Component:
         rx.el.div(
             rx.icon(
                 "search",
-                class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+                class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
             ),
             rx.el.input(
                 placeholder="Rechercher un acteur, un objet, un module ou une action…",
                 default_value=AdministrationState.journal_search,
                 on_change=AdministrationState.set_journal_search.debounce(400),
-                class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2.5 pl-9 pr-3 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/60 focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors",
+                class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] py-2.5 pl-9 pr-3 text-sm font-medium text-[rgb(var(--ap-paper-rgb))] placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] focus:border-[rgb(var(--ap-accent-rgb)/0.50)] focus:ring-2 focus:ring-[rgb(var(--ap-accent-rgb)/0.20)] outline-hidden transition-colors",
             ),
             class_name="relative flex-1 min-w-0",
         ),
@@ -225,21 +225,21 @@ def _journal_filters() -> rx.Component:
             on_click=AdministrationState.toggle_journal_sensitive,
             class_name=rx.cond(
                 AdministrationState.journal_sensitive_only,
-                "flex items-center gap-2 rounded-none border border-[#ff8a5b]/40 bg-[#ff8a5b]/10 px-4 py-2.5 text-sm font-semibold text-[#ffb894] transition-colors w-fit",
-                "flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
+                "flex items-center gap-2 rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.40)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--ap-flame-tint-rgb))] transition-colors w-fit",
+                "flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit",
             ),
         ),
         rx.el.button(
             rx.icon("rotate-ccw", class_name="h-4 w-4"),
             rx.el.span("Réinitialiser"),
             on_click=AdministrationState.reset_journal_filters,
-            class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
+            class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit",
         ),
         rx.el.button(
-            rx.icon("download", class_name="h-4 w-4 text-[#0A0A08]"),
-            rx.el.span("Exporter (CSV)", class_name="text-[#0A0A08]"),
+            rx.icon("download", class_name="h-4 w-4 text-[rgb(var(--ap-ink-rgb))]"),
+            rx.el.span("Exporter (CSV)", class_name="text-[rgb(var(--ap-ink-rgb))]"),
             on_click=AdministrationState.export_journal,
-            class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
+            class_name="flex items-center gap-2 rounded-none bg-[rgb(var(--ap-accent-rgb))] px-4 py-2.5 text-sm font-semibold hover:bg-[rgb(var(--ap-accent-soft-rgb))] transition-colors w-fit",
         ),
         class_name="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 w-full mt-5",
     )
@@ -257,14 +257,14 @@ def admin_journal() -> rx.Component:
                 rx.el.span(
                     AdministrationState.journal_count.to_string()
                     + " évènement(s) affiché(s)",
-                    class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1.5 text-[11px] font-bold text-[#c9c5b4]/70 w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1.5 text-[11px] font-bold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] w-fit",
                 ),
                 rx.el.span(
                     AdministrationState.journal_sensitive_count.to_string()
                     + " sensible(s) sur "
                     + AdministrationState.kpis["sensitive_events"].to_string()
                     + " au total",
-                    class_name="rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-3 py-1.5 text-[11px] font-bold text-[#ffb894] w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-3 py-1.5 text-[11px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit",
                 ),
                 class_name="flex flex-wrap items-center gap-2",
             ),
@@ -273,7 +273,7 @@ def admin_journal() -> rx.Component:
         _journal_filters(),
         rx.el.p(
             "Périmètre courant : " + AdministrationState.journal_filter_label,
-            class_name="ap-eyebrow text-[#c9c5b4]/65 mt-4",
+            class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-4",
         ),
         rx.cond(
             AdministrationState.activity.length() > 0,
@@ -283,7 +283,7 @@ def admin_journal() -> rx.Component:
             ),
             rx.el.p(
                 "Aucune activité consignée pour ces critères.",
-                class_name="text-sm font-medium text-[#c9c5b4]/65 mt-5",
+                class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-5",
             ),
         ),
         class_name=f"w-full {CARD}",

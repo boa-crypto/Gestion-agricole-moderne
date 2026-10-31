@@ -125,5 +125,5 @@ def fleet_filters() -> rx.Component:
                 "sm:items-center gap-3 w-full mt-4"
             ),
         ),
-        class_name="w-full border-b border-[#F2EFE4]/12 pb-7",
+        class_name="w-full border-b border-[rgb(var(--ap-paper-rgb)/0.18)] pb-7",
     )

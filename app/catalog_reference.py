@@ -36,35 +36,35 @@ PALETTE: dict[str, str] = {
 
 # Surfaces vitrées et typographie éditoriale réutilisées telles quelles.
 GLASS_SURFACE: str = (
-    "rounded-none border border-[#f2efe4]/12 bg-[#101208] "
+    "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))] "
 )
-GLASS_CARD: str = "rounded-none border border-[#f2efe4]/12 bg-[#101208]"
-EDITORIAL_TITLE: str = "ap-serif text-3xl text-[#f2efe4]"
+GLASS_CARD: str = "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))]"
+EDITORIAL_TITLE: str = "ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))]"
 EYEBROW: str = (
-    "ap-eyebrow text-[#d8fa5e]/80"
+    "ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]"
 )
 
 # Tonalités de statut agricole « lumineuses », alignées sur le reste de l'app.
 TONE_CLASSES: dict[str, str] = {
     "good": (
-        "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 "
-        "text-[10px] font-bold text-[#e4ff9b] w-fit"
+        "rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 "
+        "text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit"
     ),
     "warn": (
-        "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 "
-        "text-[10px] font-bold text-[#ffb894] w-fit"
+        "rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-2 py-0.5 "
+        "text-[10px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit"
     ),
     "bad": (
-        "rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2 py-0.5 "
-        "text-[10px] font-bold text-[#ff9b8c] w-fit"
+        "rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] px-2 py-0.5 "
+        "text-[10px] font-bold text-[rgb(var(--ap-danger-soft-rgb))] w-fit"
     ),
     "info": (
-        "rounded-none border border-[#9cc3ff]/30 bg-[#9cc3ff]/10 px-2 py-0.5 "
-        "text-[10px] font-bold text-[#c3daff] w-fit"
+        "rounded-none border border-[rgb(var(--ap-info-rgb)/0.30)] bg-[rgb(var(--ap-info-rgb)/0.10)] px-2 py-0.5 "
+        "text-[10px] font-bold text-[rgb(var(--ap-info-soft-rgb))] w-fit"
     ),
     "muted": (
-        "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 "
-        "text-[10px] font-semibold text-[#c9c5b4]/65 w-fit"
+        "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 "
+        "text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit"
     ),
 }
 

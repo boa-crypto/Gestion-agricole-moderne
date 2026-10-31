@@ -17,32 +17,32 @@ from app.states.stock_state import (
 )
 
 _INPUT = (
-    "w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] px-3 py-2.5 "
-    "text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/60 "
-    "focus:border-[#d8fa5e]/50 outline-hidden transition-colors"
+    "w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] px-3 py-2.5 "
+    "text-sm font-medium text-[rgb(var(--ap-paper-rgb))] placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] "
+    "focus:border-[rgb(var(--ap-accent-rgb)/0.50)] outline-hidden transition-colors"
 )
 
 _PRIMARY = (
-    "flex items-center gap-1.5 rounded-none bg-[#d8fa5e] px-3 py-1.5 "
-    "text-[11px] font-semibold text-[#0A0A08] hover:bg-[#e4ff9b] "
+    "flex items-center gap-1.5 rounded-none bg-[rgb(var(--ap-accent-rgb))] px-3 py-1.5 "
+    "text-[11px] font-semibold text-[rgb(var(--ap-ink-rgb))] hover:bg-[rgb(var(--ap-accent-soft-rgb))] "
     "transition-colors w-fit"
 )
 
 _GHOST = (
-    "flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] "
-    "px-3 py-1.5 text-[11px] font-semibold text-[#c9c5b4]/70 "
-    "hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit"
+    "flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] "
+    "px-3 py-1.5 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] "
+    "hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit"
 )
 
 _LINK = (
-    "flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 "
-    "bg-[#d8fa5e]/10 px-3 py-1.5 text-[10px] font-semibold text-[#e4ff9b] "
-    "hover:bg-[#d8fa5e]/20 transition-colors w-fit"
+    "flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] "
+    "bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1.5 text-[10px] font-semibold text-[rgb(var(--ap-accent-soft-rgb))] "
+    "hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors w-fit"
 )
 
 _CHIP = (
-    "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 "
-    "text-[10px] font-semibold text-[#c9c5b4]/60 w-fit whitespace-nowrap"
+    "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 "
+    "text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit whitespace-nowrap"
 )
 
 
@@ -53,21 +53,21 @@ def _badge(tone: rx.Var | str, label: rx.Var | str) -> rx.Component:
             tone,
             (
                 "good",
-                "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "warn",
-                "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 text-[10px] font-bold text-[#ffb894] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "bad",
-                "rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2 py-0.5 text-[10px] font-bold text-[#ff9b8c] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-danger-soft-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "info",
-                "rounded-none border border-[#9cc3ff]/30 bg-[#9cc3ff]/10 px-2 py-0.5 text-[10px] font-bold text-[#c3daff] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-info-rgb)/0.30)] bg-[rgb(var(--ap-info-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-info-soft-rgb))] w-fit whitespace-nowrap",
             ),
-            "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/65 w-fit whitespace-nowrap",
+            "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit whitespace-nowrap",
         ),
     )
 
@@ -76,20 +76,20 @@ def _tile(label: str, value: rx.Var | str, unit: str) -> rx.Component:
     return rx.el.div(
         rx.el.span(
             label,
-            class_name="ap-eyebrow text-[#c9c5b4]/65",
+            class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
         ),
         rx.el.div(
             rx.el.span(
                 value,
-                class_name="ap-serif text-2xl leading-none text-[#f2efe4]",
+                class_name="ap-serif text-2xl leading-none text-[rgb(var(--ap-paper-rgb))]",
             ),
             rx.el.span(
                 unit,
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mb-0.5",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mb-0.5",
             ),
             class_name="flex items-end gap-1.5 mt-2",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-3",
+        class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-3",
     )
 
 
@@ -97,10 +97,10 @@ def stock_note_bar() -> rx.Component:
     """Traçabilité de la décision : auteur et motif de l'arbitrage."""
     return rx.el.div(
         rx.el.div(
-            rx.icon("pen-line", class_name="h-3.5 w-3.5 text-[#d8fa5e]"),
+            rx.icon("pen-line", class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb))]"),
             rx.el.span(
                 "Traçabilité de l'arbitrage magasin",
-                class_name="ap-eyebrow text-[#c9c5b4]/65",
+                class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             help_icon_button("traitements"),
             class_name="flex items-center gap-2",
@@ -122,9 +122,9 @@ def stock_note_bar() -> rx.Component:
         ),
         rx.el.p(
             "La note accompagne chaque décision : elle explique six mois plus tard pourquoi le chantier a été tenu ou reporté.",
-            class_name="text-[10px] font-medium text-[#c9c5b4]/65 mt-2",
+            class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-2",
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-4",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-4",
     )
 
 
@@ -136,33 +136,33 @@ def _view_button(value: str, label: str, icon: str) -> rx.Component:
         on_click=StockState.set_view(value),
         class_name=rx.cond(
             StockState.view == value,
-            "flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/15 px-3 py-1.5 font-semibold text-[#efffc4] w-fit",
-            "flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1.5 font-medium text-[#c9c5b4]/55 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit",
+            "flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.40)] bg-[rgb(var(--ap-accent-rgb)/0.15)] px-3 py-1.5 font-semibold text-[rgb(var(--ap-accent-pale-rgb))] w-fit",
+            "flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1.5 font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors w-fit",
         ),
     )
 
 
 def _recommendation(text_value: rx.Var | str) -> rx.Component:
     return rx.el.div(
-        rx.icon("wrench", class_name="h-3 w-3 text-[#ff8a5b] shrink-0 mt-0.5"),
+        rx.icon("wrench", class_name="h-3 w-3 text-[rgb(var(--ap-flame-soft-rgb))] shrink-0 mt-0.5"),
         rx.el.p(
             text_value,
-            class_name="text-[11px] font-medium text-[#ffdccb]/80 leading-relaxed",
+            class_name="text-[11px] font-medium text-[rgb(var(--ap-warm-100-rgb)/0.80)] leading-relaxed",
         ),
-        class_name="flex items-start gap-2 rounded-none border border-[#ff8a5b]/20 bg-[#ff8a5b]/[0.06] px-3 py-2 w-full mt-2",
+        class_name="flex items-start gap-2 rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.20)] bg-[rgb(var(--ap-flame-soft-rgb))]/[0.06] px-3 py-2 w-full mt-2",
     )
 
 
 def _impact(item: StockItem) -> rx.Component:
     return rx.el.div(
         rx.icon(
-            "calendar-clock", class_name="h-3 w-3 text-[#d8fa5e] shrink-0 mt-0.5"
+            "calendar-clock", class_name="h-3 w-3 text-[rgb(var(--ap-accent-rgb))] shrink-0 mt-0.5"
         ),
         rx.el.p(
             item["impact"],
-            class_name="text-[11px] font-medium text-[#c9c5b4]/70 leading-relaxed",
+            class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.90)] leading-relaxed",
         ),
-        class_name="flex items-start gap-2 rounded-none border border-[#d8fa5e]/20 bg-[#d8fa5e]/[0.05] px-3 py-2 w-full mt-2",
+        class_name="flex items-start gap-2 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.20)] bg-[rgb(var(--ap-accent-rgb))]/[0.05] px-3 py-2 w-full mt-2",
     )
 
 
@@ -170,12 +170,12 @@ def _trace(item: StockItem) -> rx.Component:
     return rx.cond(
         item["is_documented"],
         rx.el.div(
-            rx.icon(item["icon"], class_name="h-3 w-3 text-[#d8fa5e] shrink-0"),
+            rx.icon(item["icon"], class_name="h-3 w-3 text-[rgb(var(--ap-accent-rgb))] shrink-0"),
             rx.el.p(
                 f"{item['decision_label']} · {item['decided_label']} · {item['author']} — {item['note']}",
-                class_name="text-[10px] font-medium text-[#c9c5b4]/55 leading-relaxed",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] leading-relaxed",
             ),
-            class_name="flex items-start gap-2 rounded-none border border-[#f2efe4]/12 bg-[#101208] px-3 py-2 w-full mt-2",
+            class_name="flex items-start gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))] px-3 py-2 w-full mt-2",
         ),
         rx.fragment(),
     )
@@ -184,10 +184,10 @@ def _trace(item: StockItem) -> rx.Component:
 def _item_card(item: StockItem, key: str = "") -> rx.Component:
     return rx.el.article(
         rx.el.div(
-            rx.icon("package", class_name="h-4 w-4 text-[#ff8a5b]"),
+            rx.icon("package", class_name="h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]"),
             rx.el.span(
                 item["category_label"],
-                class_name="ap-eyebrow text-[#c9c5b4]/65",
+                class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             _badge(item["severity"], item["status_label"]),
             _badge(item["tone"], item["decision_label"]),
@@ -195,7 +195,7 @@ def _item_card(item: StockItem, key: str = "") -> rx.Component:
                 item["organic"],
                 rx.el.span(
                     "AB",
-                    class_name="rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#e4ff9b] w-fit ml-auto",
+                    class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.40)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-1.5 py-0.5 text-[9px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit ml-auto",
                 ),
                 rx.fragment(),
             ),
@@ -203,23 +203,23 @@ def _item_card(item: StockItem, key: str = "") -> rx.Component:
         ),
         rx.el.p(
             item["name"],
-            class_name="text-sm font-semibold text-[#f2efe4] mt-2 truncate",
+            class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] mt-2 truncate",
         ),
         rx.el.p(
             f"{item['stock']:.1f} {item['unit']} en stock · seuil {item['threshold']:.1f} {item['unit']} · {item['supplier']}",
-            class_name="text-[11px] font-medium text-[#c9c5b4]/55 mt-1",
+            class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] mt-1",
         ),
         rx.el.div(
             rx.el.div(
                 class_name=rx.match(
                     item["severity"],
-                    ("bad", "h-full rounded-none bg-[#ff6b5a]"),
-                    ("warn", "h-full rounded-none bg-[#ff8a5b]"),
-                    "h-full rounded-none bg-[#d8fa5e]",
+                    ("bad", "h-full rounded-none bg-[rgb(var(--ap-danger-rgb))]"),
+                    ("warn", "h-full rounded-none bg-[rgb(var(--ap-flame-soft-rgb))]"),
+                    "h-full rounded-none bg-[rgb(var(--ap-accent-rgb))]",
                 ),
                 style={"width": item["coverage_pct"]},
             ),
-            class_name="h-1.5 w-full rounded-none bg-[#20241a] mt-3",
+            class_name="h-1.5 w-full rounded-none bg-[rgb(var(--ap-surface-control-rgb))] mt-3",
         ),
         rx.el.div(
             rx.el.span(
@@ -239,7 +239,7 @@ def _item_card(item: StockItem, key: str = "") -> rx.Component:
             ),
             rx.el.span(
                 f"Commande conseillée {item['order_quantity']:.1f} {item['unit']} · {item['order_cost']:.0f} €",
-                class_name="rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit whitespace-nowrap",
+                class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit whitespace-nowrap",
             ),
             class_name="flex flex-wrap items-center gap-1.5 w-full mt-3",
         ),
@@ -308,13 +308,13 @@ def _item_card(item: StockItem, key: str = "") -> rx.Component:
             item["severity"],
             (
                 "bad",
-                "w-full rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/[0.07] p-4",
+                "w-full rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb))]/[0.07] p-4",
             ),
             (
                 "warn",
-                "w-full rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/[0.06] p-4",
+                "w-full rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.25)] bg-[rgb(var(--ap-flame-soft-rgb))]/[0.06] p-4",
             ),
-            "border-t border-[#F2EFE4]/12 w-full pt-4",
+            "border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-4",
         ),
     )
 
@@ -322,14 +322,14 @@ def _item_card(item: StockItem, key: str = "") -> rx.Component:
 def _job_row(job: PlannedJob, key: str = "") -> rx.Component:
     return rx.el.li(
         rx.el.div(
-            rx.icon("spray-can", class_name="h-3.5 w-3.5 text-[#d8fa5e]"),
-            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10",
+            rx.icon("spray-can", class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb))]"),
+            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)]",
         ),
         rx.el.div(
             rx.el.div(
                 rx.el.p(
                     job["title"],
-                    class_name="text-[12px] font-semibold text-[#f2efe4] truncate",
+                    class_name="text-[12px] font-semibold text-[rgb(var(--ap-paper-rgb))] truncate",
                 ),
                 rx.cond(
                     job["is_late"],
@@ -338,48 +338,48 @@ def _job_row(job: PlannedJob, key: str = "") -> rx.Component:
                 ),
                 rx.el.span(
                     job["date_label"],
-                    class_name="text-[10px] font-medium text-[#c9c5b4]/65 ml-auto shrink-0",
+                    class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] ml-auto shrink-0",
                 ),
                 class_name="flex flex-wrap items-center gap-2 w-full min-w-0",
             ),
             rx.el.p(
                 f"{job['parcel']} · {job['crop']} — {job['dose']:.2f} {job['unit']}/ha sur {job['area']:.1f} ha, soit {job['quantity']:.1f} {job['unit']}",
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-1 leading-relaxed",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-1 leading-relaxed",
             ),
             class_name="min-w-0 flex-1",
         ),
         key=key,
-        class_name="flex items-start gap-3 w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-3",
+        class_name="flex items-start gap-3 w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-soft-rgb))] p-3",
     )
 
 
 def _log_row(entry: StockLog, key: str = "") -> rx.Component:
     return rx.el.li(
         rx.el.div(
-            rx.icon(entry["icon"], class_name="h-3.5 w-3.5 text-[#d8fa5e]"),
-            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10",
+            rx.icon(entry["icon"], class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb))]"),
+            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)]",
         ),
         rx.el.div(
             rx.el.div(
                 rx.el.p(
                     entry["target_label"],
-                    class_name="text-[12px] font-semibold text-[#f2efe4] truncate",
+                    class_name="text-[12px] font-semibold text-[rgb(var(--ap-paper-rgb))] truncate",
                 ),
                 _badge(entry["tone"], entry["action_label"]),
                 rx.el.span(
                     entry["date_label"],
-                    class_name="text-[10px] font-medium text-[#c9c5b4]/65 ml-auto shrink-0",
+                    class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] ml-auto shrink-0",
                 ),
                 class_name="flex flex-wrap items-center gap-2 w-full min-w-0",
             ),
             rx.el.p(
                 f"{entry['author']} — {entry['note']}",
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-1 leading-relaxed",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-1 leading-relaxed",
             ),
             class_name="min-w-0 flex-1",
         ),
         key=key,
-        class_name="flex items-start gap-3 w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-3",
+        class_name="flex items-start gap-3 w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-soft-rgb))] p-3",
     )
 
 
@@ -389,11 +389,11 @@ def _selection_block() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Détail de l'intrant",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h3(
                     StockState.selected_label,
-                    class_name="ap-serif text-2xl text-[#f2efe4] mt-0.5",
+                    class_name="ap-serif text-2xl text-[rgb(var(--ap-paper-rgb))] mt-0.5",
                 ),
                 class_name="min-w-0 flex-1",
             ),
@@ -401,7 +401,7 @@ def _selection_block() -> rx.Component:
                 rx.icon("x", class_name="h-3.5 w-3.5"),
                 type="button",
                 on_click=StockState.clear_selection,
-                class_name="flex h-7 w-7 shrink-0 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/60 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors",
+                class_name="flex h-7 w-7 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] text-[rgb(var(--ap-paper-muted-rgb)/0.82)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors",
             ),
             class_name="flex items-start gap-3 w-full",
         ),
@@ -409,7 +409,7 @@ def _selection_block() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Chantiers exposés",
-                    class_name="ap-eyebrow text-[#c9c5b4]/65",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 rx.cond(
                     StockState.has_selected_jobs,
@@ -424,15 +424,15 @@ def _selection_block() -> rx.Component:
                     ),
                     rx.el.p(
                         "Aucun chantier programmé ne consomme cet intrant : la commande peut attendre la prochaine tournée.",
-                        class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-3 leading-relaxed",
+                        class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-3 leading-relaxed",
                     ),
                 ),
-                class_name="border-t border-[#F2EFE4]/12 flex-1 min-w-0 pt-4",
+                class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] flex-1 min-w-0 pt-4",
             ),
             rx.el.div(
                 rx.el.span(
                     "Historique des décisions",
-                    class_name="ap-eyebrow text-[#c9c5b4]/65",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 rx.cond(
                     StockState.has_selected_history,
@@ -447,14 +447,14 @@ def _selection_block() -> rx.Component:
                     ),
                     rx.el.p(
                         "Aucune décision consignée pour cet intrant.",
-                        class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-3",
+                        class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-3",
                     ),
                 ),
-                class_name="border-t border-[#F2EFE4]/12 w-full xl:w-[26rem] shrink-0 pt-4",
+                class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full xl:w-[26rem] shrink-0 pt-4",
             ),
             class_name="flex flex-col xl:flex-row gap-3 w-full mt-4",
         ),
-        class_name="w-full rounded-none border border-[#d8fa5e]/20 bg-[#d8fa5e]/[0.04] p-5 mt-4",
+        class_name="w-full rounded-none border border-[rgb(var(--ap-accent-rgb)/0.20)] bg-[rgb(var(--ap-accent-rgb))]/[0.04] p-5 mt-4",
     )
 
 
@@ -497,15 +497,15 @@ def stock_control_panel() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Sous-module Stocks · arbitrage magasin",
-                    class_name="ap-eyebrow text-[#ff8a5b]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-flame-soft-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Piloter les intrants sous seuil",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 rx.el.p(
                     "Pour chaque intrant : couverture réelle, chantiers programmés exposés, quantité et coût de commande conseillés, puis décision consignée — commande engagée, chantier reporté ou stock suffisant.",
-                    class_name="text-sm font-medium text-[#c9c5b4]/55 mt-2 max-w-3xl",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] mt-2 max-w-3xl",
                 ),
                 class_name="min-w-0",
             ),
@@ -513,23 +513,23 @@ def stock_control_panel() -> rx.Component:
                 _badge(StockState.verdict_tone, StockState.verdict_label),
                 rx.el.span(
                     StockState.today_label,
-                    class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-semibold text-[#c9c5b4]/65 w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit",
                 ),
                 rx.el.button(
                     rx.cond(
                         StockState.is_loading,
                         rx.icon(
                             "loader-circle",
-                            class_name="h-4 w-4 animate-spin text-[#0A0A08]",
+                            class_name="h-4 w-4 animate-spin text-[rgb(var(--ap-ink-rgb))]",
                         ),
                         rx.icon(
-                            "refresh-cw", class_name="h-4 w-4 text-[#0A0A08]"
+                            "refresh-cw", class_name="h-4 w-4 text-[rgb(var(--ap-ink-rgb))]"
                         ),
                     ),
-                    rx.el.span("Recalculer", class_name="text-[#0A0A08]"),
+                    rx.el.span("Recalculer", class_name="text-[rgb(var(--ap-ink-rgb))]"),
                     type="button",
                     on_click=StockState.load_stocks,
-                    class_name="ap-mono inline-flex w-fit items-center gap-2 bg-[#D8FA5E] px-4 py-2.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[#0A0A08] transition-colors hover:bg-[#E4FF9B]",
+                    class_name="ap-mono inline-flex w-fit items-center gap-2 bg-[rgb(var(--ap-accent-rgb))] px-4 py-2.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[rgb(var(--ap-ink-rgb))] transition-colors hover:bg-[rgb(var(--ap-accent-soft-rgb))]",
                 ),
                 help_icon_button("traitements"),
                 class_name="flex flex-wrap items-center gap-2 md:justify-end",
@@ -538,7 +538,7 @@ def stock_control_panel() -> rx.Component:
         ),
         rx.el.p(
             StockState.verdict_detail,
-            class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-3",
+            class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-3",
         ),
         _summary_tiles(),
         rx.el.div(
@@ -563,12 +563,12 @@ def stock_control_panel() -> rx.Component:
                 class_name="grid grid-cols-1 xl:grid-cols-2 gap-3 w-full mt-4",
             ),
             rx.el.div(
-                rx.icon("shield-check", class_name="h-6 w-6 text-[#d8fa5e]"),
+                rx.icon("shield-check", class_name="h-6 w-6 text-[rgb(var(--ap-accent-rgb))]"),
                 rx.el.p(
                     "Aucun intrant dans cette vue : le magasin couvre les chantiers programmés.",
-                    class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] mt-2",
                 ),
-                class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-12 w-full mt-4",
+                class_name="flex flex-col items-center justify-center rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))] py-12 w-full mt-4",
             ),
         ),
         rx.cond(StockState.has_selection, _selection_block(), rx.fragment()),
@@ -577,7 +577,7 @@ def stock_control_panel() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Journal des décisions d'intrants",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.ul(
                     rx.foreach(
@@ -588,14 +588,14 @@ def stock_control_panel() -> rx.Component:
                     ),
                     class_name="flex flex-col gap-2 w-full mt-3",
                 ),
-                class_name="w-full mt-6 border-t border-[#f2efe4]/12 pt-5",
+                class_name="w-full mt-6 border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-5",
             ),
             rx.el.p(
                 "Aucune décision d'intrant consignée pour le moment.",
-                class_name="text-sm font-medium text-[#c9c5b4]/65 mt-6",
+                class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-6",
             ),
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6",
     )
 
 
@@ -606,15 +606,15 @@ def stock_diagnostic_tile() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Sous-module Stocks · état d'exploitation",
-                    class_name="ap-eyebrow text-[#ff8a5b]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-flame-soft-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Intrants sous seuil et arbitrages",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 rx.el.p(
                     StockState.verdict_detail,
-                    class_name="text-sm font-medium text-[#c9c5b4]/55 mt-2 max-w-2xl",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] mt-2 max-w-2xl",
                 ),
                 class_name="min-w-0",
             ),
@@ -656,8 +656,8 @@ def stock_diagnostic_tile() -> rx.Component:
             ),
             rx.el.p(
                 "Aucune décision d'intrant consignée : les tensions restent à arbitrer.",
-                class_name="text-sm font-medium text-[#c9c5b4]/65 mt-5",
+                class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-5",
             ),
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6",
     )

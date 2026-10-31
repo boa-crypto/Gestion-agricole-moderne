@@ -53,9 +53,9 @@ def _refresh() -> rx.Component:
         disabled=CrmState.is_loading,
         class_name=(
             "ap-mono inline-flex w-fit items-center justify-center gap-2 border "
-            "border-[#D8FA5E] bg-[#D8FA5E] px-3.5 py-2.5 text-[10px] uppercase "
-            "tracking-[0.18em] text-[#0A0A08] transition-colors "
-            "hover:border-[#E4FF9B] hover:bg-[#E4FF9B] "
+            "border-[rgb(var(--ap-accent-rgb))] bg-[rgb(var(--ap-accent-rgb))] px-3.5 py-2.5 text-[10px] uppercase "
+            "tracking-[0.18em] text-[rgb(var(--ap-ink-rgb))] transition-colors "
+            "hover:border-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-soft-rgb))] "
             "disabled:cursor-not-allowed disabled:opacity-45"
         ),
     )

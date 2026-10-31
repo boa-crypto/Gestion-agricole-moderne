@@ -22,21 +22,21 @@ def _tone_badge(tone: rx.Var, label: rx.Var | str) -> rx.Component:
             tone,
             (
                 "good",
-                "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit",
+                "rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
             ),
             (
                 "warn",
-                "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 text-[10px] font-bold text-[#ffb894] w-fit",
+                "rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit",
             ),
             (
                 "bad",
-                "rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2 py-0.5 text-[10px] font-bold text-[#ff9b8c] w-fit",
+                "rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-danger-soft-rgb))] w-fit",
             ),
             (
                 "info",
-                "rounded-none border border-[#9cc3ff]/30 bg-[#9cc3ff]/10 px-2 py-0.5 text-[10px] font-bold text-[#c3daff] w-fit",
+                "rounded-none border border-[rgb(var(--ap-info-rgb)/0.30)] bg-[rgb(var(--ap-info-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-info-soft-rgb))] w-fit",
             ),
-            "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/65 w-fit",
+            "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit",
         ),
     )
 
@@ -44,18 +44,18 @@ def _tone_badge(tone: rx.Var, label: rx.Var | str) -> rx.Component:
 def _fact(label: str, value: rx.Var | str, icon: str) -> rx.Component:
     return rx.el.div(
         rx.el.div(
-            rx.icon(icon, class_name="h-3.5 w-3.5 text-[#d8fa5e]/80"),
+            rx.icon(icon, class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb)/0.80)]"),
             rx.el.span(
                 label,
-                class_name="ap-eyebrow text-[#c9c5b4]/65",
+                class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             class_name="flex items-center gap-2",
         ),
         rx.el.p(
             value,
-            class_name="text-sm font-semibold text-[#f2efe4] mt-1.5 truncate",
+            class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] mt-1.5 truncate",
         ),
-        class_name="w-full min-w-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-3",
+        class_name="w-full min-w-0 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))] p-3",
     )
 
 
@@ -64,15 +64,15 @@ def _header() -> rx.Component:
         rx.el.div(
             rx.el.span(
                 "Suivi phénologique",
-                class_name="ap-eyebrow text-[#d8fa5e]/80",
+                class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
             ),
             rx.el.h3(
                 "Cycle de la culture",
-                class_name="ap-serif text-2xl text-[#f2efe4] mt-1",
+                class_name="ap-serif text-2xl text-[rgb(var(--ap-paper-rgb))] mt-1",
             ),
             rx.el.p(
                 f"{PhenologyState.parcel_label} · {PhenologyState.summary['culture_name']}",
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-1",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-1",
             ),
             class_name="min-w-0",
         ),
@@ -88,11 +88,11 @@ def _header() -> rx.Component:
                     ),
                     value=PhenologyState.selected_crop_id.to_string(),
                     on_change=PhenologyState.select_crop,
-                    class_name="w-full appearance-none cursor-pointer rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2 pl-3 pr-9 text-xs font-medium text-[#f2efe4] focus:border-[#d8fa5e]/50 outline-hidden",
+                    class_name="w-full appearance-none cursor-pointer rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] py-2 pl-3 pr-9 text-xs font-medium text-[rgb(var(--ap-paper-rgb))] focus:border-[rgb(var(--ap-accent-rgb)/0.50)] outline-hidden",
                 ),
                 rx.icon(
                     "chevron-down",
-                    class_name="absolute right-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#c9c5b4]/65 pointer-events-none",
+                    class_name="absolute right-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
                 ),
                 class_name="relative w-full sm:w-72",
             ),
@@ -101,16 +101,16 @@ def _header() -> rx.Component:
                     PhenologyState.is_loading,
                     rx.icon(
                         "loader-circle",
-                        class_name="h-3.5 w-3.5 animate-spin text-[#c9c5b4]/70",
+                        class_name="h-3.5 w-3.5 animate-spin text-[rgb(var(--ap-paper-muted-rgb)/0.90)]",
                     ),
                     rx.icon(
                         "refresh-cw",
-                        class_name="h-3.5 w-3.5 text-[#c9c5b4]/70",
+                        class_name="h-3.5 w-3.5 text-[rgb(var(--ap-paper-muted-rgb)/0.90)]",
                     ),
                 ),
                 rx.el.span("Actualiser", class_name="text-[11px]"),
                 on_click=PhenologyState.load_phenology,
-                class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1.5 font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
+                class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1.5 font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit",
             ),
             class_name="flex flex-wrap items-center gap-2 lg:justify-end",
         ),
@@ -122,10 +122,10 @@ def _profile_block() -> rx.Component:
     return rx.el.div(
         rx.el.div(
             rx.el.div(
-                rx.icon("git-branch", class_name="h-4 w-4 text-[#d8fa5e]"),
+                rx.icon("git-branch", class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
                 rx.el.span(
                     PhenologyState.summary["profile_name"],
-                    class_name="text-sm font-semibold text-[#f2efe4]",
+                    class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))]",
                 ),
                 class_name="flex items-center gap-2 min-w-0",
             ),
@@ -145,11 +145,11 @@ def _profile_block() -> rx.Component:
             PhenologyState.summary["profile_summary"] != "",
             rx.el.p(
                 PhenologyState.summary["profile_summary"],
-                class_name="text-[11px] font-medium text-[#c9c5b4]/55 mt-2 leading-relaxed",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] mt-2 leading-relaxed",
             ),
             rx.fragment(),
         ),
-        class_name="w-full border-t border-[#F2EFE4]/12 pt-4",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-4",
     )
 
 
@@ -221,30 +221,30 @@ def _status_line() -> rx.Component:
 def _reco_card(reco: RecoRow) -> rx.Component:
     return rx.el.div(
         rx.el.div(
-            rx.icon(reco["icon"], class_name="h-3.5 w-3.5 text-[#d8fa5e]"),
+            rx.icon(reco["icon"], class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb))]"),
             rx.el.span(
                 reco["domain_label"],
-                class_name="ap-eyebrow text-[#c9c5b4]/65",
+                class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             class_name="flex items-center gap-2",
         ),
         rx.el.p(
             reco["title"],
-            class_name="text-sm font-semibold text-[#f2efe4] mt-1.5",
+            class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] mt-1.5",
         ),
         rx.el.p(
             reco["statement"],
-            class_name="text-[11px] font-medium text-[#c9c5b4]/60 mt-1.5 leading-relaxed",
+            class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] mt-1.5 leading-relaxed",
         ),
         rx.el.div(
             _tone_badge("info", reco["confidence_label"]),
             rx.el.span(
                 reco["source"],
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65 truncate",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] truncate",
             ),
-            class_name="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-[#f2efe4]/8",
+            class_name="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-[rgb(var(--ap-paper-rgb)/0.12)]",
         ),
-        class_name="w-full border-t border-[#F2EFE4]/8 pt-4",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.12)] pt-4",
     )
 
 
@@ -253,11 +253,11 @@ def _recommendations() -> rx.Component:
         rx.el.div(
             rx.el.span(
                 "Opérations généralement associées",
-                class_name="ap-eyebrow text-[#d8fa5e]/80",
+                class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
             ),
             rx.el.span(
                 "Informations indicatives, jamais prescriptives",
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65 ml-auto",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] ml-auto",
             ),
             class_name="flex flex-wrap items-center gap-3 w-full",
         ),
@@ -272,33 +272,33 @@ def _recommendations() -> rx.Component:
             ),
             rx.el.p(
                 "Aucune opération associée à ce stade dans le référentiel.",
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-3",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-3",
             ),
         ),
-        class_name="w-full border-t border-[#F2EFE4]/12 pt-4 mt-4",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-4 mt-4",
     )
 
 
 def _guide_card(link: GuideLink) -> rx.Component:
     return rx.el.a(
         rx.el.div(
-            rx.icon("book-open", class_name="h-3.5 w-3.5 text-[#d8fa5e]"),
+            rx.icon("book-open", class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb))]"),
             rx.el.span(
                 link["title"],
-                class_name="text-[12px] font-semibold text-[#f2efe4] truncate",
+                class_name="text-[12px] font-semibold text-[rgb(var(--ap-paper-rgb))] truncate",
             ),
             rx.icon(
                 "arrow-up-right",
-                class_name="h-3 w-3 shrink-0 text-[#c9c5b4]/60 ml-auto",
+                class_name="h-3 w-3 shrink-0 text-[rgb(var(--ap-paper-muted-rgb)/0.82)] ml-auto",
             ),
             class_name="flex items-center gap-2 w-full min-w-0",
         ),
         rx.el.p(
             link["subtitle"],
-            class_name="text-[10px] font-medium text-[#c9c5b4]/65 mt-1.5 leading-relaxed",
+            class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-1.5 leading-relaxed",
         ),
         href=link["route"],
-        class_name="block w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-3 hover:border-[#d8fa5e]/25 hover:bg-[#16190f] transition-colors",
+        class_name="block w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-soft-rgb))] p-3 hover:border-[rgb(var(--ap-accent-rgb)/0.25)] hover:bg-[rgb(var(--ap-surface-muted-rgb))] transition-colors",
     )
 
 
@@ -306,7 +306,7 @@ def _guide_block() -> rx.Component:
     return rx.el.div(
         rx.el.span(
             "Comprendre ce stade — Guide Agricole",
-            class_name="ap-eyebrow text-[#d8fa5e]/80",
+            class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
         ),
         rx.cond(
             PhenologyState.guide_links.length() > 0,
@@ -319,10 +319,10 @@ def _guide_block() -> rx.Component:
             ),
             rx.el.p(
                 "Aucun article du Guide rattaché pour l'instant.",
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-3",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-3",
             ),
         ),
-        class_name="w-full border-t border-[#F2EFE4]/12 pt-4 mt-4",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-4 mt-4",
     )
 
 
@@ -331,7 +331,7 @@ def _observation_row(obs: ObsRow) -> rx.Component:
         rx.el.div(
             rx.el.span(
                 obs["stage_name"],
-                class_name="rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
             ),
             _tone_badge(obs["status_tone"], obs["status_label"]),
             _tone_badge("muted", obs["source_label"]),
@@ -341,13 +341,13 @@ def _observation_row(obs: ObsRow) -> rx.Component:
                     f"{obs['date_label']} · {obs['time_label']}",
                     obs["date_label"],
                 ),
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65 ml-auto shrink-0",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] ml-auto shrink-0",
             ),
             class_name="flex flex-wrap items-center gap-2 w-full",
         ),
         rx.el.p(
             obs["comment"],
-            class_name="text-[11px] font-medium text-[#c9c5b4]/60 mt-2 leading-relaxed",
+            class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] mt-2 leading-relaxed",
         ),
         rx.el.div(
             rx.cond(
@@ -388,18 +388,18 @@ def _observation_row(obs: ObsRow) -> rx.Component:
             class_name="flex flex-wrap items-center gap-1.5 mt-2",
         ),
         rx.el.div(
-            rx.icon("user-round", class_name="h-3 w-3 text-[#a9c98b]/70"),
+            rx.icon("user-round", class_name="h-3 w-3 text-[rgb(var(--ap-sage-rgb)/0.70)]"),
             rx.el.span(
                 obs["observer"],
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             rx.el.span(
                 f"{obs['progress']}% du cycle",
-                class_name="text-[10px] font-bold text-[#e4ff9b] ml-auto",
+                class_name="text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] ml-auto",
             ),
-            class_name="flex items-center gap-1.5 mt-2 pt-2 border-t border-[#f2efe4]/8",
+            class_name="flex items-center gap-1.5 mt-2 pt-2 border-t border-[rgb(var(--ap-paper-rgb)/0.12)]",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-3",
+        class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-soft-rgb))] p-3",
     )
 
 
@@ -407,7 +407,7 @@ def _history_row(item: HistoryRow) -> rx.Component:
     return rx.el.div(
         rx.el.div(
             rx.el.span(
-                class_name="h-2.5 w-2.5 rounded-none bg-[#d8fa5e] ring-4 ring-[#d8fa5e]/15"
+                class_name="h-2.5 w-2.5 rounded-none bg-[rgb(var(--ap-accent-rgb))] ring-4 ring-[rgb(var(--ap-accent-rgb)/0.15)]"
             ),
             class_name="relative flex flex-col items-center pt-1.5",
         ),
@@ -415,31 +415,31 @@ def _history_row(item: HistoryRow) -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     item["previous_stage"],
-                    class_name="text-[11px] font-medium text-[#c9c5b4]/65",
+                    class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 rx.icon(
                     "arrow-right",
-                    class_name="h-3 w-3 text-[#c9c5b4]/60",
+                    class_name="h-3 w-3 text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
                 ),
                 rx.el.span(
                     item["new_stage"],
-                    class_name="text-xs font-semibold text-[#f2efe4]",
+                    class_name="text-xs font-semibold text-[rgb(var(--ap-paper-rgb))]",
                 ),
                 rx.el.span(
                     item["date_label"],
-                    class_name="text-[10px] font-medium text-[#c9c5b4]/65 ml-auto shrink-0",
+                    class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] ml-auto shrink-0",
                 ),
                 class_name="flex flex-wrap items-center gap-2 min-w-0",
             ),
             rx.el.p(
                 item["comment"],
-                class_name="text-[11px] font-medium text-[#c9c5b4]/55 mt-1 leading-relaxed",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] mt-1 leading-relaxed",
             ),
             rx.el.div(
-                rx.icon("user-round", class_name="h-3 w-3 text-[#a9c98b]/70"),
+                rx.icon("user-round", class_name="h-3 w-3 text-[rgb(var(--ap-sage-rgb)/0.70)]"),
                 rx.el.span(
                     item["author"],
-                    class_name="text-[10px] font-medium text-[#c9c5b4]/65",
+                    class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 class_name="flex items-center gap-1.5 mt-1.5",
             ),
@@ -455,11 +455,11 @@ def _journal() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Observations consignées",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.span(
                     f"{PhenologyState.observation_count} observation(s)",
-                    class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2.5 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/60 w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2.5 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit",
                 ),
                 class_name="flex flex-wrap items-center gap-2",
             ),
@@ -474,32 +474,32 @@ def _journal() -> rx.Component:
                 ),
                 rx.el.p(
                     "Aucune observation pour cette culture : consignez le premier stade.",
-                    class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-3",
+                    class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-3",
                 ),
             ),
-            class_name="flex-1 min-w-0 border-t border-[#F2EFE4]/12 pt-4",
+            class_name="flex-1 min-w-0 border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-4",
         ),
         rx.el.div(
             rx.el.div(
                 rx.el.span(
                     "Historique des changements",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.span(
                     f"{PhenologyState.history_count} changement(s)",
-                    class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2.5 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/60 w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2.5 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit",
                 ),
                 class_name="flex flex-wrap items-center gap-2",
             ),
             rx.el.p(
                 "L'historique est conservé intégralement : aucune correction n'efface le passé.",
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65 mt-1.5",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-1.5",
             ),
             rx.cond(
                 PhenologyState.history.length() > 0,
                 rx.el.div(
                     rx.el.div(
-                        class_name="absolute left-[5px] top-2 bottom-2 w-px bg-gradient-to-b from-[#d8fa5e]/50 via-[#8fb37a]/25 to-transparent",
+                        class_name="absolute left-[5px] top-2 bottom-2 w-px bg-gradient-to-b from-[rgb(var(--ap-accent-rgb)/0.50)] via-[rgb(var(--ap-sage-soft-rgb)/0.25)] to-transparent",
                     ),
                     rx.foreach(
                         PhenologyState.history,
@@ -509,10 +509,10 @@ def _journal() -> rx.Component:
                 ),
                 rx.el.p(
                     "Aucun changement de stade enregistré.",
-                    class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-3",
+                    class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-3",
                 ),
             ),
-            class_name="w-full xl:w-[26rem] shrink-0 border-t border-[#F2EFE4]/12 pt-4 xl:border-l xl:border-l-[#F2EFE4]/8 xl:pl-4",
+            class_name="w-full xl:w-[26rem] shrink-0 border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-4 xl:border-l xl:border-l-[rgb(var(--ap-paper-rgb)/0.08)] xl:pl-4",
         ),
         class_name="flex flex-col xl:flex-row gap-4 w-full mt-4",
     )
@@ -527,19 +527,19 @@ def _skeleton() -> rx.Component:
 
 def _empty() -> rx.Component:
     return rx.el.div(
-        rx.icon("sprout", class_name="h-6 w-6 text-[#d8fa5e]"),
+        rx.icon("sprout", class_name="h-6 w-6 text-[rgb(var(--ap-accent-rgb))]"),
         rx.el.p(
             "Aucun profil phénologique n'est rattaché à cette culture : reliez-la "
             "à une variété du référentiel pour activer le suivi des stades.",
-            class_name="text-sm font-medium text-[#c9c5b4]/55 mt-3 text-center max-w-lg",
+            class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] mt-3 text-center max-w-lg",
         ),
         rx.el.a(
-            rx.el.span("Ouvrir le référentiel", class_name="text-[#e4ff9b]"),
-            rx.icon("arrow-up-right", class_name="h-3.5 w-3.5 text-[#e4ff9b]"),
+            rx.el.span("Ouvrir le référentiel", class_name="text-[rgb(var(--ap-accent-soft-rgb))]"),
+            rx.icon("arrow-up-right", class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-soft-rgb))]"),
             href="/referentiel",
-            class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-3 py-1.5 text-[11px] font-semibold hover:bg-[#d8fa5e]/20 transition-colors w-fit mt-4",
+            class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1.5 text-[11px] font-semibold hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors w-fit mt-4",
         ),
-        class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] py-14 w-full mt-4",
+        class_name="flex flex-col items-center justify-center rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-soft-rgb))] py-14 w-full mt-4",
     )
 
 
@@ -565,5 +565,5 @@ def phenology_panel() -> rx.Component:
                 _empty(),
             ),
         ),
-        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-6",
     )

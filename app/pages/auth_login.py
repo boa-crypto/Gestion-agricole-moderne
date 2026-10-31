@@ -32,9 +32,9 @@ def provider_button(provider) -> rx.Component:
         rx.el.button(
             _LOGIN_LABEL,
             class_name=(
-                "ap-mono w-full border border-[#D8FA5E] bg-[#D8FA5E] px-6 py-3.5 "
-                "text-[10px] uppercase tracking-[0.22em] text-[#0A0A08] "
-                "transition-colors hover:bg-[#E4FF9B]"
+                "ap-mono w-full border border-[rgb(var(--ap-accent-rgb))] bg-[rgb(var(--ap-accent-rgb))] px-6 py-3.5 "
+                "text-[10px] uppercase tracking-[0.22em] text-[rgb(var(--ap-ink-rgb))] "
+                "transition-colors hover:bg-[rgb(var(--ap-accent-soft-rgb))]"
             ),
         ),
     )
@@ -45,16 +45,16 @@ def login_page(*, providers: Sequence, **context) -> rx.Component:
         rx.el.main(
             rx.el.div(
                 rx.el.div(
-                    rx.el.span(class_name="h-2 w-2 bg-[#D8FA5E]"),
+                    rx.el.span(class_name="h-2 w-2 bg-[rgb(var(--ap-accent-rgb))]"),
                     rx.el.span(
                         "AgriPro",
-                        class_name="ap-serif text-2xl text-[#F2EFE4]",
+                        class_name="ap-serif text-2xl text-[rgb(var(--ap-paper-rgb))]",
                     ),
                     rx.el.span(
                         "Édition agronomique",
                         class_name=(
-                            "ap-mono ml-4 hidden border-l border-[#F2EFE4]/16 pl-4 "
-                            "text-[9px] uppercase tracking-[0.26em] text-[#C9C5B4]/65 sm:block"
+                            "ap-mono ml-4 hidden border-l border-[rgb(var(--ap-paper-rgb)/0.24)] pl-4 "
+                            "text-[9px] uppercase tracking-[0.26em] text-[rgb(var(--ap-paper-muted-rgb)/0.86)] sm:block"
                         ),
                     ),
                     class_name="flex items-center",
@@ -63,13 +63,13 @@ def login_page(*, providers: Sequence, **context) -> rx.Component:
                     eyebrow("Accès partenaire", tone="accent", class_name="mt-16"),
                     rx.el.h1(
                         rx.el.span("Bienvenue dans "),
-                        rx.el.span("l'édition", class_name="ap-italic text-[#D8FA5E]"),
-                        class_name="ap-display mt-6 text-[clamp(2.6rem,5vw,4rem)] text-[#F2EFE4]",
+                        rx.el.span("l'édition", class_name="ap-italic text-[rgb(var(--ap-accent-rgb))]"),
+                        class_name="ap-display mt-6 text-[clamp(2.6rem,5vw,4rem)] text-[rgb(var(--ap-paper-rgb))]",
                     ),
                     rx.el.p(
                         "Identifiez-vous pour ouvrir votre exploitation, ses "
                         "parcelles et ses registres.",
-                        class_name="mt-5 max-w-md text-[13px] leading-relaxed text-[#C9C5B4]/70",
+                        class_name="mt-5 max-w-md text-[13px] leading-relaxed text-[rgb(var(--ap-paper-muted-rgb)/0.90)]",
                     ),
                     rx.el.div(
                         *map(provider_button, providers),
@@ -83,7 +83,7 @@ def login_page(*, providers: Sequence, **context) -> rx.Component:
                         "Session vérifiée avant tout chargement métier",
                         class_name=(
                             "ap-mono pt-5 text-[9px] uppercase tracking-[0.24em] "
-                            "text-[#C9C5B4]/60"
+                            "text-[rgb(var(--ap-paper-muted-rgb)/0.82)]"
                         ),
                     ),
                     class_name="mt-16 w-full max-w-md",
@@ -95,20 +95,20 @@ def login_page(*, providers: Sequence, **context) -> rx.Component:
                 rx.el.p(
                     rx.el.span("La terre,\n"),
                     rx.el.span("tenue comme "),
-                    rx.el.span("un livre.", class_name="ap-italic text-[#D8FA5E]"),
+                    rx.el.span("un livre.", class_name="ap-italic text-[rgb(var(--ap-accent-rgb))]"),
                     class_name=(
                         "ap-display mt-8 whitespace-pre-line "
-                        "text-[clamp(2.6rem,4.4vw,4.4rem)] text-[#F2EFE4]"
+                        "text-[clamp(2.6rem,4.4vw,4.4rem)] text-[rgb(var(--ap-paper-rgb))]"
                     ),
                 ),
                 class_name=(
                     "hidden w-[46%] shrink-0 flex-col justify-center border-l "
-                    "border-[#F2EFE4]/12 bg-[#0D0F09] p-10 lg:flex xl:p-14"
+                    "border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-soft-rgb))] p-10 lg:flex xl:p-14"
                 ),
             ),
             class_name=(
-                "flex min-h-dvh w-full items-stretch justify-center bg-[#0A0A08] "
-                "font-['Inter_Tight'] text-[#F2EFE4] antialiased"
+                "flex min-h-dvh w-full items-stretch justify-center bg-[rgb(var(--ap-ink-rgb))] "
+                "font-['Inter_Tight'] text-[rgb(var(--ap-paper-rgb))] antialiased"
             ),
         ),
         rx.cond(

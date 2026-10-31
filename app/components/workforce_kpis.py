@@ -19,8 +19,8 @@ def _tile(
 
 def _section_title() -> rx.Component:
     return rx.el.div(
-        rx.icon("users-round", class_name="h-4 w-4 text-[#d8fa5e]"),
-        rx.el.span("Indicateurs RH", class_name="ap-eyebrow text-[#c9c5b4]/55"),
+        rx.icon("users-round", class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
+        rx.el.span("Indicateurs RH", class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.78)]"),
         class_name="flex w-full items-center gap-2",
     )
 
@@ -35,7 +35,7 @@ def workforce_kpis() -> rx.Component:
                 "personnes",
                 f"{EmployeesState.kpis['active']:.0f} en poste aujourd'hui",
                 "users-round",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             _tile(
                 "Absences",
@@ -43,7 +43,7 @@ def workforce_kpis() -> rx.Component:
                 "en cours",
                 "Congés et arrêts déclarés",
                 "user-minus",
-                "h-4 w-4 text-[#ff8a5b]",
+                "h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]",
             ),
             _tile(
                 "Capacité hebdo",
@@ -51,7 +51,7 @@ def workforce_kpis() -> rx.Component:
                 "h/sem",
                 "Volume contractuel cumulé",
                 "clock",
-                "h-4 w-4 text-[#a9c98b]",
+                "h-4 w-4 text-[rgb(var(--ap-sage-rgb))]",
             ),
             _tile(
                 "Masse salariale",
@@ -59,7 +59,7 @@ def workforce_kpis() -> rx.Component:
                 "€/sem",
                 "Coût direct au taux horaire",
                 "coins",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             _tile(
                 "Certiphyto",
@@ -67,7 +67,7 @@ def workforce_kpis() -> rx.Component:
                 "titulaires",
                 f"{EmployeesState.kpis['skills']:.0f} compétences référencées",
                 "badge-check",
-                "h-4 w-4 text-[#ff8a5b]",
+                "h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]",
             ),
             _tile(
                 "Affectations 7 j",
@@ -75,7 +75,7 @@ def workforce_kpis() -> rx.Component:
                 "chantiers",
                 "Missions proposées ou confirmées",
                 "calendar-clock",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             class_name=(
                 "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "

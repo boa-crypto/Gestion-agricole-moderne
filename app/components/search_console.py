@@ -10,14 +10,14 @@ from app.components.design import (
 from app.states.search_state import PeriodChip, SearchState, TypeChip
 
 _TONE_CHIP_ACTIVE: str = (
-    "flex items-center gap-2 rounded-none border border-[#d8fa5e]/45"
-    " bg-[#d8fa5e]/15 px-3 py-1.5 text-xs font-semibold text-[#efffc4]"
+    "flex items-center gap-2 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.45)]"
+    " bg-[rgb(var(--ap-accent-rgb)/0.15)] px-3 py-1.5 text-xs font-semibold text-[rgb(var(--ap-accent-pale-rgb))]"
     " transition-colors w-fit"
 )
 _TONE_CHIP_IDLE: str = (
-    "flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f]"
-    " px-3 py-1.5 text-xs font-medium text-[#c9c5b4]/60"
-    " hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit"
+    "flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))]"
+    " px-3 py-1.5 text-xs font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)]"
+    " hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit"
 )
 
 
@@ -31,7 +31,7 @@ def _search_bar() -> rx.Component:
             "search",
             class_name=(
                 "pointer-events-none absolute left-0 top-1/2 h-5 w-5 "
-                "-translate-y-1/2 text-[#D8FA5E]"
+                "-translate-y-1/2 text-[rgb(var(--ap-accent-rgb))]"
             ),
         ),
         rx.el.input(
@@ -42,10 +42,10 @@ def _search_bar() -> rx.Component:
             default_value=SearchState.term,
             on_change=SearchState.set_term.debounce(450),
             class_name=(
-                "w-full border-0 border-b border-[#F2EFE4]/20 bg-transparent "
-                "py-4 pl-8 pr-40 text-lg text-[#F2EFE4] outline-hidden "
-                "transition-colors placeholder:text-[#C9C5B4]/60 "
-                "focus:border-[#D8FA5E]"
+                "w-full border-0 border-b border-[rgb(var(--ap-paper-rgb)/0.30)] bg-transparent "
+                "py-4 pl-8 pr-40 text-lg text-[rgb(var(--ap-paper-rgb))] outline-hidden "
+                "transition-colors placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] "
+                "focus:border-[rgb(var(--ap-accent-rgb))]"
             ),
         ),
         rx.el.div(
@@ -54,13 +54,13 @@ def _search_bar() -> rx.Component:
                 rx.el.div(
                     rx.icon(
                         "loader-circle",
-                        class_name="h-3.5 w-3.5 animate-spin text-[#D8FA5E]",
+                        class_name="h-3.5 w-3.5 animate-spin text-[rgb(var(--ap-accent-rgb))]",
                     ),
                     rx.el.span(
                         "Balayage…",
                         class_name=(
                             "ap-mono text-[9px] uppercase tracking-[0.18em] "
-                            "text-[#D8FA5E]"
+                            "text-[rgb(var(--ap-accent-rgb))]"
                         ),
                     ),
                     class_name="flex items-center gap-2",
@@ -79,8 +79,8 @@ def _period_chip(chip: PeriodChip) -> rx.Component:
         on_click=SearchState.set_period(chip["value"]),
         class_name=rx.cond(
             SearchState.period == chip["value"],
-            "rounded-none border border-[#ff8a5b]/45 bg-[#ff8a5b]/15 px-3 py-1.5 text-xs font-semibold text-[#ffdccb] transition-colors w-fit",
-            "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1.5 text-xs font-medium text-[#c9c5b4]/60 hover:border-[#ff8a5b]/30 hover:text-[#f2efe4] transition-colors w-fit",
+            "rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.45)] bg-[rgb(var(--ap-flame-soft-rgb)/0.15)] px-3 py-1.5 text-xs font-semibold text-[rgb(var(--ap-warm-100-rgb))] transition-colors w-fit",
+            "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1.5 text-xs font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] hover:border-[rgb(var(--ap-flame-soft-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit",
         ),
     )
 
@@ -93,7 +93,7 @@ def _date_field(
     name: str,
 ) -> rx.Component:
     return rx.el.div(
-        rx.el.span(label, class_name="ap-eyebrow text-[#C9C5B4]/65"),
+        rx.el.span(label, class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]"),
         field(
             rx.el.input(
                 type="date",
@@ -115,8 +115,8 @@ def _type_chip(chip: TypeChip) -> rx.Component:
             chip["icon"],
             class_name=rx.cond(
                 SearchState.entity_filter == chip["value"],
-                "h-3.5 w-3.5 text-[#d8fa5e]",
-                "h-3.5 w-3.5 text-[#c9c5b4]/65",
+                "h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb))]",
+                "h-3.5 w-3.5 text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
         ),
         rx.el.span(chip["label"]),
@@ -124,8 +124,8 @@ def _type_chip(chip: TypeChip) -> rx.Component:
             chip["count"],
             class_name=rx.cond(
                 chip["count"] > 0,
-                "rounded-none bg-[#d8fa5e]/20 px-1.5 py-0.5 text-[10px] font-bold text-[#e4ff9b]",
-                "rounded-none bg-[#14160f] px-1.5 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/60",
+                "rounded-none bg-[rgb(var(--ap-accent-rgb)/0.20)] px-1.5 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))]",
+                "rounded-none bg-[rgb(var(--ap-surface-raised-rgb))] px-1.5 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
             ),
         ),
         on_click=SearchState.set_entity_filter(chip["value"]),
@@ -167,7 +167,7 @@ def search_console() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Raccourcis de période",
-                    class_name="ap-eyebrow text-[#c9c5b4]/65",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 rx.el.div(
                     rx.foreach(SearchState.period_chips, _period_chip),
@@ -186,10 +186,10 @@ def search_console() -> rx.Component:
         ),
         rx.el.div(
             rx.el.div(
-                rx.icon("filter", class_name="h-3.5 w-3.5 text-[#d8fa5e]/80"),
+                rx.icon("filter", class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb)/0.80)]"),
                 rx.el.span(
                     "Lecture par type d'actif agricole",
-                    class_name="ap-eyebrow text-[#c9c5b4]/65",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 class_name="flex items-center gap-2",
             ),
@@ -197,19 +197,19 @@ def search_console() -> rx.Component:
                 rx.foreach(SearchState.chips, _type_chip),
                 class_name="flex flex-wrap items-center gap-2 mt-3",
             ),
-            class_name="w-full mt-6 border-t border-[#F2EFE4]/12 pt-5",
+            class_name="w-full mt-6 border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-5",
         ),
         rx.cond(
             SearchState.error != "",
             rx.el.div(
                 rx.icon(
-                    "octagon-alert", class_name="h-4 w-4 text-[#ff9b8c] shrink-0"
+                    "octagon-alert", class_name="h-4 w-4 text-[rgb(var(--ap-danger-soft-rgb))] shrink-0"
                 ),
                 rx.el.p(
                     SearchState.error,
-                    class_name="text-sm font-medium text-[#ffbcb0]",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-warm-150-rgb))]",
                 ),
-                class_name="flex items-center gap-2 rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/[0.08] px-4 py-3 w-full mt-5",
+                class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb))]/[0.08] px-4 py-3 w-full mt-5",
             ),
             rx.fragment(),
         ),

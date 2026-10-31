@@ -3,8 +3,8 @@ import reflex as rx
 from app.components.guide_help import guide_error, help_icon_button
 from app.states.maintenance_state import MaintenanceState, Option
 
-_INPUT = "w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] px-3 py-2.5 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/60 focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors"
-_LABEL = "block ap-eyebrow text-[#c9c5b4]/65 mb-1.5"
+_INPUT = "w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] px-3 py-2.5 text-sm font-medium text-[rgb(var(--ap-paper-rgb))] placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] focus:border-[rgb(var(--ap-accent-rgb)/0.50)] focus:ring-2 focus:ring-[rgb(var(--ap-accent-rgb)/0.20)] outline-hidden transition-colors"
+_LABEL = "block ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mb-1.5"
 
 
 def _field(label: str, control: rx.Component, hint: str = "") -> rx.Component:
@@ -13,7 +13,7 @@ def _field(label: str, control: rx.Component, hint: str = "") -> rx.Component:
         control,
         rx.el.p(
             hint,
-            class_name="text-[10px] font-medium text-[#c9c5b4]/60 mt-1",
+            class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] mt-1",
         ),
         class_name="w-full min-w-0",
     )
@@ -52,7 +52,7 @@ def _select(
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
         ),
         class_name="relative w-full",
     )
@@ -75,16 +75,16 @@ def _modal_shell(
                 rx.el.div(
                     rx.el.div(
                         rx.el.div(
-                            rx.icon(icon, class_name="h-4 w-4 text-[#d8fa5e]"),
+                            rx.icon(icon, class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
                             rx.el.span(
                                 subtitle,
-                                class_name="ap-eyebrow text-[#d8fa5e]/80",
+                                class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                             ),
                             class_name="flex items-center gap-2",
                         ),
                         rx.el.h2(
                             title,
-                            class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                            class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                         ),
                         class_name="min-w-0 flex-1",
                     ),
@@ -98,21 +98,21 @@ def _modal_shell(
                         "Annuler",
                         type="button",
                         on_click=on_close,
-                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-5 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit",
+                        class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-5 py-2.5 text-sm font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors w-fit",
                     ),
                     rx.el.button(
-                        rx.icon("check", class_name="h-4 w-4 text-[#0A0A08]"),
-                        rx.el.span(submit_label, class_name="text-[#0A0A08]"),
+                        rx.icon("check", class_name="h-4 w-4 text-[rgb(var(--ap-ink-rgb))]"),
+                        rx.el.span(submit_label, class_name="text-[rgb(var(--ap-ink-rgb))]"),
                         type="submit",
-                        class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-5 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
+                        class_name="flex items-center gap-2 rounded-none bg-[rgb(var(--ap-accent-rgb))] px-5 py-2.5 text-sm font-semibold hover:bg-[rgb(var(--ap-accent-soft-rgb))] transition-colors w-fit",
                     ),
-                    class_name="flex items-center justify-end gap-3 mt-6 border-t border-[#f2efe4]/12 pt-5",
+                    class_name="flex items-center justify-end gap-3 mt-6 border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-5",
                 ),
                 on_submit=on_submit,
                 reset_on_submit=True,
                 class_name="w-full",
             ),
-            class_name="w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-none border border-[#f2efe4]/12 bg-[#101208]/95 p-7 ",
+            class_name="w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb)/0.95)] p-7 ",
         ),
         class_name="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 ",
     )
@@ -302,7 +302,7 @@ def _equipment_body() -> rx.Component:
         rx.el.div(
             rx.el.span(
                 "Échéances réglementaires et entretien préventif",
-                class_name="ap-eyebrow text-[#c9c5b4]/65",
+                class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             rx.el.div(
                 _field(
@@ -367,7 +367,7 @@ def _equipment_body() -> rx.Component:
                 ),
                 class_name="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-3",
             ),
-            class_name="border-t border-[#F2EFE4]/12 pt-4 mt-5",
+            class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-4 mt-5",
         ),
         _field(
             "Notes atelier",
@@ -561,19 +561,19 @@ def _operation_body() -> rx.Component:
                     ]
                     == "1",
                     key=f"mnt-internal-{MaintenanceState.form_key}",
-                    class_name="h-4 w-4 accent-[#d8fa5e] cursor-pointer",
+                    class_name="h-4 w-4 accent-[rgb(var(--ap-accent-rgb))] cursor-pointer",
                 ),
                 rx.el.span(
                     "Opération réalisée à l'atelier interne",
-                    class_name="text-sm font-medium text-[#c9c5b4]/75",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.93)]",
                 ),
                 class_name="flex items-center gap-2.5 cursor-pointer w-fit",
             ),
             rx.el.p(
                 "Si le statut est « Réalisée », les échéances de l'engin et du plan préventif sont recalculées automatiquement.",
-                class_name="text-[10px] font-medium text-[#e4ff9b]/70 mt-3",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-accent-soft-rgb)/0.70)] mt-3",
             ),
-            class_name="border-t border-[#F2EFE4]/12 pt-4 mt-5",
+            class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-4 mt-5",
         ),
         rx.el.div(
             _field(

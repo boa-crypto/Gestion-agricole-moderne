@@ -22,8 +22,8 @@ def _rail_item(item, index) -> rx.Component:
             _number(index),
             class_name=rx.cond(
                 active,
-                "ap-mono hidden w-5 shrink-0 text-[9px] tracking-[0.1em] text-[#D8FA5E] xl:block",
-                "ap-mono hidden w-5 shrink-0 text-[9px] tracking-[0.1em] text-[#C9C5B4]/60 xl:block",
+                "ap-mono hidden w-5 shrink-0 text-[9px] tracking-[0.1em] text-[rgb(var(--ap-accent-rgb))] xl:block",
+                "ap-mono hidden w-5 shrink-0 text-[9px] tracking-[0.1em] text-[rgb(var(--ap-paper-muted-rgb)/0.82)] xl:block",
             ),
         ),
         rx.icon(item["icon"], class_name="h-4 w-4 shrink-0"),
@@ -36,7 +36,7 @@ def _rail_item(item, index) -> rx.Component:
             rx.fragment(),
             rx.el.span(
                 "—",
-                class_name="ap-mono hidden text-[10px] text-[#FF8A5B] xl:block",
+                class_name="ap-mono hidden text-[10px] text-[rgb(var(--ap-flame-soft-rgb))] xl:block",
                 title=item["note"],
             ),
         ),
@@ -50,8 +50,8 @@ def _rail_item(item, index) -> rx.Component:
         on_click=NavigationState.select_cockpit(item["key"]),
         class_name=rx.cond(
             active,
-            "flex w-full items-center gap-2.5 border-l-2 border-[#D8FA5E] bg-[#D8FA5E]/8 px-2.5 py-2.5 text-[#D8FA5E] transition-colors xl:gap-3 xl:px-3",
-            "flex w-full items-center gap-2.5 border-l-2 border-transparent px-2.5 py-2.5 text-[#C9C5B4]/70 transition-colors hover:border-[#F2EFE4]/25 hover:bg-[#14160F] hover:text-[#F2EFE4] xl:gap-3 xl:px-3 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-transparent",
+            "flex w-full items-center gap-2.5 border-l-2 border-[rgb(var(--ap-accent-rgb))] bg-[rgb(var(--ap-accent-rgb)/0.08)] px-2.5 py-2.5 text-[rgb(var(--ap-accent-rgb))] transition-colors xl:gap-3 xl:px-3",
+            "flex w-full items-center gap-2.5 border-l-2 border-transparent px-2.5 py-2.5 text-[rgb(var(--ap-paper-muted-rgb)/0.90)] transition-colors hover:border-[rgb(var(--ap-paper-rgb)/0.30)] hover:bg-[rgb(var(--ap-surface-raised-rgb))] hover:text-[rgb(var(--ap-paper-rgb))] xl:gap-3 xl:px-3 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-transparent",
         ),
     )
 
@@ -68,8 +68,8 @@ def _rail_link(label: str, href: str, icon: str) -> rx.Component:
         aria_label=label,
         class_name=(
             "ap-mono flex w-full items-center gap-2.5 border-l-2 border-transparent "
-            "px-2.5 py-2.5 text-[#C9C5B4]/60 transition-colors hover:border-[#F2EFE4]/25 "
-            "hover:bg-[#14160F] hover:text-[#F2EFE4] xl:gap-3 xl:px-3"
+            "px-2.5 py-2.5 text-[rgb(var(--ap-paper-muted-rgb)/0.82)] transition-colors hover:border-[rgb(var(--ap-paper-rgb)/0.30)] "
+            "hover:bg-[rgb(var(--ap-surface-raised-rgb))] hover:text-[rgb(var(--ap-paper-rgb))] xl:gap-3 xl:px-3"
         ),
     )
 
@@ -83,7 +83,7 @@ def side_rail(active: str) -> rx.Component:
                 rx.el.span(
                     "Sommaire",
                     class_name=(
-                        "ap-eyebrow block px-3 pb-3 pt-6 text-[#C9C5B4]/60 "
+                        "ap-eyebrow block px-3 pb-3 pt-6 text-[rgb(var(--ap-paper-muted-rgb)/0.82)] "
                         "xl:px-3"
                     ),
                 ),
@@ -118,8 +118,8 @@ def side_rail(active: str) -> rx.Component:
                         aria_label="Ouvrir l'aide contextuelle",
                         class_name=(
                             "ap-mono flex w-full items-center gap-2.5 border-l-2 "
-                            "border-transparent px-2.5 py-2.5 text-[#C9C5B4]/60 transition-colors "
-                            "hover:border-[#F2EFE4]/25 hover:bg-[#14160F] hover:text-[#F2EFE4] "
+                            "border-transparent px-2.5 py-2.5 text-[rgb(var(--ap-paper-muted-rgb)/0.82)] transition-colors "
+                            "hover:border-[rgb(var(--ap-paper-rgb)/0.30)] hover:bg-[rgb(var(--ap-surface-raised-rgb))] hover:text-[rgb(var(--ap-paper-rgb))] "
                             "xl:gap-3 xl:px-3"
                         ),
                     ),
@@ -127,7 +127,7 @@ def side_rail(active: str) -> rx.Component:
                         "MMXXVI",
                         class_name=(
                             "ap-mono hidden px-3 pb-4 pt-3 text-[9px] tracking-[0.3em] "
-                            "text-[#C9C5B4]/25 xl:block"
+                            "text-[rgb(var(--ap-paper-muted-rgb)/0.25)] xl:block"
                         ),
                     ),
                     class_name="mt-2 flex flex-col",
@@ -136,7 +136,7 @@ def side_rail(active: str) -> rx.Component:
             ),
             class_name=(
                 "fixed bottom-0 left-0 top-14 z-30 hidden w-16 flex-col border-r "
-                "border-[#F2EFE4]/12 bg-[#0A0A08] md:flex xl:w-60"
+                "border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] md:flex xl:w-60"
             ),
         ),
     )
@@ -149,8 +149,8 @@ def _mobile_item(item, index) -> rx.Component:
             _number(index),
             class_name=rx.cond(
                 active,
-                "ap-mono w-6 shrink-0 text-[9px] text-[#D8FA5E]",
-                "ap-mono w-6 shrink-0 text-[9px] text-[#C9C5B4]/60",
+                "ap-mono w-6 shrink-0 text-[9px] text-[rgb(var(--ap-accent-rgb))]",
+                "ap-mono w-6 shrink-0 text-[9px] text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
             ),
         ),
         rx.icon(item["icon"], class_name="h-4 w-4 shrink-0"),
@@ -158,7 +158,7 @@ def _mobile_item(item, index) -> rx.Component:
         rx.cond(
             item["available"],
             rx.icon("arrow-up-right", class_name="h-3.5 w-3.5 opacity-40"),
-            rx.el.span("À venir", class_name="ap-mono text-[8px] text-[#FF8A5B]"),
+            rx.el.span("À venir", class_name="ap-mono text-[8px] text-[rgb(var(--ap-flame-soft-rgb))]"),
         ),
         type="button",
         disabled=~item["available"],
@@ -166,8 +166,8 @@ def _mobile_item(item, index) -> rx.Component:
         on_click=NavigationState.select_cockpit(item["key"]),
         class_name=rx.cond(
             active,
-            "flex w-full items-center gap-3 border border-[#D8FA5E]/40 bg-[#D8FA5E]/8 px-3 py-3 text-[12px] font-medium text-[#D8FA5E]",
-            "flex w-full items-center gap-3 border border-[#F2EFE4]/10 px-3 py-3 text-[12px] text-[#C9C5B4] disabled:opacity-35",
+            "flex w-full items-center gap-3 border border-[rgb(var(--ap-accent-rgb)/0.40)] bg-[rgb(var(--ap-accent-rgb)/0.08)] px-3 py-3 text-[12px] font-medium text-[rgb(var(--ap-accent-rgb))]",
+            "flex w-full items-center gap-3 border border-[rgb(var(--ap-paper-rgb)/0.15)] px-3 py-3 text-[12px] text-[rgb(var(--ap-paper-muted-rgb))] disabled:opacity-35",
         ),
     )
 
@@ -182,33 +182,33 @@ def mobile_navigation(active: str) -> rx.Component:
                 aria_label="Ouvrir l'index des cockpits",
                 class_name=(
                     "ap-mono inline-flex h-9 w-9 items-center justify-center border "
-                    "border-[#F2EFE4]/16 text-[#C9C5B4] transition-colors "
-                    "hover:border-[#D8FA5E] hover:text-[#D8FA5E] md:hidden"
+                    "border-[rgb(var(--ap-paper-rgb)/0.24)] text-[rgb(var(--ap-paper-muted-rgb))] transition-colors "
+                    "hover:border-[rgb(var(--ap-accent-rgb))] hover:text-[rgb(var(--ap-accent-rgb))] md:hidden"
                 ),
             ),
             as_child=True,
         ),
         rx.radix.primitives.dialog.portal(
             rx.radix.primitives.dialog.overlay(
-                class_name="fixed inset-0 z-[70] bg-[#060604]/85"
+                class_name="fixed inset-0 z-[70] bg-[rgb(var(--ap-ink-deep-rgb)/0.85)]"
             ),
             rx.radix.primitives.dialog.content(
                 rx.el.div(
                     rx.el.div(
-                        rx.el.span(class_name="h-2 w-2 bg-[#D8FA5E]"),
+                        rx.el.span(class_name="h-2 w-2 bg-[rgb(var(--ap-accent-rgb))]"),
                         rx.el.span(
                             "AgriPro",
-                            class_name="ap-serif text-2xl text-[#F2EFE4]",
+                            class_name="ap-serif text-2xl text-[rgb(var(--ap-paper-rgb))]",
                         ),
                         class_name="flex items-center gap-3",
                     ),
                     rx.radix.primitives.dialog.title(
                         "Index des cockpits",
-                        class_name="ap-eyebrow mt-6 text-[#C9C5B4]/65",
+                        class_name="ap-eyebrow mt-6 text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                     ),
                     rx.radix.primitives.dialog.description(
                         "Choisissez un cockpit, puis un domaine. Échap ferme ce panneau.",
-                        class_name="mt-2 text-[12px] leading-relaxed text-[#C9C5B4]/60",
+                        class_name="mt-2 text-[12px] leading-relaxed text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
                     ),
                     rx.radix.primitives.dialog.close(
                         rx.el.button(
@@ -217,7 +217,7 @@ def mobile_navigation(active: str) -> rx.Component:
                             aria_label="Fermer la navigation",
                             class_name=(
                                 "inline-flex h-9 w-9 items-center justify-center border "
-                                "border-[#F2EFE4]/16 text-[#C9C5B4]"
+                                "border-[rgb(var(--ap-paper-rgb)/0.24)] text-[rgb(var(--ap-paper-muted-rgb))]"
                             ),
                         ),
                         as_child=True,
@@ -239,15 +239,15 @@ def mobile_navigation(active: str) -> rx.Component:
                         on_click=HelpState.toggle_context(active),
                         class_name=(
                             "ap-mono inline-flex items-center gap-2 border "
-                            "border-[#F2EFE4]/16 px-3 py-2.5 text-[9px] uppercase "
-                            "tracking-[0.18em] text-[#C9C5B4]"
+                            "border-[rgb(var(--ap-paper-rgb)/0.24)] px-3 py-2.5 text-[9px] uppercase "
+                            "tracking-[0.18em] text-[rgb(var(--ap-paper-muted-rgb))]"
                         ),
                     ),
-                    class_name="mt-6 flex items-center justify-between gap-3 border-t border-[#F2EFE4]/12 pt-5",
+                    class_name="mt-6 flex items-center justify-between gap-3 border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-5",
                 ),
                 class_name=(
                     "fixed inset-x-3 bottom-3 top-3 z-[80] overflow-y-auto border "
-                    "border-[#F2EFE4]/16 bg-[#0A0A08] p-5 sm:inset-x-auto sm:left-3 "
+                    "border-[rgb(var(--ap-paper-rgb)/0.24)] bg-[rgb(var(--ap-ink-rgb))] p-5 sm:inset-x-auto sm:left-3 "
                     "sm:w-[24rem]"
                 ),
             ),

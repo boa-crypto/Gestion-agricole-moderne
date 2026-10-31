@@ -19,8 +19,8 @@ def _tile(
 
 def _section_title() -> rx.Component:
     return rx.el.div(
-        rx.icon("tractor", class_name="h-4 w-4 text-[#a9c98b]"),
-        rx.el.span("Indicateurs de chantiers", class_name="ap-eyebrow text-[#c9c5b4]/55"),
+        rx.icon("tractor", class_name="h-4 w-4 text-[rgb(var(--ap-sage-rgb))]"),
+        rx.el.span("Indicateurs de chantiers", class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.78)]"),
         class_name="flex w-full items-center gap-2",
     )
 
@@ -35,7 +35,7 @@ def operations_kpis() -> rx.Component:
                 "interventions",
                 f"{OperationsState.kpis['overdue']:.0f} en retard à replanifier",
                 "calendar-clock",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             _tile(
                 "Réalisées 30 j",
@@ -43,7 +43,7 @@ def operations_kpis() -> rx.Component:
                 "chantiers",
                 f"{OperationsState.kpis['cost_30']:.0f} € de charges opérationnelles",
                 "circle-check",
-                "h-4 w-4 text-[#a9c98b]",
+                "h-4 w-4 text-[rgb(var(--ap-sage-rgb))]",
             ),
             _tile(
                 "Intrants suivis",
@@ -51,7 +51,7 @@ def operations_kpis() -> rx.Component:
                 "références",
                 f"{OperationsState.kpis['critical']:.0f} sous le seuil de réappro",
                 "package",
-                "h-4 w-4 text-[#ff8a5b]",
+                "h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]",
             ),
             _tile(
                 "Valeur du stock",
@@ -59,7 +59,7 @@ def operations_kpis() -> rx.Component:
                 "€",
                 "Valorisation au prix d'achat",
                 "warehouse",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             _tile(
                 "Récolté",
@@ -67,7 +67,7 @@ def operations_kpis() -> rx.Component:
                 "t",
                 f"Rendement moyen {OperationsState.kpis['avg_yield']:.1f} t/ha",
                 "wheat",
-                "h-4 w-4 text-[#ff8a5b]",
+                "h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))]",
             ),
             _tile(
                 "Produit brut",
@@ -75,7 +75,7 @@ def operations_kpis() -> rx.Component:
                 "€",
                 "Cumul des ventes de récolte",
                 "coins",
-                "h-4 w-4 text-[#d8fa5e]",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
             ),
             class_name=(
                 "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "

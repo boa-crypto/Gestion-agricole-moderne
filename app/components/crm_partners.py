@@ -17,10 +17,10 @@ def crm_partner_workspace(space: str) -> rx.Component:
             CrmPartnersState.is_loading,
             rx.el.div(
                 rx.el.div(
-                    class_name="h-[42rem] w-full xl:w-[27rem] shrink-0 ap-skeleton bg-[#191C13]/70 border-t border-[#F2EFE4]/8"
+                    class_name="h-[42rem] w-full xl:w-[27rem] shrink-0 ap-skeleton bg-[rgb(var(--ap-surface-high-rgb)/0.70)] border-t border-[rgb(var(--ap-paper-rgb)/0.12)]"
                 ),
                 rx.el.div(
-                    class_name="h-[42rem] flex-1 min-w-0 ap-skeleton bg-[#191C13]/70 border-t border-[#F2EFE4]/8"
+                    class_name="h-[42rem] flex-1 min-w-0 ap-skeleton bg-[rgb(var(--ap-surface-high-rgb)/0.70)] border-t border-[rgb(var(--ap-paper-rgb)/0.12)]"
                 ),
                 class_name="flex flex-col xl:flex-row gap-4 w-full",
             ),

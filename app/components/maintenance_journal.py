@@ -7,7 +7,7 @@ from app.states.maintenance_state import (
     Option,
 )
 
-_SELECT = "w-full appearance-none cursor-pointer rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2.5 pl-9 pr-9 text-sm font-medium text-[#f2efe4] focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors"
+_SELECT = "w-full appearance-none cursor-pointer rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] py-2.5 pl-9 pr-9 text-sm font-medium text-[rgb(var(--ap-paper-rgb))] focus:border-[rgb(var(--ap-accent-rgb)/0.50)] focus:ring-2 focus:ring-[rgb(var(--ap-accent-rgb)/0.20)] outline-hidden transition-colors"
 
 
 def _status_badge(tone: rx.Var, label: rx.Var) -> rx.Component:
@@ -17,21 +17,21 @@ def _status_badge(tone: rx.Var, label: rx.Var) -> rx.Component:
             tone,
             (
                 "done",
-                "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "running",
-                "rounded-none border border-[#a9c98b]/30 bg-[#a9c98b]/10 px-2 py-0.5 text-[10px] font-bold text-[#b3af9f] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-sage-rgb)/0.30)] bg-[rgb(var(--ap-sage-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-paper-soft-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "late",
-                "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 text-[10px] font-bold text-[#ffb894] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "cancelled",
-                "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-bold text-[#c9c5b4]/65 line-through w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] line-through w-fit whitespace-nowrap",
             ),
-            "rounded-none border border-[#9cc3ff]/30 bg-[#9cc3ff]/10 px-2 py-0.5 text-[10px] font-bold text-[#c3daff] w-fit whitespace-nowrap",
+            "rounded-none border border-[rgb(var(--ap-info-rgb)/0.30)] bg-[rgb(var(--ap-info-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-info-soft-rgb))] w-fit whitespace-nowrap",
         ),
     )
 
@@ -43,17 +43,17 @@ def _priority_badge(priority: rx.Var, label: rx.Var) -> rx.Component:
             priority,
             (
                 "URGENTE",
-                "rounded-none border border-[#ff6b5a]/40 bg-[#f2452c]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#ff9b8c] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-danger-rgb)/0.40)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] px-1.5 py-0.5 text-[9px] font-bold text-[rgb(var(--ap-danger-soft-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "HAUTE",
-                "rounded-none border border-[#ff8a5b]/40 bg-[#ff8a5b]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#ffb894] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.40)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-1.5 py-0.5 text-[9px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "NORMALE",
-                "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-1.5 py-0.5 text-[9px] font-semibold text-[#c9c5b4]/55 w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-1.5 py-0.5 text-[9px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.78)] w-fit whitespace-nowrap",
             ),
-            "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-1.5 py-0.5 text-[9px] font-semibold text-[#c9c5b4]/60 w-fit whitespace-nowrap",
+            "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-1.5 py-0.5 text-[9px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit whitespace-nowrap",
         ),
     )
 
@@ -80,7 +80,7 @@ def _filter_select(
     return rx.el.div(
         rx.icon(
             icon,
-            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d8fa5e]/80 pointer-events-none",
+            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-accent-rgb)/0.80)] pointer-events-none",
         ),
         rx.el.select(
             first_option,
@@ -96,7 +96,7 @@ def _filter_select(
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
         ),
         class_name="relative w-full sm:w-52",
     )
@@ -107,13 +107,13 @@ def _filters() -> rx.Component:
         rx.el.div(
             rx.icon(
                 "search",
-                class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+                class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
             ),
             rx.el.input(
                 placeholder="Rechercher une opération, un engin, un prestataire, une panne…",
                 default_value=MaintenanceState.journal_search,
                 on_change=MaintenanceState.set_journal_search.debounce(400),
-                class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2.5 pl-9 pr-3 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/60 focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors",
+                class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] py-2.5 pl-9 pr-3 text-sm font-medium text-[rgb(var(--ap-paper-rgb))] placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] focus:border-[rgb(var(--ap-accent-rgb)/0.50)] focus:ring-2 focus:ring-[rgb(var(--ap-accent-rgb)/0.20)] outline-hidden transition-colors",
             ),
             class_name="relative flex-1 min-w-0",
         ),
@@ -145,13 +145,13 @@ def _filters() -> rx.Component:
             rx.icon("rotate-ccw", class_name="h-4 w-4"),
             rx.el.span("Réinitialiser"),
             on_click=MaintenanceState.reset_journal_filters,
-            class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
+            class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit",
         ),
         rx.el.button(
-            rx.icon("plus", class_name="h-4 w-4 text-[#0A0A08]"),
-            rx.el.span("Planifier", class_name="text-[#0A0A08]"),
+            rx.icon("plus", class_name="h-4 w-4 text-[rgb(var(--ap-ink-rgb))]"),
+            rx.el.span("Planifier", class_name="text-[rgb(var(--ap-ink-rgb))]"),
             on_click=MaintenanceState.open_operation_create,
-            class_name="flex items-center gap-2 rounded-none bg-[#d8fa5e] px-4 py-2.5 text-sm font-semibold hover:bg-[#e4ff9b] transition-colors w-fit",
+            class_name="flex items-center gap-2 rounded-none bg-[rgb(var(--ap-accent-rgb))] px-4 py-2.5 text-sm font-semibold hover:bg-[rgb(var(--ap-accent-soft-rgb))] transition-colors w-fit",
         ),
         class_name="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 w-full mt-5",
     )
@@ -160,11 +160,11 @@ def _filters() -> rx.Component:
 def _header_cell(label: str, icon: str, extra: str = "") -> rx.Component:
     return rx.el.th(
         rx.el.div(
-            rx.icon(icon, class_name="h-3.5 w-3.5 text-[#d8fa5e]/70"),
+            rx.icon(icon, class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb)/0.70)]"),
             rx.el.span(label),
             class_name="flex items-center gap-1.5",
         ),
-        class_name=f"px-3 py-3 text-left ap-eyebrow text-[#c9c5b4]/65 whitespace-nowrap {extra}",
+        class_name=f"px-3 py-3 text-left ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)] whitespace-nowrap {extra}",
     )
 
 
@@ -177,7 +177,7 @@ def _actions(row: OperationRow) -> rx.Component:
                 rx.icon("play", class_name="h-3.5 w-3.5"),
                 on_click=MaintenanceState.start_operation(row["id"]),
                 title="Démarrer à l'atelier",
-                class_name="flex h-7 w-7 items-center justify-center rounded-none border border-[#a9c98b]/30 bg-[#a9c98b]/10 text-[#b3af9f] hover:bg-[#a9c98b]/20 transition-colors",
+                class_name="flex h-7 w-7 items-center justify-center rounded-none border border-[rgb(var(--ap-sage-rgb)/0.30)] bg-[rgb(var(--ap-sage-rgb)/0.10)] text-[rgb(var(--ap-paper-soft-rgb))] hover:bg-[rgb(var(--ap-sage-rgb)/0.20)] transition-colors",
             ),
         ),
         rx.cond(
@@ -187,7 +187,7 @@ def _actions(row: OperationRow) -> rx.Component:
                 rx.icon("check", class_name="h-3.5 w-3.5"),
                 on_click=MaintenanceState.mark_operation_done(row["id"]),
                 title="Marquer réalisée",
-                class_name="flex h-7 w-7 items-center justify-center rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors",
+                class_name="flex h-7 w-7 items-center justify-center rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] text-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors",
             ),
         ),
         rx.cond(
@@ -197,14 +197,14 @@ def _actions(row: OperationRow) -> rx.Component:
                 rx.icon("calendar-plus", class_name="h-3.5 w-3.5"),
                 on_click=MaintenanceState.postpone_operation(row["id"]),
                 title="Reporter de 7 jours",
-                class_name="flex h-7 w-7 items-center justify-center rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 text-[#ffb894] hover:bg-[#ff8a5b]/20 transition-colors",
+                class_name="flex h-7 w-7 items-center justify-center rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] text-[rgb(var(--ap-flame-tint-rgb))] hover:bg-[rgb(var(--ap-flame-soft-rgb)/0.20)] transition-colors",
             ),
         ),
         rx.el.button(
             rx.icon("pencil", class_name="h-3.5 w-3.5"),
             on_click=MaintenanceState.open_operation_edit(row["id"]),
             title="Modifier",
-            class_name="flex h-7 w-7 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/70 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors",
+            class_name="flex h-7 w-7 items-center justify-center rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors",
         ),
         rx.cond(
             row["is_closed"],
@@ -213,7 +213,7 @@ def _actions(row: OperationRow) -> rx.Component:
                 rx.icon("x", class_name="h-3.5 w-3.5"),
                 on_click=MaintenanceState.cancel_operation(row["id"]),
                 title="Annuler",
-                class_name="flex h-7 w-7 items-center justify-center rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 text-[#ff9b8c] hover:bg-[#f2452c]/20 transition-colors",
+                class_name="flex h-7 w-7 items-center justify-center rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] text-[rgb(var(--ap-danger-soft-rgb))] hover:bg-[rgb(var(--ap-flame-strong-rgb)/0.20)] transition-colors",
             ),
         ),
         class_name="flex items-center gap-1.5 justify-end",
@@ -225,17 +225,17 @@ def _journal_row(row: OperationRow, key: str = "") -> rx.Component:
         rx.el.td(
             rx.el.div(
                 rx.el.div(
-                    _kind_icon(row["kind"], "h-4 w-4 text-[#d8fa5e]"),
-                    class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f]",
+                    _kind_icon(row["kind"], "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
+                    class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))]",
                 ),
                 rx.el.div(
                     rx.el.p(
                         row["title"],
-                        class_name="text-sm font-semibold text-[#f2efe4] truncate",
+                        class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] truncate",
                     ),
                     rx.el.p(
                         f"{row['kind_label']} · {row['provider']}",
-                        class_name="text-[10px] font-medium text-[#c9c5b4]/65 truncate",
+                        class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] truncate",
                     ),
                     class_name="min-w-0",
                 ),
@@ -247,21 +247,21 @@ def _journal_row(row: OperationRow, key: str = "") -> rx.Component:
             rx.el.button(
                 rx.el.p(
                     row["code"],
-                    class_name="text-xs font-semibold text-[#f2efe4] text-left",
+                    class_name="text-xs font-semibold text-[rgb(var(--ap-paper-rgb))] text-left",
                 ),
                 rx.el.p(
                     row["equipment"],
-                    class_name="text-[10px] font-medium text-[#c9c5b4]/65 truncate text-left",
+                    class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] truncate text-left",
                 ),
                 on_click=MaintenanceState.select_equipment(row["equipment_id"]),
-                class_name="min-w-0 text-left hover:text-[#e4ff9b] transition-colors",
+                class_name="min-w-0 text-left hover:text-[rgb(var(--ap-accent-soft-rgb))] transition-colors",
             ),
             class_name="px-3 py-3 align-middle min-w-[11rem]",
         ),
         rx.el.td(
             rx.el.p(
                 row["due_label"],
-                class_name="text-xs font-semibold text-[#f2efe4] whitespace-nowrap",
+                class_name="text-xs font-semibold text-[rgb(var(--ap-paper-rgb))] whitespace-nowrap",
             ),
             rx.el.p(
                 rx.cond(
@@ -279,8 +279,8 @@ def _journal_row(row: OperationRow, key: str = "") -> rx.Component:
                 ),
                 class_name=rx.cond(
                     row["is_overdue"],
-                    "text-[10px] font-semibold text-[#ff9b8c] whitespace-nowrap",
-                    "text-[10px] font-medium text-[#c9c5b4]/65 whitespace-nowrap",
+                    "text-[10px] font-semibold text-[rgb(var(--ap-danger-soft-rgb))] whitespace-nowrap",
+                    "text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] whitespace-nowrap",
                 ),
             ),
             class_name="px-3 py-3 align-middle",
@@ -296,29 +296,29 @@ def _journal_row(row: OperationRow, key: str = "") -> rx.Component:
         rx.el.td(
             rx.el.p(
                 row["responsible"],
-                class_name="text-xs font-medium text-[#c9c5b4]/70 truncate",
+                class_name="text-xs font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.90)] truncate",
             ),
             rx.el.p(
                 rx.cond(row["is_internal"], "Atelier interne", "Externalisée"),
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             class_name="px-3 py-3 align-middle min-w-[10rem]",
         ),
         rx.el.td(
             rx.el.span(
                 f"{row['labor_hours']:.1f} h MO",
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 whitespace-nowrap",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] whitespace-nowrap",
             ),
             rx.el.p(
                 f"{row['downtime']:.1f} h immo.",
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65 whitespace-nowrap",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] whitespace-nowrap",
             ),
             class_name="px-3 py-3 align-middle",
         ),
         rx.el.td(
             rx.el.span(
                 f"{row['total_cost']:.0f} €",
-                class_name="text-xs font-semibold text-[#e4ff9b] whitespace-nowrap",
+                class_name="text-xs font-semibold text-[rgb(var(--ap-accent-soft-rgb))] whitespace-nowrap",
             ),
             class_name="px-3 py-3 align-middle text-right",
         ),
@@ -329,8 +329,8 @@ def _journal_row(row: OperationRow, key: str = "") -> rx.Component:
         key=key,
         class_name=rx.cond(
             row["is_overdue"],
-            "border-b border-[#f2efe4]/8 bg-[#f2452c]/[0.05] hover:bg-[#f2452c]/[0.09] transition-colors",
-            "border-b border-[#f2efe4]/8 even:bg-[#0d0f09] hover:bg-[#d8fa5e]/[0.05] transition-colors",
+            "border-b border-[rgb(var(--ap-paper-rgb)/0.12)] bg-[rgb(var(--ap-flame-strong-rgb))]/[0.05] hover:bg-[rgb(var(--ap-flame-strong-rgb))]/[0.09] transition-colors",
+            "border-b border-[rgb(var(--ap-paper-rgb)/0.12)] even:bg-[rgb(var(--ap-surface-soft-rgb))] hover:bg-[rgb(var(--ap-accent-rgb))]/[0.05] transition-colors",
         ),
     )
 
@@ -341,26 +341,26 @@ def maintenance_journal() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Journal atelier",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Opérations préventives & correctives",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 class_name="min-w-0",
             ),
             rx.el.div(
                 rx.el.span(
                     f"{MaintenanceState.operation_count} lignes",
-                    class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-semibold text-[#c9c5b4]/60 w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit",
                 ),
                 rx.el.span(
                     f"{MaintenanceState.kpis['overdue_ops']:.0f} en retard",
-                    class_name="rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-3 py-1 text-[11px] font-semibold text-[#ffb894] w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-3 py-1 text-[11px] font-semibold text-[rgb(var(--ap-flame-tint-rgb))] w-fit",
                 ),
                 rx.el.span(
                     f"{MaintenanceState.operation_cost_shown:.0f} € engagés",
-                    class_name="rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-3 py-1 text-[11px] font-semibold text-[#e4ff9b] w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1 text-[11px] font-semibold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
                 ),
                 class_name="flex flex-wrap items-center gap-2",
             ),
@@ -371,13 +371,13 @@ def maintenance_journal() -> rx.Component:
             MaintenanceState.is_loading,
             rx.el.div(
                 rx.el.div(
-                    class_name="ap-skeleton bg-[#191C13]/70 h-12 w-full"
+                    class_name="ap-skeleton bg-[rgb(var(--ap-surface-high-rgb)/0.70)] h-12 w-full"
                 ),
                 rx.el.div(
-                    class_name="ap-skeleton bg-[#191C13]/70 h-12 w-full"
+                    class_name="ap-skeleton bg-[rgb(var(--ap-surface-high-rgb)/0.70)] h-12 w-full"
                 ),
                 rx.el.div(
-                    class_name="ap-skeleton bg-[#191C13]/70 h-12 w-full"
+                    class_name="ap-skeleton bg-[rgb(var(--ap-surface-high-rgb)/0.70)] h-12 w-full"
                 ),
                 class_name="flex flex-col gap-2 mt-6",
             ),
@@ -396,7 +396,7 @@ def maintenance_journal() -> rx.Component:
                                     _header_cell("Durées", "clock"),
                                     _header_cell("Coût", "coins", "text-right"),
                                     _header_cell("Actions", "settings_2"),
-                                    class_name="border-b border-[#f2efe4]/12 bg-[#101208]",
+                                    class_name="border-b border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))]",
                                 ),
                             ),
                             rx.el.tbody(
@@ -411,7 +411,7 @@ def maintenance_journal() -> rx.Component:
                         ),
                         class_name="overflow-x-auto",
                     ),
-                    class_name="mt-6 w-full rounded-none border border-[#f2efe4]/12 bg-[#0D0F09]/60 overflow-hidden max-h-[42rem] overflow-y-auto",
+                    class_name="mt-6 w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-soft-rgb)/0.60)] overflow-hidden max-h-[42rem] overflow-y-auto",
                 ),
                 empty_state(
                     "search-x",
@@ -419,5 +419,5 @@ def maintenance_journal() -> rx.Component:
                 ),
             ),
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6",
     )

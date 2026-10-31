@@ -22,28 +22,28 @@ from app.states.contour_state import (
 )
 
 _INPUT = (
-    "w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] px-3 py-2.5 "
-    "text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/60 "
-    "focus:border-[#d8fa5e]/50 outline-hidden transition-colors"
+    "w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] px-3 py-2.5 "
+    "text-sm font-medium text-[rgb(var(--ap-paper-rgb))] placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] "
+    "focus:border-[rgb(var(--ap-accent-rgb)/0.50)] outline-hidden transition-colors"
 )
 
 _SELECT = (
-    "w-full appearance-none cursor-pointer rounded-none border border-[#f2efe4]/12 "
-    "bg-[#0A0A08] py-2.5 pl-9 pr-9 text-sm font-medium text-[#f2efe4] "
-    "focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 "
+    "w-full appearance-none cursor-pointer rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] "
+    "bg-[rgb(var(--ap-ink-rgb))] py-2.5 pl-9 pr-9 text-sm font-medium text-[rgb(var(--ap-paper-rgb))] "
+    "focus:border-[rgb(var(--ap-accent-rgb)/0.50)] focus:ring-2 focus:ring-[rgb(var(--ap-accent-rgb)/0.20)] "
     "outline-hidden transition-colors"
 )
 
 _PRIMARY = (
-    "flex items-center gap-1.5 rounded-none bg-[#d8fa5e] px-3 py-1.5 "
-    "text-[11px] font-semibold text-[#0A0A08] hover:bg-[#e4ff9b] "
+    "flex items-center gap-1.5 rounded-none bg-[rgb(var(--ap-accent-rgb))] px-3 py-1.5 "
+    "text-[11px] font-semibold text-[rgb(var(--ap-ink-rgb))] hover:bg-[rgb(var(--ap-accent-soft-rgb))] "
     "transition-colors w-fit"
 )
 
 _GHOST = (
-    "flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] "
-    "px-3 py-1.5 text-[11px] font-semibold text-[#c9c5b4]/70 "
-    "hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit"
+    "flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] "
+    "px-3 py-1.5 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] "
+    "hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit"
 )
 
 
@@ -54,21 +54,21 @@ def _badge(tone: rx.Var, label: rx.Var | str) -> rx.Component:
             tone,
             (
                 "good",
-                "rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "warn",
-                "rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-2 py-0.5 text-[10px] font-bold text-[#ffb894] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-flame-tint-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "bad",
-                "rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 px-2 py-0.5 text-[10px] font-bold text-[#ff9b8c] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-danger-soft-rgb))] w-fit whitespace-nowrap",
             ),
             (
                 "info",
-                "rounded-none border border-[#9cc3ff]/30 bg-[#9cc3ff]/10 px-2 py-0.5 text-[10px] font-bold text-[#c3daff] w-fit whitespace-nowrap",
+                "rounded-none border border-[rgb(var(--ap-info-rgb)/0.30)] bg-[rgb(var(--ap-info-rgb)/0.10)] px-2 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-info-soft-rgb))] w-fit whitespace-nowrap",
             ),
-            "rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/65 w-fit whitespace-nowrap",
+            "rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit whitespace-nowrap",
         ),
     )
 
@@ -76,10 +76,10 @@ def _badge(tone: rx.Var, label: rx.Var | str) -> rx.Component:
 def _tone_bar(tone: rx.Var) -> rx.Var | str:
     return rx.match(
         tone,
-        ("good", "h-full rounded-none bg-[#d8fa5e]/80"),
-        ("warn", "h-full rounded-none bg-[#ff8a5b]/80"),
-        ("bad", "h-full rounded-none bg-[#ff6b5a]/80"),
-        "h-full rounded-none bg-[#333927]",
+        ("good", "h-full rounded-none bg-[rgb(var(--ap-accent-rgb)/0.80)]"),
+        ("warn", "h-full rounded-none bg-[rgb(var(--ap-flame-soft-rgb)/0.80)]"),
+        ("bad", "h-full rounded-none bg-[rgb(var(--ap-danger-rgb)/0.80)]"),
+        "h-full rounded-none bg-[rgb(var(--ap-track-deep-rgb))]",
     )
 
 
@@ -88,17 +88,17 @@ def _tone_ring(tone: rx.Var) -> rx.Var | str:
         tone,
         (
             "good",
-            "flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 text-[#e4ff9b]",
+            "flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-accent-rgb)/0.30)] bg-[rgb(var(--ap-accent-rgb)/0.10)] text-[rgb(var(--ap-accent-soft-rgb))]",
         ),
         (
             "warn",
-            "flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 text-[#ffb894]",
+            "flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.30)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] text-[rgb(var(--ap-flame-tint-rgb))]",
         ),
         (
             "bad",
-            "flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/10 text-[#ff9b8c]",
+            "flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-danger-rgb)/0.30)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] text-[rgb(var(--ap-danger-soft-rgb))]",
         ),
-        "flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/60",
+        "flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] text-[rgb(var(--ap-paper-muted-rgb)/0.82)]",
     )
 
 
@@ -106,20 +106,20 @@ def _tile(label: str, value: rx.Var | str, unit: str) -> rx.Component:
     return rx.el.div(
         rx.el.span(
             label,
-            class_name="ap-eyebrow text-[#c9c5b4]/65",
+            class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
         ),
         rx.el.div(
             rx.el.span(
                 value,
-                class_name="ap-serif text-2xl leading-none text-[#f2efe4]",
+                class_name="ap-serif text-2xl leading-none text-[rgb(var(--ap-paper-rgb))]",
             ),
             rx.el.span(
                 unit,
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mb-0.5",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mb-0.5",
             ),
             class_name="flex items-end gap-1.5 mt-2",
         ),
-        class_name="w-full border-t border-[#F2EFE4]/12 pt-3",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-3",
     )
 
 
@@ -132,19 +132,19 @@ def _distribution_row(row: ControlDistribution, key: str = "") -> rx.Component:
             ),
             rx.el.span(
                 row["label"],
-                class_name="text-[12px] font-semibold text-[#f2efe4] truncate text-left",
+                class_name="text-[12px] font-semibold text-[rgb(var(--ap-paper-rgb))] truncate text-left",
             ),
             rx.el.span(
                 row["value"],
                 class_name=rx.cond(
                     row["value"] > 0,
-                    "text-[12px] font-bold text-[#f2efe4] ml-auto",
-                    "text-[12px] font-bold text-[#c9c5b4]/60 ml-auto",
+                    "text-[12px] font-bold text-[rgb(var(--ap-paper-rgb))] ml-auto",
+                    "text-[12px] font-bold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] ml-auto",
                 ),
             ),
             rx.el.span(
                 row["share_pct"],
-                class_name="text-[10px] font-semibold text-[#c9c5b4]/65 w-9 text-right",
+                class_name="text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-9 text-right",
             ),
             class_name="flex items-center gap-2.5 w-full min-w-0",
         ),
@@ -153,11 +153,11 @@ def _distribution_row(row: ControlDistribution, key: str = "") -> rx.Component:
                 class_name=_tone_bar(row["tone"]),
                 style={"width": row["share_pct"]},
             ),
-            class_name="h-1.5 w-full rounded-none bg-[#20241a] mt-2",
+            class_name="h-1.5 w-full rounded-none bg-[rgb(var(--ap-surface-control-rgb))] mt-2",
         ),
         on_click=ContourState.focus_control(row["key"]),
         key=key,
-        class_name="w-full border-t border-[#F2EFE4]/8 pt-3 transition-colors hover:border-t-[#D8FA5E]/40",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.12)] pt-3 transition-colors hover:border-t-[rgb(var(--ap-accent-rgb)/0.40)]",
     )
 
 
@@ -166,7 +166,7 @@ def _gauge() -> rx.Component:
         rx.el.div(
             rx.el.span(
                 "Taux de contrôle des contours",
-                class_name="ap-eyebrow text-[#c9c5b4]/65",
+                class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             _badge(ContourState.verdict_tone, ContourState.verdict_label),
             class_name="flex flex-wrap items-center justify-between gap-2 w-full",
@@ -174,41 +174,41 @@ def _gauge() -> rx.Component:
         rx.el.div(
             rx.el.span(
                 ContourState.control_rate_pct,
-                class_name="ap-serif text-5xl leading-none text-[#f2efe4]",
+                class_name="ap-serif text-5xl leading-none text-[rgb(var(--ap-paper-rgb))]",
             ),
             rx.el.span(
                 "des îlots portent une décision de contour",
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mb-1.5",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mb-1.5",
             ),
             class_name="flex items-end gap-2 w-full mt-3",
         ),
         rx.el.div(
             rx.el.div(
-                class_name="h-full rounded-none bg-gradient-to-r from-[#8fb37a] via-[#d8fa5e] to-[#ff8a5b]",
+                class_name="h-full rounded-none bg-gradient-to-r from-[rgb(var(--ap-sage-soft-rgb))] via-[rgb(var(--ap-accent-rgb))] to-[rgb(var(--ap-flame-soft-rgb))]",
                 style={"width": ContourState.control_rate_pct},
             ),
-            class_name="h-2 w-full rounded-none bg-[#20241a] mt-4",
+            class_name="h-2 w-full rounded-none bg-[rgb(var(--ap-surface-control-rgb))] mt-4",
         ),
         rx.el.p(
             ContourState.verdict_detail,
-            class_name="text-[12px] font-medium text-[#c9c5b4]/60 leading-relaxed mt-4",
+            class_name="text-[12px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] leading-relaxed mt-4",
         ),
         rx.el.div(
             rx.el.span(
                 f"{ContourState.kpis['mapped_area']:.1f} ha tracés",
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2.5 py-1 text-[10px] font-semibold text-[#c9c5b4]/55 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2.5 py-1 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.78)] w-fit",
             ),
             rx.el.span(
                 f"{ContourState.kpis['gap_area']:.2f} ha d'écart cumulé",
-                class_name="rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/10 px-2.5 py-1 text-[10px] font-semibold text-[#ffb894] w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.25)] bg-[rgb(var(--ap-flame-soft-rgb)/0.10)] px-2.5 py-1 text-[10px] font-semibold text-[rgb(var(--ap-flame-tint-rgb))] w-fit",
             ),
             rx.el.span(
                 f"écart max {ContourState.kpis['gap_max']:.1f} %",
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2.5 py-1 text-[10px] font-semibold text-[#c9c5b4]/55 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2.5 py-1 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.78)] w-fit",
             ),
             class_name="flex flex-wrap items-center gap-2 w-full mt-4",
         ),
-        class_name="w-full xl:w-[24rem] shrink-0 rounded-none border border-[#d8fa5e]/20 bg-[#0A0A08]/70 p-5",
+        class_name="w-full xl:w-[24rem] shrink-0 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.20)] bg-[rgb(var(--ap-ink-rgb)/0.70)] p-5",
     )
 
 
@@ -223,7 +223,7 @@ def _select(
     return rx.el.div(
         rx.icon(
             icon,
-            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d8fa5e]/80 pointer-events-none",
+            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-accent-rgb)/0.80)] pointer-events-none",
         ),
         rx.el.select(
             first_option,
@@ -239,7 +239,7 @@ def _select(
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
         ),
         class_name="relative w-full sm:w-56",
     )
@@ -250,7 +250,7 @@ def _filters() -> rx.Component:
         rx.el.div(
             rx.icon(
                 "search",
-                class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#c9c5b4]/65 pointer-events-none",
+                class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
             ),
             rx.el.input(
                 placeholder="Rechercher un îlot, un code, une localité…",
@@ -280,7 +280,7 @@ def _filters() -> rx.Component:
             rx.icon("rotate-ccw", class_name="h-4 w-4"),
             rx.el.span("Réinitialiser"),
             on_click=ContourState.reset_filters,
-            class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 text-sm font-semibold text-[#c9c5b4]/70 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
+            class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit",
         ),
         class_name="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 w-full mt-5",
     )
@@ -289,10 +289,10 @@ def _filters() -> rx.Component:
 def _note_bar() -> rx.Component:
     return rx.el.div(
         rx.el.div(
-            rx.icon("pen-line", class_name="h-3.5 w-3.5 text-[#d8fa5e]"),
+            rx.icon("pen-line", class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb))]"),
             rx.el.span(
                 "Traçabilité de la décision de contour",
-                class_name="ap-eyebrow text-[#c9c5b4]/65",
+                class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
             class_name="flex items-center gap-2",
         ),
@@ -313,9 +313,9 @@ def _note_bar() -> rx.Component:
         ),
         rx.el.p(
             "Une vérification à l'écran reste une validation visuelle : elle ne vaut ni relevé cadastral ni mesure GPS.",
-            class_name="text-[10px] font-medium text-[#c9c5b4]/65 mt-2",
+            class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-2",
         ),
-        class_name="w-full border-t border-[#F2EFE4]/8 pt-4 mt-5",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.12)] pt-4 mt-5",
     )
 
 
@@ -330,7 +330,7 @@ def _contour_card(row: ContourRow, key: str = "") -> rx.Component:
                 rx.el.div(
                     rx.el.span(
                         row["code"],
-                        class_name="ap-eyebrow text-[#c9c5b4]/65",
+                        class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                     ),
                     _badge(row["control_tone"], row["control_label"]),
                     _badge(row["validation_tone"], row["validation_label"]),
@@ -338,11 +338,11 @@ def _contour_card(row: ContourRow, key: str = "") -> rx.Component:
                 ),
                 rx.el.p(
                     row["name"],
-                    class_name="ap-serif text-xl text-[#f2efe4] mt-1 truncate",
+                    class_name="ap-serif text-xl text-[rgb(var(--ap-paper-rgb))] mt-1 truncate",
                 ),
                 rx.el.p(
                     f"{row['locality']} · {row['source_label']} · {row['vertex_count']} sommets",
-                    class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-0.5",
+                    class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-0.5",
                 ),
                 class_name="min-w-0 flex-1",
             ),
@@ -351,11 +351,11 @@ def _contour_card(row: ContourRow, key: str = "") -> rx.Component:
         rx.el.div(
             rx.el.span(
                 f"Déclarée {row['declared_area']:.2f} ha",
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/60 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit",
             ),
             rx.el.span(
                 f"Contour {row['computed_area']:.2f} ha",
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/60 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit",
             ),
             _badge(
                 rx.cond(row["gap_pct"] > 5.0, "bad", "good"),
@@ -367,36 +367,36 @@ def _contour_card(row: ContourRow, key: str = "") -> rx.Component:
             rx.el.div(
                 class_name=rx.cond(
                     row["gap_pct"] > 5.0,
-                    "h-full rounded-none bg-[#ff6b5a]/80",
-                    "h-full rounded-none bg-[#d8fa5e]/80",
+                    "h-full rounded-none bg-[rgb(var(--ap-danger-rgb)/0.80)]",
+                    "h-full rounded-none bg-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 style={"width": row["gap_bar_pct"]},
             ),
-            class_name="h-1.5 w-full rounded-none bg-[#20241a] mt-2",
+            class_name="h-1.5 w-full rounded-none bg-[rgb(var(--ap-surface-control-rgb))] mt-2",
         ),
         rx.el.div(
             rx.icon(
-                "wrench", class_name="h-3 w-3 text-[#ff8a5b] shrink-0 mt-0.5"
+                "wrench", class_name="h-3 w-3 text-[rgb(var(--ap-flame-soft-rgb))] shrink-0 mt-0.5"
             ),
             rx.el.p(
                 row["recommendation"],
-                class_name="text-[11px] font-medium text-[#ffdccb]/80 leading-relaxed",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-warm-100-rgb)/0.80)] leading-relaxed",
             ),
-            class_name="flex items-start gap-2 rounded-none border border-[#ff8a5b]/20 bg-[#ff8a5b]/[0.06] px-3 py-2 w-full mt-3",
+            class_name="flex items-start gap-2 rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.20)] bg-[rgb(var(--ap-flame-soft-rgb))]/[0.06] px-3 py-2 w-full mt-3",
         ),
         rx.cond(
             row["decision_count"] > 0,
             rx.el.div(
-                rx.icon("history", class_name="h-3 w-3 text-[#d8fa5e] shrink-0"),
+                rx.icon("history", class_name="h-3 w-3 text-[rgb(var(--ap-accent-rgb))] shrink-0"),
                 rx.el.p(
                     f"{row['validation_label']} · {row['last_decided_label']} · {row['last_author']} — {row['last_note']}",
-                    class_name="text-[10px] font-medium text-[#c9c5b4]/55 leading-relaxed",
+                    class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] leading-relaxed",
                 ),
                 rx.el.span(
                     f"{row['decision_count']} décision(s)",
-                    class_name="ml-auto shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[9px] font-semibold text-[#c9c5b4]/65 w-fit",
+                    class_name="ml-auto shrink-0 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[9px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit",
                 ),
-                class_name="flex items-start gap-2 rounded-none border border-[#f2efe4]/12 bg-[#101208] px-3 py-2 w-full mt-2",
+                class_name="flex items-start gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))] px-3 py-2 w-full mt-2",
             ),
             rx.fragment(),
         ),
@@ -417,7 +417,7 @@ def _contour_card(row: ContourRow, key: str = "") -> rx.Component:
                 rx.el.span("Ouvrir l'éditeur de contour"),
                 rx.icon("arrow-up-right", class_name="h-3 w-3"),
                 href="/cartographie",
-                class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1.5 text-[10px] font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit ml-auto",
+                class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1.5 text-[10px] font-semibold text-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors w-fit ml-auto",
             ),
             class_name="flex flex-wrap items-center gap-2 w-full mt-3",
         ),
@@ -436,32 +436,32 @@ def _contour_card(row: ContourRow, key: str = "") -> rx.Component:
                 rx.el.span("Guide de la cartographie"),
                 rx.icon("arrow-up-right", class_name="h-3 w-3"),
                 href="/guide",
-                class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1.5 text-[10px] font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit",
+                class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1.5 text-[10px] font-semibold text-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors w-fit",
             ),
             rx.el.a(
                 rx.el.span("Chercher cet îlot"),
                 rx.icon("radar", class_name="h-3 w-3"),
                 href="/recherche",
-                class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1.5 text-[10px] font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit",
+                class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1.5 text-[10px] font-semibold text-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors w-fit",
             ),
             class_name="flex flex-wrap items-center gap-2 w-full mt-2",
         ),
         rx.el.p(
             f"Géométrie mise à jour : {row['updated_label']} · {row['updated_by']}",
-            class_name="text-[10px] font-medium text-[#c9c5b4]/60 mt-2",
+            class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] mt-2",
         ),
         key=key,
         class_name=rx.match(
             row["control_tone"],
             (
                 "bad",
-                "w-full border-l-2 border-[#FF6B5A] bg-[#F2452C]/[0.06] pl-3 pr-2 py-3",
+                "w-full border-l-2 border-[rgb(var(--ap-danger-rgb))] bg-[rgb(var(--ap-flame-strong-rgb))]/[0.06] pl-3 pr-2 py-3",
             ),
             (
                 "warn",
-                "w-full border-l-2 border-[#FF8A5B] bg-[#FF8A5B]/[0.05] pl-3 pr-2 py-3",
+                "w-full border-l-2 border-[rgb(var(--ap-flame-soft-rgb))] bg-[rgb(var(--ap-flame-soft-rgb))]/[0.05] pl-3 pr-2 py-3",
             ),
-            "w-full border-t border-[#F2EFE4]/8 pt-3 transition-colors hover:border-t-[#D8FA5E]/40",
+            "w-full border-t border-[rgb(var(--ap-paper-rgb)/0.12)] pt-3 transition-colors hover:border-t-[rgb(var(--ap-accent-rgb)/0.40)]",
         ),
     )
 
@@ -473,22 +473,22 @@ def contour_control_board() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Contrôle parcellaire · géométrie",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Valider les contours d'îlots",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 rx.el.p(
                     "Chaque îlot reçoit un statut de contrôle et une décision : contour conforme, contour généré à vérifier, écart de surface à arbitrer ou contour à tracer.",
-                    class_name="text-sm font-medium text-[#c9c5b4]/55 mt-2 max-w-2xl",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] mt-2 max-w-2xl",
                 ),
                 class_name="min-w-0",
             ),
             rx.el.div(
                 rx.el.span(
                     ContourState.today_label,
-                    class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-semibold text-[#c9c5b4]/65 w-fit",
+                    class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit",
                 ),
                 help_icon_button("cartographie"),
                 class_name="flex flex-wrap items-center gap-2",
@@ -533,7 +533,7 @@ def contour_control_board() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Répartition des statuts de contrôle",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.div(
                     rx.foreach(
@@ -542,7 +542,7 @@ def contour_control_board() -> rx.Component:
                     ),
                     class_name="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mt-3",
                 ),
-                class_name="flex-1 min-w-0 w-full border-t border-[#F2EFE4]/8 pt-4",
+                class_name="flex-1 min-w-0 w-full border-t border-[rgb(var(--ap-paper-rgb)/0.12)] pt-4",
             ),
             class_name="flex flex-col xl:flex-row gap-3 w-full mt-3",
         ),
@@ -552,13 +552,13 @@ def contour_control_board() -> rx.Component:
             rx.el.div(
                 rx.icon(
                     "triangle-alert",
-                    class_name="h-4 w-4 text-[#ff8a5b] shrink-0",
+                    class_name="h-4 w-4 text-[rgb(var(--ap-flame-soft-rgb))] shrink-0",
                 ),
                 rx.el.p(
                     "Les colonnes de géométrie sont indisponibles : les contours affichés sont générés à la volée et le contrôle reste indicatif.",
-                    class_name="text-xs font-medium text-[#ffdccb]/80",
+                    class_name="text-xs font-medium text-[rgb(var(--ap-warm-100-rgb)/0.80)]",
                 ),
-                class_name="flex items-center gap-2 rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/[0.07] px-4 py-3 w-full mt-4",
+                class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.25)] bg-[rgb(var(--ap-flame-soft-rgb))]/[0.07] px-4 py-3 w-full mt-4",
             ),
         ),
         _filters(),
@@ -567,10 +567,10 @@ def contour_control_board() -> rx.Component:
             ContourState.is_loading,
             rx.el.div(
                 rx.el.div(
-                    class_name="ap-skeleton bg-[#191C13]/70 h-40 w-full"
+                    class_name="ap-skeleton bg-[rgb(var(--ap-surface-high-rgb)/0.70)] h-40 w-full"
                 ),
                 rx.el.div(
-                    class_name="ap-skeleton bg-[#191C13]/70 h-40 w-full"
+                    class_name="ap-skeleton bg-[rgb(var(--ap-surface-high-rgb)/0.70)] h-40 w-full"
                 ),
                 class_name="grid grid-cols-1 xl:grid-cols-2 gap-3 w-full mt-4",
             ),
@@ -592,7 +592,7 @@ def contour_control_board() -> rx.Component:
                 ),
             ),
         ),
-        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-6",
     )
 
 
@@ -606,28 +606,28 @@ def _log_row(item: ContourLog, key: str = "") -> rx.Component:
             rx.el.div(
                 rx.el.p(
                     item["label"],
-                    class_name="text-[12px] font-semibold text-[#f2efe4] truncate",
+                    class_name="text-[12px] font-semibold text-[rgb(var(--ap-paper-rgb))] truncate",
                 ),
                 _badge(item["tone"], item["action_label"]),
                 rx.el.span(
                     item["date_label"],
-                    class_name="text-[10px] font-medium text-[#c9c5b4]/65 ml-auto shrink-0",
+                    class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] ml-auto shrink-0",
                 ),
                 class_name="flex flex-wrap items-center gap-2 w-full min-w-0",
             ),
             rx.el.p(
                 f"{item['author']} — {item['note']}",
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-1 leading-relaxed",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-1 leading-relaxed",
             ),
             class_name="min-w-0 flex-1",
         ),
         rx.el.a(
             rx.icon("arrow-up-right", class_name="h-3.5 w-3.5"),
             href="/cartographie",
-            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#14160f] text-[#c9c5b4]/60 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors",
+            class_name="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] text-[rgb(var(--ap-paper-muted-rgb)/0.82)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors",
         ),
         key=key,
-        class_name="flex items-start gap-3 w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-3",
+        class_name="flex items-start gap-3 w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-soft-rgb))] p-3",
     )
 
 
@@ -638,21 +638,21 @@ def contour_history_panel() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Historique des décisions",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Journal de contrôle des contours",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 rx.el.p(
                     "Qui a validé quel îlot, quand et pourquoi : la trace rend le contrôle relisible plusieurs campagnes plus tard.",
-                    class_name="text-sm font-medium text-[#c9c5b4]/55 mt-2 max-w-2xl",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] mt-2 max-w-2xl",
                 ),
                 class_name="min-w-0",
             ),
             rx.el.span(
                 f"{ContourState.kpis['decisions']:.0f} décision(s) consignée(s)",
-                class_name="rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1 text-[11px] font-bold text-[#e4ff9b] w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1 text-[11px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
             ),
             class_name="flex flex-wrap items-end justify-between gap-3 w-full",
         ),
@@ -671,7 +671,7 @@ def contour_history_panel() -> rx.Component:
                 class_name="mt-5",
             ),
         ),
-        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-6",
     )
 
 
@@ -682,15 +682,15 @@ def contour_diagnostic_tile() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Diagnostic · géométrie parcellaire",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Contrôle des contours d'îlots",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 rx.el.p(
                     ContourState.verdict_detail,
-                    class_name="text-sm font-medium text-[#c9c5b4]/55 mt-2 max-w-2xl",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] mt-2 max-w-2xl",
                 ),
                 class_name="min-w-0",
             ),
@@ -700,7 +700,7 @@ def contour_diagnostic_tile() -> rx.Component:
                     rx.el.span("Ouvrir la cartographie"),
                     rx.icon("arrow-up-right", class_name="h-3 w-3"),
                     href="/cartographie",
-                    class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1.5 text-[10px] font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit",
+                    class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1.5 text-[10px] font-semibold text-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors w-fit",
                 ),
                 help_topic_button(
                     "cartographie", "geometrie", "Règle de géométrie"
@@ -740,5 +740,5 @@ def contour_diagnostic_tile() -> rx.Component:
             ),
             class_name="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 w-full mt-3",
         ),
-        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
+        class_name="w-full border-t border-[rgb(var(--ap-paper-rgb)/0.18)] pt-6",
     )

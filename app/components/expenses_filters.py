@@ -20,7 +20,7 @@ def _select(
     on_change: rx.event.EventType,
 ) -> rx.Component:
     return rx.el.div(
-        rx.el.span(label, class_name="ap-eyebrow text-[#C9C5B4]/65"),
+        rx.el.span(label, class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]"),
         select_field(
             rx.el.option(all_label, value="TOUS"),
             rx.foreach(
@@ -45,7 +45,7 @@ def _date_field(
     on_change: rx.event.EventType,
 ) -> rx.Component:
     return rx.el.div(
-        rx.el.span(label, class_name="ap-eyebrow text-[#C9C5B4]/65"),
+        rx.el.span(label, class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]"),
         field(
             rx.el.input(
                 type="date",
@@ -68,13 +68,13 @@ def _period_chip(chip: Option) -> rx.Component:
         type="button",
         class_name=rx.cond(
             ExpensesState.period == chip["value"],
-            "ap-mono inline-flex w-fit items-center border border-[#FF5A2B] "
-            "bg-[#FF5A2B]/12 px-2.5 py-1.5 text-[9px] uppercase "
-            "tracking-[0.18em] text-[#FFB894] transition-colors",
-            "ap-mono inline-flex w-fit items-center border border-[#F2EFE4]/12 "
+            "ap-mono inline-flex w-fit items-center border border-[rgb(var(--ap-flame-rgb))] "
+            "bg-[rgb(var(--ap-flame-rgb)/0.12)] px-2.5 py-1.5 text-[9px] uppercase "
+            "tracking-[0.18em] text-[rgb(var(--ap-flame-tint-rgb))] transition-colors",
+            "ap-mono inline-flex w-fit items-center border border-[rgb(var(--ap-paper-rgb)/0.18)] "
             "px-2.5 py-1.5 text-[9px] uppercase tracking-[0.18em] "
-            "text-[#C9C5B4]/55 transition-colors hover:border-[#F2EFE4]/30 "
-            "hover:text-[#F2EFE4]",
+            "text-[rgb(var(--ap-paper-muted-rgb)/0.78)] transition-colors hover:border-[rgb(var(--ap-paper-rgb)/0.30)] "
+            "hover:text-[rgb(var(--ap-paper-rgb))]",
         ),
     )
 
@@ -162,7 +162,7 @@ def expenses_filters() -> rx.Component:
                     "archive",
                     class_name=rx.cond(
                         ExpensesState.include_archived,
-                        "h-3.5 w-3.5 text-[#FFB894]",
+                        "h-3.5 w-3.5 text-[rgb(var(--ap-flame-tint-rgb))]",
                         "h-3.5 w-3.5",
                     ),
                 ),
@@ -178,12 +178,12 @@ def expenses_filters() -> rx.Component:
                 class_name=rx.cond(
                     ExpensesState.include_archived,
                     "ap-mono inline-flex w-fit items-center gap-2 border "
-                    "border-[#FF5A2B]/45 bg-[#FF5A2B]/10 px-3 py-2.5 text-[10px] "
-                    "uppercase tracking-[0.18em] text-[#FFB894] transition-colors",
+                    "border-[rgb(var(--ap-flame-rgb)/0.45)] bg-[rgb(var(--ap-flame-rgb)/0.10)] px-3 py-2.5 text-[10px] "
+                    "uppercase tracking-[0.18em] text-[rgb(var(--ap-flame-tint-rgb))] transition-colors",
                     "ap-mono inline-flex w-fit items-center gap-2 border "
-                    "border-[#F2EFE4]/12 px-3 py-2.5 text-[10px] uppercase "
-                    "tracking-[0.18em] text-[#C9C5B4]/60 transition-colors "
-                    "hover:border-[#F2EFE4]/30 hover:text-[#F2EFE4]",
+                    "border-[rgb(var(--ap-paper-rgb)/0.18)] px-3 py-2.5 text-[10px] uppercase "
+                    "tracking-[0.18em] text-[rgb(var(--ap-paper-muted-rgb)/0.82)] transition-colors "
+                    "hover:border-[rgb(var(--ap-paper-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))]",
                 ),
             ),
             action_button(
@@ -195,22 +195,22 @@ def expenses_filters() -> rx.Component:
             ),
             class_name=(
                 "flex flex-wrap items-center gap-3 w-full mt-5 "
-                "border-t border-[#F2EFE4]/10 pt-5"
+                "border-t border-[rgb(var(--ap-paper-rgb)/0.15)] pt-5"
             ),
         ),
         rx.cond(
             ExpensesState.error != "",
             rx.el.div(
                 rx.icon(
-                    "octagon-alert", class_name="h-4 w-4 text-[#ff9b8c] shrink-0"
+                    "octagon-alert", class_name="h-4 w-4 text-[rgb(var(--ap-danger-soft-rgb))] shrink-0"
                 ),
                 rx.el.p(
                     ExpensesState.error,
-                    class_name="text-sm font-medium text-[#ffbcb0]",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-warm-150-rgb))]",
                 ),
                 class_name=(
-                    "flex items-center gap-2 border border-[#ff6b5a]/30 "
-                    "bg-[#f2452c]/[0.08] px-4 py-3 w-full mt-4"
+                    "flex items-center gap-2 border border-[rgb(var(--ap-danger-rgb)/0.30)] "
+                    "bg-[rgb(var(--ap-flame-strong-rgb))]/[0.08] px-4 py-3 w-full mt-4"
                 ),
             ),
             rx.fragment(),

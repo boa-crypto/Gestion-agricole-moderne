@@ -29,9 +29,9 @@ def _refresh() -> rx.Component:
         disabled=CatalogBrowserState.is_loading,
         class_name=(
             "ap-mono inline-flex w-fit items-center justify-center gap-2 border "
-            "border-[#D8FA5E] bg-[#D8FA5E] px-3.5 py-2.5 text-[10px] uppercase "
-            "tracking-[0.18em] text-[#0A0A08] transition-colors "
-            "hover:border-[#E4FF9B] hover:bg-[#E4FF9B] "
+            "border-[rgb(var(--ap-accent-rgb))] bg-[rgb(var(--ap-accent-rgb))] px-3.5 py-2.5 text-[10px] uppercase "
+            "tracking-[0.18em] text-[rgb(var(--ap-ink-rgb))] transition-colors "
+            "hover:border-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-soft-rgb))] "
             "disabled:cursor-not-allowed disabled:opacity-45"
         ),
     )
@@ -82,15 +82,15 @@ def catalog_coverage() -> rx.Component:
                 rx.foreach(
                     [0, 1, 2, 3, 4, 5],
                     lambda _i: rx.el.div(
-                        rx.el.div(class_name="h-px w-full bg-[#F2EFE4]/12"),
+                        rx.el.div(class_name="h-px w-full bg-[rgb(var(--ap-paper-rgb)/0.12)]"),
                         rx.el.div(
                             class_name=(
-                                "mt-4 h-2 w-24 ap-skeleton bg-[#F2EFE4]/10"
+                                "mt-4 h-2 w-24 ap-skeleton bg-[rgb(var(--ap-paper-rgb)/0.10)]"
                             )
                         ),
                         rx.el.div(
                             class_name=(
-                                "mt-3 h-8 w-16 ap-skeleton bg-[#F2EFE4]/10"
+                                "mt-3 h-8 w-16 ap-skeleton bg-[rgb(var(--ap-paper-rgb)/0.10)]"
                             )
                         ),
                         class_name="pb-1",
@@ -141,7 +141,7 @@ def _radar_dot(node: CategoryNode) -> rx.Component:
         aria_label=node["name"],
         class_name=rx.cond(
             CatalogBrowserState.category_filter == node["key"],
-            "absolute -translate-x-1/2 -translate-y-1/2 rounded-none ring-2 ring-[#e4ff9b]/80 ring-offset-2 ring-offset-[#0A0A08] transition-transform hover:scale-125",
+            "absolute -translate-x-1/2 -translate-y-1/2 rounded-none ring-2 ring-[rgb(var(--ap-accent-soft-rgb)/0.80)] ring-offset-2 ring-offset-[rgb(var(--ap-ink-rgb))] transition-transform hover:scale-125",
             "absolute -translate-x-1/2 -translate-y-1/2 rounded-none opacity-80 transition-transform hover:scale-125 hover:opacity-100",
         ),
         style={
@@ -162,11 +162,11 @@ def _legend_row(node: CategoryNode) -> rx.Component:
         rx.el.div(
             rx.el.p(
                 node["name"],
-                class_name="text-[12px] font-semibold text-[#f2efe4] text-left truncate",
+                class_name="text-[12px] font-semibold text-[rgb(var(--ap-paper-rgb))] text-left truncate",
             ),
             rx.el.p(
                 f"{node['cultures']} cultures · {node['species']} espèces · {node['varieties']} variétés",
-                class_name="text-[10px] font-medium text-[#c9c5b4]/65 text-left truncate",
+                class_name="text-[10px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] text-left truncate",
             ),
             class_name="min-w-0 flex-1",
         ),
@@ -178,13 +178,13 @@ def _legend_row(node: CategoryNode) -> rx.Component:
                     "backgroundColor": node["color"],
                 },
             ),
-            class_name="hidden sm:block h-1.5 w-16 shrink-0 rounded-none bg-[#20241a] overflow-hidden",
+            class_name="hidden sm:block h-1.5 w-16 shrink-0 rounded-none bg-[rgb(var(--ap-surface-control-rgb))] overflow-hidden",
         ),
         on_click=CatalogBrowserState.select_category(node["key"]),
         class_name=rx.cond(
             CatalogBrowserState.category_filter == node["key"],
-            "flex items-center gap-2.5 w-full rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/[0.08] px-3 py-2 transition-colors",
-            "flex items-center gap-2.5 w-full rounded-none border border-[#f2efe4]/10 bg-[#0d0f09] px-3 py-2 hover:border-[#d8fa5e]/25 hover:bg-[#16190f] transition-colors",
+            "flex items-center gap-2.5 w-full rounded-none border border-[rgb(var(--ap-accent-rgb)/0.40)] bg-[rgb(var(--ap-accent-rgb))]/[0.08] px-3 py-2 transition-colors",
+            "flex items-center gap-2.5 w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.15)] bg-[rgb(var(--ap-surface-soft-rgb))] px-3 py-2 hover:border-[rgb(var(--ap-accent-rgb)/0.25)] hover:bg-[rgb(var(--ap-surface-muted-rgb))] transition-colors",
         ),
     )
 
@@ -196,61 +196,61 @@ def catalog_radar() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Planche d'herbier",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     "Radar agronomique du référentiel",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 rx.el.p(
                     "Chaque branche est une famille cultivée : sa longueur et "
                     "son bourgeon traduisent la richesse variétale décrite.",
-                    class_name="text-[11px] font-medium text-[#c9c5b4]/65 mt-1.5 max-w-md",
+                    class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mt-1.5 max-w-md",
                 ),
                 class_name="min-w-0",
             ),
             rx.el.span(
                 f"{CatalogBrowserState.totals['reference']} variétés de référence · {CatalogBrowserState.totals['linked']} reliées",
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-[11px] font-semibold text-[#c9c5b4]/60 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit",
             ),
             class_name="flex flex-col sm:flex-row sm:items-end justify-between gap-3 w-full",
         ),
         rx.cond(
             CatalogBrowserState.is_loading,
             rx.el.div(
-                class_name="ap-skeleton bg-[#191C13]/70 h-80 w-full mt-5"
+                class_name="ap-skeleton bg-[rgb(var(--ap-surface-high-rgb)/0.70)] h-80 w-full mt-5"
             ),
             rx.el.div(
                 rx.el.div(
                     rx.el.div(
                         rx.el.div(
-                            class_name="absolute inset-0 rounded-none border border-[#f2efe4]/10"
+                            class_name="absolute inset-0 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.15)]"
                         ),
                         rx.el.div(
-                            class_name="absolute inset-[14%] rounded-none border border-[#f2efe4]/10"
+                            class_name="absolute inset-[14%] rounded-none border border-[rgb(var(--ap-paper-rgb)/0.15)]"
                         ),
                         rx.el.div(
-                            class_name="absolute inset-[28%] rounded-none border border-dashed border-[#d8fa5e]/15"
+                            class_name="absolute inset-[28%] rounded-none border border-dashed border-[rgb(var(--ap-accent-rgb)/0.15)]"
                         ),
                         rx.el.div(
-                            class_name="absolute inset-[42%] rounded-none border border-[#f2efe4]/10"
+                            class_name="absolute inset-[42%] rounded-none border border-[rgb(var(--ap-paper-rgb)/0.15)]"
                         ),
                         rx.foreach(CatalogBrowserState.nodes, _radar_spoke),
                         rx.foreach(CatalogBrowserState.nodes, _radar_dot),
                         rx.el.div(
                             rx.icon(
                                 "leaf",
-                                class_name="h-5 w-5 text-[#d8fa5e]",
+                                class_name="h-5 w-5 text-[rgb(var(--ap-accent-rgb))]",
                             ),
                             rx.el.span(
                                 CatalogBrowserState.totals["varieties"],
-                                class_name="ap-serif text-2xl text-[#f2efe4] leading-none",
+                                class_name="ap-serif text-2xl text-[rgb(var(--ap-paper-rgb))] leading-none",
                             ),
                             rx.el.span(
                                 "variétés",
-                                class_name="ap-eyebrow text-[#c9c5b4]/65",
+                                class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                             ),
-                            class_name="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-0.5 rounded-none border border-[#d8fa5e]/20 bg-[#0A0A08]/85 h-24 w-24 justify-center ",
+                            class_name="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-0.5 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.20)] bg-[rgb(var(--ap-ink-rgb)/0.85)] h-24 w-24 justify-center ",
                         ),
                         class_name="relative aspect-square w-full max-w-[24rem]",
                     ),
@@ -263,5 +263,5 @@ def catalog_radar() -> rx.Component:
                 class_name="flex flex-col lg:flex-row items-start gap-6 w-full mt-5",
             ),
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6",
     )

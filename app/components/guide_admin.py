@@ -12,9 +12,9 @@ from app.components.guide_admin_versions import (
 from app.states.guide_admin_state import ContentRow, GuideAdminState
 
 _SELECT = (
-    "w-full appearance-none rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] "
-    "py-2.5 pl-3 pr-9 text-sm font-medium text-[#f2efe4] "
-    "focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 "
+    "w-full appearance-none rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] "
+    "py-2.5 pl-3 pr-9 text-sm font-medium text-[rgb(var(--ap-paper-rgb))] "
+    "focus:border-[rgb(var(--ap-accent-rgb)/0.50)] focus:ring-2 focus:ring-[rgb(var(--ap-accent-rgb)/0.20)] "
     "outline-hidden transition-colors cursor-pointer"
 )
 
@@ -23,20 +23,20 @@ def _stat(label: str, value: rx.Var | int, caption: str) -> rx.Component:
     return rx.el.div(
         rx.el.span(
             label,
-            class_name="ap-eyebrow text-[#c9c5b4]/65",
+            class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
         ),
         rx.el.div(
             rx.el.span(
                 value,
-                class_name="ap-serif text-2xl leading-none text-[#f2efe4]",
+                class_name="ap-serif text-2xl leading-none text-[rgb(var(--ap-paper-rgb))]",
             ),
             rx.el.span(
                 caption,
-                class_name="text-[11px] font-medium text-[#c9c5b4]/65 mb-0.5",
+                class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.86)] mb-0.5",
             ),
             class_name="flex items-end gap-1.5 mt-2",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-3",
+        class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-3",
     )
 
 
@@ -45,21 +45,21 @@ def _header() -> rx.Component:
         rx.el.div(
             rx.el.div(
                 rx.el.div(
-                    rx.icon("square-pen", class_name="h-4 w-4 text-[#d8fa5e]"),
+                    rx.icon("square-pen", class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
                     rx.el.span(
                         "Pupitre éditorial",
-                        class_name="ap-eyebrow text-[#D8FA5E]",
+                        class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb))]",
                     ),
                     class_name="flex items-center gap-2",
                 ),
                 rx.el.h2(
                     "Administration du Guide Agricole",
-                    class_name="ap-serif text-3xl md:text-4xl text-[#f2efe4] mt-2",
+                    class_name="ap-serif text-3xl md:text-4xl text-[rgb(var(--ap-paper-rgb))] mt-2",
                 ),
                 rx.el.p(
                     "Rédiger, relire, publier et archiver les contenus du guide, "
                     "version par version, sans jamais supprimer la mémoire éditoriale.",
-                    class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 max-w-2xl",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] mt-2 max-w-2xl",
                 ),
                 class_name="min-w-0 flex-1",
             ),
@@ -69,27 +69,27 @@ def _header() -> rx.Component:
                         GuideAdminState.is_loading,
                         rx.icon(
                             "loader-circle",
-                            class_name="h-4 w-4 animate-spin text-[#c9c5b4]/70",
+                            class_name="h-4 w-4 animate-spin text-[rgb(var(--ap-paper-muted-rgb)/0.90)]",
                         ),
                         rx.icon(
                             "refresh-cw",
-                            class_name="h-4 w-4 text-[#c9c5b4]/70",
+                            class_name="h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.90)]",
                         ),
                     ),
                     rx.el.span("Recharger le registre"),
                     on_click=GuideAdminState.load_admin,
-                    class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2 text-xs font-semibold text-[#c9c5b4]/70 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit",
+                    class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2 text-xs font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors w-fit",
                 ),
                 rx.el.button(
-                    rx.icon("plus", class_name="h-4 w-4 stroke-[#0A0A08]"),
+                    rx.icon("plus", class_name="h-4 w-4 stroke-[rgb(var(--ap-ink-rgb))]"),
                     rx.el.span(
                         f"Nouveau · {GuideAdminState.kind_label}",
-                        class_name="text-[#0A0A08]",
+                        class_name="text-[rgb(var(--ap-ink-rgb))]",
                     ),
                     on_click=GuideAdminState.start_create(
                         GuideAdminState.content_kind
                     ),
-                    class_name="ap-mono inline-flex w-fit items-center gap-2 bg-[#D8FA5E] px-4 py-2.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[#0A0A08] transition-colors hover:bg-[#E4FF9B]",
+                    class_name="ap-mono inline-flex w-fit items-center gap-2 bg-[rgb(var(--ap-accent-rgb))] px-4 py-2.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[rgb(var(--ap-ink-rgb))] transition-colors hover:bg-[rgb(var(--ap-accent-soft-rgb))]",
                 ),
                 class_name="flex flex-wrap items-start gap-2 lg:justify-end",
             ),
@@ -124,17 +124,17 @@ def _header() -> rx.Component:
             rx.el.div(
                 rx.icon(
                     "circle-check",
-                    class_name="h-4 w-4 stroke-[#d8fa5e] shrink-0",
+                    class_name="h-4 w-4 stroke-[rgb(var(--ap-accent-rgb))] shrink-0",
                 ),
                 rx.el.p(
                     GuideAdminState.notice,
-                    class_name="text-[12px] font-semibold text-[#efffc4]/90",
+                    class_name="text-[12px] font-semibold text-[rgb(var(--ap-accent-pale-rgb)/0.90)]",
                 ),
-                class_name="flex items-center gap-2 w-full rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/[0.07] px-4 py-2.5 mt-4",
+                class_name="flex items-center gap-2 w-full rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb))]/[0.07] px-4 py-2.5 mt-4",
             ),
             rx.fragment(),
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6 md:p-8",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6 md:p-8",
     )
 
 
@@ -144,20 +144,20 @@ def _kind_tab(item: tuple[str, str, str]) -> rx.Component:
             item[2],
             class_name=rx.cond(
                 GuideAdminState.content_kind == item[0],
-                "h-4 w-4 text-[#d8fa5e]",
-                "h-4 w-4 text-[#c9c5b4]/65",
+                "h-4 w-4 text-[rgb(var(--ap-accent-rgb))]",
+                "h-4 w-4 text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
             ),
         ),
         rx.el.span(item[1]),
         rx.el.span(
             GuideAdminState.kind_totals[item[0]],
-            class_name="rounded-none bg-[#20241a] px-1.5 py-0.5 text-[9px] font-bold text-[#c9c5b4]/70 w-fit",
+            class_name="rounded-none bg-[rgb(var(--ap-surface-control-rgb))] px-1.5 py-0.5 text-[9px] font-bold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] w-fit",
         ),
         on_click=GuideAdminState.set_content_kind(item[0]),
         class_name=rx.cond(
             GuideAdminState.content_kind == item[0],
-            "flex items-center gap-2 rounded-none border border-[#d8fa5e]/45 bg-[#d8fa5e]/15 px-4 py-2 text-xs font-semibold text-[#efffc4] transition-colors w-fit",
-            "flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2 text-xs font-medium text-[#c9c5b4]/60 hover:border-[#d8fa5e]/30 hover:text-[#f2efe4] transition-colors w-fit",
+            "flex items-center gap-2 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.45)] bg-[rgb(var(--ap-accent-rgb)/0.15)] px-4 py-2 text-xs font-semibold text-[rgb(var(--ap-accent-pale-rgb))] transition-colors w-fit",
+            "flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2 text-xs font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit",
         ),
     )
 
@@ -167,13 +167,13 @@ def _filters() -> rx.Component:
         rx.el.div(
             rx.icon(
                 "search",
-                class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d8fa5e]/80 pointer-events-none",
+                class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[rgb(var(--ap-accent-rgb)/0.80)] pointer-events-none",
             ),
             rx.el.input(
                 placeholder="Rechercher un titre, un identifiant, un extrait…",
                 default_value=GuideAdminState.search,
                 on_change=GuideAdminState.set_search.debounce(400),
-                class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-2.5 pl-9 pr-3 text-sm font-medium text-[#f2efe4] placeholder:text-[#c9c5b4]/60 focus:border-[#d8fa5e]/50 focus:ring-2 focus:ring-[#d8fa5e]/20 outline-hidden transition-colors",
+                class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] py-2.5 pl-9 pr-3 text-sm font-medium text-[rgb(var(--ap-paper-rgb))] placeholder:text-[rgb(var(--ap-paper-muted-rgb)/0.82)] focus:border-[rgb(var(--ap-accent-rgb)/0.50)] focus:ring-2 focus:ring-[rgb(var(--ap-accent-rgb)/0.20)] outline-hidden transition-colors",
             ),
             class_name="relative flex-1 min-w-[16rem]",
         ),
@@ -190,7 +190,7 @@ def _filters() -> rx.Component:
             ),
             rx.icon(
                 "chevron-down",
-                class_name="absolute right-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#c9c5b4]/65 pointer-events-none",
+                class_name="absolute right-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
             ),
             class_name="relative w-full sm:w-56",
         ),
@@ -207,7 +207,7 @@ def _filters() -> rx.Component:
             ),
             rx.icon(
                 "chevron-down",
-                class_name="absolute right-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#c9c5b4]/65 pointer-events-none",
+                class_name="absolute right-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
             ),
             class_name="relative w-full sm:w-48",
         ),
@@ -215,7 +215,7 @@ def _filters() -> rx.Component:
             rx.icon("rotate-ccw", class_name="h-3.5 w-3.5"),
             rx.el.span("Réinitialiser"),
             on_click=GuideAdminState.reset_filters,
-            class_name="flex items-center gap-2 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-2.5 text-xs font-semibold text-[#c9c5b4]/65 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit",
+            class_name="flex items-center gap-2 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-4 py-2.5 text-xs font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors w-fit",
         ),
         class_name="flex flex-wrap items-center gap-2 w-full mt-4",
     )
@@ -232,11 +232,11 @@ def _status_select(item: ContentRow) -> rx.Component:
             on_change=lambda value: GuideAdminState.set_content_status(
                 item["kind"], item["id"], value
             ),
-            class_name="appearance-none rounded-none border border-[#f2efe4]/12 bg-[#0A0A08] py-1 pl-3 pr-7 text-[10px] font-bold text-[#c9c5b4]/75 focus:border-[#d8fa5e]/50 outline-hidden cursor-pointer",
+            class_name="appearance-none rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-ink-rgb))] py-1 pl-3 pr-7 text-[10px] font-bold text-[rgb(var(--ap-paper-muted-rgb)/0.93)] focus:border-[rgb(var(--ap-accent-rgb)/0.50)] outline-hidden cursor-pointer",
         ),
         rx.icon(
             "chevron-down",
-            class_name="absolute right-2 top-1/2 -translate-y-1/2 h-3 w-3 text-[#c9c5b4]/65 pointer-events-none",
+            class_name="absolute right-2 top-1/2 -translate-y-1/2 h-3 w-3 text-[rgb(var(--ap-paper-muted-rgb)/0.86)] pointer-events-none",
         ),
         class_name="relative w-fit",
     )
@@ -249,43 +249,43 @@ def _content_row(item: ContentRow, key: str = "") -> rx.Component:
                 rx.el.div(
                     rx.el.span(
                         item["kind_label"],
-                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[9px] font-bold text-[#c9c5b4]/60 w-fit",
+                        class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[9px] font-bold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit",
                     ),
                     status_badge(item["status_label"], item["tone"]),
                     rx.el.span(
                         item["version_label"],
-                        class_name="rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-2 py-0.5 text-[9px] font-bold text-[#e4ff9b] w-fit",
+                        class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2 py-0.5 text-[9px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
                     ),
                     rx.el.span(
                         item["ref"],
-                        class_name="text-[9px] font-mono text-[#c9c5b4]/65 truncate",
+                        class_name="text-[9px] font-mono text-[rgb(var(--ap-paper-muted-rgb)/0.86)] truncate",
                     ),
                     class_name="flex flex-wrap items-center gap-1.5 w-full",
                 ),
                 rx.el.p(
                     item["title"],
-                    class_name="text-sm font-semibold text-[#f2efe4] mt-2",
+                    class_name="text-sm font-semibold text-[rgb(var(--ap-paper-rgb))] mt-2",
                 ),
                 rx.el.p(
                     item["excerpt"],
-                    class_name="text-[11px] font-medium text-[#c9c5b4]/55 leading-relaxed mt-1.5 line-clamp-2",
+                    class_name="text-[11px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.78)] leading-relaxed mt-1.5 line-clamp-2",
                 ),
                 rx.el.div(
                     rx.el.span(
                         item["category_name"],
-                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/55 w-fit",
+                        class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.78)] w-fit",
                     ),
                     rx.cond(
                         item["author"] != "",
                         rx.el.span(
                             item["author"],
-                            class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/55 w-fit",
+                            class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.78)] w-fit",
                         ),
                         rx.fragment(),
                     ),
                     rx.el.span(
                         item["date_label"],
-                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/55 w-fit",
+                        class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.78)] w-fit",
                     ),
                     class_name="flex flex-wrap items-center gap-1.5 w-full mt-3",
                 ),
@@ -299,7 +299,7 @@ def _content_row(item: ContentRow, key: str = "") -> rx.Component:
                     on_click=GuideAdminState.open_preview(
                         item["kind"], item["id"]
                     ),
-                    class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1.5 text-[11px] font-semibold text-[#c9c5b4]/65 hover:text-[#f2efe4] hover:border-[#d8fa5e]/30 transition-colors w-fit",
+                    class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1.5 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] hover:text-[rgb(var(--ap-paper-rgb))] hover:border-[rgb(var(--ap-accent-rgb)/0.30)] transition-colors w-fit",
                 ),
                 rx.el.button(
                     rx.icon("square-pen", class_name="h-3.5 w-3.5"),
@@ -307,7 +307,7 @@ def _content_row(item: ContentRow, key: str = "") -> rx.Component:
                     on_click=GuideAdminState.start_edit(
                         item["kind"], item["id"]
                     ),
-                    class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-3 py-1.5 text-[11px] font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit",
+                    class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-3 py-1.5 text-[11px] font-semibold text-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors w-fit",
                 ),
                 rx.cond(
                     item["status"] != "ARCHIVE",
@@ -317,11 +317,11 @@ def _content_row(item: ContentRow, key: str = "") -> rx.Component:
                         on_click=GuideAdminState.archive_content(
                             item["kind"], item["id"]
                         ),
-                        class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1.5 text-[11px] font-semibold text-[#c9c5b4]/55 hover:text-[#ffbcb0] hover:border-[#ff6b5a]/30 transition-colors w-fit",
+                        class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1.5 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.78)] hover:text-[rgb(var(--ap-warm-150-rgb))] hover:border-[rgb(var(--ap-danger-rgb)/0.30)] transition-colors w-fit",
                     ),
                     rx.el.span(
                         "Archivé",
-                        class_name="rounded-none border border-[#ff6b5a]/25 bg-[#f2452c]/10 px-3 py-1.5 text-[11px] font-semibold text-[#ffbcb0]/80 w-fit",
+                        class_name="rounded-none border border-[rgb(var(--ap-danger-rgb)/0.25)] bg-[rgb(var(--ap-flame-strong-rgb)/0.10)] px-3 py-1.5 text-[11px] font-semibold text-[rgb(var(--ap-warm-150-rgb)/0.80)] w-fit",
                     ),
                 ),
                 class_name="flex flex-wrap items-center gap-2 lg:flex-col lg:items-end shrink-0",
@@ -329,7 +329,7 @@ def _content_row(item: ContentRow, key: str = "") -> rx.Component:
             class_name="flex flex-col lg:flex-row gap-4 w-full",
         ),
         key=key,
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-4 hover:border-t-[#D8FA5E]/40 transition-colors",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-4 hover:border-t-[rgb(var(--ap-accent-rgb)/0.40)] transition-colors",
     )
 
 
@@ -339,17 +339,17 @@ def _register() -> rx.Component:
             rx.el.div(
                 rx.el.span(
                     "Registre des contenus",
-                    class_name="ap-eyebrow text-[#d8fa5e]/80",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                 ),
                 rx.el.h2(
                     f"{GuideAdminState.kind_label} du guide",
-                    class_name="ap-serif text-3xl text-[#f2efe4] mt-1",
+                    class_name="ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))] mt-1",
                 ),
                 class_name="min-w-0",
             ),
             rx.el.span(
                 f"{GuideAdminState.visible_count} fiche(s) affichée(s)",
-                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-xs font-bold text-[#c9c5b4]/70 w-fit",
+                class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1 text-xs font-bold text-[rgb(var(--ap-paper-muted-rgb)/0.90)] w-fit",
             ),
             class_name="flex flex-wrap items-end justify-between gap-3 w-full",
         ),
@@ -369,10 +369,10 @@ def _register() -> rx.Component:
                 class_name="flex flex-col gap-3 w-full mt-5",
             ),
             rx.el.div(
-                rx.icon("file-search", class_name="h-6 w-6 text-[#ff8a5b]"),
+                rx.icon("file-search", class_name="h-6 w-6 text-[rgb(var(--ap-flame-soft-rgb))]"),
                 rx.el.p(
                     "Aucune fiche ne correspond à ce filtrage éditorial.",
-                    class_name="text-sm font-medium text-[#c9c5b4]/60 mt-2 text-center",
+                    class_name="text-sm font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.82)] mt-2 text-center",
                 ),
                 rx.el.button(
                     rx.icon("plus", class_name="h-3.5 w-3.5"),
@@ -380,12 +380,12 @@ def _register() -> rx.Component:
                     on_click=GuideAdminState.start_create(
                         GuideAdminState.content_kind
                     ),
-                    class_name="flex items-center gap-1.5 rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-4 py-2 text-[11px] font-semibold text-[#e4ff9b] hover:bg-[#d8fa5e]/20 transition-colors w-fit mt-4",
+                    class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-4 py-2 text-[11px] font-semibold text-[rgb(var(--ap-accent-soft-rgb))] hover:bg-[rgb(var(--ap-accent-rgb)/0.20)] transition-colors w-fit mt-4",
                 ),
-                class_name="flex flex-col items-center justify-center rounded-none border border-[#f2efe4]/12 bg-[#101208] py-14 w-full mt-5",
+                class_name="flex flex-col items-center justify-center rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))] py-14 w-full mt-5",
             ),
         ),
-        class_name="border-t border-[#F2EFE4]/12 w-full pt-6",
+        class_name="border-t border-[rgb(var(--ap-paper-rgb)/0.18)] w-full pt-6",
     )
 
 
@@ -394,18 +394,18 @@ def _preview_block(title: str, body: rx.Var, icon: str) -> rx.Component:
         body != "",
         rx.el.div(
             rx.el.div(
-                rx.icon(icon, class_name="h-3.5 w-3.5 text-[#d8fa5e]/80"),
+                rx.icon(icon, class_name="h-3.5 w-3.5 text-[rgb(var(--ap-accent-rgb)/0.80)]"),
                 rx.el.span(
                     title,
-                    class_name="ap-eyebrow text-[#c9c5b4]/65",
+                    class_name="ap-eyebrow text-[rgb(var(--ap-paper-muted-rgb)/0.86)]",
                 ),
                 class_name="flex items-center gap-1.5",
             ),
             rx.el.p(
                 body,
-                class_name="text-[12px] font-medium text-[#c9c5b4]/70 leading-relaxed whitespace-pre-line mt-1.5",
+                class_name="text-[12px] font-medium text-[rgb(var(--ap-paper-muted-rgb)/0.90)] leading-relaxed whitespace-pre-line mt-1.5",
             ),
-            class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-3",
+            class_name="w-full rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-rgb))] p-3",
         ),
         rx.fragment(),
     )
@@ -417,15 +417,15 @@ def _preview() -> rx.Component:
         rx.el.section(
             rx.el.div(
                 rx.el.div(
-                    rx.icon("eye", class_name="h-4 w-4 text-[#d8fa5e]"),
+                    rx.icon("eye", class_name="h-4 w-4 text-[rgb(var(--ap-accent-rgb))]"),
                     rx.el.div(
                         rx.el.span(
                             "Aperçu du contenu",
-                            class_name="ap-eyebrow text-[#d8fa5e]/80",
+                            class_name="ap-eyebrow text-[rgb(var(--ap-accent-rgb)/0.80)]",
                         ),
                         rx.el.h3(
                             GuideAdminState.preview["title"],
-                            class_name="ap-serif text-2xl text-[#f2efe4] mt-0.5",
+                            class_name="ap-serif text-2xl text-[rgb(var(--ap-paper-rgb))] mt-0.5",
                         ),
                         class_name="min-w-0 flex-1",
                     ),
@@ -433,26 +433,26 @@ def _preview() -> rx.Component:
                         rx.icon("x", class_name="h-3.5 w-3.5"),
                         rx.el.span("Fermer"),
                         on_click=GuideAdminState.close_preview,
-                        class_name="flex items-center gap-1.5 rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1.5 text-[11px] font-semibold text-[#c9c5b4]/65 hover:text-[#f2efe4] transition-colors w-fit",
+                        class_name="flex items-center gap-1.5 rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-3 py-1.5 text-[11px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.86)] hover:text-[rgb(var(--ap-paper-rgb))] transition-colors w-fit",
                     ),
                     class_name="flex items-start gap-2.5 w-full",
                 ),
                 rx.el.div(
                     rx.el.span(
                         GuideAdminState.preview["kind_label"],
-                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2.5 py-0.5 text-[10px] font-bold text-[#c9c5b4]/60 w-fit",
+                        class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2.5 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-paper-muted-rgb)/0.82)] w-fit",
                     ),
                     rx.el.span(
                         GuideAdminState.preview["category_name"],
-                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2.5 py-0.5 text-[10px] font-semibold text-[#c9c5b4]/55 w-fit",
+                        class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2.5 py-0.5 text-[10px] font-semibold text-[rgb(var(--ap-paper-muted-rgb)/0.78)] w-fit",
                     ),
                     rx.el.span(
                         GuideAdminState.preview["version_label"],
-                        class_name="rounded-none border border-[#d8fa5e]/25 bg-[#d8fa5e]/10 px-2.5 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit",
+                        class_name="rounded-none border border-[rgb(var(--ap-accent-rgb)/0.25)] bg-[rgb(var(--ap-accent-rgb)/0.10)] px-2.5 py-0.5 text-[10px] font-bold text-[rgb(var(--ap-accent-soft-rgb))] w-fit",
                     ),
                     rx.el.span(
                         GuideAdminState.preview["ref"],
-                        class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-2.5 py-0.5 text-[10px] font-mono text-[#c9c5b4]/65 w-fit",
+                        class_name="rounded-none border border-[rgb(var(--ap-paper-rgb)/0.18)] bg-[rgb(var(--ap-surface-raised-rgb))] px-2.5 py-0.5 text-[10px] font-mono text-[rgb(var(--ap-paper-muted-rgb)/0.86)] w-fit",
                     ),
                     class_name="flex flex-wrap items-center gap-2 w-full mt-3",
                 ),
@@ -515,7 +515,7 @@ def _preview() -> rx.Component:
                 ),
                 class_name="grid grid-cols-1 xl:grid-cols-2 gap-3 w-full mt-5",
             ),
-            class_name="w-full rounded-none border border-[#d8fa5e]/20 bg-[#0A0A08]/75 p-6 ",
+            class_name="w-full rounded-none border border-[rgb(var(--ap-accent-rgb)/0.20)] bg-[rgb(var(--ap-ink-rgb)/0.75)] p-6 ",
         ),
         rx.fragment(),
     )

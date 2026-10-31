@@ -22,7 +22,7 @@ def configuration_page() -> rx.Component:
                 "Administration des accès",
                 rx.el.span(
                     rx.el.span("Configuration & "),
-                    rx.el.span("accès", class_name="ap-italic text-[#D8FA5E]"),
+                    rx.el.span("accès", class_name="ap-italic text-[rgb(var(--ap-accent-rgb))]"),
                 ),
                 "Administrez les menus, les rôles et les comptes connectés. "
                 "Consultez les droits effectifs et le journal des modifications.",
@@ -43,8 +43,8 @@ def configuration_page() -> rx.Component:
                 "Les refus sont prioritaires. La Configuration reste activée et "
                 "au moins un administrateur doit conserver son accès.",
                 class_name=(
-                    "mt-5 border-l-2 border-[#FF5A2B] pl-3 text-[12px] "
-                    "leading-relaxed text-[#FF8A5B]"
+                    "mt-5 border-l-2 border-[rgb(var(--ap-flame-rgb))] pl-3 text-[12px] "
+                    "leading-relaxed text-[rgb(var(--ap-flame-soft-rgb))]"
                 ),
             ),
             rx.cond(
@@ -52,13 +52,13 @@ def configuration_page() -> rx.Component:
                 rx.el.div(
                     rx.icon(
                         "octagon-alert",
-                        class_name="h-4 w-4 shrink-0 text-[#FF8A5B]",
+                        class_name="h-4 w-4 shrink-0 text-[rgb(var(--ap-flame-soft-rgb))]",
                     ),
                     rx.el.div(
                         rx.el.p(
                             MenuConfigurationState.error,
                             role="alert",
-                            class_name="text-sm text-[#FFBCB0]",
+                            class_name="text-sm text-[rgb(var(--ap-warm-150-rgb))]",
                         ),
                         action_button(
                             "Réessayer",
@@ -70,8 +70,8 @@ def configuration_page() -> rx.Component:
                         class_name="min-w-0",
                     ),
                     class_name=(
-                        "flex items-start gap-3 border-l-2 border-[#FF5A2B] "
-                        "bg-[#FF5A2B]/[0.06] px-4 py-4 mt-6"
+                        "flex items-start gap-3 border-l-2 border-[rgb(var(--ap-flame-rgb))] "
+                        "bg-[rgb(var(--ap-flame-rgb))]/[0.06] px-4 py-4 mt-6"
                     ),
                 ),
                 rx.fragment(),
@@ -83,10 +83,10 @@ def configuration_page() -> rx.Component:
                         rx.el.p(
                             "Chargement de la session et de la configuration…",
                             role="status",
-                            class_name="text-sm text-[#c9c5b4]",
+                            class_name="text-sm text-[rgb(var(--ap-paper-muted-rgb))]",
                         ),
                         rx.el.div(
-                            class_name="ap-skeleton bg-[#191C13]/70 mt-4 h-40 w-full"
+                            class_name="ap-skeleton bg-[rgb(var(--ap-surface-high-rgb)/0.70)] mt-4 h-40 w-full"
                         ),
                         class_name="w-full",
                     ),
@@ -98,17 +98,17 @@ def configuration_page() -> rx.Component:
                             rx.el.section(
                                 rx.icon(
                                     "shield",
-                                    class_name="h-8 w-8 text-[#ff8a5b]",
+                                    class_name="h-8 w-8 text-[rgb(var(--ap-flame-soft-rgb))]",
                                 ),
                                 rx.el.h2(
                                     "Accès réservé à l’administrateur",
-                                    class_name="mt-3 ap-serif text-3xl text-[#f2efe4]",
+                                    class_name="mt-3 ap-serif text-3xl text-[rgb(var(--ap-paper-rgb))]",
                                 ),
                                 rx.el.p(
                                     "Votre session est valide, mais les droits de configuration requis ne sont pas accordés à votre compte.",
-                                    class_name="mt-3 text-sm text-[#c9c5b4]/80",
+                                    class_name="mt-3 text-sm text-[rgb(var(--ap-paper-muted-rgb)/0.95)]",
                                 ),
-                                class_name="w-full rounded-none border border-[#ff8a5b]/20 bg-[#14160F] p-6",
+                                class_name="w-full rounded-none border border-[rgb(var(--ap-flame-soft-rgb)/0.20)] bg-[rgb(var(--ap-surface-raised-rgb))] p-6",
                             ),
                         ),
                         login_panel(),
