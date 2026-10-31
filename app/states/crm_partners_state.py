@@ -490,6 +490,8 @@ class CrmPartnersState(rx.State):
 
     space: str = "clients"
     is_loading: bool = False
+    loaded_space: str = ""
+    loading_space: str = ""
     is_saving: bool = False
     kind_filter: str = ""
     status_filter: str = ""
@@ -1454,24 +1456,53 @@ class CrmPartnersState(rx.State):
 
     @rx.event
     async def enter_space(self, space: str):
-        self.space = space if space in SPACE_TITLES else "partenaires"
+        target = space if space in SPACE_TITLES else "partenaires"
+        if target == self.loading_space:
+            return
+        if target == self.space and target == self.loaded_space:
+            # Déjà chargé côté serveur (navigation) : le montage ne recharge pas.
+            return
+        self.space = target
         self.kind_filter = ""
         self.status_filter = ""
         self.selected_id = 0
         yield CrmPartnersState.load_space
 
+    async def _load(self) -> None:
+        """Chargement complet de l'espace tiers, indépendant du montage."""
+        self.is_loading = True
+        self.loading_space = self.space
+        try:
+            await ensure_local_database()
+            await ensure_crm_tables()
+            await asyncio.to_thread(seed_crm_if_empty)
+            await self._fetch_partners()
+            if self.selected_id == 0 and self.partners:
+                self.selected_id = self.partners[0]["id"]
+            await self._fetch_detail()
+            self.loaded_space = self.space
+        finally:
+            self.is_loading = False
+            self.loading_space = ""
+
     @rx.event
     async def load_space(self):
         self.is_loading = True
         yield
-        await ensure_local_database()
-        await ensure_crm_tables()
-        await asyncio.to_thread(seed_crm_if_empty)
-        await self._fetch_partners()
-        if self.selected_id == 0 and self.partners:
-            self.selected_id = self.partners[0]["id"]
-        await self._fetch_detail()
-        self.is_loading = False
+        await self._load()
+
+    async def enter_space_now(self, space: str) -> None:
+        """Prépare et charge un espace tiers depuis un autre état."""
+        target = space if space in SPACE_TITLES else "partenaires"
+        if target == self.loading_space:
+            return
+        if target == self.space and target == self.loaded_space:
+            return
+        self.space = target
+        self.kind_filter = ""
+        self.status_filter = ""
+        self.selected_id = 0
+        await self._load()
 
     @rx.event
     async def refresh(self):

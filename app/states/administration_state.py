@@ -361,7 +361,7 @@ class AdministrationState(rx.State):
                         """
                         SELECT r.id, r.key, r.label, COALESCE(r.level, 0),
                                COALESCE(r.icon, 'shield'),
-                               COALESCE(r.color_hex, '#a3e635'),
+                               COALESCE(r.color_hex, '#D8FA5E'),
                                COALESCE(r.tagline, ''),
                                (SELECT COUNT(*) FROM agripro_user_role ur
                                  WHERE ur.role_id = r.id),

@@ -760,7 +760,7 @@ class GuideState(rx.State):
             "difficulty_label": "",
             "estimated_minutes": 0,
             "icon": "graduation-cap",
-            "color": "#a3e635",
+            "color": "#D8FA5E",
             "step_count": 0,
         }
 

@@ -17,24 +17,24 @@ async def main():
     assert state.is_loading is False
     assert state.kpis["users"] >= 6
     assert state.kpis["roles"] >= 6
-    assert state.users.length() >= 6
-    assert state.visible_users.length() == state.users.length()
-    assert state.functions.length() >= 10
-    assert state.roles.length() >= 6
-    assert state.teams.length() >= 3
-    assert state.permission_matrix.length() >= 10
+    assert len(state.users) >= 6
+    assert len(state.visible_users) == len(state.users)
+    assert len(state.functions) >= 10
+    assert len(state.roles) >= 6
+    assert len(state.teams) >= 3
+    assert len(state.permission_matrix) >= 10
 
     user_id = state.selected_user_id
     assert user_id > 0
     assert state.selected_user["id"] == user_id
-    assert state.effective_permissions.length() >= 1
+    assert len(state.effective_permissions) >= 1
     assert isinstance(state.scope_parcels, list)
 
     await run_event(state.set_query, "irrigation")
     assert (state.query == "irrigation") & (state.search == "irrigation")
-    assert state.visible_users.length() >= 1
+    assert len(state.visible_users) >= 1
     await run_event(state.reset_filters)
-    assert (state.query == "") & (state.users.length() >= 6)
+    assert (state.query == "") & (len(state.users) >= 6)
 
     await run_event(state.select_user, user_id)
     assert state.selected_user_id == user_id
@@ -61,7 +61,7 @@ async def main():
     assert logged >= 2, logged
 
     print(
-        f"✓ {state.users.length()} utilisateurs, {state.roles.length()} rôles, {state.permission_matrix.length()} modules, {logged} changement(s) tracé(s)"
+        f"✓ {len(state.users)} utilisateurs, {len(state.roles)} rôles, {len(state.permission_matrix)} modules, {logged} changement(s) tracé(s)"
     )
     print("=== Test réussi ===")
 

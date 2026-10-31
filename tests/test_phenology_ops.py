@@ -74,7 +74,7 @@ async def main():
     await run_event(ops.load_operational)
     assert ops.is_loading is False
     assert ops.row_count > 0
-    assert ops.stage_options.length() > 0
+    assert len(ops.stage_options) > 0
     first_stage = ops.rows[0]["stage_name"]
     await run_event(ops.set_stage_filter, first_stage)
     for row in ops.rows:
@@ -85,7 +85,7 @@ async def main():
     search = PhenologySearchState()
     await run_event(search.load_index)
     assert search.total_hits > 0
-    assert search.sections.length() > 0
+    assert len(search.sections) > 0
     await run_event(search.set_term, "tallage")
     await run_event(search.reset_index)
     assert search.term == ""

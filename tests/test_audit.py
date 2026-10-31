@@ -21,12 +21,12 @@ async def main():
     assert state.generated_label != "", "La date d'audit doit être calculée"
 
     # --- Cartographie des modules ---------------------------------------
-    assert state.modules.length() == len(MODULE_SPECS), (
+    assert len(state.modules) == len(MODULE_SPECS), (
         "Chaque module applicatif doit être audité"
     )
     keys = [item["key"] for item in state.modules]
     for spec in MODULE_SPECS:
-        assert keys.contains(spec["key"]), f"Module manquant : {spec['key']}"
+        assert (spec["key"]) in keys, f"Module manquant : {spec['key']}"
         assert APP_ROUTES.count(spec["route"]) == 1, (
             f"Route non enregistrée : {spec['route']}"
         )
@@ -49,20 +49,20 @@ async def main():
         )
 
     # --- Entités de données ----------------------------------------------
-    assert state.entities.length() == len(ENTITY_SPECS), (
+    assert len(state.entities) == len(ENTITY_SPECS), (
         "Toutes les entités du référentiel doivent être comptées"
     )
     tables = [item["table"] for item in state.entities]
     for spec in ENTITY_SPECS:
-        assert tables.contains(spec["table"]), (
+        assert (spec["table"]) in tables, (
             f"Entité absente de l'audit : {spec['table']}"
         )
     core = [item for item in state.entities if item["is_core"]]
-    assert core.length() > 0, "Des entités structurantes sont attendues"
+    assert len(core) > 0, "Des entités structurantes sont attendues"
     assert state.kpis["records"] > 0, "Des enregistrements réels sont attendus"
 
     # --- Couverture éditoriale -------------------------------------------
-    assert state.categories.length() > 0, (
+    assert len(state.categories) > 0, (
         "Les catégories du Guide doivent être lues"
     )
     for item in state.categories:
@@ -96,7 +96,7 @@ async def main():
     assert state.status_filter == "TOUS"
     assert state.visible_issue_count == state.issue_count
 
-    if state.modules.length() > 0:
+    if len(state.modules) > 0:
         module_key = state.modules[0]["key"]
         await run_event(state.set_module_filter, module_key)
         for item in state.visible_issues:
@@ -116,10 +116,10 @@ async def main():
     )
 
     print(
-        f"✓ {state.modules.length()} modules "
+        f"✓ {len(state.modules)} modules "
         f"(couverture moyenne {state.kpis['coverage']:.0f}%), "
-        f"{state.entities.length()} entités, "
-        f"{state.categories.length()} catégories, "
+        f"{len(state.entities)} entités, "
+        f"{len(state.categories)} catégories, "
         f"{state.issue_count} constat(s) dont {state.kpis['blocking']:.0f} bloquant(s)"
     )
     print("=== Test réussi ===")

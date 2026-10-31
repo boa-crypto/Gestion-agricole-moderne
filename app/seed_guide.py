@@ -107,8 +107,8 @@ CATEGORIES: list[dict[str, str | int]] = [
             "récolte → charge, et rôle de chaque module du cockpit."
         ),
         "icon": "compass",
-        "color_hex": "#a3e635",
-        "accent_hex": "#fbbf24",
+        "color_hex": "#D8FA5E",
+        "accent_hex": "#FF8A5B",
         "module_route": "/",
         "position": 1,
     },
@@ -121,8 +121,8 @@ CATEGORIES: list[dict[str, str | int]] = [
             "coordonnées et contours cartographiques."
         ),
         "icon": "map",
-        "color_hex": "#4ade80",
-        "accent_hex": "#a3e635",
+        "color_hex": "#A9C98B",
+        "accent_hex": "#D8FA5E",
         "module_route": "/parcelles",
         "position": 2,
     },
@@ -135,8 +135,8 @@ CATEGORIES: list[dict[str, str | int]] = [
             "avancement et état sanitaire."
         ),
         "icon": "sprout",
-        "color_hex": "#22c55e",
-        "accent_hex": "#facc15",
+        "color_hex": "#8FB37A",
+        "accent_hex": "#FFC46B",
         "module_route": "/parcelles",
         "position": 3,
     },
@@ -149,8 +149,8 @@ CATEGORIES: list[dict[str, str | int]] = [
             "clôture des interventions."
         ),
         "icon": "clipboard-list",
-        "color_hex": "#84cc16",
-        "accent_hex": "#fb923c",
+        "color_hex": "#C2E847",
+        "accent_hex": "#FF9E7A",
         "module_route": "/traitements",
         "position": 4,
     },
@@ -163,8 +163,8 @@ CATEGORIES: list[dict[str, str | int]] = [
             "équipements d'irrigation."
         ),
         "icon": "droplets",
-        "color_hex": "#38bdf8",
-        "accent_hex": "#a3e635",
+        "color_hex": "#9CC3FF",
+        "accent_hex": "#D8FA5E",
         "module_route": "/traitements",
         "position": 5,
     },
@@ -177,8 +177,8 @@ CATEGORIES: list[dict[str, str | int]] = [
             "amendements et matière organique."
         ),
         "icon": "flask-conical",
-        "color_hex": "#f59e0b",
-        "accent_hex": "#a3e635",
+        "color_hex": "#FF6A38",
+        "accent_hex": "#D8FA5E",
         "module_route": "/traitements",
         "position": 6,
     },
@@ -191,8 +191,8 @@ CATEGORIES: list[dict[str, str | int]] = [
             "rentrée et avant récolte, registre phytosanitaire."
         ),
         "icon": "shield-check",
-        "color_hex": "#f97316",
-        "accent_hex": "#fde68a",
+        "color_hex": "#FF5A2B",
+        "accent_hex": "#FFE4C4",
         "module_route": "/traitements",
         "position": 7,
     },
@@ -205,8 +205,8 @@ CATEGORIES: list[dict[str, str | int]] = [
             "et valorisation du stock."
         ),
         "icon": "package",
-        "color_hex": "#14b8a6",
-        "accent_hex": "#a3e635",
+        "color_hex": "#7FD3B9",
+        "accent_hex": "#D8FA5E",
         "module_route": "/traitements",
         "position": 8,
     },
@@ -219,8 +219,8 @@ CATEGORIES: list[dict[str, str | int]] = [
             "réglementaires et coûts d'atelier."
         ),
         "icon": "wrench",
-        "color_hex": "#94a3b8",
-        "accent_hex": "#fbbf24",
+        "color_hex": "#A8A79C",
+        "accent_hex": "#FF8A5B",
         "module_route": "/maintenance",
         "position": 9,
     },
@@ -233,8 +233,8 @@ CATEGORIES: list[dict[str, str | int]] = [
             "affectations et heures réalisées."
         ),
         "icon": "users-round",
-        "color_hex": "#c084fc",
-        "accent_hex": "#a3e635",
+        "color_hex": "#D3C6FF",
+        "accent_hex": "#D8FA5E",
         "module_route": "/employes",
         "position": 10,
     },
@@ -247,8 +247,8 @@ CATEGORIES: list[dict[str, str | int]] = [
             "face au rendement visé et valorisation."
         ),
         "icon": "wheat",
-        "color_hex": "#eab308",
-        "accent_hex": "#a3e635",
+        "color_hex": "#F0A84A",
+        "accent_hex": "#D8FA5E",
         "module_route": "/traitements",
         "position": 11,
     },
@@ -261,8 +261,8 @@ CATEGORIES: list[dict[str, str | int]] = [
             "brute par parcelle et pilotage de trésorerie."
         ),
         "icon": "coins",
-        "color_hex": "#fbbf24",
-        "accent_hex": "#a3e635",
+        "color_hex": "#FF8A5B",
+        "accent_hex": "#D8FA5E",
         "module_route": "/charges",
         "position": 12,
     },
@@ -2091,7 +2091,7 @@ PATHS: list[dict] = [
         "difficulty": "DECOUVERTE",
         "estimated_minutes": 55,
         "icon": "graduation-cap",
-        "color_hex": "#a3e635",
+        "color_hex": "#D8FA5E",
         "position": 1,
         "steps": [
             {
@@ -2149,7 +2149,7 @@ PATHS: list[dict] = [
         "difficulty": "INTERMEDIAIRE",
         "estimated_minutes": 50,
         "icon": "shield-check",
-        "color_hex": "#f97316",
+        "color_hex": "#FF5A2B",
         "position": 2,
         "steps": [
             {
@@ -2198,7 +2198,7 @@ PATHS: list[dict] = [
         "difficulty": "AVANCE",
         "estimated_minutes": 45,
         "icon": "coins",
-        "color_hex": "#fbbf24",
+        "color_hex": "#FF8A5B",
         "position": 3,
         "steps": [
             {
@@ -2603,7 +2603,7 @@ async def seed_guide_data() -> None:
                     "status": "PUBLIE",
                     "estimated_minutes": int(item.get("estimated_minutes", 30)),
                     "icon": item.get("icon", "graduation-cap"),
-                    "color_hex": item.get("color_hex", "#a3e635"),
+                    "color_hex": item.get("color_hex", "#D8FA5E"),
                     "version_label": GUIDE_VERSION,
                     "position": int(item.get("position", 0)),
                 }

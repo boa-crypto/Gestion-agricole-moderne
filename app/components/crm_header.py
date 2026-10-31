@@ -1,48 +1,32 @@
+"""En-tête éditorial du cockpit commercial (CRM & partenaires)."""
+
+from __future__ import annotations
+
 import reflex as rx
 
+from app.components.design import (
+    index_rail,
+    index_tab,
+    meta_ledger,
+    meta_row,
+    page_hero,
+)
 from app.components.guide_help import help_button
 from app.states.crm_state import CrmState, Tab
 from app.states.menu_auth_state import MenuAuthState
 
 
-def _pill(icon: str, label: rx.Var | str) -> rx.Component:
-    return rx.el.div(
-        rx.icon(icon, class_name="h-3.5 w-3.5 text-lime-300"),
-        rx.el.span(label, class_name="text-xs font-medium text-emerald-50/80"),
-        class_name="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-xl w-fit",
-    )
-
-
 def _tab(item: Tab) -> rx.Component:
-    return rx.el.button(
-        rx.icon(
-            item["icon"],
-            class_name=rx.cond(
-                CrmState.active_tab == item["key"],
-                "h-3.5 w-3.5 stroke-[#04140d]",
-                "h-3.5 w-3.5 stroke-emerald-100/60",
-            ),
-        ),
-        rx.el.span(
-            item["label"],
-            class_name=rx.cond(
-                CrmState.active_tab == item["key"],
-                "text-xs font-semibold text-[#04140d]",
-                "text-xs font-semibold text-emerald-100/70",
-            ),
-        ),
-        type="button",
+    return index_tab(
+        item["label"],
+        active=CrmState.active_tab == item["key"],
         on_click=CrmState.set_tab(item["key"]),
-        class_name=rx.cond(
-            CrmState.active_tab == item["key"],
-            "flex items-center gap-2 rounded-full bg-lime-300 px-4 py-2 transition-colors w-fit",
-            "flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 hover:border-lime-300/35 hover:bg-white/[0.08] transition-colors w-fit",
-        ),
+        icon=item["icon"],
     )
 
 
 def crm_tabs() -> rx.Component:
-    return rx.el.nav(
+    return index_rail(
         rx.foreach(
             CrmState.tabs,
             lambda item: rx.cond(
@@ -51,62 +35,56 @@ def crm_tabs() -> rx.Component:
                 rx.fragment(),
             ),
         ),
-        aria_label="Navigation CRM",
-        class_name="flex flex-wrap items-center gap-2 w-full",
+        label="Navigation CRM",
+        class_name="mt-8",
+    )
+
+
+def _refresh() -> rx.Component:
+    return rx.el.button(
+        rx.cond(
+            CrmState.is_loading,
+            rx.icon("loader-circle", class_name="h-3.5 w-3.5 animate-spin"),
+            rx.icon("refresh-cw", class_name="h-3.5 w-3.5"),
+        ),
+        rx.el.span("Actualiser"),
+        type="button",
+        on_click=CrmState.load_crm,
+        disabled=CrmState.is_loading,
+        class_name=(
+            "ap-mono inline-flex w-fit items-center justify-center gap-2 border "
+            "border-[#D8FA5E] bg-[#D8FA5E] px-3.5 py-2.5 text-[10px] uppercase "
+            "tracking-[0.18em] text-[#0A0A08] transition-colors "
+            "hover:border-[#E4FF9B] hover:bg-[#E4FF9B] "
+            "disabled:cursor-not-allowed disabled:opacity-45"
+        ),
     )
 
 
 def crm_header() -> rx.Component:
-    return rx.el.header(
-        rx.el.div(
-            rx.el.div(
-                rx.el.div(
-                    rx.icon("handshake", class_name="h-4 w-4 text-lime-300"),
-                    rx.el.span(
-                        "Cockpit commercial",
-                        class_name="text-[11px] font-semibold uppercase tracking-[0.32em] text-lime-300/90",
-                    ),
-                    class_name="flex items-center gap-2",
+    return rx.el.div(
+        page_hero(
+            "Cockpit commercial",
+            "CRM & Partenaires",
+            "Vision consolidée des clients, fournisseurs et partenaires : chiffre "
+            "d'affaires, achats, créances, dettes, échéances et risques financiers "
+            "de l'exploitation.",
+            meta=meta_ledger(
+                meta_row("Jour", CrmState.today_label),
+                meta_row("Campagne", CrmState.season_label),
+                meta_row(
+                    "Alertes financières",
+                    CrmState.alert_count.to_string(),
+                    tone="flame",
                 ),
-                rx.el.h1(
-                    "CRM & Partenaires",
-                    class_name="font-['Instrument_Serif'] text-4xl md:text-5xl leading-[1.05] text-emerald-50 mt-3",
-                ),
-                rx.el.p(
-                    "Vision consolidée des clients, fournisseurs et partenaires : "
-                    "chiffre d'affaires, achats, créances, dettes, échéances et "
-                    "risques financiers de l'exploitation.",
-                    class_name="text-sm font-medium text-emerald-100/60 mt-3 max-w-2xl",
-                ),
-                class_name="min-w-0",
             ),
-            rx.el.div(
-                _pill("calendar-days", CrmState.today_label),
-                _pill("sprout", CrmState.season_label),
-                _pill(
-                    "bell-ring",
-                    f"{CrmState.alert_count} alerte(s) financière(s)",
-                ),
+            actions=rx.el.div(
                 help_button("crm", "Guide CRM"),
-                rx.el.button(
-                    rx.cond(
-                        CrmState.is_loading,
-                        rx.icon(
-                            "loader-circle",
-                            class_name="h-4 w-4 animate-spin text-[#04140d]",
-                        ),
-                        rx.icon(
-                            "refresh-cw", class_name="h-4 w-4 text-[#04140d]"
-                        ),
-                    ),
-                    rx.el.span("Actualiser", class_name="text-[#04140d]"),
-                    on_click=CrmState.load_crm,
-                    class_name="flex items-center gap-2 rounded-full bg-lime-300 px-4 py-2 text-sm font-semibold hover:bg-lime-200 transition-colors w-fit",
-                ),
-                class_name="flex flex-wrap items-center gap-2 md:justify-end",
+                _refresh(),
+                class_name="flex flex-wrap items-center gap-2",
             ),
-            class_name="flex flex-col lg:flex-row lg:items-end justify-between gap-6 w-full",
+            class_name="pb-8",
         ),
-        rx.el.div(crm_tabs(), class_name="w-full mt-6"),
-        class_name="w-full border-b border-white/10 pb-8 mt-6",
+        crm_tabs(),
+        class_name="w-full",
     )

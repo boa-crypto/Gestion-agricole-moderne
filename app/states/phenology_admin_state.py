@@ -99,7 +99,7 @@ EMPTY_STAGE: StageAdminRow = {
     "is_critical": False,
     "is_active": False,
     "icon": "sprout",
-    "color_hex": "#a3e635",
+    "color_hex": "#D8FA5E",
     "guide_article_slug": "",
     "guide_term_slug": "",
     "recommendation_count": 0,
@@ -131,7 +131,7 @@ EMPTY_STAGE_DRAFT: dict[str, str] = {
     "is_critical": "0",
     "is_active": "1",
     "icon": "sprout",
-    "color_hex": "#a3e635",
+    "color_hex": "#D8FA5E",
     "guide_article_slug": "",
     "guide_term_slug": "",
 }

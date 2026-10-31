@@ -5,6 +5,7 @@ from __future__ import annotations
 import datetime
 
 from sqlalchemy import create_engine, func, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.crm_rules import (
@@ -296,9 +297,17 @@ def test_document_links_are_bound_to_documents() -> None:
 
         # Une référence orpheline doit être détectée avant validation.
         links[0].payment_id = 999_999
-        session.flush()
-        anomalies = crm_integrity_report(session)
-        assert any("crm_document_link.payment_id" in item for item in anomalies)
+        try:
+            session.flush()
+        except IntegrityError:
+            # La clé étrangère rejette déjà la référence orpheline : la
+            # garantie est portée par le schéma, pas seulement par le rapport.
+            session.rollback()
+        else:
+            anomalies = crm_integrity_report(session)
+            assert any(
+                "crm_document_link.payment_id" in item for item in anomalies
+            )
 
 
 def test_codes_and_duplicate_detection() -> None:

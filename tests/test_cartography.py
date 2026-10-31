@@ -10,10 +10,10 @@ async def main():
     state = CartographyState()
     await run_event(state.load_map)
     assert state.is_loading is False, "Le chargement doit être terminé"
-    assert state.shapes.length() > 0, "Les contours doivent être chargés"
+    assert len(state.shapes) > 0, "Les contours doivent être chargés"
     assert state.selected_parcel_id > 0, "Une parcelle doit être sélectionnée"
     first = state.shapes[0]
-    assert first["positions"].length() >= 4, "Le contour doit avoir des sommets"
+    assert len(first["positions"]) >= 4, "Le contour doit avoir des sommets"
 
     await run_event(state.select_parcel, first["id"])
     assert state.parcel_detail["code"] != "—", "La fiche doit être remplie"
@@ -59,12 +59,12 @@ async def main():
     assert state.geometry_error != "", "Un Point doit être refusé"
 
     await run_event(state.set_search, "Grands")
-    assert state.shapes.length() >= 1, "La recherche doit trouver un îlot"
+    assert len(state.shapes) >= 1, "La recherche doit trouver un îlot"
     await run_event(state.reset_filters)
     assert state.search == "", "Les filtres doivent être réinitialisés"
 
     print(
-        f"✓ Îlots : {state.shapes.length()}, contours : {state.mapped_count}, interventions : {state.interventions.length()}"
+        f"✓ Îlots : {len(state.shapes)}, contours : {state.mapped_count}, interventions : {len(state.interventions)}"
     )
     print("=== Test réussi ===")
 

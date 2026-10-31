@@ -850,14 +850,14 @@ class RemediationState(rx.State):
         self, alert_id: int, note: rx.event.PointerEventInfo | str = ""
     ):
         """Événement UI et API : mise sous surveillance documentée."""
-        return await RemediationState._watch_alert(alert_id, note)
+        return await self._watch_alert(alert_id, note)
 
     @rx.event
     async def document_alert(
         self, alert_id: int, note: rx.event.PointerEventInfo | str = ""
     ):
         """Alias explicite de la mise sous surveillance documentée."""
-        return await RemediationState._watch_alert(alert_id, note)
+        return await self._watch_alert(alert_id, note)
 
     # ------------------------------------------------------------------
     # 2) Décision de réapprovisionnement
@@ -907,14 +907,14 @@ class RemediationState(rx.State):
         note: rx.event.PointerEventInfo | str = "",
     ):
         """Événement UI et API : arbitrage d'un intrant sous seuil."""
-        return await RemediationState._decide_stock(product_id, action, note)
+        return await self._decide_stock(product_id, action, note)
 
     @rx.event
     async def order_stock(
         self, product_id: int, note: rx.event.PointerEventInfo | str = ""
     ):
         """Documente une commande engagée pour un intrant sous seuil."""
-        return await RemediationState._decide_stock(
+        return await self._decide_stock(
             product_id, "COMMANDE", note
         )
 
@@ -1009,7 +1009,7 @@ class RemediationState(rx.State):
         self, product_id: int, note: rx.event.PointerEventInfo | str = ""
     ):
         """Documente un stock jugé suffisant malgré le seuil."""
-        return await RemediationState._decide_stock(
+        return await self._decide_stock(
             product_id, "SUFFISANT", note
         )
 
@@ -1088,14 +1088,14 @@ class RemediationState(rx.State):
         note: rx.event.PointerEventInfo | str = "",
     ):
         """Événement UI et API : validation d'un contour parcellaire."""
-        return await RemediationState._decide_contour(parcel_id, action, note)
+        return await self._decide_contour(parcel_id, action, note)
 
     @rx.event
     async def mark_contour_verified(
         self, parcel_id: int, note: rx.event.PointerEventInfo | str = ""
     ):
         """Marque un contour vérifié à l'écran."""
-        return await RemediationState._decide_contour(
+        return await self._decide_contour(
             parcel_id, "VERIFIE", note
         )
 

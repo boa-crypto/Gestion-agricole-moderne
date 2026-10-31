@@ -238,8 +238,8 @@ EMPTY_TILE: ParcelTile = {
     "width": "0%",
     "height": "0%",
     "fill": "#22c55e26",
-    "stroke": "#22c55e",
-    "color": "#22c55e",
+    "stroke": "#8FB37A",
+    "color": "#8FB37A",
 }
 
 
@@ -388,6 +388,12 @@ class DashboardState(rx.State):
     def critical_alerts(self) -> int:
         return len([a for a in self.alerts if a["level"] == "CRITIQUE"])
 
+    @rx.var
+    def revenue_display(self) -> str:
+        """Produit brut lisible : séparateur de milliers fin."""
+        value = float(self.kpis.get("revenue", 0.0))
+        return f"{value:,.0f}".replace(",", "\u202f")
+
     @rx.event
     def select_parcel(self, parcel_id: int):
         self.selected_parcel_id = parcel_id
@@ -437,7 +443,7 @@ class DashboardState(rx.State):
                                COALESCE(p.map_x, 0), COALESCE(p.map_y, 0),
                                COALESCE(p.map_w, 0), COALESCE(p.map_h, 0),
                                c.name, c.health, COALESCE(c.progress_percent, 0),
-                               COALESCE(v.color_hex, '#4ade80')
+                               COALESCE(v.color_hex, '#A9C98B')
                         FROM parcel p
                         LEFT JOIN crop c ON c.parcel_id = p.id AND c.status = 'EN_COURS'
                         LEFT JOIN crop_variety v ON v.id = c.variety_id
@@ -454,7 +460,7 @@ class DashboardState(rx.State):
                         SELECT c.id, c.name, COALESCE(v.species, ''), p.name, c.stage, c.status,
                                c.health, COALESCE(c.area_ha, 0), COALESCE(c.progress_percent, 0),
                                c.sowing_date, c.expected_harvest_date,
-                               COALESCE(v.color_hex, '#4ade80')
+                               COALESCE(v.color_hex, '#A9C98B')
                         FROM crop c
                         JOIN parcel p ON p.id = c.parcel_id
                         LEFT JOIN crop_variety v ON v.id = c.variety_id
@@ -527,7 +533,7 @@ class DashboardState(rx.State):
                         """
                         SELECT COALESCE(v.species, c.name) AS species,
                                COALESCE(SUM(c.area_ha), 0) AS area_ha,
-                               MIN(COALESCE(v.color_hex, '#4ade80')) AS color
+                               MIN(COALESCE(v.color_hex, '#A9C98B')) AS color
                         FROM crop c
                         LEFT JOIN crop_variety v ON v.id = c.variety_id
                         WHERE c.status = 'EN_COURS'

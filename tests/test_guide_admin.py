@@ -12,11 +12,11 @@ async def main():
     state = GuideAdminState()
     await run_event(state.load_admin)
     assert state.is_loading is False, "Le chargement doit être terminé"
-    assert state.categories.length() > 0, "Les catégories doivent être chargées"
-    assert state.versions.length() > 0, "Une version doit exister"
+    assert len(state.categories) > 0, "Les catégories doivent être chargées"
+    assert len(state.versions) > 0, "Une version doit exister"
     assert state.has_current_version is True, "Une version courante attendue"
-    assert state.changelog.length() > 0, "Le changelog doit être lisible"
-    assert state.items.length() > 0, "Le registre des articles doit être rempli"
+    assert len(state.changelog) > 0, "Le changelog doit être lisible"
+    assert len(state.items) > 0, "Le registre des articles doit être rempli"
     assert state.status_totals["TOTAL"] > 0, (
         "Les compteurs doivent être calculés"
     )
@@ -25,7 +25,7 @@ async def main():
     for kind, _label, _icon in state.kind_tabs:
         await run_event(state.set_content_kind, kind)
         assert state.content_kind == kind
-        assert state.items.length() > 0, f"Registre vide pour {kind}"
+        assert len(state.items) > 0, f"Registre vide pour {kind}"
         for item in state.items:
             assert item["kind"] == kind
 
@@ -41,7 +41,7 @@ async def main():
     await run_event(state.reset_filters)
     assert state.filter_status == "TOUS"
     await run_event(state.set_search, "parcelle")
-    assert state.items.length() > 0, "La recherche éditoriale doit trouver"
+    assert len(state.items) > 0, "La recherche éditoriale doit trouver"
     await run_event(state.reset_filters)
 
     # --- Validation : une création incomplète est refusée ----------------
@@ -99,7 +99,7 @@ async def main():
     await run_event(state.set_content_kind, "article")
     await run_event(state.set_search, "fiche éditoriale de test")
     matches = [item for item in state.items if item["ref"] == slug]
-    assert matches.length() == 1, "La fiche créée doit apparaître au registre"
+    assert len(matches) == 1, "La fiche créée doit apparaître au registre"
     created = matches[0]
     assert created["status"] == "BROUILLON"
 
@@ -172,7 +172,7 @@ async def main():
     )
     assert state.has_errors is False, "La version doit être créée"
     new_versions = [v for v in state.versions if v["version_label"] == label]
-    assert new_versions.length() == 1, "La nouvelle version doit apparaître"
+    assert len(new_versions) == 1, "La nouvelle version doit apparaître"
     new_version = new_versions[0]
     assert new_version["status"] == "BROUILLON"
     assert new_version["entry_count"] > 0, "Le changelog doit être amorcé"
@@ -209,9 +209,9 @@ async def main():
     assert state.has_errors is True, "Une version en doublon doit être refusée"
 
     print(
-        f"✓ Pupitre éditorial : {state.versions.length()} version(s), "
+        f"✓ Pupitre éditorial : {len(state.versions)} version(s), "
         f"{state.status_totals['TOTAL']} fiches articles, "
-        f"{state.changelog.length()} entrée(s) de changelog"
+        f"{len(state.changelog)} entrée(s) de changelog"
     )
     print("=== Test réussi ===")
 

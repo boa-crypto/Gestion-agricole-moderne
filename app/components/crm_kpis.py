@@ -1,5 +1,6 @@
 import reflex as rx
 
+from app.components.design import stat
 from app.states.crm_state import CrmState
 
 
@@ -9,33 +10,16 @@ def _tile(
     unit: str,
     caption: rx.Var | str,
     icon: str,
-    icon_class: str,
+    icon_class: str = "",
 ) -> rx.Component:
-    return rx.el.div(
-        rx.el.div(
-            rx.el.span(
-                label,
-                class_name="text-[10px] font-semibold uppercase tracking-[0.22em] text-emerald-100/50",
-            ),
-            rx.icon(icon, class_name=icon_class),
-            class_name="flex items-start justify-between gap-3",
-        ),
-        rx.el.div(
-            rx.el.span(
-                value,
-                class_name="font-['Instrument_Serif'] text-3xl leading-none text-emerald-50",
-            ),
-            rx.el.span(
-                unit,
-                class_name="text-xs font-medium text-emerald-100/50 mb-0.5",
-            ),
-            class_name="flex items-end gap-1.5 mt-4",
-        ),
-        rx.el.p(
-            caption,
-            class_name="text-[11px] font-medium text-emerald-100/45 mt-2",
-        ),
-        class_name="w-full rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl hover:border-lime-300/30 transition-colors",
+    """Chiffre indicateur, registre éditorial : filet, valeur serif, légende."""
+    return stat(
+        label,
+        value,
+        unit,
+        caption,
+        icon=icon,
+        tone="paper",
     )
 
 
@@ -44,7 +28,7 @@ def _section_title(label: str, icon: str, icon_class: str) -> rx.Component:
         rx.icon(icon, class_name=icon_class),
         rx.el.span(
             label,
-            class_name="text-[10px] font-semibold uppercase tracking-[0.24em] text-emerald-100/55",
+            class_name="ap-eyebrow text-[#c9c5b4]/55",
         ),
         class_name="flex items-center gap-2 w-full",
     )
@@ -53,7 +37,7 @@ def _section_title(label: str, icon: str, icon_class: str) -> rx.Component:
 def crm_client_kpis() -> rx.Component:
     return rx.el.section(
         _section_title(
-            "Indicateurs clients", "users-round", "h-4 w-4 text-lime-300"
+            "Indicateurs clients", "users-round", "h-4 w-4 text-[#d8fa5e]"
         ),
         rx.el.div(
             _tile(
@@ -62,7 +46,7 @@ def crm_client_kpis() -> rx.Component:
                 "tiers",
                 f"{CrmState.kpis['clients_active']:.0f} actifs · {CrmState.kpis['clients_inactive']:.0f} inactifs",
                 "users-round",
-                "h-4 w-4 text-lime-300",
+                "h-4 w-4 text-[#d8fa5e]",
             ),
             _tile(
                 "Nouveaux clients",
@@ -70,31 +54,31 @@ def crm_client_kpis() -> rx.Component:
                 "90 jours",
                 f"{CrmState.kpis['clients_blocked']:.0f} compte(s) bloqué(s)",
                 "user-round-plus",
-                "h-4 w-4 text-emerald-300",
+                "h-4 w-4 text-[#a9c98b]",
             ),
             _tile(
                 "CA clients",
-                f"{CrmState.kpis['turnover']:.0f}",
+                CrmState.turnover_display,
                 "DA TTC",
                 f"{CrmState.kpis['sales_count']:.0f} vente(s) enregistrée(s)",
                 "trending-up",
-                "h-4 w-4 text-lime-300",
+                "h-4 w-4 text-[#d8fa5e]",
             ),
             _tile(
                 "Créances clients",
-                f"{CrmState.kpis['receivable']:.0f}",
+                CrmState.receivable_display,
                 "DA",
-                f"{CrmState.kpis['receivable_overdue']:.0f} DA échus",
+                CrmState.receivable_overdue_display + " DA échus",
                 "hand-coins",
-                "h-4 w-4 text-amber-300",
+                "h-4 w-4 text-[#ff8a5b]",
             ),
             _tile(
                 "Paiements reçus",
-                f"{CrmState.kpis['received']:.0f}",
+                CrmState.received_display,
                 "DA",
                 f"{CrmState.kpis['unpaid_sales_invoices']:.0f} facture(s) impayée(s)",
                 "banknote",
-                "h-4 w-4 text-emerald-300",
+                "h-4 w-4 text-[#a9c98b]",
             ),
             _tile(
                 "Factures en retard",
@@ -102,9 +86,12 @@ def crm_client_kpis() -> rx.Component:
                 "clients",
                 f"{CrmState.kpis['due_soon']:.0f} échéance(s) sous 15 jours",
                 "alarm-clock",
-                "h-4 w-4 text-amber-300",
+                "h-4 w-4 text-[#ff8a5b]",
             ),
-            class_name="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 w-full mt-4",
+            class_name=(
+                "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
+                "xl:grid-cols-3 w-full mt-5"
+            ),
         ),
         class_name="w-full",
     )
@@ -113,7 +100,7 @@ def crm_client_kpis() -> rx.Component:
 def crm_supplier_kpis() -> rx.Component:
     return rx.el.section(
         _section_title(
-            "Indicateurs fournisseurs", "truck", "h-4 w-4 text-amber-300"
+            "Indicateurs fournisseurs", "truck", "h-4 w-4 text-[#ff8a5b]"
         ),
         rx.el.div(
             _tile(
@@ -122,31 +109,31 @@ def crm_supplier_kpis() -> rx.Component:
                 "tiers",
                 f"{CrmState.kpis['suppliers_active']:.0f} actifs sur {CrmState.kpis['partners']:.0f} partenaires",
                 "truck",
-                "h-4 w-4 text-amber-300",
+                "h-4 w-4 text-[#ff8a5b]",
             ),
             _tile(
                 "Achats totaux",
-                f"{CrmState.kpis['purchases']:.0f}",
+                CrmState.purchases_display,
                 "DA TTC",
                 f"{CrmState.kpis['purchases_count']:.0f} achat(s) référencé(s)",
                 "package",
-                "h-4 w-4 text-lime-300",
+                "h-4 w-4 text-[#d8fa5e]",
             ),
             _tile(
                 "Dettes fournisseurs",
-                f"{CrmState.kpis['payable']:.0f}",
+                CrmState.payable_display,
                 "DA",
-                f"{CrmState.kpis['payable_overdue']:.0f} DA en retard",
+                CrmState.payable_overdue_display + " DA en retard",
                 "wallet",
-                "h-4 w-4 text-amber-300",
+                "h-4 w-4 text-[#ff8a5b]",
             ),
             _tile(
                 "Paiements effectués",
-                f"{CrmState.kpis['paid_out']:.0f}",
+                CrmState.paid_out_display,
                 "DA",
                 f"{CrmState.kpis['unpaid_purchase_invoices']:.0f} facture(s) impayée(s)",
                 "credit-card",
-                "h-4 w-4 text-emerald-300",
+                "h-4 w-4 text-[#a9c98b]",
             ),
             _tile(
                 "Retards fournisseurs",
@@ -154,7 +141,7 @@ def crm_supplier_kpis() -> rx.Component:
                 "factures",
                 "Factures d'achat au-delà de l'échéance",
                 "triangle-alert",
-                "h-4 w-4 text-amber-300",
+                "h-4 w-4 text-[#ff8a5b]",
             ),
             _tile(
                 "Nouveaux fournisseurs",
@@ -162,9 +149,12 @@ def crm_supplier_kpis() -> rx.Component:
                 "90 jours",
                 "Premières transactions récentes",
                 "handshake",
-                "h-4 w-4 text-lime-300",
+                "h-4 w-4 text-[#d8fa5e]",
             ),
-            class_name="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 w-full mt-4",
+            class_name=(
+                "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
+                "xl:grid-cols-3 w-full mt-5"
+            ),
         ),
         class_name="w-full",
     )
@@ -173,32 +163,32 @@ def crm_supplier_kpis() -> rx.Component:
 def crm_commercial_kpis() -> rx.Component:
     return rx.el.section(
         _section_title(
-            "Indicateurs commerciaux", "activity", "h-4 w-4 text-emerald-300"
+            "Indicateurs commerciaux", "activity", "h-4 w-4 text-[#a9c98b]"
         ),
         rx.el.div(
             _tile(
                 "CA du mois",
-                f"{CrmState.kpis['turnover_month']:.0f}",
+                CrmState.turnover_month_display,
                 "DA TTC",
-                f"{CrmState.kpis['turnover_season']:.0f} DA sur la campagne",
+                CrmState.turnover_season_display + " DA sur la campagne",
                 "calendar-days",
-                "h-4 w-4 text-lime-300",
+                "h-4 w-4 text-[#d8fa5e]",
             ),
             _tile(
                 "Achats du mois",
-                f"{CrmState.kpis['purchases_month']:.0f}",
+                CrmState.purchases_month_display,
                 "DA TTC",
-                f"{CrmState.kpis['purchases_season']:.0f} DA sur la campagne",
+                CrmState.purchases_season_display + " DA sur la campagne",
                 "shopping-cart",
-                "h-4 w-4 text-amber-300",
+                "h-4 w-4 text-[#ff8a5b]",
             ),
             _tile(
                 "Marge commerciale",
-                f"{CrmState.kpis['margin']:.0f}",
+                CrmState.margin_display,
                 "DA",
                 CrmState.margin_label,
                 "scale",
-                "h-4 w-4 text-emerald-300",
+                "h-4 w-4 text-[#a9c98b]",
             ),
             _tile(
                 "Taux de marge",
@@ -206,15 +196,15 @@ def crm_commercial_kpis() -> rx.Component:
                 "%",
                 "Ventes moins achats de la campagne",
                 "percent",
-                "h-4 w-4 text-lime-300",
+                "h-4 w-4 text-[#d8fa5e]",
             ),
             _tile(
                 "Position nette",
-                f"{CrmState.kpis['net_cash']:.0f}",
+                CrmState.net_cash_display,
                 "DA",
                 CrmState.cash_label,
                 "landmark",
-                "h-4 w-4 text-emerald-300",
+                "h-4 w-4 text-[#a9c98b]",
             ),
             _tile(
                 "Limites de crédit",
@@ -222,9 +212,12 @@ def crm_commercial_kpis() -> rx.Component:
                 "dépassées",
                 "Encours client supérieur à la limite autorisée",
                 "shield-alert",
-                "h-4 w-4 text-amber-300",
+                "h-4 w-4 text-[#ff8a5b]",
             ),
-            class_name="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 w-full mt-4",
+            class_name=(
+                "ap-stagger grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 "
+                "xl:grid-cols-3 w-full mt-5"
+            ),
         ),
         class_name="w-full",
     )

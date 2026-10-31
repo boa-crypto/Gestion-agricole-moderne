@@ -22,10 +22,10 @@ async def main():
         assert state.context_label != "", f"Libellé manquant pour {key}"
         assert state.context_key == key
         assert state.content_count > 0, f"Aucun contenu pour le contexte {key}"
-        assert state.rules.length() > 0, f"Aucune règle pour {key}"
-        assert state.articles.length() > 0, f"Aucun article pour {key}"
+        assert len(state.rules) > 0, f"Aucune règle pour {key}"
+        assert len(state.articles) > 0, f"Aucun article pour {key}"
         print(
-            f"  · {key}: {state.concepts.length()} concepts, {state.rules.length()} règles, {state.faqs.length()} questions, {state.procedures.length()} procédures, {state.articles.length()} articles"
+            f"  · {key}: {len(state.concepts)} concepts, {len(state.rules)} règles, {len(state.faqs)} questions, {len(state.procedures)} procédures, {len(state.articles)} articles"
         )
 
     # Fermeture / bascule.
@@ -37,13 +37,13 @@ async def main():
         await run_event(state.open_topic, "parcelles", topic)
         assert state.has_focus is True, f"Focus attendu pour {topic}"
         assert state.focus_hint != "", f"Explication manquante pour {topic}"
-        assert state.focus_rules.length() > 0, (
+        assert len(state.focus_rules) > 0, (
             f"Aucune règle de cohérence trouvée pour le sujet {topic}"
         )
         codes = [rule["code"] for rule in state.focus_rules]
         for code in codes:
             assert code != "", "Code de règle vide"
-        print(f"  · {topic}: {state.focus_rules.length()} règle(s) {codes}")
+        print(f"  · {topic}: {len(state.focus_rules)} règle(s) {codes}")
 
     await run_event(state.clear_focus)
     assert state.has_focus is False, "Le focus doit pouvoir être retiré"

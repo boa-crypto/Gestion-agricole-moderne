@@ -41,7 +41,7 @@ async def main():
         )
         assert state.notice != ""
         ids = [item["id"] for item in state.alert_actions]
-        assert ~ids.contains(row["id"]), "L'alerte clôturée sort de la liste"
+        assert row["id"] not in ids, "L'alerte clôturée sort de la liste"
 
     if state.stock_actions:
         row = state.stock_actions[0]
@@ -63,7 +63,7 @@ async def main():
         await run_event(state.mark_contour_verified, row["id"], "Vérifié")
         assert state.notice != ""
 
-    assert state.recent_logs.length() > 0, "Le journal doit être alimenté"
+    assert len(state.recent_logs) > 0, "Le journal doit être alimenté"
 
     # L'audit et la recherche globale restent opérationnels.
     audit = AuditState()
@@ -78,7 +78,7 @@ async def main():
     assert search.total_results > 0
 
     print(
-        f"✓ alertes={state.summary['alerts']:.0f}, stocks={state.summary['stock']:.0f}, contours={state.summary['contours']:.0f}, logs={state.recent_logs.length()}"
+        f"✓ alertes={state.summary['alerts']:.0f}, stocks={state.summary['stock']:.0f}, contours={state.summary['contours']:.0f}, logs={len(state.recent_logs)}"
     )
     print("=== Test réussi ===")
 

@@ -909,7 +909,7 @@ class ContourState(rx.State):
         self, parcel_id: int, note: rx.event.PointerEventInfo | str = ""
     ):
         """Marque un contour vérifié à l'écran."""
-        return await ContourState._decide_and_report(
+        return await self._decide_and_report(
             parcel_id, VALIDATION_VERIFIE, note
         )
 
@@ -918,7 +918,7 @@ class ContourState(rx.State):
         self, parcel_id: int, note: rx.event.PointerEventInfo | str = ""
     ):
         """Marque un contour à relever sur le terrain."""
-        return await ContourState._decide_and_report(
+        return await self._decide_and_report(
             parcel_id, VALIDATION_A_RELEVER, note
         )
 

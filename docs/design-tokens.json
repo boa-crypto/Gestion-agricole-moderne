@@ -1,0 +1,93 @@
+{
+  "$schema": "https://schemas.tokens.studio/latest/tokens-studio.schema.json",
+  "$description": "AgriPro — jetons « Encre & Chlorophylle », importables dans Figma via le plugin Tokens Studio. Source de vérité : app/components/design.py.",
+  "global": {
+    "color": {
+      "ink": {
+        "value": "#0A0A08",
+        "type": "color",
+        "description": "Fond principal, encre chaude"
+      },
+      "ink-deep": { "value": "#060604", "type": "color" },
+      "surface": { "value": "#101208", "type": "color" },
+      "surface-raised": { "value": "#14160F", "type": "color" },
+      "surface-high": { "value": "#191C13", "type": "color" },
+      "surface-control": { "value": "#20241A", "type": "color" },
+      "paper": { "value": "#F2EFE4", "type": "color", "description": "Texte principal" },
+      "paper-muted": { "value": "#C9C5B4", "type": "color" },
+      "paper-faint": { "value": "#8F8C7E", "type": "color" },
+      "accent": { "value": "#D8FA5E", "type": "color", "description": "Chlorophylle, accent de marque" },
+      "accent-deep": { "value": "#B6D93F", "type": "color" },
+      "flame": { "value": "#FF5A2B", "type": "color", "description": "Signal, alerte" },
+      "flame-soft": { "value": "#FF8A5B", "type": "color" },
+      "sage": { "value": "#A9C98B", "type": "color", "description": "Succès, croissance" },
+      "info": { "value": "#9CC3FF", "type": "color" },
+      "danger": { "value": "#FF6B5A", "type": "color" },
+      "line": { "value": "rgba(242, 239, 228, 0.12)", "type": "color" },
+      "line-soft": { "value": "rgba(242, 239, 228, 0.08)", "type": "color" },
+      "line-strong": { "value": "rgba(242, 239, 228, 0.22)", "type": "color" }
+    },
+    "fontFamilies": {
+      "display": { "value": "Instrument Serif", "type": "fontFamilies" },
+      "sans": { "value": "Inter Tight", "type": "fontFamilies" },
+      "mono": { "value": "JetBrains Mono", "type": "fontFamilies" }
+    },
+    "fontSizes": {
+      "micro": { "value": "9px", "type": "fontSizes", "description": "Étiquettes, index" },
+      "eyebrow": { "value": "10px", "type": "fontSizes" },
+      "caption": { "value": "11px", "type": "fontSizes" },
+      "body-sm": { "value": "13px", "type": "fontSizes" },
+      "body": { "value": "14px", "type": "fontSizes" },
+      "lede": { "value": "15px", "type": "fontSizes" },
+      "stat": { "value": "2.35rem", "type": "fontSizes" },
+      "h2": { "value": "1.75rem", "type": "fontSizes" },
+      "hero": { "value": "clamp(2.3rem, 4.2vw, 3.8rem)", "type": "fontSizes" }
+    },
+    "lineHeights": {
+      "display": { "value": "0.94", "type": "lineHeights" },
+      "tight": { "value": "1.15", "type": "lineHeights" },
+      "body": { "value": "1.6", "type": "lineHeights" }
+    },
+    "letterSpacing": {
+      "display": { "value": "-0.028em", "type": "letterSpacing" },
+      "body": { "value": "-0.012em", "type": "letterSpacing" },
+      "eyebrow": { "value": "0.3em", "type": "letterSpacing" },
+      "label": { "value": "0.18em", "type": "letterSpacing" }
+    },
+    "spacing": {
+      "1": { "value": "4px", "type": "spacing" },
+      "2": { "value": "8px", "type": "spacing" },
+      "3": { "value": "12px", "type": "spacing" },
+      "4": { "value": "16px", "type": "spacing" },
+      "5": { "value": "20px", "type": "spacing" },
+      "6": { "value": "24px", "type": "spacing" },
+      "8": { "value": "32px", "type": "spacing" },
+      "10": { "value": "40px", "type": "spacing" },
+      "14": { "value": "56px", "type": "spacing" },
+      "18": { "value": "72px", "type": "spacing" }
+    },
+    "borderRadius": {
+      "none": { "value": "0px", "type": "borderRadius", "description": "Angles vifs — règle de la maison" },
+      "pill": { "value": "999px", "type": "borderRadius", "description": "Réservé aux pastilles de statut" }
+    },
+    "borderWidth": {
+      "hairline": { "value": "1px", "type": "borderWidth" },
+      "rule": { "value": "2px", "type": "borderWidth", "description": "Filet latéral d'alerte" }
+    },
+    "shadow": {
+      "none": { "value": "none", "type": "boxShadow", "description": "Aucune ombre portée : la profondeur vient des filets" },
+      "overlay": { "value": "0 24px 80px rgba(0, 0, 0, 0.55)", "type": "boxShadow", "description": "Modales et panneaux flottants uniquement" }
+    },
+    "motion": {
+      "duration-fast": { "value": "160ms", "type": "other" },
+      "duration-base": { "value": "240ms", "type": "other" },
+      "duration-reveal": { "value": "620ms", "type": "other" },
+      "ease-out": { "value": "cubic-bezier(.2, .7, .2, 1)", "type": "other" }
+    },
+    "grid": {
+      "columns": { "value": "12", "type": "other" },
+      "gutter": { "value": "32px", "type": "other" },
+      "max-width": { "value": "1600px", "type": "other" }
+    }
+  }
+}

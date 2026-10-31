@@ -9,11 +9,11 @@ async def main():
     state = ExpensesState()
     await run_event(state.load_expenses)
     assert state.is_loading is False, "Le chargement doit être terminé"
-    assert state.types.length() > 0, "Les types de dépenses doivent exister"
-    assert state.expenses.length() > 0, "Des dépenses doivent être amorcées"
+    assert len(state.types) > 0, "Les types de dépenses doivent exister"
+    assert len(state.expenses) > 0, "Des dépenses doivent être amorcées"
     assert state.kpis["total_ttc"] > 0, "Le cumul TTC doit être positif"
-    assert state.months.length() > 0, "La synthèse mensuelle doit être remplie"
-    assert state.type_options.length() > 0, "Des types actifs doivent exister"
+    assert len(state.months) > 0, "La synthèse mensuelle doit être remplie"
+    assert len(state.type_options) > 0, "Des types actifs doivent exister"
 
     await run_event(state.set_search, "carburant")
     assert state.error == "", "La recherche doit rester valide"
@@ -51,12 +51,12 @@ async def main():
     )
     assert state.type_error == "", "Le type doit être accepté"
     created_types = [t for t in state.types if t["name"] == "Type de test"]
-    assert created_types.length() == 1, "Le type créé doit apparaître"
+    assert len(created_types) == 1, "Le type créé doit apparaître"
     type_id = created_types[0]["id"]
 
     await run_event(state.open_expense_create)
     bad = {
-        "expense_type_id": type_id.to_string(),
+        "expense_type_id": str(type_id),
         "label": "Dépense invalide",
         "supplier": "Test",
         "reference": "",
@@ -88,7 +88,7 @@ async def main():
     await run_event(state.submit_expense, good)
     assert state.expense_error == "", "La dépense valide doit être acceptée"
     created = [e for e in state.expenses if e["label"] == "Dépense de test"]
-    assert created.length() == 1, "La dépense créée doit apparaître"
+    assert len(created) == 1, "La dépense créée doit apparaître"
     expense_id = created[0]["id"]
     assert created[0]["amount_ttc"] == 120.0, "Le TTC doit être calculé"
 
@@ -102,17 +102,17 @@ async def main():
 
     await run_event(state.archive_expense, expense_id)
     remaining = [e for e in state.expenses if e["id"] == expense_id]
-    assert remaining.length() == 0, "La dépense archivée doit être masquée"
+    assert len(remaining) == 0, "La dépense archivée doit être masquée"
     await run_event(state.toggle_archived)
     archived = [e for e in state.expenses if e["id"] == expense_id]
-    assert archived.length() == 1, "Les archives doivent être consultables"
+    assert len(archived) == 1, "Les archives doivent être consultables"
     await run_event(state.restore_expense, expense_id)
     await run_event(state.toggle_archived)
 
     await run_event(state.toggle_type_active, type_id)
     await run_event(state.archive_type, type_id)
     archived_types = [t for t in state.types if t["id"] == type_id]
-    assert archived_types.length() == 1, "Le type archivé reste consultable"
+    assert len(archived_types) == 1, "Le type archivé reste consultable"
 
     print(
         f"✓ {state.expense_count} dépenses, {state.type_count} types, "

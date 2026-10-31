@@ -61,7 +61,7 @@ TEAMS: list[tuple[str, str, str, str, str, str, str, str]] = [
         "Tours d'eau, réseau et sondes",
         "05h00 - 13h00",
         "Nord",
-        "#38bdf8",
+        "#9CC3FF",
         "droplets",
     ),
     (
@@ -71,7 +71,7 @@ TEAMS: list[tuple[str, str, str, str, str, str, str, str]] = [
         "Chantiers de récolte et transport",
         "06h00 - 20h00 en campagne",
         "Centre",
-        "#fbbf24",
+        "#FF8A5B",
         "wheat",
     ),
     (
@@ -81,7 +81,7 @@ TEAMS: list[tuple[str, str, str, str, str, str, str, str]] = [
         "Applications phytosanitaires habilitées",
         "05h30 - 12h00",
         "Sud",
-        "#a3e635",
+        "#D8FA5E",
         "spray-can",
     ),
     (
@@ -91,7 +91,7 @@ TEAMS: list[tuple[str, str, str, str, str, str, str, str]] = [
         "Atelier, entretien préventif et curatif",
         "08h00 - 17h00",
         "Centre",
-        "#f97316",
+        "#FF5A2B",
         "wrench",
     ),
     (
@@ -101,7 +101,7 @@ TEAMS: list[tuple[str, str, str, str, str, str, str, str]] = [
         "Semis, plantation et travail du sol",
         "07h00 - 16h00",
         "Nord",
-        "#4ade80",
+        "#A9C98B",
         "sprout",
     ),
 ]
@@ -491,7 +491,7 @@ async def seed_access_data() -> None:
                         "default_role_key": spec["default_role"],
                         "icon": spec["icon"],
                         "color_hex": FAMILY_COLORS.get(
-                            spec["family"], "#a3e635"
+                            spec["family"], "#D8FA5E"
                         ),
                         "position": position,
                     },

@@ -130,7 +130,7 @@ async def main():
     assert refreshed[0]["is_open"] is False
 
     print(
-        f"✓ délégations {state.delegations.length()}, EXPIRE_DELEGATION journalisé ({before + 1})"
+        f"✓ délégations {len(state.delegations)}, EXPIRE_DELEGATION journalisé ({before + 1})"
     )
     print("=== Test réussi ===")
 

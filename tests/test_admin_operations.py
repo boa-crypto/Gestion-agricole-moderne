@@ -148,9 +148,9 @@ async def main():
     # --- État Reflex -----------------------------------------------------
     state = AdministrationState()
     await run_event(state.load_administration)
-    assert state.org_levels.length() >= 2
-    assert state.assignments.length() >= 5
-    assert state.delegations.length() >= 1
+    assert len(state.org_levels) >= 2
+    assert len(state.assignments) >= 5
+    assert len(state.delegations) >= 1
     assert state.personal["user_id"] > 0
 
     await run_event(state.select_org_node, irrigation)
@@ -159,8 +159,8 @@ async def main():
     )
     await run_event(state.open_personal_space, irrigation)
     assert (state.section == "espace") & (state.personal_user_id == irrigation)
-    assert state.personal_tasks.length() >= 1
-    assert state.personal_responsibilities.length() >= 1
+    assert len(state.personal_tasks) >= 1
+    assert len(state.personal_responsibilities) >= 1
 
     second = await one_open_intervention()
     if second > 0:
@@ -169,7 +169,7 @@ async def main():
         assert state.error == "", state.error
 
     await run_event(state.set_assignment_team, "equipe-irrigation")
-    assert state.assignments.length() >= 1
+    assert len(state.assignments) >= 1
     await run_event(state.reset_assignment_filters)
     assert state.assignment_team == "TOUTES"
     await run_event(state.expire_temporary_permissions)

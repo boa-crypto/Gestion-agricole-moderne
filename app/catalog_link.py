@@ -80,7 +80,7 @@ _PENDING_SQL: str = """
     SELECT v.id, v.name, COALESCE(v.cycle_days, 0),
            COALESCE(v.expected_yield_t_ha, 0),
            COALESCE(v.sowing_window, ''), COALESCE(v.harvest_window, ''),
-           COALESCE(v.color_hex, '#a3e635'), COALESCE(v.quality_grade, ''),
+           COALESCE(v.color_hex, '#D8FA5E'), COALESCE(v.quality_grade, ''),
            COALESCE(v.notes, ''), s.name,
            COALESCE(s.botanical_family, ''), COALESCE(cu.icon, 'sprout'),
            COALESCE(s.cycle_days_max, 0)

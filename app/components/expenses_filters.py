@@ -1,9 +1,14 @@
 import reflex as rx
 
+from app.components.design import (
+    action_button,
+    field,
+    input_class,
+    section_header,
+    select_field,
+    tag,
+)
 from app.states.expenses_state import ExpensesState, Option
-
-_INPUT = "w-full rounded-xl border border-white/10 bg-[#04140d] px-3 py-2.5 text-sm font-medium text-emerald-50 placeholder:text-emerald-100/30 focus:border-lime-300/50 outline-hidden transition-colors"
-_SELECT = f"{_INPUT} appearance-none cursor-pointer pr-9"
 
 
 def _select(
@@ -15,30 +20,20 @@ def _select(
     on_change: rx.event.EventType,
 ) -> rx.Component:
     return rx.el.div(
-        rx.el.span(
-            label,
-            class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/45",
-        ),
-        rx.el.div(
-            rx.el.select(
-                rx.el.option(all_label, value="TOUS"),
-                rx.foreach(
-                    options,
-                    lambda opt: rx.el.option(opt["label"], value=opt["value"]),
-                ),
-                name=name,
-                default_value=value,
-                key=f"{name}-{ExpensesState.form_key}",
-                on_change=on_change,
-                class_name=_SELECT,
+        rx.el.span(label, class_name="ap-eyebrow text-[#C9C5B4]/65"),
+        select_field(
+            rx.el.option(all_label, value="TOUS"),
+            rx.foreach(
+                options,
+                lambda opt: rx.el.option(opt["label"], value=opt["value"]),
             ),
-            rx.icon(
-                "chevron-down",
-                class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-100/40 pointer-events-none",
-            ),
-            class_name="relative w-full mt-2",
+            name=name,
+            default_value=value,
+            on_change=on_change,
+            form_key=ExpensesState.form_key,
+            width="w-full mt-2",
         ),
-        class_name="w-full sm:w-52",
+        class_name="w-full sm:w-64",
     )
 
 
@@ -50,23 +45,17 @@ def _date_field(
     on_change: rx.event.EventType,
 ) -> rx.Component:
     return rx.el.div(
-        rx.el.span(
-            label,
-            class_name="text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-100/45",
-        ),
-        rx.el.div(
-            rx.icon(
-                icon,
-                class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-lime-300/80 pointer-events-none",
-            ),
+        rx.el.span(label, class_name="ap-eyebrow text-[#C9C5B4]/65"),
+        field(
             rx.el.input(
                 type="date",
                 name=name,
                 default_value=value,
                 on_change=on_change,
-                class_name=f"{_INPUT} pl-9",
+                class_name=input_class(icon=True),
             ),
-            class_name="relative w-full mt-2",
+            icon=icon,
+            class_name="mt-2",
         ),
         class_name="w-full sm:w-48",
     )
@@ -76,47 +65,43 @@ def _period_chip(chip: Option) -> rx.Component:
     return rx.el.button(
         rx.el.span(chip["label"]),
         on_click=ExpensesState.set_period(chip["value"]),
+        type="button",
         class_name=rx.cond(
             ExpensesState.period == chip["value"],
-            "rounded-full border border-amber-300/45 bg-amber-300/15 px-3 py-1.5 text-xs font-semibold text-amber-100 transition-colors w-fit",
-            "rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-emerald-100/60 hover:border-amber-300/30 hover:text-emerald-50 transition-colors w-fit",
+            "ap-mono inline-flex w-fit items-center border border-[#FF5A2B] "
+            "bg-[#FF5A2B]/12 px-2.5 py-1.5 text-[9px] uppercase "
+            "tracking-[0.18em] text-[#FFB894] transition-colors",
+            "ap-mono inline-flex w-fit items-center border border-[#F2EFE4]/12 "
+            "px-2.5 py-1.5 text-[9px] uppercase tracking-[0.18em] "
+            "text-[#C9C5B4]/55 transition-colors hover:border-[#F2EFE4]/30 "
+            "hover:text-[#F2EFE4]",
         ),
     )
 
 
 def expenses_filters() -> rx.Component:
     return rx.el.section(
-        rx.el.div(
-            rx.el.div(
-                rx.icon("filter", class_name="h-3.5 w-3.5 text-lime-300/80"),
-                rx.el.span(
-                    "Lecture du registre",
-                    class_name="text-[10px] font-semibold uppercase tracking-[0.24em] text-emerald-100/45",
-                ),
-                class_name="flex items-center gap-2",
+        section_header(
+            "Filtres",
+            "Lecture du registre",
+            trailing=rx.el.div(
+                tag(ExpensesState.range_label, tone="accent"),
+                tag(ExpensesState.scope_label),
+                class_name="flex flex-wrap items-center gap-2",
             ),
-            rx.el.span(
-                ExpensesState.range_label,
-                class_name="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-emerald-100/60 w-fit ml-auto",
-            ),
-            rx.el.span(
-                ExpensesState.scope_label,
-                class_name="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-emerald-100/60 w-fit",
-            ),
-            class_name="flex flex-wrap items-center gap-3 w-full",
         ),
-        rx.el.div(
-            rx.icon(
-                "search",
-                class_name="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-lime-300 pointer-events-none",
-            ),
+        field(
             rx.el.input(
-                placeholder="Rechercher un libellé, un fournisseur, une facture, un type de charge…",
+                placeholder=(
+                    "Rechercher un libellé, un fournisseur, une facture, "
+                    "un type de charge…"
+                ),
                 default_value=ExpensesState.search,
                 on_change=ExpensesState.set_search.debounce(450),
-                class_name=f"{_INPUT} pl-11 py-3.5",
+                class_name=input_class(icon=True, extra="py-3.5"),
             ),
-            class_name="relative w-full mt-5",
+            icon="search",
+            class_name="mt-5",
         ),
         rx.el.div(
             _select(
@@ -177,8 +162,8 @@ def expenses_filters() -> rx.Component:
                     "archive",
                     class_name=rx.cond(
                         ExpensesState.include_archived,
-                        "h-4 w-4 text-amber-200",
-                        "h-4 w-4 text-emerald-100/50",
+                        "h-3.5 w-3.5 text-[#FFB894]",
+                        "h-3.5 w-3.5",
                     ),
                 ),
                 rx.el.span(
@@ -188,34 +173,47 @@ def expenses_filters() -> rx.Component:
                         "Archives masquées",
                     )
                 ),
+                type="button",
                 on_click=ExpensesState.toggle_archived,
                 class_name=rx.cond(
                     ExpensesState.include_archived,
-                    "flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1.5 text-xs font-semibold text-amber-100 transition-colors w-fit",
-                    "flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-emerald-100/60 hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit",
+                    "ap-mono inline-flex w-fit items-center gap-2 border "
+                    "border-[#FF5A2B]/45 bg-[#FF5A2B]/10 px-3 py-2.5 text-[10px] "
+                    "uppercase tracking-[0.18em] text-[#FFB894] transition-colors",
+                    "ap-mono inline-flex w-fit items-center gap-2 border "
+                    "border-[#F2EFE4]/12 px-3 py-2.5 text-[10px] uppercase "
+                    "tracking-[0.18em] text-[#C9C5B4]/60 transition-colors "
+                    "hover:border-[#F2EFE4]/30 hover:text-[#F2EFE4]",
                 ),
             ),
-            rx.el.button(
-                rx.icon("rotate-ccw", class_name="h-4 w-4"),
-                rx.el.span("Réinitialiser"),
+            action_button(
+                "Réinitialiser",
+                icon="rotate-ccw",
+                tone="ghost",
                 on_click=ExpensesState.reset_filters,
-                class_name="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-emerald-100/70 hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit ml-auto",
+                class_name="ml-auto",
             ),
-            class_name="flex flex-wrap items-center gap-3 w-full mt-5 border-t border-white/10 pt-5",
+            class_name=(
+                "flex flex-wrap items-center gap-3 w-full mt-5 "
+                "border-t border-[#F2EFE4]/10 pt-5"
+            ),
         ),
         rx.cond(
             ExpensesState.error != "",
             rx.el.div(
                 rx.icon(
-                    "octagon-alert", class_name="h-4 w-4 text-red-300 shrink-0"
+                    "octagon-alert", class_name="h-4 w-4 text-[#ff9b8c] shrink-0"
                 ),
                 rx.el.p(
                     ExpensesState.error,
-                    class_name="text-sm font-medium text-red-200",
+                    class_name="text-sm font-medium text-[#ffbcb0]",
                 ),
-                class_name="flex items-center gap-2 rounded-2xl border border-red-400/30 bg-red-500/[0.08] px-4 py-3 w-full mt-4",
+                class_name=(
+                    "flex items-center gap-2 border border-[#ff6b5a]/30 "
+                    "bg-[#f2452c]/[0.08] px-4 py-3 w-full mt-4"
+                ),
             ),
             rx.fragment(),
         ),
-        class_name="w-full rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl",
+        class_name="w-full",
     )

@@ -90,7 +90,7 @@ async def main():
         )
     for key in MISSING_CATEGORIES:
         matched = [p for p in guide.procedures if p["category_key"] == key]
-        assert matched.length() > 0, f"Catégorie sans procédure : {key}"
+        assert len(matched) > 0, f"Catégorie sans procédure : {key}"
 
     # Les règles corrigées sont exploitables par l'aide contextuelle.
     codes = [fix["code"] for fix in RULE_FIELD_FIXES]
@@ -107,15 +107,15 @@ async def main():
     for item in structural:
         assert item["domain"] in STRUCTURAL_DOMAINS
     guide_gaps = [item for item in structural if item["domain"] == "guide"]
-    assert guide_gaps.length() == 0, (
+    assert len(guide_gaps) == 0, (
         f"Écarts éditoriaux restants : {[i['id'] for i in guide_gaps]}"
     )
     liaison = [item for item in structural if item["domain"] == "liaison"]
-    assert liaison.length() == 0, (
+    assert len(liaison) == 0, (
         "Aucun lien guide → application ne doit être cassé"
     )
     empty_data = [item for item in structural if item["domain"] == "donnees"]
-    assert empty_data.length() == 0, (
+    assert len(empty_data) == 0, (
         f"Sous-entités encore vides : {[i['reference'] for i in empty_data]}"
     )
 
@@ -127,19 +127,19 @@ async def main():
     assert audit.issue_count == (
         audit.structural_issue_count
         + audit.operational_issue_count
-        + [i for i in audit.issues if i["domain"] == "coherence"].length()
+        + len([i for i in audit.issues if i["domain"] == "coherence"])
     ), "Chaque constat doit appartenir à un domaine connu"
 
     # --- Modules parcelles / cultures alimentés ---------------------------
     parcels = ParcelsState()
     await run_event(parcels.load_space)
     assert parcels.parcel_count > 0
-    assert parcels.stage_logs.length() > 0, (
+    assert len(parcels.stage_logs) > 0, (
         "La timeline végétale doit afficher des stades consignés"
     )
 
     print(
-        f"✓ {first['procedures']} procédures ({first['steps']} étapes), {first['soil']} analyses de sol, {first['logs']} stades consignés, {audit.structural_issue_count} écart(s) structurel(s) restant(s), {operational_refs.length()} état(s) d'exploitation à traiter"
+        f"✓ {first['procedures']} procédures ({first['steps']} étapes), {first['soil']} analyses de sol, {first['logs']} stades consignés, {audit.structural_issue_count} écart(s) structurel(s) restant(s), {len(operational_refs)} état(s) d'exploitation à traiter"
     )
     print("=== Test réussi ===")
 

@@ -191,7 +191,7 @@ CONTEXT_SQL: str = """
            COALESCE(st.position, 0), COALESCE(st.bbch_code, ''),
            COALESCE(st.is_critical, 0),
            COALESCE(st.duration_days_min, 0), COALESCE(st.duration_days_max, 0),
-           COALESCE(st.color_hex, '#a3e635'),
+           COALESCE(st.color_hex, '#D8FA5E'),
            COALESCE(pr.id, 0), COALESCE(pr.name, ''), COALESCE(cu.name, ''),
            (SELECT COUNT(*) FROM crop_phenology_stage s2
               WHERE s2.profile_id = pr.id AND s2.is_active = 1),
@@ -383,7 +383,7 @@ async def stage_context_rows(
                 ),
                 "harvest_label": _fmt_date(row[6]),
                 "days_to_harvest": (harvest - today).days if harvest else 0,
-                "color": str(row[19]) or "#a3e635",
+                "color": str(row[19]) or "#D8FA5E",
             }
         )
     return context

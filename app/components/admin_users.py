@@ -9,6 +9,14 @@ from app.components.admin_shared import (
     section_title,
     tone_badge,
 )
+from app.components.design import (
+    action_button,
+    empty_state,
+    field,
+    input_class,
+    select_field,
+    skeleton_rows,
+)
 from app.states.administration_state import AdministrationState
 
 
@@ -20,45 +28,33 @@ def _select(
     first: rx.Component,
     options: rx.Var[list[Option]],
 ) -> rx.Component:
-    return rx.el.div(
-        rx.icon(
-            icon,
-            class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-lime-300/80 pointer-events-none",
+    return select_field(
+        first,
+        rx.foreach(
+            options,
+            lambda opt: rx.el.option(opt["label"], value=opt["value"]),
         ),
-        rx.el.select(
-            first,
-            rx.foreach(
-                options,
-                lambda opt: rx.el.option(opt["label"], value=opt["value"]),
-            ),
-            name=name,
-            default_value=value,
-            key=f"admin-{name}-{AdministrationState.form_key}",
-            on_change=on_change,
-            class_name=SELECT,
-        ),
-        rx.icon(
-            "chevron-down",
-            class_name="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-100/40 pointer-events-none",
-        ),
-        class_name="relative w-full sm:w-52",
+        name=name,
+        icon=icon,
+        default_value=value,
+        on_change=on_change,
+        form_key=AdministrationState.form_key,
     )
 
 
 def admin_filters() -> rx.Component:
     return rx.el.div(
-        rx.el.div(
-            rx.icon(
-                "search",
-                class_name="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-100/40 pointer-events-none",
-            ),
+        field(
             rx.el.input(
-                placeholder="Rechercher un nom, un matricule, une fonction, un rôle ou une équipe…",
+                placeholder=(
+                    "Rechercher un nom, un matricule, une fonction, "
+                    "un rôle ou une équipe…"
+                ),
                 default_value=AdministrationState.search,
                 on_change=AdministrationState.set_search.debounce(400),
-                class_name="w-full rounded-xl border border-white/10 bg-[#04140d] py-2.5 pl-9 pr-3 text-sm font-medium text-emerald-50 placeholder:text-emerald-100/30 focus:border-lime-300/50 focus:ring-2 focus:ring-lime-300/20 outline-hidden transition-colors",
+                class_name=input_class(icon=True),
             ),
-            class_name="relative flex-1 min-w-0",
+            icon="search",
         ),
         _select(
             "status",
@@ -84,19 +80,21 @@ def admin_filters() -> rx.Component:
             rx.el.option("Toutes les équipes", value="TOUTES"),
             AdministrationState.team_options,
         ),
-        rx.el.button(
-            rx.icon("download", class_name="h-4 w-4 text-[#04140d]"),
-            rx.el.span("Exporter (CSV)", class_name="text-[#04140d]"),
+        action_button(
+            "Exporter (CSV)",
+            icon="download",
             on_click=AdministrationState.export_users,
-            class_name="flex items-center gap-2 rounded-xl bg-lime-300 px-4 py-2.5 text-sm font-semibold hover:bg-lime-200 transition-colors w-fit",
         ),
-        rx.el.button(
-            rx.icon("rotate-ccw", class_name="h-4 w-4"),
-            rx.el.span("Réinitialiser"),
+        action_button(
+            "Réinitialiser",
+            icon="rotate-ccw",
+            tone="outline",
             on_click=AdministrationState.reset_filters,
-            class_name="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-emerald-100/70 hover:border-lime-300/30 hover:text-emerald-50 transition-colors w-fit",
         ),
-        class_name="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 w-full",
+        class_name=(
+            "flex flex-col sm:flex-row sm:flex-wrap items-stretch "
+            "sm:items-center gap-3 w-full mt-5"
+        ),
     )
 
 
@@ -107,11 +105,11 @@ def _user_card(user: UserRow, key: str = "") -> rx.Component:
             rx.el.div(
                 rx.el.p(
                     user["name"],
-                    class_name="text-sm font-semibold text-emerald-50 truncate text-left",
+                    class_name="text-sm font-semibold text-[#f2efe4] truncate text-left",
                 ),
                 rx.el.p(
                     user["matricule"] + " · " + user["function_label"],
-                    class_name="text-[11px] font-medium text-emerald-100/50 truncate text-left",
+                    class_name="text-[11px] font-medium text-[#c9c5b4]/65 truncate text-left",
                 ),
                 class_name="min-w-0 flex-1",
             ),
@@ -121,7 +119,7 @@ def _user_card(user: UserRow, key: str = "") -> rx.Component:
         rx.el.div(
             rx.el.span(
                 user["role_label"],
-                class_name="rounded-full border border-lime-300/30 bg-lime-300/10 px-2 py-0.5 text-[10px] font-bold text-lime-200 w-fit",
+                class_name="rounded-none border border-[#d8fa5e]/30 bg-[#d8fa5e]/10 px-2 py-0.5 text-[10px] font-bold text-[#e4ff9b] w-fit",
             ),
             chip(user["team_label"]),
             chip(user["family_label"]),
@@ -129,7 +127,7 @@ def _user_card(user: UserRow, key: str = "") -> rx.Component:
                 user["mfa_enabled"],
                 rx.el.span(
                     "MFA",
-                    class_name="rounded-full border border-sky-300/40 bg-sky-300/10 px-1.5 py-0.5 text-[9px] font-bold text-sky-200 w-fit",
+                    class_name="rounded-none border border-[#9cc3ff]/40 bg-[#9cc3ff]/10 px-1.5 py-0.5 text-[9px] font-bold text-[#c3daff] w-fit",
                 ),
                 rx.fragment(),
             ),
@@ -138,15 +136,15 @@ def _user_card(user: UserRow, key: str = "") -> rx.Component:
         rx.el.div(
             rx.el.span(
                 user["scopes"].to_string() + " périmètre(s)",
-                class_name="text-[10px] font-medium text-emerald-100/45",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/65",
             ),
             rx.el.span(
                 user["assignments"].to_string() + " affectation(s)",
-                class_name="text-[10px] font-medium text-emerald-100/45",
+                class_name="text-[10px] font-medium text-[#c9c5b4]/65",
             ),
             rx.el.span(
                 user["last_login"],
-                class_name="text-[10px] font-semibold text-lime-200 ml-auto truncate",
+                class_name="text-[10px] font-semibold text-[#e4ff9b] ml-auto truncate",
             ),
             class_name="flex items-center gap-2 w-full mt-2 min-w-0",
         ),
@@ -154,8 +152,8 @@ def _user_card(user: UserRow, key: str = "") -> rx.Component:
         key=key,
         class_name=rx.cond(
             AdministrationState.selected_user_id == user["id"],
-            "w-full rounded-2xl border border-lime-300/40 bg-lime-300/[0.07] p-4 text-left ring-2 ring-lime-300/40 transition-all",
-            "w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left hover:border-lime-300/25 transition-all",
+            "w-full border-t border-[#F2EFE4]/12 border-l-2 border-l-[#D8FA5E] bg-[#D8FA5E]/[0.07] pl-3 pr-2 pt-4 text-left transition-colors",
+            "border-t border-[#F2EFE4]/12 w-full pt-4 text-left hover:border-t-[#D8FA5E]/40 transition-all",
         ),
     )
 
@@ -170,24 +168,13 @@ def admin_user_list() -> rx.Component:
             ),
             rx.el.span(
                 AdministrationState.user_count,
-                class_name="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold text-emerald-100/70 w-fit",
+                class_name="rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-3 py-1 text-xs font-bold text-[#c9c5b4]/70 w-fit",
             ),
             class_name="flex items-end justify-between gap-3",
         ),
         rx.cond(
             AdministrationState.is_loading,
-            rx.el.div(
-                rx.el.div(
-                    class_name="animate-pulse h-28 rounded-2xl bg-white/[0.05]"
-                ),
-                rx.el.div(
-                    class_name="animate-pulse h-28 rounded-2xl bg-white/[0.05]"
-                ),
-                rx.el.div(
-                    class_name="animate-pulse h-28 rounded-2xl bg-white/[0.05]"
-                ),
-                class_name="flex flex-col gap-3 mt-5",
-            ),
+            rx.el.div(skeleton_rows(4), class_name="mt-5"),
             rx.cond(
                 AdministrationState.users.length() > 0,
                 rx.el.div(
@@ -197,13 +184,10 @@ def admin_user_list() -> rx.Component:
                     ),
                     class_name="flex flex-col gap-3 mt-5 max-h-[48rem] overflow-y-auto pr-1",
                 ),
-                rx.el.div(
-                    rx.icon("user-x", class_name="h-6 w-6 text-amber-300"),
-                    rx.el.p(
-                        "Aucun compte pour ces critères.",
-                        class_name="text-sm font-medium text-emerald-100/60 mt-2 text-center",
-                    ),
-                    class_name="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] py-12 mt-5",
+                empty_state(
+                    "user-x",
+                    "Aucun compte pour ces critères.",
+                    class_name="mt-5",
                 ),
             ),
         ),

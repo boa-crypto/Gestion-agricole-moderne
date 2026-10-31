@@ -258,7 +258,7 @@ async def seed_parcel_geometry() -> None:
                         THEN geometry_source ELSE 'GENEREE' END,
                     geometry_srid = 4326,
                     geometry_color_hex = COALESCE(
-                        NULLIF(geometry_color_hex, ''), '#a3e635'
+                        NULLIF(geometry_color_hex, ''), '#D8FA5E'
                     ),
                     geometry_updated_at = :updated_at,
                     geometry_updated_by = 'Amorçage automatique',

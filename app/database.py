@@ -8,6 +8,15 @@ persistant stocké dans le projet. Ce module centralise :
 * les réglages SQLite utiles (WAL, clés étrangères).
 
 Aucune base externe n'est utilisée ni écrite.
+
+Note sur `import reflex.model` : `rx.asession` est un attribut paresseux de
+`reflex`. Le premier accès déclenche l'import de `reflex.model`, qui importe
+alembic et l'ensemble des dialectes SQLAlchemy — plusieurs centaines de
+millisecondes, verrou d'import en main. Déclenché au cœur d'une requête, cet
+import bloque la boucle d'événements : sur `/parcelles`, la première session
+asynchrone (l'UPDATE des liens de variétés) y restait suspendue, la page
+demeurait en squelette. Le module est donc chargé ici, à l'import de
+l'application.
 """
 
 from __future__ import annotations
@@ -16,6 +25,7 @@ import asyncio
 import logging
 from pathlib import Path
 
+import reflex.model  # noqa: F401 - voir la note ci-dessous
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.engine import Engine
 

@@ -312,7 +312,7 @@ async def main():
 
     await run_event(state.set_export_format, "CSV")
     await run_event(state.run_export)
-    assert state.export_payload.contains("profile_key")
+    assert ("profile_key") in state.export_payload
 
     await run_event(state.run_checks)
     assert state.checks, "Les validations finales doivent être exposées"
@@ -324,13 +324,13 @@ async def main():
         "history",
         "advisory",
     ):
-        assert by_id.contains(key), by_id.keys()
+        assert (key) in by_id, by_id.keys()
         assert by_id[key]["ok"] is True, by_id[key]["message"]
     assert state.failed_checks == 0
     assert state.checks_passed is True
 
     print(
-        f"✓ {state.profile_count} profil(s) administrables, {state.stage_count} stade(s) sur le profil de contrôle, import additif (1 créé / 1 enrichi), export JSON+CSV, {len(history)} changement(s) conservé(s), {state.checks.length()} validation(s) conforme(s)"
+        f"✓ {state.profile_count} profil(s) administrables, {state.stage_count} stade(s) sur le profil de contrôle, import additif (1 créé / 1 enrichi), export JSON+CSV, {len(history)} changement(s) conservé(s), {len(state.checks)} validation(s) conforme(s)"
     )
     print("=== Test réussi ===")
 

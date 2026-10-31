@@ -81,14 +81,15 @@ def test_insights_are_built_from_aggregates() -> None:
             "purchases_width": "12%",
         }
     ]
-    state._build_insights()
+    # _build_insights est asynchrone depuis la refonte du chargement CRM.
+    asyncio.run(state._build_insights())
     titles = [item["title"] for item in state.insights]
-    assert titles.contains("Équilibre commercial de la campagne")
-    assert titles.contains("Recouvrement clients")
-    assert titles.contains("Limites de crédit")
+    assert "Équilibre commercial de la campagne" in titles
+    assert "Recouvrement clients" in titles
+    assert "Limites de crédit" in titles
     assert [
         item for item in state.insights if "janv" in item["detail"]
-    ].length() > 0
+    ]
 
 
 def test_state_tabs_cover_navigation() -> None:
@@ -99,6 +100,12 @@ def test_state_tabs_cover_navigation() -> None:
         "clients",
         "fournisseurs",
         "partenaires",
+        "ventes",
+        "achats",
+        "creances",
+        "dettes",
+        "paiements",
+        "rapports",
         "tiers",
         "alertes",
         "recherche",

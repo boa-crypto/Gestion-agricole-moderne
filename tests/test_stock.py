@@ -103,13 +103,13 @@ async def main():
         await run_event(state.set_view, "DOCUMENTE")
         assert [
             i for i in state.visible_items if not i["is_documented"]
-        ].length() == 0
+        ] == []
         await run_event(state.set_view, "A_ARBITRER")
         assert [
             i for i in state.visible_items if i["is_documented"]
-        ].length() == 0
+        ] == []
         await run_event(state.set_view, "TOUS")
-        assert state.visible_items.length() == state.items.length()
+        assert len(state.visible_items) == len(state.items)
 
         await run_event(state.clear_selection)
         assert state.selected_id == 0

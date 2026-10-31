@@ -10,20 +10,20 @@ async def main():
     await run_event(state.load_search)
     assert state.is_loading is False, "Le chargement doit être terminé"
     assert state.error == "", "Aucune erreur au chargement"
-    assert state.chips.length() == len(SPECS) + 1, (
+    assert len(state.chips) == len(SPECS) + 1, (
         "Chaque table doit avoir sa puce de filtre"
     )
     assert state.total_results > 0, (
         "Le balayage complet doit remonter des lignes"
     )
-    assert state.sections.length() > 0, "Des sections doivent être affichées"
+    assert len(state.sections) > 0, "Des sections doivent être affichées"
 
     await run_event(state.set_term, "blé")
     assert state.error == "", "La recherche par mot-clé doit être valide"
     assert state.total_results > 0, "Le mot-clé doit trouver des instances"
 
     await run_event(state.set_entity_filter, "culture")
-    assert state.sections.length() <= 1, (
+    assert len(state.sections) <= 1, (
         "Le filtre par type doit restreindre les sections"
     )
     for section in state.sections:
@@ -56,7 +56,7 @@ async def main():
 
     print(
         f"✓ {state.total_results} instances sur {state.tables_touched} tables, "
-        f"{state.sections.length()} sections"
+        f"{len(state.sections)} sections"
     )
     print("=== Test réussi ===")
 

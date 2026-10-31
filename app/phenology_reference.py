@@ -251,7 +251,7 @@ PHENOLOGY_PROFILES: list[ProfileSpec] = [
                 "days_min": 7,
                 "days_max": 15,
                 "icon": "sprout",
-                "color_hex": "#a3e635",
+                "color_hex": "#D8FA5E",
                 "recommendations": [
                     _reco(
                         DOMAIN_SURVEILLANCE,
@@ -271,7 +271,7 @@ PHENOLOGY_PROFILES: list[ProfileSpec] = [
                 "days_min": 10,
                 "days_max": 20,
                 "icon": "seedling",
-                "color_hex": "#84cc16",
+                "color_hex": "#C2E847",
             },
             {
                 "key": "tallage",
@@ -290,7 +290,7 @@ PHENOLOGY_PROFILES: list[ProfileSpec] = [
                 "days_max": 70,
                 "is_critical": True,
                 "icon": "wheat",
-                "color_hex": "#bef264",
+                "color_hex": "#E4FF9B",
                 "recommendations": [
                     _reco(
                         DOMAIN_FERTILISATION,
@@ -318,7 +318,7 @@ PHENOLOGY_PROFILES: list[ProfileSpec] = [
                 "days_max": 45,
                 "is_critical": True,
                 "icon": "arrow-up",
-                "color_hex": "#4ade80",
+                "color_hex": "#A9C98B",
                 "recommendations": [
                     _reco(
                         DOMAIN_TRAITEMENT,
@@ -339,7 +339,7 @@ PHENOLOGY_PROFILES: list[ProfileSpec] = [
                 "days_max": 14,
                 "is_critical": True,
                 "icon": "wheat",
-                "color_hex": "#facc15",
+                "color_hex": "#FFC46B",
             },
             {
                 "key": "floraison",
@@ -352,7 +352,7 @@ PHENOLOGY_PROFILES: list[ProfileSpec] = [
                 "days_max": 12,
                 "is_critical": True,
                 "icon": "flower-2",
-                "color_hex": "#fbbf24",
+                "color_hex": "#FF8A5B",
             },
             {
                 "key": "remplissage",
@@ -364,7 +364,7 @@ PHENOLOGY_PROFILES: list[ProfileSpec] = [
                 "days_min": 20,
                 "days_max": 35,
                 "icon": "droplets",
-                "color_hex": "#f59e0b",
+                "color_hex": "#FF6A38",
                 "recommendations": [
                     _reco(
                         DOMAIN_IRRIGATION,
@@ -384,7 +384,7 @@ PHENOLOGY_PROFILES: list[ProfileSpec] = [
                 "days_min": 10,
                 "days_max": 20,
                 "icon": "sun",
-                "color_hex": "#d97706",
+                "color_hex": "#DE7233",
                 "recommendations": [
                     _reco(
                         DOMAIN_RECOLTE,
@@ -560,7 +560,7 @@ PHENOLOGY_PROFILES: list[ProfileSpec] = [
                     "constate sur le fruit, pas sur la fleur."
                 ),
                 "icon": "cherry",
-                "color_hex": "#4ade80",
+                "color_hex": "#A9C98B",
                 "recommendations": [
                     _reco(
                         DOMAIN_IRRIGATION,

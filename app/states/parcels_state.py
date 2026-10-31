@@ -490,7 +490,7 @@ class ParcelsState(rx.State):
                                   WHERE cc.parcel_id = p.id
                                     AND cc.status = 'EN_COURS'
                                   ORDER BY cc.id LIMIT 1),
-                               (SELECT COALESCE(vv.color_hex, '#4ade80')
+                               (SELECT COALESCE(vv.color_hex, '#A9C98B')
                                   FROM crop cc
                                   LEFT JOIN crop_variety vv ON vv.id = cc.variety_id
                                   WHERE cc.parcel_id = p.id
@@ -528,7 +528,7 @@ class ParcelsState(rx.State):
                     else "Sans culture active",
                     "progress": progress,
                     "progress_pct": f"{progress}%",
-                    "color": str(row[12]) if row[12] else "#4ade80",
+                    "color": str(row[12]) if row[12] else "#A9C98B",
                 }
             )
         self.parcels = parcels
@@ -591,7 +591,7 @@ class ParcelsState(rx.State):
                                COALESCE(c.seed_density, 0),
                                COALESCE(c.expected_yield_t_ha, 0),
                                COALESCE(c.notes, ''),
-                               COALESCE(v.color_hex, '#4ade80')
+                               COALESCE(v.color_hex, '#A9C98B')
                         FROM crop c
                         LEFT JOIN crop_variety v ON v.id = c.variety_id
                         WHERE c.parcel_id = :pid{crop_clause}
@@ -693,7 +693,7 @@ class ParcelsState(rx.State):
                     "seed_density": f"{float(row[13] or 0):.0f}",
                     "expected_yield": f"{float(row[14] or 0):.1f}",
                     "notes": str(row[15]) or "Aucune observation consignée.",
-                    "color": str(row[16]) if row[16] else "#4ade80",
+                    "color": str(row[16]) if row[16] else "#A9C98B",
                     "rail": _build_rail(stage),
                     "has_catalog": info["path"] != "",
                     "catalog_path": info["path"],
@@ -764,7 +764,7 @@ class ParcelsState(rx.State):
             index[str(int(row[0]))] = {
                 "path": f"{category} → {culture} → {species} → {variety}",
                 "category": category,
-                "category_color": str(row[2]) or "#a3e635",
+                "category_color": str(row[2]) or "#D8FA5E",
                 "culture": culture,
                 "culture_icon": str(row[4]) or "sprout",
                 "species": species,
