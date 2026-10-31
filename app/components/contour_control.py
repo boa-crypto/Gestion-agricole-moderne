@@ -119,7 +119,7 @@ def _tile(label: str, value: rx.Var | str, unit: str) -> rx.Component:
             ),
             class_name="flex items-end gap-1.5 mt-2",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] px-4 py-3",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-3",
     )
 
 
@@ -157,7 +157,7 @@ def _distribution_row(row: ControlDistribution, key: str = "") -> rx.Component:
         ),
         on_click=ContourState.focus_control(row["key"]),
         key=key,
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#0d0f09] p-3 hover:border-[#d8fa5e]/25 transition-colors",
+        class_name="w-full border-t border-[#F2EFE4]/8 pt-3 transition-colors hover:border-t-[#D8FA5E]/40",
     )
 
 
@@ -315,7 +315,7 @@ def _note_bar() -> rx.Component:
             "Une vérification à l'écran reste une validation visuelle : elle ne vaut ni relevé cadastral ni mesure GPS.",
             class_name="text-[10px] font-medium text-[#c9c5b4]/40 mt-2",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 mt-5",
+        class_name="w-full border-t border-[#F2EFE4]/8 pt-4 mt-5",
     )
 
 
@@ -455,13 +455,13 @@ def _contour_card(row: ContourRow, key: str = "") -> rx.Component:
             row["control_tone"],
             (
                 "bad",
-                "w-full rounded-none border border-[#ff6b5a]/30 bg-[#f2452c]/[0.06] p-4",
+                "w-full border-l-2 border-[#FF6B5A] bg-[#F2452C]/[0.06] pl-3 pr-2 py-3",
             ),
             (
                 "warn",
-                "w-full rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/[0.05] p-4",
+                "w-full border-l-2 border-[#FF8A5B] bg-[#FF8A5B]/[0.05] pl-3 pr-2 py-3",
             ),
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 hover:border-[#d8fa5e]/25 transition-colors",
+            "w-full border-t border-[#F2EFE4]/8 pt-3 transition-colors hover:border-t-[#D8FA5E]/40",
         ),
     )
 
@@ -542,7 +542,7 @@ def contour_control_board() -> rx.Component:
                     ),
                     class_name="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mt-3",
                 ),
-                class_name="flex-1 min-w-0 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4",
+                class_name="flex-1 min-w-0 w-full border-t border-[#F2EFE4]/8 pt-4",
             ),
             class_name="flex flex-col xl:flex-row gap-3 w-full mt-3",
         ),
@@ -592,7 +592,7 @@ def contour_control_board() -> rx.Component:
                 ),
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
     )
 
 
@@ -671,7 +671,7 @@ def contour_history_panel() -> rx.Component:
                 class_name="mt-5",
             ),
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
     )
 
 
@@ -740,5 +740,5 @@ def contour_diagnostic_tile() -> rx.Component:
             ),
             class_name="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 w-full mt-3",
         ),
-        class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="w-full border-t border-[#F2EFE4]/12 pt-6",
     )

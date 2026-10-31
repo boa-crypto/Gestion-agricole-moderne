@@ -77,7 +77,7 @@ Trois lots ont été livrés (`b8b7edd`, `6c19339`, `4da760d`) :
 
 | Catégorie | Constat | Portée |
 | --- | --- | --- |
-| Surfaces | cartes encadrées `CARD` **résolues** (filet supérieur) ; restent les panneaux de cartographie et les tuiles interactives | ~10 composants |
+| Surfaces | **résolues** : cartes `CARD`, parcelles, cartographie et contrôles de contour en filet supérieur ; restent quelques tuiles interactives et champs | ~6 composants |
 | Tableaux | en-têtes non normalisés en mono, pagination hétérogène, densité variable | CRM, stocks, charges |
 | Chargements | 67 `animate-pulse` bruts : squelettes gris génériques, sans lien avec la silhouette réelle ; **registres CRM traités** (`_register_skeleton`) | 53 fichiers |
 | Mouvement | **résolu** : héros en `ap-reveal`, grilles en `ap-stagger`, clic en `ap-press`, squelettes balayés | global |

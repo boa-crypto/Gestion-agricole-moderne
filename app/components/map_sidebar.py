@@ -124,8 +124,8 @@ def _parcel_card(shape: ParcelShape, key: str = "") -> rx.Component:
         key=key,
         class_name=rx.cond(
             CartographyState.selected_parcel_id == shape["id"],
-            "w-full rounded-none border border-[#d8fa5e]/40 bg-[#d8fa5e]/[0.07] p-4 text-left ring-2 ring-[#d8fa5e]/40 transition-all",
-            "w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-4 text-left hover:border-[#d8fa5e]/25 transition-all",
+            "w-full border-l-2 border-[#D8FA5E] bg-[#D8FA5E]/[0.06] border-b border-b-[#F2EFE4]/8 pl-3 pr-2 py-3 text-left transition-colors",
+            "w-full border-l-2 border-transparent border-b border-b-[#F2EFE4]/8 pl-3 pr-2 py-3 text-left transition-colors hover:border-l-[#F2EFE4]/25",
         ),
     )
 
@@ -226,5 +226,5 @@ def map_sidebar() -> rx.Component:
                 ),
             ),
         ),
-        class_name="w-full xl:w-[23rem] shrink-0 rounded-none border border-[#f2efe4]/12 bg-[#101208] p-5 ",
+        class_name="w-full xl:w-[23rem] shrink-0 border-t border-[#F2EFE4]/12 pt-6 xl:border-l xl:border-l-[#F2EFE4]/8 xl:pl-6",
     )

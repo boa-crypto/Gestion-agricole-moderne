@@ -298,7 +298,7 @@ def _draw_toolbar() -> rx.Component:
             ),
             class_name="flex flex-wrap items-center gap-2 w-full mt-3",
         ),
-        class_name="w-full rounded-none border border-[#d8fa5e]/20 bg-[#0A0A08]/70 p-4 mt-5",
+        class_name="w-full border-t border-[#D8FA5E]/30 pt-4 mt-5",
     )
 
 
@@ -493,7 +493,7 @@ def map_canvas() -> rx.Component:
                 ),
                 rx.fragment(),
             ),
-            class_name="w-full rounded-none border border-[#f2efe4]/12 bg-[#14160f] p-4 mt-5",
+            class_name="w-full border-t border-[#F2EFE4]/8 pt-4 mt-5",
         ),
         rx.el.div(
             rxe.map(
@@ -571,10 +571,10 @@ def map_canvas() -> rx.Component:
                 ),
                 rx.el.p(
                     "Les colonnes de géométrie ne sont pas encore présentes en base : les contours affichés sont générés à la volée et l'enregistrement est désactivé.",
-                    class_name="text-xs font-medium text-[#ffdccb]/80",
+                    class_name="text-[11px] leading-relaxed text-[#FFB894]",
                 ),
-                class_name="flex items-center gap-2 rounded-none border border-[#ff8a5b]/25 bg-[#ff8a5b]/[0.07] px-4 py-3 mt-4",
+                class_name="flex items-center gap-2 border-l-2 border-[#FF5A2B] bg-[#FF5A2B]/[0.06] px-4 py-3 mt-4",
             ),
         ),
-        class_name="flex-1 min-w-0 w-full rounded-none border border-[#f2efe4]/12 bg-[#101208] p-6 ",
+        class_name="flex-1 min-w-0 w-full border-t border-[#F2EFE4]/12 pt-6",
     )

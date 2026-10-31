@@ -316,3 +316,28 @@ Trois tests ne correspondaient plus au code livré (et échouaient déjà sur
   attendait huit onglets là où l'écran en déclare quatorze.
 - `test_crm` insérait une référence orpheline (`payment_id = 999999`) que la
   clé étrangère rejette désormais : le test accepte le rejet du schéma.
+
+## 11. Cartographie et contrôle des contours (lot 6)
+
+La page cartographie était la dernière à empiler des cartes encadrées : la
+carte vivante et la liste des îlots ressemblaient à deux boîtes posées côte à
+côte.
+
+1. **Double page** — la colonne des îlots et la carte perdent fond et cadre :
+   filet supérieur (`border-t … pt-6`) et séparateur vertical en `xl`
+   (`xl:border-l xl:pl-6`), comme les parcelles.
+2. **Lignes d'îlot** — les boutons de la liste quittent le fond `#101208` :
+   filet gauche de sélection (`border-l-2 border-[#D8FA5E]`), filet bas
+   `#F2EFE4/8` entre les lignes, survol qui éclaire le filet gauche.
+3. **Dessin assisté** — le panneau chlorophylle encadré devient un filet
+   supérieur `#D8FA5E/30` ; les compteurs (sommets, dessinés, déclarés)
+   restent des étiquettes encadrées, seules surfaces autorisées avec les
+   champs et les badges.
+4. **Contrôle des contours** — les trois panneaux `p-6` passent en filet
+   supérieur, les cartes de contrôle troquent leur cadre contre un filet
+   latéral selon le ton (vermillon `#FF6B5A`, ambre `#FF8A5B`, neutre
+   `#F2EFE4/8`), et les bandeaux d'indisponibilité géométrique adoptent le
+   bandeau vermillon standard.
+5. **Bandeaux d'alerte** — les deux avertissements « colonnes de géométrie
+   absentes » utilisent désormais le même gabarit
+   (`border-l-2 border-[#FF5A2B] bg-[#FF5A2B]/[0.06]`).
