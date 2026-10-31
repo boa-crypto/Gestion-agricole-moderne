@@ -435,6 +435,7 @@ class CrmRegistersState(rx.State):
     is_loading: bool = False
     load_error: str = ""
     loaded_register: str = ""
+    loading_register: str = ""
     is_saving: bool = False
     register: str = "ventes"
     search: str = ""
@@ -1456,6 +1457,7 @@ class CrmRegistersState(rx.State):
     async def _load(self) -> None:
         """Chargement complet du registre, indépendant du montage."""
         self.is_loading = True
+        self.loading_register = self.register
         self.load_error = ""
         try:
             await ensure_local_database()
@@ -1474,6 +1476,7 @@ class CrmRegistersState(rx.State):
             self.totals = EMPTY_TOTALS
         finally:
             self.is_loading = False
+            self.loading_register = ""
 
     @rx.event
     async def load_registers(self):
@@ -1484,6 +1487,8 @@ class CrmRegistersState(rx.State):
     async def enter_register_now(self, register: str) -> None:
         """Prépare et charge un registre depuis un autre état (navigation)."""
         target = register if register in REGISTERS else "ventes"
+        if target == self.loading_register:
+            return
         if target == self.register and target == self.loaded_register:
             return
         if target != self.register:
@@ -1497,6 +1502,10 @@ class CrmRegistersState(rx.State):
     @rx.event
     async def enter_register(self, register: str):
         target = register if register in REGISTERS else "ventes"
+        if target == self.loading_register:
+            # Un chargement de ce registre est déjà en cours : inutile d'en
+            # lancer un second, qui écraserait le premier résultat.
+            return
         if target == self.register and target == self.loaded_register:
             # Déjà chargé côté serveur (navigation) : le montage ne recharge pas.
             return

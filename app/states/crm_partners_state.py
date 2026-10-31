@@ -491,6 +491,7 @@ class CrmPartnersState(rx.State):
     space: str = "clients"
     is_loading: bool = False
     loaded_space: str = ""
+    loading_space: str = ""
     is_saving: bool = False
     kind_filter: str = ""
     status_filter: str = ""
@@ -1456,6 +1457,8 @@ class CrmPartnersState(rx.State):
     @rx.event
     async def enter_space(self, space: str):
         target = space if space in SPACE_TITLES else "partenaires"
+        if target == self.loading_space:
+            return
         if target == self.space and target == self.loaded_space:
             # Déjà chargé côté serveur (navigation) : le montage ne recharge pas.
             return
@@ -1468,6 +1471,7 @@ class CrmPartnersState(rx.State):
     async def _load(self) -> None:
         """Chargement complet de l'espace tiers, indépendant du montage."""
         self.is_loading = True
+        self.loading_space = self.space
         try:
             await ensure_local_database()
             await ensure_crm_tables()
@@ -1479,6 +1483,7 @@ class CrmPartnersState(rx.State):
             self.loaded_space = self.space
         finally:
             self.is_loading = False
+            self.loading_space = ""
 
     @rx.event
     async def load_space(self):
@@ -1489,6 +1494,8 @@ class CrmPartnersState(rx.State):
     async def enter_space_now(self, space: str) -> None:
         """Prépare et charge un espace tiers depuis un autre état."""
         target = space if space in SPACE_TITLES else "partenaires"
+        if target == self.loading_space:
+            return
         if target == self.space and target == self.loaded_space:
             return
         self.space = target

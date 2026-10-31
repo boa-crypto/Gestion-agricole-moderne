@@ -89,8 +89,10 @@ la chaîne d'événements du serveur :
    seul point où `page_allowed` est fiable. Un `yield` ne suffisait pas, la
    suite du gestionnaire s'exécutant avant la vérification.
 4. Chaque panneau mémorise ce qu'il a chargé (`loaded_register`, `loaded_space`) :
-   le montage ne recharge pas un panneau déjà en mémoire, ce qui évite qu'un
-   second chargement concurrent écrase la liste affichée.
+   le montage ne recharge pas un panneau déjà en mémoire. Un chargement en
+   cours est également signalé (`loading_register`, `loading_space`) pour
+   qu'un second événement — le montage arrivant pendant la navigation — ne
+   lance pas une requête concurrente qui écraserait la première.
 
 ### Les cinq échecs de sécurité
 
