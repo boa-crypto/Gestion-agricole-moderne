@@ -740,7 +740,8 @@ def wrap_event(handler: rx.event.EventHandler, rule: EventRule) -> None:
             async with _state_access(state, background):
                 state.actor_id = int(actors[0][0]) if len(actors) == 1 else 0
                 state.actor_label = email
-        context_token = CHECKED_CONTEXT.set(CheckedContext(state, background))
+        previous_context = CHECKED_CONTEXT.get()
+        CHECKED_CONTEXT.set(CheckedContext(state, background))
         try:
             result = implementation(state, *args, **kwargs)
             if inspect.isasyncgen(result):
@@ -763,7 +764,11 @@ def wrap_event(handler: rx.event.EventHandler, rule: EventRule) -> None:
                 close_button=True,
             )
         finally:
-            CHECKED_CONTEXT.reset(context_token)
+            # Le générateur peut être repris dans un autre contexte asyncio
+            # (annulation, déconnexion du client) : `ContextVar.reset` lèverait
+            # alors « Token was created in a different Context ». On réaffecte
+            # la valeur précédente, valable dans n'importe quel contexte.
+            CHECKED_CONTEXT.set(previous_context)
 
     gated._agripro_event_gate = True
     gated._agripro_rule = rule
