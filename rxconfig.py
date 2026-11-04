@@ -13,6 +13,7 @@ import reflex as rx  # noqa: E402
 
 config = rx.Config(
     app_name="app",
+    default_color_mode="light",
     db_url=SYNC_DB_URL,
     async_db_url=ASYNC_DB_URL,
     plugins=[

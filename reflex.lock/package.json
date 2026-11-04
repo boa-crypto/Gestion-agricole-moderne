@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "@radix-ui/react-dialog": "1.1.23",
-    "@radix-ui/themes": "3.3.0",
     "@react-router/node": "8.4.0",
     "isbot": "5.2.2",
     "leaflet": "1.9.4",

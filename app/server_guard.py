@@ -40,6 +40,7 @@ STATE_MODULES: dict[str, tuple[str, ...]] = {
     "GuideAdminState": ("documents",),
     "GuideState": ("documents",),
     "HelpState": ("documents",),
+    "IrrigationState": ("irrigation",),
     "MaintenanceState": ("materiel", "maintenance", "carburant"),
     "OperationsState": ("interventions",),
     "ParcelsState": ("parcelles", "cultures"),
@@ -81,6 +82,7 @@ STATE_ROUTES: dict[str, tuple[str, ...]] = {
     "GuideAdminState": ("/guide",),
     "GuideState": ("/guide", "/"),
     "HelpState": tuple(entry["route"] for entry in ROUTE_MATRIX.values()),
+    "IrrigationState": ("/irrigation",),
     "MaintenanceState": ("/maintenance",),
     "OperationsState": ("/traitements",),
     "ParcelsState": ("/parcelles",),
@@ -331,6 +333,9 @@ def build_rule(
         "apply_status",
     }:
         actions = ("MODIFIER",)
+    if state_name == "IrrigationState":
+        modules = ("irrigation",)
+        actions = ("CONSULTER",)
     if state_name == "WeatherState":
         actions = ("CONSULTER",)
     if state_name == "AuditState":

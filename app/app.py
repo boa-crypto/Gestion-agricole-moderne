@@ -25,6 +25,7 @@ from app.pages.configuration import configuration_page
 from app.pages.employees import employees_page
 from app.pages.expenses import expenses_page
 from app.pages.guide import guide_page
+from app.pages.irrigation import irrigation_page
 from app.pages.maintenance import maintenance_page
 from app.pages.operations import operations_page
 from app.pages.parcels import parcels_page
@@ -40,6 +41,7 @@ from app.states.contour_state import ContourState
 from app.states.crm_state import CrmState
 from app.states.dashboard_state import DashboardState
 from app.states.employees_state import EmployeesState
+from app.states.irrigation_state import IrrigationState
 from app.states.maintenance_state import MaintenanceState
 from app.states.operations_state import OperationsState
 from app.states.expenses_state import ExpensesState
@@ -138,6 +140,11 @@ register_loaders(
     StockState.load_stocks,
 )
 register_loaders(
+    "irrigation",
+    NavigationState.refresh_navigation,
+    IrrigationState.load_irrigation,
+)
+register_loaders(
     "employes",
     NavigationState.refresh_navigation,
     EmployeesState.load_workforce,
@@ -216,7 +223,6 @@ app = rxe.App(
             rel="stylesheet",
         ),
     ],
-    theme=rx.theme(appearance="light"),
 )
 app.register_lifespan_task(menu_database_lifespan)
 app.add_page(
@@ -249,6 +255,12 @@ app.add_page(
     lambda: guarded_page(operations_page(), "/traitements"),
     route="/traitements",
     on_load=NavigationState.enter_page("traitements"),
+)
+app.add_page(
+    lambda: guarded_page(irrigation_page(), "/irrigation"),
+    route="/irrigation",
+    title="Irrigation — AgriPro",
+    on_load=NavigationState.enter_page("irrigation"),
 )
 app.add_page(
     lambda: guarded_page(employees_page(), "/employes"),

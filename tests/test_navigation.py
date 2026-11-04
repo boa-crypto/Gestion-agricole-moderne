@@ -19,6 +19,7 @@ EXPECTED_ROUTES = {
     "/referentiel",
     "/phenologie",
     "/traitements",
+    "/irrigation",
     "/employes",
     "/maintenance",
     "/cartographie",

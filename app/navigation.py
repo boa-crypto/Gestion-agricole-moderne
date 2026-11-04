@@ -236,6 +236,15 @@ NAVIGATION: list[NavigationEntry] = [
         "spray-can",
     ),
     _entry(
+        "agricole.irrigation",
+        "irrigation",
+        "/irrigation",
+        "agricole",
+        "Pilotage hydrique",
+        "Irrigation",
+        "droplets",
+    ),
+    _entry(
         "agricole.phenologie",
         "phenologie",
         "/phenologie",
@@ -512,6 +521,7 @@ PRIMARY_KEYS: dict[str, str] = {
     "referentiel": "agricole.referentiel",
     "phenologie": "administration.phenologie",
     "traitements": "agricole.traitements",
+    "irrigation": "agricole.irrigation",
     "employes": "rh.employes",
     "maintenance": "materiel.flotte",
     "cartographie": "cartographique.carte",

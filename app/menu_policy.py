@@ -49,6 +49,7 @@ ENTRY_MODULES: dict[str, tuple[str, ...]] = {
     "agricole.parcelles": ("parcelles",),
     "agricole.referentiel": ("semences",),
     "agricole.traitements": ("traitements",),
+    "agricole.irrigation": ("irrigation",),
     "agricole.phenologie": ("parametres",),
     "agricole.rapports": ("rapports",),
     "commercial.overview": ("ventes", "achats", "comptabilite"),
